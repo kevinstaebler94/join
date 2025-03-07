@@ -7,46 +7,47 @@
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg">
     <link rel="stylesheet" href="/styles/summary.css">
     <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/header.css">
     <script src="./script.js"></script>
     <script src="./scripts/includeHTML.js"></script>
     <title>Summary</title>
 </head>
 
 <body onload="init()">
-<div class="main">
-    <div w3-include-html="./assets/templates/sidebar.html"></div>
-    <div class="content">
-        
-        <div class="main_content">
-            <div w3-include-html="./assets/templates/header.html"></div>
+    <div class="main">
+        <div w3-include-html="./assets/templates/sidebar.html"></div>
+        <div class="content">
 
-            <div class="main_container">
-                <div class="main_content_wrapper">
-                    <div class="summary_headline">
-                        <h1>Join 360</h1>
-                        <div class="blue_divider"></div>
-                        <span>Key Metrics at a Glance</span>
-                    </div>
-                    <div class="overview_section">
-                        <div class="top_tasks">
-                            <div class="to_do_container">
-                                <div class="to_do_img">
-                                    <img src="" alt="pencil-Logo">
+            <div class="main_content">
+                <div w3-include-html="./assets/templates/header.html"></div>
+
+                <div class="main_container">
+                    <div class="main_content_wrapper">
+                        <div class="summary_headline">
+                            <h1>Join 360</h1>
+                            <div class="blue_divider"></div>
+                            <span>Key Metrics at a Glance</span>
+                        </div>
+                        <div class="overview_section">
+                            <div class="top_tasks">
+                                <div class="to_do_container">
+                                    <div class="to_do_img">
+                                        <img src="" alt="pencil-Logo">
+                                    </div>
+                                    <div class="to_do_count">
+                                        <span>2</span>
+                                        <p>To-Do</p>
+                                    </div>
                                 </div>
-                                <div class="to_do_count">
-                                    <span>2</span>
-                                    <p>To-Do</p>
-                                </div>
+                                <div class="done_container"></div>
                             </div>
-                            <div class="done_container"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-    
+
 </body>
 
 </html>
