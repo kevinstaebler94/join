@@ -106,3 +106,7 @@ header {
 .to_do_container {
     display: flex;
 }
+
+.main {
+    display: flex;
+}
