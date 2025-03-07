@@ -17,12 +17,6 @@ span {
     line-height: 32.4px;
 }
 
-
-h3 {
-    font-weight: 400;
-    margin: 0;
-}
-
 .content {
     display: flex;
     min-height: 100dvh;
@@ -38,32 +32,6 @@ h3 {
 .main_content {
     width: 100vw;
 }
-
-
-header {
-    max-width: 1440px;
-    height: 96px;
-    box-shadow: 5px 0px 4px 1px #cdcdcd;
-}
-
-
-.header_content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    padding-right: 64px;
-    padding-left: 64px;
-}
-
-
-.header_links {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    position: relative;
-}
-
 
 .summary_headline {
     display: flex;
