@@ -85,3 +85,24 @@ header {
     padding-left: 64px;
     padding-right: 64px;
 }
+
+
+.overview_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+
+.top_tasks {
+    display: flex;
+    gap: 32px;
+    height: 30%;
+    width: 100%;
+}
+
+
+.to_do_container {
+    display: flex;
+}
