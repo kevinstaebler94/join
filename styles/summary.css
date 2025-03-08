@@ -15,14 +15,13 @@ span {
     line-height: 32.4px;
 }
 
+.main {
+    display: flex;
+}
+
 .content {
     display: flex;
     min-height: 100dvh;
-}
-
-.sidebar {
-    width: 232px;
-    background-color: #2A3647;
 }
 
 .mainContent {
@@ -34,7 +33,6 @@ span {
     align-items: center;
     gap: 30px;
     padding-top: 64px;
-    position: absolute;
 }
 
 .blueDivider {
@@ -44,8 +42,16 @@ span {
 }
 
 .mainContentWrapper {
+    display: flex;
+    flex-direction: column;
     padding-left: 64px;
     padding-right: 64px;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f7f8;
 }
 
 .overviewSection {
@@ -63,9 +69,25 @@ span {
 }
 
 .toDoContainer {
+    width: 50%;
+    background-color: white;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    padding: 16px 19px;
 }
 
-.main {
+.toDoImg {
+    background-color: #2A3647;
+    width: 69px;
+    height: 69px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.doneContainer {
     display: flex;
 }
