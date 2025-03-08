@@ -4,12 +4,10 @@ body {
     padding: 0;
 }
 
-
 h1 {
     font-size: 61px;
     font-weight: 700;
 }
-
 
 span {
     font-size: 27px;
@@ -22,18 +20,16 @@ span {
     min-height: 100dvh;
 }
 
-
 .sidebar {
     width: 232px;
     background-color: #2A3647;
 }
 
-
-.main_content {
+.mainContent {
     width: 100vw;
 }
 
-.summary_headline {
+.summaryHeadline {
     display: flex;
     align-items: center;
     gap: 30px;
@@ -41,37 +37,32 @@ span {
     position: absolute;
 }
 
-
-.blue_divider {
+.blueDivider {
     width: 3px;
     height: 59px;
     background-color: #29ABE2;
 }
 
-
-.main_content_wrapper {
+.mainContentWrapper {
     padding-left: 64px;
     padding-right: 64px;
 }
 
-
-.overview_section {
+.overviewSection {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 16px;
 }
 
-
-.top_tasks {
+.topTasks {
     display: flex;
     gap: 32px;
     height: 30%;
     width: 100%;
 }
 
-
-.to_do_container {
+.toDoContainer {
     display: flex;
 }
 
