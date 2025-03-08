@@ -147,9 +147,8 @@ form {
 
 .contentSignUp {
   margin: 5vh auto;
-  min-width: 557px;
-  width: 35%;
-  min-height: 408px;
+  max-width: 557px;
+  width: 100%;
 }
 
 

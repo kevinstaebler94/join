@@ -142,9 +142,9 @@ form {
 
 .contentLogin {
   margin: 15vh auto;
-  min-width: 557px;
-  width: 35%;
-  min-height: 408px;
+  max-width: 557px;
+  width: 100%;
+  max-height: 408px;
 }
 
 
