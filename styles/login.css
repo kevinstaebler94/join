@@ -3,9 +3,7 @@
   src: url("/assets/fonts/Inter-VariableFont_opsz\,wght.ttf") format('truetype');
 }
 
-
 * {box-sizing: border-box;}
-
 
 html, body {
   margin: 0;
@@ -14,11 +12,9 @@ html, body {
   font-family: "Inter";
 }
 
-
 .contentWrapper {
   max-width: 1920px;
 }
-
 
 .heroLogo {
   width: 80px;
@@ -28,7 +24,6 @@ html, body {
   left: 3.5em;
 }
 
-
 h2 {
   text-align: center;
   margin-block: 0;
@@ -36,20 +31,17 @@ h2 {
   font-weight: 700;
 }
 
-
 .hr {
   width: 28%;
   border: 2px solid #29ABE2;
   margin: 0.125em auto;
 }
 
-
 form {
   display: flex;
   flex-direction: column;
   margin-top: 1em;
 }
-
 
 .inputWrapper {
   position: relative;
@@ -58,14 +50,12 @@ form {
   align-items: center;
 }
 
-
 .inputIcon {
   height: 1rem;
   position: absolute;
   pointer-events: none;
   right: 4em;
 }
-
 
 .inputfield {
   width: 75%;
@@ -75,13 +65,11 @@ form {
   padding: 0.5em 1em;
 }
 
-
 .buttonWrapper {
   margin: 1em auto 2em;
   display: flex;
   gap: 1em;
 }
-
 
 .button {
   border-radius: 8px;
@@ -91,7 +79,6 @@ form {
   font-weight: 700;
   cursor: pointer;
 }
-
 
 .legalLinks {
   display: flex;
@@ -103,22 +90,18 @@ form {
   bottom: 0;
 }
 
-
 .privacyPolicy,
 .legalNotice {
   cursor: pointer;
 }
 
-
 .privacyPolicy:hover {
   color: #28ABE2;
 }
 
-
 .legalNotice:hover {
   color: #28ABE2;
 }
-
 
 .signUpHeroContainer {
   position: absolute;
@@ -126,25 +109,21 @@ form {
   right: 3em;
 }
 
-
 .signUpText {
   font-size: 1.125rem;
   text-align: center;
   padding-right: 0.75em;
 } 
 
-
 .signUpButton {
   background-color: #2A3647;
   color: white;
 }
 
-
 .signUpButton:hover {
   background-color: #28ABE2;
   border: 1px solid transparent;
 }
-
 
 .contentLogin {
   margin: 15vh auto;
@@ -153,7 +132,6 @@ form {
   max-height: 408px;
 }
 
-
 .loginContainer {
   border-radius: 30px;
   background-color: #FFFFFF;
@@ -161,24 +139,20 @@ form {
   padding: 1em;
 }
 
-
 .loginButton {
   background-color: #2A3647;
   color: white;
 }
-
 
 .loginButton:hover {
   background-color: #28ABE2;
   border: 1px solid transparent;
 }
 
-
 .guestLoginButton {
   background-color: #FFFFFF;
   color: #2A3647;
 }
-
 
 .guestLoginButton:hover {
   color: #28ABE2;
