@@ -1,0 +1,32 @@
+.startAnimationOverlay {
+  min-height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeOut 700ms 700ms forwards;
+}
+
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+
+.logo {
+  animation: moveLogo 700ms ease-in-out forwards;
+  position: absolute;
+  width: 350px;
+  height: auto;
+}
+
+
+@keyframes moveLogo {
+  0% { width: 350px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  100% { width: 80px; top: 3.5em; left: 3.5em; transform: translate(0, 0); }
+}

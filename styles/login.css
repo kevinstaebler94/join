@@ -97,10 +97,14 @@ form {
 
 .privacyPolicy:hover {
   color: #28ABE2;
+  scale: 1.1;
+  font-weight: 500;
 }
 
 .legalNotice:hover {
   color: #28ABE2;
+  scale: 1.1;
+  font-weight: 500;
 }
 
 .signUpHeroContainer {
