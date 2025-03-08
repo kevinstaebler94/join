@@ -166,6 +166,12 @@ form {
 
 .checkbox {
   width: 5%;
+  cursor: pointer;
+}
+
+
+.checkbox:hover {
+  scale: 1.1;
 }
 
 
