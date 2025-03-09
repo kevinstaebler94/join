@@ -22,10 +22,13 @@ span {
 .content {
     display: flex;
     min-height: 100dvh;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .mainContent {
-    width: 100vw;
+    width: 100%;
+    height: 100dvh;
 }
 
 .summaryHeadline {
@@ -58,6 +61,8 @@ span {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: clamp(300px, 100%, 550px);
+    width: clamp(300px, 100%, 550px);
     gap: 16px;
 }
 
@@ -100,11 +105,11 @@ span {
 }
 
 .midContent {
-    width: 50%;
+    width: 100%;
     background-color: white;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border-radius: 30px;
     padding: 16px 19px;
 }
@@ -122,4 +127,32 @@ span {
 .dateContainer {
     display: flex;
     flex-direction: column;
+}
+
+.bottomBar {
+    justify-content: space-evenly;
+    display: flex;
+    gap: 32px;
+    height: 30%;
+    width: 100%;
+}
+
+.bottomBarTasks {
+    width: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    padding: 16px 19px;
+}
+
+.bottomBarTasks p {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.bottomBarTasks span {
+    font-size: 16px;
+    font-weight: 300;
 }
