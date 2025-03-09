@@ -1,7 +1,15 @@
+/**
+ * Initializes the user interface by displaying the login template.
+ */
 function init() {
   updateContent("login");
 }
 
+/**
+ * Updates the content area by switching between login and sign-up templates.
+ * 
+ * @param {string} section - The section to display ("login" or "signUp").
+ */
 function updateContent(section) {
   let contentWrapper = document.getElementById("contentWrapper");
   contentWrapper.innerHTML = "";
@@ -18,6 +26,11 @@ function updateContent(section) {
   }
 }
 
+/**
+ * Generates the HTML template for the login form.
+ * 
+ * @returns The HTML string for the login section.
+ */
 function loginTemplate() {
   return `
     <img class="heroLogo" src="/assets/img/joinLogoSmall.svg" alt="">
@@ -52,6 +65,11 @@ function loginTemplate() {
   `
 }
 
+/**
+ * Generates the HTML template for the sign-up form.
+ * 
+ * @returns The HTML string for the sign-up section.
+ */
 function signUpTemplate() {
   return `
     <img class="heroLogo" src="/assets/img/joinLogoSmall.svg" alt="">

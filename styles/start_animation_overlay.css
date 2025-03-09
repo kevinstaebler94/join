@@ -12,14 +12,6 @@
   animation: fadeOut 700ms 700ms forwards;
 }
 
-.hide {
-  display: none;
-}
-
-.show {
-  display: flex;
-}
-
 @keyframes fadeOut {
   to { opacity: 0; visibility: hidden; }
 }
