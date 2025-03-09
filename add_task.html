@@ -1,16 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/add_task.css">
+    <link rel="stylesheet" href="./styles/header.css">
     <script src="./script.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/includeHTML.js"></script>
     <title>Add Task</title>
 </head>
+
 <body onload="includeHTML()">
-    <div w3-include-html="./assets/templates/sidebar.html"></div>
+
+    <div class="dFlex">
+        <div w3-include-html="./assets/templates/sidebar.html"></div>
+        <div class="includeHeader">
+            <div w3-include-html="./assets/templates/header.html"></div>
+            <main>
+                <div class="mainContent">
+                    <h1>Add Task</h1>
+
+                <div class="addTaskContent">
+                    <div class="leftContainer">
+                        <form class="leftAddTaskForm">
+                            <label class="directionColumn" for="title">Title
+                                <input class="inputFields" type="text" placeholder="Enter a title">
+                            </label>
+                            <label class="directionColumn" for="description">Description
+                                <textarea class="inputFields textArea" name="description" id="taskDescription"
+                                    placeholder="Enter a Description"></textarea>
+                            </label>
+                            <label class="directionColumn" for="date">Due date
+                                <input class="inputFields" type="text" id="dateInput" placeholder="dd/mm/yyyy"
+                                    onfocus="(this.type='date')" onblur="(this.type='text')">
+                            </label>
+                        </form>
+                    </div>
+                    <span class="dividingLine"></span>
+                    <div class="rightContainer">
+                        <form class="rightAddTaskForm" action="">
+                            <label class="directionColumn maxWidth" for="priority">Priority
+                                <div class="btnContainer flexOne">
+                                    <span class="categoryBtn">Urgent<img class="categoryIcon" src="./assets/img/prioUrgent.svg"
+                                            alt=""></span>
+                                    <span class="categoryBtn">Medium<img class="categoryIconMedium" src="./assets/img/prioMedium.svg"
+                                            alt=""></span>
+                                    <span class="categoryBtn">Low<img class="categoryIcon" src="./assets/img/prioLow.svg" alt=""></span>
+                                </div>
+                            </label>
+                            <label class="directionColumn" for="assignedTo">Assigned to
+                                <select class="inputFields">
+                                    <option value="" disabled selected>Select contacts to assigned</option>
+                                    <option value="contact">Oliver</option>
+                                    <option value="contact">Kevin</option>
+                                    <option value="contact">Daniel</option>
+                                </select>
+                            </label>
+                            <label class="directionColumn" for="assignedTo">Category
+                                <select class="inputFields">
+                                    <option value="" disabled selected>Select task category</option>
+                                    <option value="contact">Category 1</option>
+                                    <option value="contact">Category 2</option>
+                                    <option value="contact">Category 3</option>
+                                </select>
+                            </label>
+                            <label class="directionColumn" for="">Subtasks
+                                <input class="inputFields" type="text">
+                                <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                            </label>
+                        </form>
+                    </div>
+                </div>
+                <div class="submitSection">
+                    <div class="infoText">
+                        <p><p class="fontRed">*</p>This field is required</p>
+                    </div>
+                    
+                    <div class="submitBtnContainer">
+                        <span class="submitBtn clearBtn">Clear<img src="./assets/img/iconCancel.svg" alt=""></span>
+                        <span class="submitBtn checkBtn">Create Task<img src="./assets/img/iconCheck.svg" alt=""></span>
+                    </div>
+                </div>
+                </div>
+                
+            </main>
+
+
+        </div>
+
+    </div>
+
+
+
 </body>
+
 </html>

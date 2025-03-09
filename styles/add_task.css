@@ -1,0 +1,164 @@
+.includeHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    height: 100%;
+    background-color: #F6F7F8;
+    display: flex;
+    justify-content: center;
+}
+
+.mainContent {
+    width: 800px;
+}
+
+.dFlex {
+    display: flex;
+}
+
+.flexOne {
+    flex: 1;
+}
+
+.maxWidth {
+    width: 100%;
+}
+
+.directionColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 60px;
+    margin-top: 64px;
+}
+
+.addTaskContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 300px;
+    margin: 64px 0;
+}
+
+.leftContainer {
+    height: 100%;
+}
+
+.rightContainer {
+    height: 100%;
+}
+
+.leftAddTaskForm {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.dividingLine {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid gray;
+}
+
+.rightAddTaskForm {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.btnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.categoryBtn {
+    width: 104px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #D1D1D1;
+    border-radius: 8px;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.categoryIcon {
+    width: 16px;
+}
+
+.categoryMedium {
+    width: 24px;
+}
+
+.submitSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submitBtnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.submitBtn {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: solid 1px #D1D1D1;
+    border-radius: 8px;
+    padding: 0 8px;
+}
+
+.clearBtn {
+    color: #2A3647;
+}
+
+.checkBtn {
+    background-color: #2A3647;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.inputFields {
+    width: 345px;
+    height: 32px;
+    border: solid 1px #D1D1D1;
+    border-radius: 8px;
+}
+
+.textArea {
+    height: 90px;
+}
+
+.plusIcon {
+    width: 16px;
+}
+
+label {
+    color: #2A3647;
+}
+
+.infoText {
+    display: flex;
+    color: #2A3647;
+}
+
+.fontRed {
+    color: #FF8190;
+}

@@ -47,6 +47,14 @@ nav {
     background-color: #091931;
 }
 
+.loginContainer {
+    width: 100%;
+}
+
+.loginIcon:hover {
+    color: #C6C6C6;
+}
+
 .legal-container {
     width: 100%;
     display: flex;
@@ -112,4 +120,8 @@ nav {
 .img_on,
 #contacts_icon:hover .img_off {
     display: block;
+}
+
+.dNone {
+    display: none;
 }
