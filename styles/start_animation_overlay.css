@@ -12,11 +12,17 @@
   animation: fadeOut 700ms 700ms forwards;
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
 
 @keyframes fadeOut {
   to { opacity: 0; visibility: hidden; }
 }
-
 
 .logo {
   animation: moveLogo 700ms ease-in-out forwards;
@@ -24,7 +30,6 @@
   width: 350px;
   height: auto;
 }
-
 
 @keyframes moveLogo {
   0% { width: 350px; top: 50%; left: 50%; transform: translate(-50%, -50%); }

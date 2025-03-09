@@ -5,44 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="/styles/login.css">
+  <link rel="stylesheet" href="/styles/sign_up.css">
   <link rel="stylesheet" href="/styles/start_animation_overlay.css">
   <link rel="shortcut icon" href="/assets/img/favicon.svg" type="image/x-icon">
+  <script src="/scripts/login.js"></script>
   <title>Join</title>
 </head>
-<body>
+<body onload="init()">
   <div id="startAnimationOverlay" class="startAnimationOverlay">
     <img class="logo" src="/assets/img/joinLogoBig.svg" alt="">
   </div>
-  <section class="contentWrapper">
-    <img class="heroLogo" src="/assets/img/joinLogoSmall.svg" alt="">
-    <header class="signUpHeroContainer">
-      <span class="signUpText">Not a Join user?</span>
-      <button onclick="document.location='sign_up.html'" class="button signUpButton">Sign up</button>
-    </header>
-    <main id="contentLogin" class="contentLogin">
-      <div class="loginContainer">
-        <h2>Log in</h2>
-        <hr class="hr">
-        <form onsubmit="">
-          <div class="inputWrapper">
-            <input id="email" class="inputfield" type="email" placeholder="Email">
-            <img class="inputIcon" src="/assets/img/mail.svg" alt="">
-          </div>
-          <div class="inputWrapper">
-            <input id="password" class="inputfield" required type="password" placeholder="Password">
-            <img class="inputIcon" src="/assets/img/lock.svg" alt="">
-          </div>
-          <div class="buttonWrapper">
-            <button class="button loginButton">Log in</button>
-            <button class="button guestLoginButton">Guest Log in</button>
-          </div>
-        </form>
-      </div>
-    </main>
-    <footer class="legalLinks">
-      <span class="privacyPolicy">Privacy Policy</span>
-      <span class="legalNotice">Legal notice</span>
-    </footer>
-  </section>
-</body>
+  <section id="contentWrapper" class="contentWrapper"></section>
+</body> 
 </html>
