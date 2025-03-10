@@ -18,6 +18,7 @@ html, body {
   justify-content: space-between;
   flex-direction: column;
   height: 100vh;
+  margin: auto;
 }
 
 .heroLogo {
