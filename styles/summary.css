@@ -2,6 +2,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     padding: 0;
+    font-family: "Inter", sans-serif;
 }
 
 h1 {
@@ -81,6 +82,7 @@ span {
     justify-content: center;
     border-radius: 30px;
     padding: 16px 19px;
+    gap: 8px;
 }
 
 .toDoImg {
@@ -89,6 +91,13 @@ span {
     height: 69px;
     border-radius: 50%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toDoCount {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -116,6 +125,23 @@ span {
 
 .midContentLeft {
     display: flex;
+    align-items: center;
+}
+
+.urgentArrows {
+    background-color: #FF3D01;
+    width: 69px;
+    height: 69px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.urgentContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .midSectionDivider {
@@ -147,9 +173,10 @@ span {
     padding: 16px 19px;
 }
 
-.bottomBarTasks p {
+p {
     font-size: 64px;
     font-weight: 600;
+    margin: 0;
 }
 
 .bottomBarTasks span {
