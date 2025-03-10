@@ -162,3 +162,8 @@ label {
 .fontRed {
     color: #FF8190;
 }
+
+.templateHTML {
+    position: relative;
+    z-index: 3;
+}
