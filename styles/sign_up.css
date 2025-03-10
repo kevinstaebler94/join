@@ -14,6 +14,10 @@ html, body {
 
 .contentWrapper {
   max-width: 1920px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .heroLogo {
@@ -87,7 +91,7 @@ form {
   gap: 2.5em;
   color: #A8A8A8;
   font-size: 1rem;
-  bottom: 0;
+  padding-bottom: 1.5em;
 }
 
 .privacyPolicy,

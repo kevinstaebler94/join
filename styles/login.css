@@ -14,6 +14,10 @@ html, body {
 
 .contentWrapper {
   max-width: 1920px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .heroLogo {
@@ -87,7 +91,7 @@ form {
   gap: 2.5em;
   color: #A8A8A8;
   font-size: 1rem;
-  bottom: 0;
+  padding-bottom: 1.5em;
 }
 
 .privacyPolicy,
@@ -130,8 +134,11 @@ form {
 }
 
 .contentLogin {
-  
-  
+  margin: 15vh auto;
+  max-width: 557px;
+  width: 100%;
+  max-height: 408px;
+  height: 100%;
 }
 
 .loginContainer {
@@ -139,11 +146,6 @@ form {
   background-color: #FFFFFF;
   box-shadow: 0px 2px 14px 2px rgba(0,0,0,0.23);
   padding: 1em;
-  margin: 15vh auto;
-  max-width: 557px;
-  width: 100%;
-  max-height: 408px;
-  height: 100%;
 }
 
 .loginButton {
