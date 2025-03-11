@@ -26,3 +26,57 @@ h3 {
     font-weight: 400;
     margin: 0;
 }
+
+.userIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    border: #2a3647 2px solid;
+    height: 48px;
+    width: 48px;
+    border-radius: 30px;
+    color: #29abe2;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.burgerMenu {
+    width: 150px;
+    height: fit-content;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #2a3647;
+    position: absolute;
+    top: 72px;
+    right: -200px;
+    transition: all 0.3s ease-in-out;
+    z-index: 9;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.burgerMenu.show {
+    right: 15px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.burgerMenu a {
+    color: #cdcdcd;
+    padding: 8px 16px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.burgerMenu a:hover {
+    color: #29ABE2;
+}
