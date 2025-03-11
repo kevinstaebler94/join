@@ -12,12 +12,70 @@
     <title>Board</title>
 </head>
 <body onload="init()">
-    
+    <div class="contentWrapper">
+        <aside>
+            <div w3-include-html="./assets/templates/sidebar.html"></div>
+        </aside>
+        <div class="mainContainer">
+            <header class="includeContainerHeader" w3-include-html="./assets/templates/header.html"></header>
+            <main>
+                <section class="heroContainerWrapper">
+                    <div class="heroContainerContent">
+                        <h2>Board</h2>
+                        <div class="taskControls">
+                            <div class="searchBox">
+                                <input type="text">
+                                <img src="" alt="">
+                            </div>
+                            <div class="addButtonHeroContainer">
+                                <button>Add task </button>
+                                <img src="" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="taskBoardContentWrapper">
+                    <div class="taskBoardContent">
+                        <div class="taskContentWrapper">
+                            <div class="taskBoardActionButtons">
+                                <button>To do</button>
+                                <img src="/assets/img/plusIcon.svg" alt="">
+                            </div>
+                            <div class="taskContent">
+                            </div>
+                        </div>
+                        
 
-    <div class="main">
-        <div w3-include-html="./assets/templates/sidebar.html"></div>
-        <div class="includeContainerHeader" w3-include-html="./assets/templates/header.html"></div>
+                        <div class="taskContentWrapper">
+                            <div class="taskBoardActionButtons">
+                                <button>in progress</button>
+                                <img src="/assets/img/plusIcon.svg" alt="">
+                            </div>
+                            <div class="taskContent">
+                            </div>
+                        </div>
+
+                        <div class="taskContentWrapper">
+                            <div class="taskBoardActionButtons">
+                                <button>Await feedback</button>
+                                <img src="/assets/img/plusIcon.svg" alt="">
+                            </div>
+                            <div class="taskContent">
+                            </div>
+                        </div>
+
+                        <div class="taskContentWrapper">
+                            <div class="taskBoardActionButtons">
+                                <button>done</button>
+                            </div>
+                            <div class="taskContent">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
     </div>
-    
 </body>
 </html>
