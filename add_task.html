@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="./styles/add_task.css">
     <link rel="stylesheet" href="./styles/header.css">
     <script src="./script.js"></script>
-    <script src="./script.js"></script>
+    <script src="./scripts/add_task.js"></script>
     <script src="./scripts/includeHTML.js"></script>
     <title>Add Task</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="init()">
 
     <div class="dFlex">
         <div w3-include-html="./assets/templates/sidebar.html"></div>
@@ -53,21 +53,38 @@
                                     <span class="categoryBtn">Low<img class="categoryIcon" src="./assets/img/prioLow.svg" alt=""></span>
                                 </div>
                             </label>
-                            <label class="directionColumn" for="assignedTo">Assigned to
-                                <select class="inputFields">
-                                    <option value="" disabled selected>Select contacts to assigned</option>
-                                    <option value="contact">Oliver</option>
-                                    <option value="contact">Kevin</option>
-                                    <option value="contact">Daniel</option>
-                                </select>
+                            <label class="directionColumn customSelectWrapper" for="assignedTo">Category
+                                <div class="customDropdown" onclick="toggleDropdownName()">
+                                    <div class="dropdownHeader">
+                                        <span id="selectedOption">Assigned to</span>
+                                        <img id="dropdownIconName" class="dropdownIcon" src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
+                                    </div>
+                                </div>
+                                <div class="listContainer">
+                                    <ul class="dropdownList dNone" id="dropdownListName">
+                                        <span class="puffer"></span>
+                                        <li class="listElement" onclick="selectOption('Category 2')">Kevin</li>
+                                        <li class="listElement" onclick="selectOption('Category 3')">Oliver</li>
+                                        <li class="listElement" onclick="selectOption('Category 3')">Daniel</li>
+                                    </ul>
+                                </div>
                             </label>
-                            <label class="directionColumn" for="assignedTo">Category
-                                <select class="inputFields">
-                                    <option value="" disabled selected>Select task category</option>
-                                    <option value="contact">Category 1</option>
-                                    <option value="contact">Category 2</option>
-                                    <option value="contact">Category 3</option>
-                                </select>
+                            <label class="directionColumn customSelectWrapper" for="assignedTo">Category
+                                <div class="customDropdown" onclick="toggleDropdownCategory()">
+                                    <div class="dropdownHeader">
+                                        <span id="selectedOption">Select category</span>
+                                        <img id="dropdownIconCategory" class="dropdownIcon" src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
+                                    </div>
+                                </div>
+                                <div class="listContainer">
+                                    <ul class="dropdownList dNone" id="dropdownListCategory">
+                                        <span class="puffer"></span>
+                                        <li class="listElement" onclick="selectOption('Category 1')">Category 1</li>
+                                        <li class="listElement" onclick="selectOption('Category 2')">Category 2</li>
+                                        <li class="listElement" onclick="selectOption('Category 3')">Category 3</li>
+                                        <li class="listElement" onclick="selectOption('Category 3')">Category 3</li>
+                                    </ul>
+                                </div>
                             </label>
                             <label class="directionColumn" for="">Subtasks
                                 <input class="inputFields" type="text">
