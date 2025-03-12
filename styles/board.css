@@ -16,53 +16,72 @@ html, body {
     overflow: hidden;
 }
 
-.heroContainerWrapper {
+.bordHeaderWrapper {
     display: flex;
     align-items: center;
-    padding: 3em 5em;
+    padding: 3em 5em 0 3em;
     border: 2px solid red;
     flex-direction: column;
 }
 
-.heroContainerContent {
+.boardHeaderContent {
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
 }
 
-.taskControls {
+h2 {
+    font-size: 2.5rem;
+}
+
+.taskActionWrapper {
     display: flex;
-    gap: 1em;
+    align-items: center;
 }
 
-.taskBoardContentWrapper {
-    padding: 0 1.25em;
-}
-
-.taskBoardContent {
+.taskSearch {
     display: flex;
+    align-items: center;
+    position: relative;
 }
 
-.taskContentWrapper {
+.verticalLine {
+    height: 17px;
+    color: black;
+    background: black;
+    width: 1px;
+    position: relative;
+    left: -42px;
+}
+
+.searchIcon {
+    position: relative;
+    left: -36px;
+}
+
+.taskButtonsWrapper {
     display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 0 1em;
+    width: 100%;
+    align-items: center;
+    padding-top: 3em;
 }
 
-.taskBoardActionButtons{
+.taskButtonContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex: 1;
+    margin: 0 0.5em;
+    background-color: antiquewhite;
 }
 
-.taskContent {
-    width: 100%;
-    height: 250px;
-    background-color: black;
-}
+
+
+
+
+
+
 
 
 
