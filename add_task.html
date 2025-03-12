@@ -46,11 +46,11 @@
                         <form class="rightAddTaskForm" action="">
                             <label class="directionColumn maxWidth" for="priority">Priority
                                 <div class="btnContainer flexOne">
-                                    <span class="categoryBtn">Urgent<img class="categoryIcon" src="./assets/img/prioUrgent.svg"
+                                    <span onclick="selectPriority('urgent')" id="priorityUrgentBtn" class="priorityBtn">Urgent<img id="urgentIcon" class="priorityIcon" src="./assets/img/prioUrgent.svg"
                                             alt=""></span>
-                                    <span class="categoryBtn">Medium<img class="categoryIconMedium" src="./assets/img/prioMedium.svg"
+                                    <span onclick="selectPriority('medium')" id="priorityMediumBtn" class="priorityBtn">Medium<img id="mediumIcon" class="priorityIconMedium" src="./assets/img/prioMedium.svg"
                                             alt=""></span>
-                                    <span class="categoryBtn">Low<img class="categoryIcon" src="./assets/img/prioLow.svg" alt=""></span>
+                                    <span onclick="selectPriority('low')" id="priorityLowBtn" class="priorityBtn">Low<img id="lowIcon" class="priorityIcon" src="./assets/img/prioLow.svg" alt=""></span>
                                 </div>
                             </label>
                             <label class="directionColumn customSelectWrapper" for="assignedTo">Category

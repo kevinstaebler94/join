@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 main {
@@ -84,7 +85,7 @@ h1 {
     justify-content: space-between;
 }
 
-.categoryBtn {
+.priorityBtn {
     width: 104px;
     height: 40px;
     display: flex;
@@ -96,12 +97,39 @@ h1 {
     cursor: pointer;
 }
 
-.categoryIcon {
+.priorityIcon {
     width: 16px;
 }
 
-.categoryMedium {
+.priorityMedium {
     width: 24px;
+}
+
+.urgentIcon {
+    width: 16px;
+    cursor: pointer;
+}
+
+.activeUrgentBtn {
+    background-color: #FF3D00;
+    color: white;
+    font-weight: bold;
+}
+
+.activeMediumBtn {
+    background-color: #FFA800;
+    color: white;
+    font-weight: bold;
+}
+
+.activeLowBtn {
+    background-color: #7AE229;
+    color: white;
+    font-weight: bold;
+}
+
+.whiteIcon {
+    filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(303deg) brightness(300%) contrast(101%);
 }
 
 .submitSection {
