@@ -46,22 +46,22 @@
                         <form class="rightAddTaskForm" action="">
                             <label class="directionColumn maxWidth" for="priority">Priority
                                 <div class="btnContainer flexOne">
-                                    <span onclick="selectPriority('urgent')" id="priorityUrgentBtn" class="priorityBtn">Urgent<img id="urgentIcon" class="priorityIcon" src="./assets/img/prioUrgent.svg"
+                                    <span onclick="selectPriority('urgent')" id="priorityUrgentBtn" class="priorityBtn hoverBtn">Urgent<img id="urgentIcon" class="priorityIcon" src="./assets/img/prioUrgent.svg"
                                             alt=""></span>
-                                    <span onclick="selectPriority('medium')" id="priorityMediumBtn" class="priorityBtn">Medium<img id="mediumIcon" class="priorityIconMedium" src="./assets/img/prioMedium.svg"
+                                    <span onclick="selectPriority('medium')" id="priorityMediumBtn" class="priorityBtn hoverBtn">Medium<img id="mediumIcon" class="priorityIconMedium" src="./assets/img/prioMedium.svg"
                                             alt=""></span>
-                                    <span onclick="selectPriority('low')" id="priorityLowBtn" class="priorityBtn">Low<img id="lowIcon" class="priorityIcon" src="./assets/img/prioLow.svg" alt=""></span>
+                                    <span onclick="selectPriority('low')" id="priorityLowBtn" class="priorityBtn hoverBtn">Low<img id="lowIcon" class="priorityIcon" src="./assets/img/prioLow.svg" alt=""></span>
                                 </div>
                             </label>
                             <label class="directionColumn customSelectWrapper" for="assignedTo">Category
-                                <div class="customDropdown" onclick="toggleDropdownName()">
+                                <div id="customDropdownName" class="customDropdown" onclick="toggleDropdownName()">
                                     <div class="dropdownHeader">
                                         <span id="selectedOption">Assigned to</span>
                                         <img id="dropdownIconName" class="dropdownIcon" src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                     </div>
                                 </div>
                                 <div class="listContainer">
-                                    <ul class="dropdownList dNone" id="dropdownListName">
+                                    <ul class="dropdownList hidden" id="dropdownListName">
                                         <span class="puffer"></span>
                                         <li class="listElement" onclick="selectOption('Category 2')">Kevin</li>
                                         <li class="listElement" onclick="selectOption('Category 3')">Oliver</li>
@@ -70,7 +70,7 @@
                                 </div>
                             </label>
                             <label class="directionColumn customSelectWrapper" for="assignedTo">Category
-                                <div class="customDropdown" onclick="toggleDropdownCategory()">
+                                <div id="customDropdownCategory" class="customDropdown" onclick="toggleDropdownCategory()">
                                     <div class="dropdownHeader">
                                         <span id="selectedOption">Select category</span>
                                         <img id="dropdownIconCategory" class="dropdownIcon" src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
@@ -87,7 +87,7 @@
                                 </div>
                             </label>
                             <label class="directionColumn" for="">Subtasks
-                                <input class="inputFields" type="text">
+                                <input class="inputFields" type="text" placeholder="Add new subtask">
                                 <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                             </label>
                         </form>
