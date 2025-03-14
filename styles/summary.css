@@ -59,8 +59,15 @@ span {
 
 .mainContainer {
     display: flex;
-    flex-direction: column;
     background-color: #f6f7f8;
+    height: 100dvh;
+}
+
+.greetingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 48px;
 }
 
 .overviewSection {
