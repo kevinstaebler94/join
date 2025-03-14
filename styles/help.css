@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.templateHTML {
+    position: relative;
+    z-index: 3;
+}
+
+span {
+    color: #29abe2;
+}
+
+.main {
+    display: flex;
+    height: 100dvh;
+}
+
+.content {
+    display: flex;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100dvh;
+}
+
+.mainContent {
+    width: 100%;
+    height: 100dvh;
+}
+
+.mainContentWrapper {
+    display: flex;
+    flex-direction: column;
+    padding-left: 64px;
+    padding-right: 64px;
+    height: 100dvh;
+}
+
+.mainContainer {
+    display: flex;
+    background-color: #f6f7f8;
+    height: 100dvh;
+}
+
+.headlineWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 64px;
+}
+
+.helpList {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 16px;
+}
