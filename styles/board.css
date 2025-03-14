@@ -16,12 +16,19 @@ html, body {
     overflow: hidden;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .bordHeaderWrapper {
     display: flex;
     align-items: center;
     padding: 3em 5em 0 3em;
     border: 2px solid red;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .boardHeaderContent {
@@ -73,9 +80,26 @@ h2 {
     align-items: center;
     flex: 1;
     margin: 0 0.5em;
-    background-color: antiquewhite;
 }
 
+.taskButtonContainer span    {
+   font-weight: 700; 
+}
+
+.taskButtonContainer img {
+    border: 2px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.taskButtonContainer img:hover {
+  border-color: #29ABE2;
+}
+
+.boardContentWrapper {
+    border: 2px solid rgb(6, 255, 31);
+    flex-grow: 1;
+}
 
 
 
