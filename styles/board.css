@@ -1,14 +1,17 @@
 html, body {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-    height: 100vh;
+    max-height: 100vh;
+    max-width: 1920px;
     width: 100%;
     display: flex;
+    background-color: black
 }
 
 .contentWrapper {
     display: flex;
     flex: 1;
+    background-color: white;
 }
 
 .mainContainer {
@@ -81,7 +84,6 @@ h2 {
     align-items: center;
     flex: 1;
     border: 2px solid rgb(1, 187, 255);
-    max-width: 305px;
     width: 100%;
 }
 
@@ -120,10 +122,8 @@ h2 {
 .column {
     flex-grow: 1;
     border: 2px solid;
-    max-width: 305px;
     width: 100%;
     margin-top: 0.5em;
-    min-height: 100%;
 }
 
 .column:nth-child(1),
