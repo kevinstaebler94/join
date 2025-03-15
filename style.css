@@ -8,3 +8,7 @@
     box-sizing: border-box;
     font-family: "Inter";
 }
+
+.maxWidth {
+    max-width: 1920px;
+}
