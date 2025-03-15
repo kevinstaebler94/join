@@ -80,3 +80,7 @@ h3 {
 .burgerMenu a:hover {
     color: #29ABE2;
 }
+
+a:hover {
+    transform: scale(1.08);
+}
