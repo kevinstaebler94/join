@@ -33,7 +33,7 @@ function updateContent(section) {
  */
 function loginTemplate() {
   return `
-    <img class="heroLogo" src="/assets/img/joinLogoSmall.svg" alt="">
+    <img class="heroLogo" src="./assets/img/joinLogoSmall.svg" alt="">
     <header class="signUpHeroContainer">
       <span class="signUpText">Not a Join user?</span>
       <button onclick="updateContent('signUp')" class="button signUpButton">Sign up</button>
@@ -45,7 +45,7 @@ function loginTemplate() {
         <form onsubmit="">
           <div class="inputWrapper">
             <input id="email" class="inputfield" type="email" placeholder="Email">
-            <img class="inputIcon" src="/assets/img/mail.svg" alt="">
+            <img class="inputIcon" src="./assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
             <input id="password" class="inputfield" type="password" placeholder="Password">
@@ -72,10 +72,10 @@ function loginTemplate() {
  */
 function signUpTemplate() {
   return `
-    <img class="heroLogo" src="/assets/img/joinLogoSmall.svg" alt="">
+    <img class="heroLogo" src="./assets/img/joinLogoSmall.svg" alt="">
     <main id="contentSignUp" class="contentSignUp">
       <div class="signUpContainer">
-        <img onclick="updateContent('login')" class="returnArrow" src="/assets/img/returnArrow.svg" alt="">  
+        <img onclick="updateContent('login')" class="returnArrow" src="./assets/img/returnArrow.svg" alt="">  
         <h2>Sign up</h2>
         <hr class="hr">
         <form onsubmit="">
