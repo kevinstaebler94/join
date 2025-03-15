@@ -6,19 +6,21 @@
 * {box-sizing: border-box;}
 
 html, body {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
-  background-color: #F6F7F8;
+  background-color: #000000;
   font-family: "Inter";
+  max-width: 1920px;
+  width: 100%;
 }
 
 .contentWrapper {
-  max-width: 1920px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   height: 100vh;
-  margin: auto;
+  position: absolute;
+  background-color: #F6F7F8;
 }
 
 .heroLogo {
@@ -152,6 +154,11 @@ form {
 .loginButton {
   background-color: #2A3647;
   color: white;
+  text-decoration: none;
+}
+
+.loginButton:visited {
+  text-decoration: none;
 }
 
 .loginButton:hover {
@@ -162,6 +169,7 @@ form {
 .guestLoginButton {
   background-color: #FFFFFF;
   color: #2A3647;
+  text-decoration: none;
 }
 
 .guestLoginButton:hover {
@@ -169,5 +177,11 @@ form {
   border-color: #28ABE2;
   box-shadow: 0px 5px 11px -5px rgba(0,0,0,0.75);
 }
+
+.guestLoginButton:visited {
+  text-decoration: none;
+}
+
+
 
 

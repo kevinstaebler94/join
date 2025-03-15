@@ -48,12 +48,12 @@ function loginTemplate() {
             <img class="inputIcon" src="/assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="password" class="inputfield" required type="password" placeholder="Password">
+            <input id="password" class="inputfield" type="password" placeholder="Password">
             <img class="inputIcon" src="/assets/img/lock.svg" alt="">
           </div>
           <div class="buttonWrapper">
-            <button class="button loginButton">Log in</button>
-            <button class="button guestLoginButton">Guest Log in</button>
+            <a class="button loginButton">Log in</a>
+            <a class="button guestLoginButton" href="summary.html">Guest Log in</a>
           </div>
         </form>
       </div>
@@ -80,27 +80,27 @@ function signUpTemplate() {
         <hr class="hr">
         <form onsubmit="">
           <div class="inputWrapper">
-            <input id="name" class="inputfield" required type="text" placeholder="Name">
+            <input id="name" class="inputfield" type="text" placeholder="Name">
             <img class="inputIcon" src="/assets/img/person.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="email" class="inputfield" required type="email" placeholder="Email">
+            <input id="email" class="inputfield" type="email" placeholder="Email">
             <img class="inputIcon" src="/assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="password" class="inputfield" required type="password" placeholder="Password">
+            <input id="password" class="inputfield" type="password" placeholder="Password">
             <img class="inputIcon" src="/assets/img/lock.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="passwordCheck" class="inputfield" required type="password" placeholder="Confirm Password">
+            <input id="passwordCheck" class="inputfield" type="password" placeholder="Confirm Password">
             <img class="inputIcon" src="/assets/img/lock.svg" alt="">
           </div>
           <div class="checkPrivacyPolicy">
-            <input required id="checkbox" class="checkbox" type="checkbox">
+            <input id="checkbox" class="checkbox" type="checkbox">
             <span>I accept the <span class="hightlight">Privacy Policy</span> </span>
           </div>
           <div class="buttonWrapper">
-            <button class="button signUpButton">Sign up</button>
+            <a class="button signUpButton">Sign up</a>
           </div>
         </form>
       </div>
