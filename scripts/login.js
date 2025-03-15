@@ -49,7 +49,7 @@ function loginTemplate() {
           </div>
           <div class="inputWrapper">
             <input id="password" class="inputfield" type="password" placeholder="Password">
-            <img class="inputIcon" src="/assets/img/lock.svg" alt="">
+            <img class="inputIcon" src="./assets/img/lock.svg" alt="">
           </div>
           <div class="buttonWrapper">
             <a class="button loginButton">Log in</a>
@@ -81,19 +81,19 @@ function signUpTemplate() {
         <form onsubmit="">
           <div class="inputWrapper">
             <input id="name" class="inputfield" type="text" placeholder="Name">
-            <img class="inputIcon" src="/assets/img/person.svg" alt="">
+            <img class="inputIcon" src="./assets/img/person.svg" alt="">
           </div>
           <div class="inputWrapper">
             <input id="email" class="inputfield" type="email" placeholder="Email">
-            <img class="inputIcon" src="/assets/img/mail.svg" alt="">
+            <img class="inputIcon" src="./assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
             <input id="password" class="inputfield" type="password" placeholder="Password">
-            <img class="inputIcon" src="/assets/img/lock.svg" alt="">
+            <img class="inputIcon" src="./assets/img/lock.svg" alt="">
           </div>
           <div class="inputWrapper">
             <input id="passwordCheck" class="inputfield" type="password" placeholder="Confirm Password">
-            <img class="inputIcon" src="/assets/img/lock.svg" alt="">
+            <img class="inputIcon" src="./assets/img/lock.svg" alt="">
           </div>
           <div class="checkPrivacyPolicy">
             <input id="checkbox" class="checkbox" type="checkbox">
