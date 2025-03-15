@@ -97,6 +97,10 @@ span {
     gap: 8px;
 }
 
+.toDoContainer:hover {
+    transform: scale(1.08);
+}
+
 .toDoImg {
     background-color: #2A3647;
     width: 69px;
@@ -133,6 +137,10 @@ span {
     justify-content: space-between;
     border-radius: 30px;
     padding: 16px 19px;
+}
+
+.midContent:hover {
+    transform: scale(1.08);
 }
 
 .midContentLeft {
@@ -183,6 +191,10 @@ span {
     justify-content: center;
     border-radius: 30px;
     padding: 16px 19px;
+}
+
+.bottomBarTasks:hover {
+    transform: scale(1.08);
 }
 
 p {
