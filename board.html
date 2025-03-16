@@ -27,28 +27,27 @@
                         <h2>Board</h2>
                         <div class="taskActionWrapper">
                             <div class="taskSearch">
-                                <input type="text">
+                                <input class="taskInputfield" type="text" placeholder="Find task">
                                 <img class="verticalLine" src="/assets/img/verticalLine.svg" alt="">
                                 <img class="searchIcon" src="/assets/img/search.svg" alt="">
                             </div>
                             <div class="addTaskContainer">
-                                <button>Add task </button>
-                                <img src="" alt="">
+                                <button class="addTaskButton">Add task<img src="./assets/img/plusIconWhite.svg" alt=""></button>
                             </div>
                         </div>
                     </div>
                     <div class="taskButtonsWrapper">
                         <div class="taskButtonContainer">
                             <span>To do</span>
-                            <img src="/assets/img/plusIcon.svg" alt="">
+                            <img src="./assets/img/plusIconDarkBlue.svg" alt="">
                         </div>
                         <div class="taskButtonContainer">
                             <span>In progress</span>
-                            <img src="/assets/img/plusIcon.svg" alt="">
+                            <img src="./assets/img/plusIconDarkBlue.svg" alt="">
                         </div>
                         <div class="taskButtonContainer">
                             <span>Await feedback</span>
-                            <img src="/assets/img/plusIcon.svg" alt="">
+                            <img src="./assets/img/plusIconDarkBlue.svg" alt="">
                         </div>
                         <div class="taskButtonContainer">
                             <span>Done</span>
@@ -65,12 +64,12 @@
 
                         <div class="column">
                             <div class="filledTask marginBottom">
-                                <h3 class="taskCategory">User Story</h3>
+                                <h3 class="taskCategory userStory">User Story</h3>
                                 <h4 class="taskTitle">Kochwelt Page & Recipe Recommender</h4>
                                 <p class="taskDescription">Build start page with recipe recommendation</p>
                                 <div class="subtasksContainer">
                                     <div class="progressBarContainer">
-                                        <div class="progressBar"></div>  
+                                        <div class="progressBar halfFilled"></div>  
                                     </div>
                                     <span class="subtaskInfo">1/2 Subtasks</span>
                                 </div>
@@ -80,21 +79,17 @@
                                         <span class="assignedUser">DB</span>
                                         <span class="assignedUser">OG</span>
                                     </div>
-                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrio">
+                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMedium">
                                 </div>
                             </div>
                         </div>
 
                         <div class="column">
                             <div class="filledTask marginBottom">
-                                <h3 class="taskCategory">User Story</h3>
-                                <h4 class="taskTitle">Kochwelt Page & Recipe Recommender</h4>
-                                <p class="taskDescription">Build start page with recipe recommendation</p>
+                                <h3 class="taskCategory technicalTask">Technical Task</h3>
+                                <h4 class="taskTitle">HTML Base Template Creation</h4>
+                                <p class="taskDescription">Create reusable HTML base templates</p>
                                 <div class="subtasksContainer">
-                                    <div class="progressBarContainer">
-                                        <div class="progressBar"></div>  
-                                    </div>
-                                    <span class="subtaskInfo">1/2 Subtasks</span>
                                 </div>
                                 <div class="assignedToContainer">
                                     <div class="assignedUsers">
@@ -102,18 +97,14 @@
                                         <span class="assignedUser">DB</span>
                                         <span class="assignedUser">OG</span>
                                     </div>
-                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrio">
+                                    <img src="/assets/img/prioLow.svg" alt="" class="taskPrioLow">
                                 </div>
                             </div>
                             <div class="filledTask marginBottom">
-                                <h3 class="taskCategory">User Story</h3>
-                                <h4 class="taskTitle">Kochwelt Page & Recipe Recommender</h4>
-                                <p class="taskDescription">Build start page with recipe recommendation</p>
+                                <h3 class="taskCategory userStory">User Story</h3>
+                                <h4 class="taskTitle">Daily Kochwelt Recipe</h4>
+                                <p class="taskDescription">Implement daily recipe and portion calculator</p>
                                 <div class="subtasksContainer">
-                                    <div class="progressBarContainer">
-                                        <div class="progressBar"></div>  
-                                    </div>
-                                    <span class="subtaskInfo">1/2 Subtasks</span>
                                 </div>
                                 <div class="assignedToContainer">
                                     <div class="assignedUsers">
@@ -121,59 +112,21 @@
                                         <span class="assignedUser">DB</span>
                                         <span class="assignedUser">OG</span>
                                     </div>
-                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrio">
-                                </div>
-                            </div>
-                            <div class="filledTask marginBottom">
-                                <h3 class="taskCategory">User Story</h3>
-                                <h4 class="taskTitle">Kochwelt Page & Recipe Recommender</h4>
-                                <p class="taskDescription">Build start page with recipe recommendation</p>
-                                <div class="subtasksContainer">
-                                    <div class="progressBarContainer">
-                                        <div class="progressBar"></div>  
-                                    </div>
-                                    <span class="subtaskInfo">1/2 Subtasks</span>
-                                </div>
-                                <div class="assignedToContainer">
-                                    <div class="assignedUsers">
-                                        <span class="assignedUser">KS</span>
-                                        <span class="assignedUser">DB</span>
-                                        <span class="assignedUser">OG</span>
-                                    </div>
-                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrio">
-                                </div>
-                            </div>
-                            <div class="filledTask marginBottom">
-                                <h3 class="taskCategory">User Story</h3>
-                                <h4 class="taskTitle">Kochwelt Page & Recipe Recommender</h4>
-                                <p class="taskDescription">Build start page with recipe recommendation</p>
-                                <div class="subtasksContainer">
-                                    <div class="progressBarContainer">
-                                        <div class="progressBar"></div>  
-                                    </div>
-                                    <span class="subtaskInfo">1/2 Subtasks</span>
-                                </div>
-                                <div class="assignedToContainer">
-                                    <div class="assignedUsers">
-                                        <span class="assignedUser">KS</span>
-                                        <span class="assignedUser">DB</span>
-                                        <span class="assignedUser">OG</span>
-                                    </div>
-                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrio">
+                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMedium">
                                 </div>
                             </div>
                         </div>
 
                         <div class="column">
                             <div class="filledTask marginBottom">
-                                <h3 class="taskCategory">User Story</h3>
-                                <h4 class="taskTitle">Kochwelt Page & Recipe Recommender</h4>
-                                <p class="taskDescription">Build start page with recipe recommendation</p>
+                                <h3 class="taskCategory technicalTask">Technical Task</h3>
+                                <h4 class="taskTitle">CSS Architecture Planning</h4>
+                                <p class="taskDescription">Define CSS naming coventions and structure</p>
                                 <div class="subtasksContainer">
                                     <div class="progressBarContainer">
-                                        <div class="progressBar"></div>  
+                                        <div class="progressBar fullFilled"></div>  
                                     </div>
-                                    <span class="subtaskInfo">1/2 Subtasks</span>
+                                    <span class="subtaskInfo">2/2 Subtasks</span>
                                 </div>
                                 <div class="assignedToContainer">
                                     <div class="assignedUsers">
@@ -181,7 +134,7 @@
                                         <span class="assignedUser">DB</span>
                                         <span class="assignedUser">OG</span>
                                     </div>
-                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrio">
+                                    <img src="/assets/img/prioUrgent.svg" alt="" class="taskPrioUrgent">
                                 </div>
                             </div>
                         </div>

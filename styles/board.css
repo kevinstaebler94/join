@@ -7,6 +7,7 @@ html, body {
     display: flex;
     background-color: black;
     overflow: hidden;
+    font-size: 16px;
 }
 
 .contentWrapper {
@@ -33,9 +34,8 @@ main {
 .bordHeaderWrapper {
     display: flex;
     align-items: center;
-    margin: 0 2.5em;
+    margin: 3em 2.5em 0 2.5em;
     padding: 2.5em 0em 0 0em;
-    border: 2px solid red;
     flex-direction: column;
     flex-shrink: 0;
 }
@@ -48,7 +48,7 @@ main {
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 5rem;
 }
 
 .taskActionWrapper {
@@ -62,19 +62,58 @@ h2 {
     position: relative;
 }
 
+.taskInputfield {
+    height: 4rem;
+    border-radius: 10px;
+    padding: 0 1em;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #d1d1d1;
+    border: 1px solid #bcbcbc;
+}
+
 .verticalLine {
-    height: 17px;
-    color: black;
-    background: black;
-    width: 1px;
+    height: 3.5rem;
+    color: #d1d1d1;
+    width: 2px;
     position: relative;
-    left: -42px;
+    left: -70px;
 }
 
 .searchIcon {
     position: relative;
-    left: -36px;
+    left: -55px;
+    width: 2.5rem;
+    cursor: pointer;
 }
+
+.searchIcon:hover {
+    border-radius: 50%;
+    background-color: rgb(238, 238, 238);
+}
+
+.addTaskButton {
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: #2a3647;
+    color: white;
+    padding: 0.2em 0.6em;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .addTaskButton:hover {
+    background-color: #29abe2;
+  }
+
+  .addTaskButton img {
+    margin-left: 0.5em;
+    height: 1.5rem;
+  }
 
 .taskButtonsWrapper {
     display: flex;
@@ -88,8 +127,8 @@ h2 {
     justify-content: space-between;
     align-items: center;
     flex: 1;
-    border: 2px solid rgb(1, 187, 255);
     width: 100%;
+    padding: 0 0.75em;
 }
 
 .taskButtonContainer:nth-child(1),
@@ -99,21 +138,20 @@ h2 {
 }
 
 .taskButtonContainer span    {
+    font-size: 1.25rem;
     font-weight: 700; 
+    color: #42526e;
 }
 
 .taskButtonContainer img {
-    border: 2px solid black;
-    border-radius: 8px;
     cursor: pointer;
 }
 
 .taskButtonContainer img:hover {
-    border-color: #29ABE2;
+    filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg) brightness(95%) contrast(86%);
 }
 
 .boardContentWrapper {
-    border: 2px solid rgb(6, 255, 31);
     display: flex;
     overflow-y: auto;
 }
@@ -121,7 +159,6 @@ h2 {
 .columnWrapper {
     display: flex;
     margin: 0 2.5em;
-    border: 2px solid purple;
     overflow: hidden;
 }
 
@@ -134,7 +171,6 @@ h2 {
     margin-top: 0.5em;
     overflow-y: auto;
     padding: 0.75em;
-    /*border: 2px solid peru;*/
 }
 
 .column::-webkit-scrollbar {
@@ -161,7 +197,7 @@ h2 {
     border-radius: 24px;
     background-color: #FFFFFF;
     box-shadow: 0px 2px 14px 2px rgba(0,0,0,0.23);
-    padding: 1em;
+    padding: 1.25em;
     flex-shrink: 0;
 }
 
@@ -171,13 +207,20 @@ h2 {
 
 .taskCategory {
     border-radius: 10px;
-    background-color: #0038ff;
     color: white;
     text-align: center;
-    width: 50%;
-    padding: 0.25em 0;
+    width: fit-content;
+    padding: 0.1em 0.85em;
     font-weight: 400;
     margin-bottom: 1.5em;
+}
+
+.userStory {
+    background-color: #0038ff;
+}
+
+.technicalTask {
+    background-color: #1fd7c1;
 }
 
 .taskTitle {
@@ -208,11 +251,19 @@ h2 {
 }
 
 .progressBar {
-    width: 50%;
     height: 10px;
     background-color: #4589ff;
     border-radius: 10px;
 }
+
+.halfFilled {
+    width: 50%;
+}
+
+.fullFilled {
+    width: 100%;
+}
+
 
 .subtaskInfo {
     text-align: start;
@@ -232,9 +283,10 @@ h2 {
 
 .assignedUser {
     border-radius: 50%;
-    padding: 0.6em 0.5em;
+    padding: 0.5em 0.4em;
     position: relative;
     color: white;
+    font-size: 0.9rem;
 }
 
 .assignedUser:nth-child(1) {
@@ -251,9 +303,16 @@ h2 {
     left: -1.5em;
 }
 
-.taskPrio {
-    height: 3rem;
+.taskPrioLow,
+.taskPrioUrgent {
+    width: 1rem;
 }
+
+.taskPrioMedium {
+    width: 2rem;
+}
+
+
 
 
 
