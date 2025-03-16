@@ -228,6 +228,7 @@ h2 {
     font-weight: 700;
     color: #2A3647;
     margin-bottom: 0.75em;
+    overflow-wrap: break-word;
 }
 
 .taskDescription {
@@ -235,6 +236,7 @@ h2 {
     font-size: 1.2rem;
     font-weight: 300;      
     margin-bottom: 1.5em;
+    overflow-wrap: break-word;
 }
 
 .subtasksContainer {
