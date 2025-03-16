@@ -307,3 +307,17 @@ label {
 ::placeholder {
     color: #D1D1D1;
 }
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.dateIcon {
+    width: 16px;
+    position: relative;
+    left: 320px;
+    bottom: 23px;
+    cursor: pointer;
+}
