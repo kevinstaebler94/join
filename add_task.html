@@ -29,24 +29,25 @@
                     <div class="addTaskContent">
                         <div class="leftContainer">
                             <form class="leftAddTaskForm">
-                                <label class="directionColumn" for="title">Title
-                                    <input class="inputFields" type="text" placeholder="Enter a title">
+                                <label class="directionColumn"><div class="dFlex"><p>Title</p><p class="fontRed">*</p></div>
+                                    <input id="titleInput" class="inputFields" type="text" placeholder="Enter a title">
+                                    <span id="requiredTitle"></span>
                                 </label>
-                                <label class="directionColumn" for="description">Description
+                                <label class="directionColumn">Description
                                     <textarea class="inputFields textArea" name="description" id="taskDescription"
                                         placeholder="Enter a Description"></textarea>
                                 </label>
-                                <label class="directionColumn" for="date">Due date
-                                    <input class="inputFields" type="text" id="dateInput" placeholder="dd/mm/yyyy"
-                                        onfocus="(this.type='date')" onblur="(this.type='text')">
-                                        <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="">
+                                <label class="directionColumn"><div class="dFlex"><p>Due date</p><p class="fontRed">*</p></div>
+                                    <input class="inputFields" type="text" id="dateInput" placeholder="dd/mm/yyyy" oninput="formatDate(this)" maxlength="10">
+                                    <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="">
+                                    <span id="requiredDate"></span>
                                 </label>
                             </form>
                         </div>
                         <span class="dividingLine"></span>
                         <div class="rightContainer">
                             <form class="rightAddTaskForm" action="">
-                                <label class="directionColumn maxWidth" for="priority">Priority
+                                <label class="directionColumn maxWidth">Priority
                                     <div class="btnContainer flexOne">
                                         <span onclick="selectPriority('urgent')" id="priorityUrgentBtn"
                                             class="priorityBtn hoverBtn">Urgent<img id="urgentIcon" class="priorityIcon"
@@ -60,28 +61,28 @@
                                                 src="./assets/img/prioLow.svg" alt=""></span>
                                     </div>
                                 </label>
-                                <label class="directionColumn customSelectWrapper" for="assignedTo">Category
+                                <label class="directionColumn customSelectWrapper">Assigned to
                                     <div id="customDropdownName" class="customDropdown" onclick="toggleDropdownName()">
                                         <div class="dropdownHeader">
-                                            <span id="selectedOption">Assigned to</span>
+                                            <span id="selectedName">Assigned to</span>
                                             <img id="dropdownIconName" class="dropdownIcon"
                                                 src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                         </div>
                                     </div>
                                     <div class="listContainer">
-                                        <ul class="dropdownList hidden" id="dropdownListName">
+                                        <ul class="dropdownList dNone" id="dropdownListName">
                                             <span class="puffer"></span>
-                                            <li class="listElement" onclick="selectOption('Category 2')">Kevin</li>
-                                            <li class="listElement" onclick="selectOption('Category 3')">Oliver</li>
-                                            <li class="listElement" onclick="selectOption('Category 3')">Daniel</li>
+                                            <li class="listElement"><p id="listName1">Kevin</p><input type="checkbox" name="" id="" checked="false"></li>
+                                            <li class="listElement"><p id="listName1">Oliver</p><input type="checkbox" name="" id=""></li>
+                                            <li class="listElement"><p id="listName1">Daniel</p><input type="checkbox" name="" id=""></li>
                                         </ul>
                                     </div>
                                 </label>
-                                <label class="directionColumn customSelectWrapper" for="assignedTo">Category
+                                <label class="directionColumn customSelectWrapper"><div class="dFlex"><p>Category</p><p class="fontRed">*</p></div>
                                     <div id="customDropdownCategory" class="customDropdown"
                                         onclick="toggleDropdownCategory()">
                                         <div class="dropdownHeader">
-                                            <span id="selectedOption">Select category</span>
+                                            <span id="selectedCategory">Select category</span>
                                             <img id="dropdownIconCategory" class="dropdownIcon"
                                                 src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                         </div>
@@ -89,14 +90,12 @@
                                     <div class="listContainer">
                                         <ul class="dropdownList dNone" id="dropdownListCategory">
                                             <span class="puffer"></span>
-                                            <li class="listElement" onclick="selectOption('Category 1')">Category 1</li>
-                                            <li class="listElement" onclick="selectOption('Category 2')">Category 2</li>
-                                            <li class="listElement" onclick="selectOption('Category 3')">Category 3</li>
-                                            <li class="listElement" onclick="selectOption('Category 3')">Category 3</li>
+                                            <li class="listElement" onclick="selectCategory('Technical Task')">Technical Task</li>
+                                            <li class="listElement" onclick="selectCategory('User Story')">User Story</li>
                                         </ul>
                                     </div>
                                 </label>
-                                <label class="directionColumn" for="">Subtasks
+                                <label class="directionColumn">Subtasks
                                     <input class="inputFields" type="text" placeholder="Add new subtask">
                                     <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                 </label>
@@ -111,7 +110,7 @@
 
                         <div class="submitBtnContainer">
                             <span class="submitBtn clearBtn">Clear<img src="./assets/img/iconCancel.svg" alt=""></span>
-                            <span class="submitBtn checkBtn">Create Task<img src="./assets/img/iconCheck.svg"
+                            <span class="submitBtn checkBtn" onclick="checkValidation()">Create Task<img src="./assets/img/iconCheck.svg"
                                     alt=""></span>
                         </div>
                     </div>

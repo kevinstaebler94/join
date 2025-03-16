@@ -2,12 +2,20 @@ function toggleDropdownName() {
     let customDropdownName = document.getElementById('customDropdownName');
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
+    
     customDropdownName.classList.toggle('activeBorder');
-    // dropdown.classList.toggle('dNone');
+    dropdown.classList.toggle('dNone');
     // dropdown.classList.toggle('transformList');
     dropdownIcon.classList.toggle('rotate');
-    toggleAnimation(dropdown);
+    // toggleAnimation(dropdown);
+    // addCheckbox();
+
 }
+
+// function addCheckbox() {
+//     let listName = document.getElementById('listName1');
+//     listName.innerHTML += `<input type="checkbox" name="" id="">`;
+// }
 
 function toggleDropdownCategory() {
     let customDropdownCategory = document.getElementById('customDropdownCategory');
@@ -19,7 +27,7 @@ function toggleDropdownCategory() {
 }
 
 function toggleAnimation(dropdown) {
-    
+
 
     if (dropdown.classList.contains("visible")) {
         dropdown.classList.remove("visible");
@@ -68,5 +76,47 @@ function setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon
         lowBtn.classList.remove('hoverBtn');
         lowBtn.classList.add('activeLowBtn');
         lowIcon.classList.add('whiteIcon');
+    }
+}
+
+function formatDate(input) {
+    let value = input.value.replace(/\D/g, "");
+    let formattedValue = "";
+    if (value.length > 0) {
+        formattedValue += value.substring(0, 2);
+    }
+    if (value.length > 2) {
+        formattedValue += "/" + value.substring(2, 4);
+    }
+    if (value.length > 4) {
+        formattedValue += "/" + value.substring(4, 8);
+    }
+    input.value = formattedValue;
+}
+
+function selectName(myName) {
+    let selectedName = document.getElementById('selectedName');
+    selectedName.innerHTML = `${myName}`;
+    toggleDropdownName();
+}
+
+function selectCategory(myCategory) {
+    let selectedCategory = document.getElementById('selectedCategory');
+    selectedCategory.innerHTML = `${myCategory}`;
+    toggleDropdownCategory();
+}
+
+function checkValidation() {
+    let titleInput = document.getElementById('titleInput');
+    let requiredTitle = document.getElementById('requiredTitle');
+    let dateInput = document.getElementById('dateInput');
+    let requiredDate = document.getElementById('requiredDate');
+    if (titleInput.value == '') {
+        console.log('this is required');
+        titleInput.classList.add('required');
+        requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
+    } else if (dateInput.value == '') {
+        dateInput.classList.add('required');
+        requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
     }
 }
