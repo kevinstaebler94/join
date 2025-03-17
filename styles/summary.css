@@ -95,10 +95,13 @@ span {
     border-radius: 30px;
     padding: 16px 19px;
     gap: 8px;
+    transition: 0.1s ease-in-out;
 }
 
 .toDoContainer:hover {
     transform: scale(1.08);
+    background-color: #2A3647;
+    color: white;
 }
 
 .toDoImg {
@@ -109,6 +112,20 @@ span {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.toDoImg .hover-icon {
+    position: absolute;
+    opacity: 0;
+}
+
+.toDoContainer:hover .toDoImg .default-icon {
+    opacity: 0;
+}
+
+.toDoContainer:hover .toDoImg .hover-icon {
+    opacity: 1;
 }
 
 .toDoCount {
@@ -137,10 +154,13 @@ span {
     justify-content: space-between;
     border-radius: 30px;
     padding: 16px 19px;
+    transition: 0.1s ease-in-out;
 }
 
 .midContent:hover {
     transform: scale(1.08);
+    background-color: #2A3647;
+    color: white;
 }
 
 .midContentLeft {
@@ -191,10 +211,13 @@ span {
     justify-content: center;
     border-radius: 30px;
     padding: 16px 19px;
+    transition: 0.1s ease-in-out;
 }
 
 .bottomBarTasks:hover {
     transform: scale(1.08);
+    background-color: #2A3647;
+    color: white;
 }
 
 p {

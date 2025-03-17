@@ -41,6 +41,10 @@ h3 {
     cursor: pointer;
 }
 
+.userIcon:hover {
+    background-color: #EDEDED;
+}
+
 .burgerMenu {
     width: 150px;
     height: fit-content;
