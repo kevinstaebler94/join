@@ -47,35 +47,44 @@ function selectPriority(priority) {
     let urgentIcon = document.getElementById('urgentIcon');
     let mediumIcon = document.getElementById('mediumIcon');
     let lowIcon = document.getElementById('lowIcon');
-    resetPriorityClassList(urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon);
-    setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon);
+    let urgentIconWhite = document.getElementById('urgentIconWhite');
+    let mediumIconWhite = document.getElementById('mediumIconWhite');
+    let lowIconWhite = document.getElementById('lowIconWhite');
+    resetPriorityClassList(urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon, urgentIconWhite, mediumIconWhite, lowIconWhite);
+    setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon, urgentIconWhite, mediumIconWhite, lowIconWhite);
 }
 
-function resetPriorityClassList(urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon) {
+function resetPriorityClassList(urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon, urgentIconWhite, mediumIconWhite, lowIconWhite) {
     urgentBtn.classList.add('hoverBtn');
     urgentBtn.classList.remove('activeUrgentBtn');
-    urgentIcon.classList.remove('whiteIcon');
+    urgentIcon.classList.remove('dNone');
+    urgentIconWhite.classList.add('dNone');
     mediumBtn.classList.add('hoverBtn');
     mediumBtn.classList.remove('activeMediumBtn');
-    mediumIcon.classList.remove('whiteIcon');
+    mediumIcon.classList.remove('dNone');
+    mediumIconWhite.classList.add('dNone');
     lowBtn.classList.add('hoverBtn');
     lowBtn.classList.remove('activeLowBtn');
-    lowIcon.classList.remove('whiteIcon');
+    lowIcon.classList.remove('dNone');
+    lowIconWhite.classList.add('dNone');
 }
 
-function setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon) {
+function setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon, urgentIconWhite, mediumIconWhite) {
     if (priority === 'urgent') {
         urgentBtn.classList.remove('hoverBtn');
         urgentBtn.classList.add('activeUrgentBtn');
-        urgentIcon.classList.add('whiteIcon');
+        urgentIcon.classList.add('dNone');
+        urgentIconWhite.classList.remove('dNone');
     } else if (priority === 'medium') {
         mediumBtn.classList.remove('hoverBtn');
         mediumBtn.classList.add('activeMediumBtn');
-        mediumIcon.classList.add('whiteIcon');
+        mediumIcon.classList.add('dNone');
+        mediumIconWhite.classList.remove('dNone');
     } else if (priority === 'low') {
         lowBtn.classList.remove('hoverBtn');
         lowBtn.classList.add('activeLowBtn');
-        lowIcon.classList.add('whiteIcon');
+        lowIcon.classList.add('dNone');
+        lowIconWhite.classList.remove('dNone');
     }
 }
 
@@ -115,7 +124,7 @@ function checkValidation() {
         console.log('this is required');
         titleInput.classList.add('required');
         requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
-    } else if (dateInput.value == '') {
+    } else if (dateInput.value.length < 10) {
         dateInput.classList.add('required');
         requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
     }

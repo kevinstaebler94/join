@@ -133,8 +133,8 @@ h1 {
     font-weight: bold;
 }
 
-.whiteIcon {
-    filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(303deg) brightness(300%) contrast(101%);
+.priorityIconWhite {
+    width: 16px;
 }
 
 .submitSection {
