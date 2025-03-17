@@ -22,6 +22,7 @@ span {
 }
 
 .main {
+    height: 100%;
     display: flex;
 }
 
@@ -34,7 +35,7 @@ span {
 
 .mainContent {
     width: 100%;
-    height: 100dvh;
+    height: 100%;
 }
 
 .summaryHeadline {
@@ -60,7 +61,7 @@ span {
 .mainContainer {
     display: flex;
     background-color: #f6f7f8;
-    height: 100dvh;
+    height: 100%;
 }
 
 .greetingContainer {
@@ -115,16 +116,16 @@ span {
     position: relative;
 }
 
-.toDoImg .hover-icon {
+.toDoImg .hoverIcon {
     position: absolute;
     opacity: 0;
 }
 
-.toDoContainer:hover .toDoImg .default-icon {
+.toDoContainer:hover .toDoImg .defaultIcon {
     opacity: 0;
 }
 
-.toDoContainer:hover .toDoImg .hover-icon {
+.toDoContainer:hover .toDoImg .hoverIcon {
     opacity: 1;
 }
 
