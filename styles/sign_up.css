@@ -8,7 +8,7 @@
 html, body {
   margin: 0 auto;
   padding: 0;
-  background-color: #000000;
+  background-color: #F6F7F8;
   font-family: "Inter";
   max-width: 1920px;
   width: 100%;
@@ -101,18 +101,19 @@ form {
 .privacyPolicy,
 .legalNotice {
   cursor: pointer;
+  transition: scale 125ms ease-in-out, font-weight 125ms ease-in-out, color 125ms ease-in-out;
 }
 
 .privacyPolicy:hover {
   color: #28ABE2;
-  scale: 1.1;
+  transform: scale(1.1);
   font-weight: 500;
 }
 
 .legalNotice:hover {
   color: #28ABE2;
-  scale: 1.1;
-  font-weight: 600;
+  transform: scale(1.1);
+  font-weight: 500;
 }
 
 .signUpContainer {
@@ -126,6 +127,7 @@ form {
   background-color: #2A3647;
   color: white;
   text-decoration: none;
+  transition: background-color 125ms ease-in-out, border 125ms ease-in-out;
 }
 
 .signUpButton:visited {
@@ -144,6 +146,7 @@ form {
   cursor: pointer;
   border-radius: 50%;
   padding: 0.25em;
+  transition: border-radius 125ms ease-in-out, background-color 125ms ease-in-out;
 }
 
 .returnArrow:hover {

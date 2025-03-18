@@ -1,11 +1,11 @@
 html, body {
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     max-width: 1920px;
     width: 100%;
     height: 100%;
     display: flex;
-    background-color: black;
+    background-color: #f6f7f8;
     overflow: hidden;
     font-size: 16px;
 }
@@ -97,6 +97,7 @@ h2 {
     left: -55px;
     width: 2.5rem;
     cursor: pointer;
+    transition: border-radius 125ms ease-in-out, background-color 125ms ease-in-out;
 }
 
 .searchIcon:hover {
@@ -116,6 +117,7 @@ h2 {
     height: 4rem;
     display: flex;
     align-items: center;
+    transition: background-color 125ms ease-in-out;
   }
 
   .addTaskButton:hover {
@@ -157,6 +159,7 @@ h2 {
 
 .taskButtonContainer img {
     cursor: pointer;
+    transition: filter 125ms ease-in-out;
 }
 
 .taskButtonContainer img:hover {
@@ -212,10 +215,11 @@ h2 {
     padding: 1.25em;
     flex-shrink: 0;
     cursor: pointer;
+    transition: transform 125ms ease-in-out;
 }
 
 .filledTask:hover {
-    rotate: 5deg;
+    transform: rotate(5deg);
 }
 
 .marginBottom {
