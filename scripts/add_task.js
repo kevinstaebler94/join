@@ -1,21 +1,14 @@
+let listNames = ['Kevin', 'Oliver', 'Daniel'];
+
 function toggleDropdownName() {
     let customDropdownName = document.getElementById('customDropdownName');
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
-    
-    customDropdownName.classList.toggle('activeBorder');
+    customDropdownName.classList.add('activeBorder');
     dropdown.classList.toggle('dNone');
-    // dropdown.classList.toggle('transformList');
     dropdownIcon.classList.toggle('rotate');
-    // toggleAnimation(dropdown);
-    // addCheckbox();
-
+    selectName();
 }
-
-// function addCheckbox() {
-//     let listName = document.getElementById('listName1');
-//     listName.innerHTML += `<input type="checkbox" name="" id="">`;
-// }
 
 function toggleDropdownCategory() {
     let customDropdownCategory = document.getElementById('customDropdownCategory');
@@ -103,10 +96,20 @@ function formatDate(input) {
     input.value = formattedValue;
 }
 
-function selectName(myName) {
-    let selectedName = document.getElementById('selectedName');
-    selectedName.innerHTML = `${myName}`;
-    toggleDropdownName();
+function selectName() {
+    let dropdownListName = document.getElementById('dropdownListName');
+    dropdownListName.innerHTML = '';
+    for (let nameIndex = 0; nameIndex < listNames.length; nameIndex++) {
+        let myContact = listNames[nameIndex];
+        let listItem = `<li id="listName${nameIndex}" class="listElement">
+        <p>${myContact}</p>
+        <input type="checkbox" id="checkbox${nameIndex}" name="selectedNames">
+    </li>`;
+
+        dropdownListName.innerHTML += listItem;
+
+    }
+
 }
 
 function selectCategory(myCategory) {

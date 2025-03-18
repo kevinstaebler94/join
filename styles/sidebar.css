@@ -82,6 +82,11 @@ nav {
     width: 30px;
 }
 
+.hoverContainer {
+    width: 100%;
+    overflow: hidden;
+}
+
 .img_off,
 #summary_icon:hover .img_on {
     display: none;
