@@ -33,7 +33,6 @@ span {
 .content {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     overflow-x: hidden;
     width: 100%;
     height: 100vh;

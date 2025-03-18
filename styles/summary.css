@@ -36,6 +36,7 @@ span {
 .mainContent {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 .summaryHeadline {
@@ -62,6 +63,7 @@ span {
     display: flex;
     background-color: #f6f7f8;
     height: 100%;
+    justify-content: center;
 }
 
 .greetingContainer {
