@@ -28,7 +28,7 @@ span {
 
 .content {
     display: flex;
-    min-height: 100dvh;
+    min-height: 100vh;
     overflow-x: hidden;
     width: 100%;
 }

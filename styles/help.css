@@ -27,20 +27,21 @@ span {
 
 .main {
     display: flex;
-    height: 100dvh;
+    height: 100vh;
 }
 
 .content {
     display: flex;
-    min-height: 100dvh;
+    flex-direction: column;
+    min-height: 100vh;
     overflow-x: hidden;
     width: 100%;
-    height: 100dvh;
+    height: 100vh;
 }
 
 .mainContent {
     width: 100%;
-    height: 100dvh;
+    height: 100vh;
 }
 
 .mainContentWrapper {
@@ -48,13 +49,13 @@ span {
     flex-direction: column;
     padding-left: 64px;
     padding-right: 64px;
-    height: 100dvh;
+    height: 100vh;
 }
 
 .mainContainer {
     display: flex;
     background-color: #f6f7f8;
-    height: 100dvh;
+    height: 100vh;
 }
 
 .headlineWrapper {
