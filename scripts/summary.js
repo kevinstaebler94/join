@@ -1,3 +1,11 @@
+let names = ["Oliver", "Daniel", "Kevin"]
+
+function greetingByName() {
+    let randomName = names[Math.floor(Math.random() * names.length)];
+
+    document.getElementById("userName").textContent = randomName;
+}
+
 function updateGreeting() {
     let hour = new Date().getHours(); // Holt die aktuelle Stunde
     let greeting;
