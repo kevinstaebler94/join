@@ -68,9 +68,20 @@ span {
 
 .greetingContainer {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    padding-top: 350px;
     padding-left: 48px;
+}
+
+.timeOfDay {
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.userName {
+    font-size: 64px;
+    color: #29abe2;
+    font-weight: 700;
 }
 
 .overviewSection {
