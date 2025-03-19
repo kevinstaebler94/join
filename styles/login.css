@@ -72,6 +72,21 @@ form {
   padding: 0.5em 1em;
 }
 
+.forgetPassword {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  cursor: pointer;
+  transition: text-decoration 125ms ease-in-out;
+  transition: font-weight 125ms ease-in-out;
+}
+
+.forgetPassword:hover {
+  text-decoration: underline #28ABE2;
+  font-weight: 500;
+}
+
 .buttonWrapper {
   margin: 1em auto 2em;
   display: flex;

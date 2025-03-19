@@ -51,6 +51,9 @@ function loginTemplate() {
             <input id="password" class="inputfield" type="password" placeholder="Password">
             <img class="inputIcon" src="./assets/img/lock.svg" alt="">
           </div>
+          <div class="forgetPassword">
+            <span class="hightlight">I forgot my password</span>
+          </div>
           <div class="buttonWrapper">
             <a class="button loginButton">Log in</a>
             <a class="button guestLoginButton" href="summary.html">Guest Log in</a>
