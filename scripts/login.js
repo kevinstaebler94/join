@@ -1,3 +1,4 @@
+let globalBackend = [];
 /**
  * Initializes the user interface by displaying the login template.
  */
@@ -42,20 +43,18 @@ function loginTemplate() {
       <div class="loginContainer">
         <h2>Log in</h2>
         <hr class="hr">
-        <form onsubmit="">
+        <form onsubmit="login(); return false">
           <div class="inputWrapper">
-            <input id="email" class="inputfield" type="email" placeholder="Email">
+            <input id ="emailLogin" class="inputfield" type="email" placeholder="Email">
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="password" class="inputfield" type="password" placeholder="Password">
-            <img class="inputIcon" src="./assets/img/lock.svg" alt="">
+            <input id="passwordLogin" class="inputfield" type="password" placeholder="Password">
+            <img id="passwordIcon" class="inputIcon" src="./assets/img/lock.svg" alt="">
           </div>
-          <div class="forgetPassword">
-            <span class="hightlight">I forgot my password</span>
-          </div>
+          <span id="loginErrorMsg" class="formValidation dNone">Check your email and password. Please try again.</span>
           <div class="buttonWrapper">
-            <a class="button loginButton">Log in</a>
+            <button class="button loginButton">Log in</button>
             <a class="button guestLoginButton" href="summary.html">Guest Log in</a>
           </div>
         </form>
@@ -67,7 +66,7 @@ function loginTemplate() {
     </footer>
   `
 }
-
+ false
 /**
  * Generates the HTML template for the sign-up form.
  * 
@@ -115,6 +114,23 @@ function signUpTemplate() {
   `
 }
 
+function login() {
+  let email = document.getElementById("emailLogin");
+  let password = document.getElementById("passwordLogin");
+  let passwordIcon = document.getElementById("passwordIcon");
+  
+  globalBackend.push({
+    email: email.value,
+    password: password.value
+  })
 
+  email.value = "";
+  password.value = "";
+  console.log(globalBackend);
+  
+}
+
+
+ 
 
 

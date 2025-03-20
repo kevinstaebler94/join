@@ -76,7 +76,7 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1em;
+  margin: 1em;
   cursor: pointer;
   transition: text-decoration 125ms ease-in-out;
   transition: font-weight 125ms ease-in-out;
@@ -199,6 +199,25 @@ form {
 
 .guestLoginButton:visited {
   text-decoration: none;
+}
+
+.formValidation {
+  font-size: 0.6rem;
+  color: red;
+  margin-top: -0.5em;
+  padding-left: 5em;
+}
+
+.redBorder {
+  border-color: red;
+}
+
+.dNone {
+  display: none;
+}
+
+.dFlex {
+  display: flex;
 }
 
 
