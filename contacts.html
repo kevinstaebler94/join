@@ -6,14 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/contacts.css">
+
     <script src="./script.js"></script>
     <script src="./scripts/includeHTML.js"></script>
     <script src="./scripts/header.js"></script>
+
     <title>Contacts</title>
+
 </head>
 
 <body onload="includeHTML()">
-    <div w3-include-html="./assets/templates/sidebar.html"></div>
+    <div class="content">
+        <div w3-include-html="./assets/templates/sidebar.html"></div>
+        <div class="includeHeader">
+            <div class="templateHTML" w3-include-html="./assets/templates/header.html"></div>
+            <main>
+                <div class="mainContent">
+                    <div class="contactsList"></div>
+                    <div class="contactsOverview">
+                        <div class="contactsHeadline">
+                            <h1>Contacts</h1>
+                            <div class="blueDivider"></div>
+                            <span>Better with a team</span>
+                        </div>
+                        <div class="contactsBody">
+                            <div class="contactsNameContainer">
+                                <div class="userIconContainer">
+                                    <img src="" alt="">AM
+                                </div>
+                                <div class="userNameContainer">
+                                    <h2>Anton Mayer</h2>
+                                    <img src="./assets/img/edit.svg" alt="">
+                                    <span>Edit</span>
+                                    <img src="" alt="">
+                                    <span>Delete</span>
+                                </div>
+                            </div>
+                            <div class="contactsInfoContainer">
+                                <h3>Contact Infotmation</h3>
+                                <span>Email</span>
+                                <a href="">email link</a>
+                                <span>Phone</span>
+                                <p>number</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
 </body>
 
 </html>

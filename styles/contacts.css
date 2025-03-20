@@ -1,0 +1,93 @@
+.content {
+    display: flex;
+}
+
+main {
+    height: 100%;
+    background-color: #F6F7F8;
+    display: flex;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h3 {
+    font-size: 27px;
+}
+
+.includeHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.templateHTML {
+    position: relative;
+    z-index: 3;
+}
+
+.mainContent {
+    display: flex;
+    width: 100%;
+    gap: 64px;
+}
+
+.contactsList {
+    width: 450px;
+    height: 100%;
+    display: flex;
+    box-shadow: 1px 2px 4px 1px #cdcdcd;
+}
+
+.contactsOverview {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactsHeadline {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-top: 64px;
+}
+
+.blueDivider {
+    width: 3px;
+    height: 59px;
+    background-color: #29ABE2;
+}
+
+.contactsBody {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+.contactsNameContainer {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.userIconContainer img {
+    background: #F6F7F8;
+
+}
+
+.userIconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 47px;
+    border: white 2px solid;
+    height: 120px;
+    width: 120px;
+    border-radius: 60px;
+    background-color: #FF7A00;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+}
