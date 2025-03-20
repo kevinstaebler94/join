@@ -14,6 +14,9 @@ h1 {
 
 h3 {
     font-size: 27px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight: 400;
 }
 
 .includeHeader {
@@ -44,6 +47,7 @@ h3 {
 .contactsOverview {
     display: flex;
     flex-direction: column;
+    padding-top: 30px;
 }
 
 .contactsHeadline {
@@ -90,4 +94,20 @@ h3 {
     color: white;
     font-weight: 500;
     cursor: pointer;
+}
+
+.contactsInfoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.contactsInfoContainer span {
+    font-weight: 700;
+}
+
+.contactsInfoContainer a {
+    color: #29ABE2;
+    text-decoration: none;
+    transform: none;
 }
