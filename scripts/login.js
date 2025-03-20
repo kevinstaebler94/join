@@ -117,17 +117,7 @@ function signUpTemplate() {
 function login() {
   let email = document.getElementById("emailLogin");
   let password = document.getElementById("passwordLogin");
-  let passwordIcon = document.getElementById("passwordIcon");
-  
-  globalBackend.push({
-    email: email.value,
-    password: password.value
-  })
-
-  email.value = "";
-  password.value = "";
-  console.log(globalBackend);
-  
+  let passwordIcon = changePasswordIcon(password);
 }
 
 
