@@ -7,13 +7,21 @@
 
 main {
     height: 100%;
+    width: 100%;
     background-color: #F6F7F8;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.contentWrapper {
+    max-width: 1920px;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
 .mainContent {
-    width: 800px;
+    width: 850px;
 }
 
 .dFlex {
@@ -31,6 +39,7 @@ main {
 .directionColumn {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 
 h1 {
@@ -60,14 +69,14 @@ h1 {
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    gap: 32px;
+    gap: 12px;
 }
 
 .dividingLine {
     height: 100%;
     display: flex;
     justify-content: center;
-    border: 1px solid gray;
+    border: 1px solid #D1D1D1;
 }
 
 .rightAddTaskForm {
@@ -76,7 +85,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    gap: 32px;
+    gap: 12px;
 }
 
 .btnContainer {
@@ -86,7 +95,7 @@ h1 {
 }
 
 .priorityBtn {
-    width: 104px;
+    width: 108px;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -98,6 +107,10 @@ h1 {
     cursor: pointer;
 }
 
+.priorityMediumBtn {
+    gap: 0;
+}
+
 .hoverBtn:hover {
     box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
 }
@@ -106,8 +119,8 @@ h1 {
     width: 16px;
 }
 
-.priorityMedium {
-    width: 24px;
+.priorityIconMedium {
+    width: 32px;
 }
 
 .urgentIcon {
@@ -146,7 +159,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
     z-index: 1;
 }
 
@@ -158,6 +171,11 @@ h1 {
     border-radius: 8px;
     padding: 0 8px;
     cursor: pointer;
+    gap: 4px;
+}
+
+.submitIcons {
+    width: 24px;
 }
 
 .clearBtn {
@@ -166,10 +184,32 @@ h1 {
     cursor: pointer;
 }
 
+.clearBtn:hover {
+    color: #29ABE2;
+    border: solid 1px #29ABE2;
+    font-size: bolder;
+}
+
 .checkBtn {
     background-color: #2A3647;
     color: #ffffff;
     font-weight: bold;
+}
+
+.checkBtn:hover {
+    background-color: #29ABE2;
+}
+
+.clearBtn img:last-child {
+    display: none;
+}
+
+.clearBtn:hover img:last-child {
+    display: block;
+}
+
+.clearBtn:hover img:first-child {
+    display: none;
 }
 
 .inputFields {
@@ -281,7 +321,6 @@ h1 {
     display: none;
     opacity: 0;
     transform: translateY(-10px);
-    /* Für sanftes Hineingleiten */
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -301,6 +340,10 @@ label {
     color: #2A3647;
 }
 
+.requiredDate {
+    margin-top: -15px;
+}
+
 .infoText {
     display: flex;
     color: #2A3647;
@@ -311,7 +354,7 @@ label {
 }
 
 .requiredFont {
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .templateHTML {
@@ -329,10 +372,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     -webkit-appearance: none;
 }
 
+::-webkit-resizer {
+    -webkit-appearance: none;
+}
+
 .dateIcon {
     width: 16px;
     position: relative;
     left: 320px;
     bottom: 23px;
     cursor: pointer;
+}
+
+.resizeIcon {
+    background-image: url(../assets/img/resizeIcon.svg);
+    background-repeat: no-repeat;
+    background-position: right 3px bottom 3px;
+    background-size: 12px;
 }
