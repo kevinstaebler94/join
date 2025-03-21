@@ -1,0 +1,35 @@
+.includeHeader {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+main {
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.mainContent {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 90px;
+    gap: 24px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: bold;
+}

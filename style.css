@@ -12,3 +12,7 @@
 .maxWidth {
     max-width: 1920px;
 }
+
+.dFlex {
+    display: flex;
+}

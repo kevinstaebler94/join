@@ -1,4 +1,29 @@
+// let listNames = [
+//     {
+//         'name' : 'Kevin',
+//         'checkbox' : false
+//     }, 
+    
+//     {
+//         'name' : 'Oliver',
+//         'checkbox' : false
+//     },
+
+//     {
+//         'name' : 'Daniel',
+//         'checkbox' : false
+//     }
+// ];
+
 let listNames = ['Kevin', 'Oliver', 'Daniel'];
+
+function checkCheckbox(nameIndex) {
+    let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
+    myCheckbox.checked = false;
+    console.log(myCheckbox.checked);
+    
+}
+
 
 function toggleDropdownName() {
     let customDropdownName = document.getElementById('customDropdownName');
@@ -8,7 +33,10 @@ function toggleDropdownName() {
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
     selectName();
+    
 }
+
+
 
 function toggleDropdownCategory() {
     let customDropdownCategory = document.getElementById('customDropdownCategory');
@@ -98,18 +126,24 @@ function formatDate(input) {
 
 function selectName() {
     let dropdownListName = document.getElementById('dropdownListName');
+    
     dropdownListName.innerHTML = '';
     for (let nameIndex = 0; nameIndex < listNames.length; nameIndex++) {
+        let checkbox = document.getElementById('checkbox');
         let myContact = listNames[nameIndex];
         let listItem = `<li id="listName${nameIndex}" class="listElement">
         <p>${myContact}</p>
-        <input type="checkbox" id="checkbox${nameIndex}" name="selectedNames">
-    </li>`;
+        <input type="checkbox" id="checkbox${nameIndex}" class="checkbox" name="selectedNames" checked="false">
+        </li>`;
 
         dropdownListName.innerHTML += listItem;
-
     }
+    
+}
 
+function uncheckCheckbox(nameIndex) {
+    let checkbox = document.getElementById(`checkbox${nameIndex}`);
+    checkbox.checked = false;
 }
 
 function selectCategory(myCategory) {
