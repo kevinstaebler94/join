@@ -5,19 +5,19 @@ let globalBackend = [
         name: "Daniel",
         email: "daniel@dev.com",
         password: "Test123",
-        passwordCheck: "Test123"
+        confirmedPassword: "Test123"
       },
       {
         name: "Oliver",
         email: "oliver@dev.com",
         password: "!DevTest",
-        passwordCheck: "!DevTest"
+        confirmedPassword: "!DevTest"
       },
       {
         name: "Kevin",
         email: "kevin@dev.com",
         password: "K.dev!!",
-        passwordCheck: "K.dev!!"
+        confirmedPassword: "K.dev!!"
       }
     ]
   }
@@ -68,7 +68,7 @@ function loginTemplate() {
         <hr class="hr">
         <form onsubmit="login(); return false">
           <div class="inputWrapper">
-            <input required id="emailLogin" class="inputfield" type="email" placeholder="Email">
+            <input id="emailLogin" class="inputfield" type="email" placeholder="Email">
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
@@ -77,7 +77,7 @@ function loginTemplate() {
           </div>
           <span id="loginErrorMsg" class="formValidation dNone">Check your email and password. Please try again.</span>
           <div class="buttonWrapper">
-            <button class="button loginButton">Log in</button>
+            <button disabled type="button" id="loginButton" class="button loginButton">Log in</button>
             <a class="button guestLoginButton" href="summary.html">Guest Log in</a>
           </div>
         </form>
@@ -89,7 +89,7 @@ function loginTemplate() {
     </footer>
   `
 }
- false
+ 
 /**
  * Generates the HTML template for the sign-up form.
  * 
@@ -103,29 +103,29 @@ function signUpTemplate() {
         <img onclick="updateContent('login')" class="returnArrow" src="./assets/img/returnArrow.svg" alt="">  
         <h2>Sign up</h2>
         <hr class="hr">
-        <form onsubmit="">
+        <form onsubmit="signUp(event)"; return false">
           <div class="inputWrapper">
-            <input id="name" class="inputfield" type="text" placeholder="Name">
+            <input id="name" class="inputfield" type="text" placeholder="Name" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/person.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="email" class="inputfield" type="email" placeholder="Email">
+            <input id="email" class="inputfield" type="email" placeholder="Email" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="password" class="inputfield" type="password" placeholder="Password">
+            <input id="password" class="inputfield" type="password" placeholder="Password" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/lock.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="passwordCheck" class="inputfield" type="password" placeholder="Confirm Password">
+            <input id="confirmedPassword" class="inputfield" type="password" placeholder="Confirm Password" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/lock.svg" alt="">
           </div>
           <div class="checkPrivacyPolicy">
-            <input id="checkbox" class="checkbox" type="checkbox">
+            <input id="checkbox" class="checkbox" type="checkbox" onchange="toggleSignUpButton()">
             <span>I accept the <span class="hightlight">Privacy Policy</span> </span>
           </div>
           <div class="buttonWrapper">
-            <a class="button signUpButton">Sign up</a>
+            <button disabled id="signUpButton" class="button signUpButton">Sign up</button>
           </div>
         </form>
       </div>
@@ -137,15 +137,24 @@ function signUpTemplate() {
   `
 }
 
-function login() {
-  let email = document.getElementById("emailLogin");
-  let password = document.getElementById("passwordLogin");
-  let passwordIcon = changePasswordIcon(password);
-
+function signUp(event) {
+  event.preventDefault();
+  window.location.href = "login.html"
   
 }
 
+function toggleSignUpButton() {
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  let passwordIcon = document.getElementById("passwordIcon").value;
+  let checkbox = document.getElementById("checkbox").checked;
+}
 
+function highlightInputfield() {
+  let inputfield = document.querySelector("inputfield");
+  inputfield.classList.add("pointer");
+}
  
 
 

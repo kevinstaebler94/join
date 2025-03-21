@@ -60,7 +60,6 @@ form {
 .inputIcon {
   height: 1rem;
   position: absolute;
-  pointer-events: none;
   right: 4em;
 }
 
@@ -151,6 +150,19 @@ form {
 .signUpButton:hover {
   background-color: #28ABE2;
   border: 1px solid transparent;
+}
+
+.signUpButton:disabled {
+  background-color: grey;
+  color: lightgray;
+  border: 1px solid transparent;
+  cursor: default;
+  transition: background-color 125ms ease-in-out, border 125ms ease-in-out;
+}
+
+.signUpButton:disabled:hover {
+  background-color: grey;
+  color: lightgray;
 }
 
 .contentLogin {
