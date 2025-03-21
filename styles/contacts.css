@@ -46,6 +46,19 @@ h3 {
     height: 100%;
     display: flex;
     box-shadow: 1px 2px 4px 1px #cdcdcd;
+    flex-direction: column;
+}
+
+.addContactButton {
+    border: 1px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    margin: 52px;
 }
 
 .contactsOverview {
