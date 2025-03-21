@@ -1,4 +1,27 @@
-let globalBackend = [];
+let globalBackend = [
+  {
+    users: [
+      {
+        name: "Daniel",
+        email: "daniel@dev.com",
+        password: "Test123",
+        passwordCheck: "Test123"
+      },
+      {
+        name: "Oliver",
+        email: "oliver@dev.com",
+        password: "!DevTest",
+        passwordCheck: "!DevTest"
+      },
+      {
+        name: "Kevin",
+        email: "kevin@dev.com",
+        password: "K.dev!!",
+        passwordCheck: "K.dev!!"
+      }
+    ]
+  }
+];
 /**
  * Initializes the user interface by displaying the login template.
  */
@@ -45,7 +68,7 @@ function loginTemplate() {
         <hr class="hr">
         <form onsubmit="login(); return false">
           <div class="inputWrapper">
-            <input id ="emailLogin" class="inputfield" type="email" placeholder="Email">
+            <input required id="emailLogin" class="inputfield" type="email" placeholder="Email">
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
@@ -118,6 +141,8 @@ function login() {
   let email = document.getElementById("emailLogin");
   let password = document.getElementById("passwordLogin");
   let passwordIcon = changePasswordIcon(password);
+
+  
 }
 
 
