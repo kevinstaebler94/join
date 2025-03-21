@@ -47,6 +47,7 @@ h3 {
     display: flex;
     box-shadow: 1px 2px 4px 1px #cdcdcd;
     flex-direction: column;
+    background-color: white;
 }
 
 .addContactButton {
@@ -57,11 +58,26 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 22px;
+    padding: 16px;
     margin: 52px;
     font-weight: 700;
     font-size: 21px;
     gap: 16px;
+}
+
+.addContactButton:hover {
+    cursor: pointer;
+    background-color: #29ABE2;
+}
+
+.nameList {
+    list-style-type: none;
+    padding: 16px;
+}
+
+#nameList li {
+    padding: 6px 8px;
+    border-bottom: 1px solid #ddd;
 }
 
 .contactsOverview {
