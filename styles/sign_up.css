@@ -56,21 +56,28 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .inputIcon {
   height: 1rem;
   position: absolute;
-  pointer-events: none;
   right: 4em;
+  top: 1.2em;
+  z-index: 2;
+}
+
+.password {
+  cursor: pointer;
 }
 
 .inputfield {
   width: 75%;
   margin: 0.7em auto;
   border-radius: 10px;
-  border: 1px solid #DCDCDC;
+  border: 2px solid #DCDCDC;
   padding: 0.5em 1em;
+  z-index: 1;
 }
 
 .buttonWrapper {
@@ -179,7 +186,20 @@ form {
   margin-top: 1em;
 }
 
-.hightlight {
-  color: #28ABE2;
+.inputfield:focus {
+  outline: none;
+  border: 2px solid #28ABE2;
+}
+
+.errorMsgPassword {
+  font-size: 0.6rem;
+  color: red;
+  position: relative;
+  top: -0.9em;
+  left: -1.6em;
+}
+
+.redBorder {
+  border: 2px solid red;
 }
 

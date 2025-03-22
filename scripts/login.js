@@ -73,7 +73,7 @@ function loginTemplate() {
           </div>
           <div class="inputWrapper">
             <input id="passwordLogin" class="inputfield" type="password" placeholder="Password">
-            <img id="passwordIcon" class="inputIcon" src="./assets/img/lock.svg" alt="">
+            <img id="passwordIcon" class="inputIcon password" src="./assets/img/lock.svg" alt="">
           </div>
           <span id="loginErrorMsg" class="formValidation dNone">Check your email and password. Please try again.</span>
           <div class="buttonWrapper">
@@ -113,12 +113,13 @@ function signUpTemplate() {
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="password" class="inputfield" type="password" placeholder="Password" oninput="toggleSignUpButton()">
+            <input id="password" class="inputfield password" type="password" placeholder="Password" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/lock.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="confirmedPassword" class="inputfield" type="password" placeholder="Confirm Password" oninput="toggleSignUpButton()">
+            <input id="confirmedPassword" class="inputfield password" type="password" placeholder="Confirm Password" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/lock.svg" alt="">
+            <span id="errorMsgPassword" class="errorMsgPassword dNone">Your passwords don't match. Please try again.</span>
           </div>
           <div class="checkPrivacyPolicy">
             <input id="checkbox" class="checkbox" type="checkbox" onchange="toggleSignUpButton()">
@@ -139,22 +140,61 @@ function signUpTemplate() {
 
 function signUp(event) {
   event.preventDefault();
-  window.location.href = "login.html"
-  
+  validatesPasswords();
 }
 
 function toggleSignUpButton() {
   let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-  let passwordIcon = document.getElementById("passwordIcon").value;
+  validateEmail();
   let checkbox = document.getElementById("checkbox").checked;
+
+  if(name && validateEmail() && checkbox) {
+    document.getElementById("signUpButton").disabled = false;
+  } else {
+    document.getElementById("signUpButton").disabled = true;
+  }
 }
 
-function highlightInputfield() {
-  let inputfield = document.querySelector("inputfield");
-  inputfield.classList.add("pointer");
+function validateEmail() {
+  let email = document.getElementById("email").value;
+    return email.includes("@");
 }
+
+function validatesPasswords() {
+  let password = document.getElementById("password");
+  let confirmedPassword = document.getElementById("confirmedPassword");
+  let errorMsgPassword = document.getElementById("errorMsgPassword");
+  if(password.value === confirmedPassword.value) {
+    errorMsgPassword.classList.remove("dFlex");
+    password.classList.remove("redBorder");
+    confirmedPassword.classList.remove("redBorder");
+    window.location.href = "login.html";
+  } else {
+    errorMsgPassword.classList.add("dFlex");
+    password.classList.add("redBorder");
+    confirmedPassword.classList.add("redBorder");
+    clearPasswordInput(password, confirmedPassword, errorMsgPassword);
+  }
+}
+
+function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
+  document.getElementById("checkbox").checked = false;
+  document.getElementById("signUpButton").disabled = true;
+
+  password.value = "";
+  confirmedPassword.value = "";
+
+  setTimeout(function() {
+    password.classList.remove("redBorder");
+    confirmedPassword.classList.remove("redBorder");
+    errorMsgPassword.classList.remove("dFlex");
+    errorMsgPassword.classList.add("dNone");
+  }, 2000);
+  return
+}
+
+
  
+
 
 
