@@ -203,3 +203,15 @@ form {
   border: 2px solid red;
 }
 
+.fade-out {
+  opacity: 0;
+  transform: scale(1 .95);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+}
+
