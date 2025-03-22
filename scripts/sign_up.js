@@ -141,7 +141,7 @@ function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
     confirmedPassword.classList.remove("redBorder");
     errorMsgPassword.classList.remove("dFlex");
     errorMsgPassword.classList.add("dNone");
-  }, 2000);
+  }, 3500);
   return
 }
 
