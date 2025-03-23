@@ -24,12 +24,12 @@ function signUpTemplate() {
           </div>
           <div class="inputWrapper">
             <input id="password" class="inputfield password" type="password" placeholder="Password" oninput="toggleSignUpButton()">
-            <img class="inputIcon" src="./assets/img/lock.svg" alt="">
+            <img onclick="togglePasswordVisibility('password')" class="inputIcon passwordIcon" src="./assets/img/lock.svg" alt="">
             <span class="hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
             <input id="confirmedPassword" class="inputfield password" type="password" placeholder="Confirm Password" oninput="toggleSignUpButton()">
-            <img class="inputIcon" src="./assets/img/lock.svg" alt="">
+            <img onclick="togglePasswordVisibility('confirmedPassword')" class="inputIcon passwordIcon" src="./assets/img/lock.svg" alt="">
             <span id="errorMsgPassword" class="errorMsgPassword hide">Your passwords don't match. Please try again.</span>
           </div>
           <div class="checkPrivacyPolicy">
@@ -50,14 +50,16 @@ function signUpTemplate() {
 }
 
 /**
+ * Handles the sign-up form submission.
  * Prevents the default form submission and validates passwords.
  * 
  * @param {Event} event - The event object from form submission.
  */
 function signUp(event) {
   event.preventDefault();
-  checkEmailInput();
-  validatesPasswords();
+  if (checkInput()) {
+    updateContent("login");
+  }
 }
 
 /**
@@ -75,7 +77,7 @@ function toggleSignUpButton() {
 }
 
 /**
- * Checks if the entered email contains an '@' symbol.
+ * Checks if the entered email is valid.
  * 
  * @returns {boolean} - Returns true if the email is valid, otherwise false.
  */
@@ -84,50 +86,107 @@ function validateEmail() {
     return email.includes("@");
 }
 
+/**
+ * Validates the email input using a regular expression.
+ * Shows an error message if the email is invalid.
+ * 
+ * @returns {boolean} True if the email is valid, otherwise false.
+ */
 function checkEmailInput() {
-  let email = document.getElementById("email").value;
+  let email = document.getElementById("email").value.trim();
   let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let errorMsgEmail = document.getElementById("errorMsgEmail");
   
   if(!pattern.test(email)) {
-    /*showEmailErrorMessage(errorMsgEmail);*/
+    showEmailErrorMessage(errorMsgEmail);
+    clearEmailInput(errorMsgEmail);
     return false;
   } else {
-    /*hideEmailErrorMessage(errorMsgEmail);*/
+    hideEmailErrorMessage(errorMsgEmail);
     return true;
   }
 }
 
+/**
+ * Displays the email error message.
+ * 
+ * @param {HTMLElement} errorMsgEmail - The email error message element.
+ */
 function showEmailErrorMessage(errorMsgEmail) {
   errorMsgEmail.classList.add("show");
+  document.getElementById("email").classList.add("redBorder");
 }
 
 /**
- * Validates if passwords match and redirects if they do.
+ * Hides the email error message.
+ * 
+ * @param {HTMLElement} errorMsgEmail - The email error message element.
  */
-function validatesPasswords() {
+function hideEmailErrorMessage(errorMsgEmail) {
+  errorMsgEmail.classList.add("hide");
+  document.getElementById("email").classList.remove("redBorder");
+}
+
+/**
+ * Clears the email input field and hides the error message after a delay.
+ * 
+ * @param {HTMLElement} errorMsgEmail - The email error message element.
+ */
+function clearEmailInput(errorMsgEmail) {
+  let email = document.getElementById("email");
+  document.getElementById("checkbox").checked = false;
+  document.getElementById("signUpButton").disabled = true;
+
+  setTimeout(function() {
+    email.classList.remove("redBorder");
+    errorMsgEmail.classList.remove("show");
+    errorMsgEmail.classList.add("hide");
+  }, 3500);
+  return
+}
+
+/**
+ * Validates if passwords match.
+ * 
+ * @returns {boolean} True if passwords match, otherwise false.
+ */
+function validatePasswords() {
   let password = document.getElementById("password");
   let confirmedPassword = document.getElementById("confirmedPassword");
   let errorMsgPassword = document.getElementById("errorMsgPassword");
-  if(password.value === confirmedPassword.value) {
+  if(password.value.trim() === confirmedPassword.value.trim()) {
     hidePasswordErrorMessage(password, confirmedPassword, errorMsgPassword);
-    updateContent("login");
+    return true;
   } else {
     showPasswordErrorMessage(password, confirmedPassword, errorMsgPassword);
     clearPasswordInput(password, confirmedPassword, errorMsgPassword);
+    return false;
   }
 }
 
 /**
  * Checks if both password fields are filled.
  * 
- * @returns {boolean} - Returns true if both passwords are entered, otherwise false.
+ * @returns {boolean} True if both passwords are entered, otherwise false.
  */
 function checkPasswordInput() {
   let password = document.getElementById("password");
   let confirmedPassword = document.getElementById("confirmedPassword");
   
   return password.value.length > 0 && confirmedPassword.value.length > 0;
+}
+
+function togglePasswordVisibility(id) {
+  let input = document.getElementById(id)
+  let icon = input.nextElementSibling;
+  
+  if(input.type === "password") {
+    input.type = "text";
+    icon.src = "./assets/img/visibility.svg";
+  } else {
+    input.type = "password";
+    icon.src = "./assets/img/visibilityOff.svg";
+  }
 }
 
 /**
@@ -157,7 +216,7 @@ function showPasswordErrorMessage(password, confirmedPassword, errorMsgPassword)
 }
 
 /**
- * Clears password input fields and hides the error message after 2 seconds.
+ * Clears password input fields and hides the error message after a delay.
  * 
  * @param {HTMLInputElement} password - The password input field.
  * @param {HTMLInputElement} confirmedPassword - The confirm password input field.
@@ -179,4 +238,14 @@ function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
   return
 }
 
+/**
+ * Validates email and password inputs.
+ * 
+ * @returns {boolean} True if all inputs are valid, otherwise false.
+ */
+function checkInput() {
+  let emailValid = checkEmailInput();
+  let passwordsValid = validatePasswords();
+  return emailValid && passwordsValid;
+}
 
