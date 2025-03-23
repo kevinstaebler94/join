@@ -1,11 +1,21 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
 .content {
     display: flex;
+    height: 100%;
 }
 
 main {
     height: 100%;
     background-color: #F6F7F8;
     display: flex;
+    overflow: hidden;
 }
 
 h1 {
@@ -25,9 +35,10 @@ h3 {
 
 .includeHeader {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .templateHTML {
@@ -38,16 +49,18 @@ h3 {
 .mainContent {
     display: flex;
     width: 100%;
+    height: 100%;
     gap: 64px;
 }
 
-.contactsList {
+.contactListContainer {
     width: 450px;
     height: 100%;
     display: flex;
     box-shadow: 1px 2px 4px 1px #cdcdcd;
     flex-direction: column;
     background-color: white;
+    overflow: hidden;
 }
 
 .addContactButton {
@@ -63,6 +76,9 @@ h3 {
     font-weight: 700;
     font-size: 21px;
     gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 .addContactButton:hover {
@@ -70,14 +86,54 @@ h3 {
     background-color: #29ABE2;
 }
 
-.nameList {
-    list-style-type: none;
+.contactList {
+    flex-grow: 1;
+    overflow-y: auto;
     padding: 16px;
+    min-height: 0;
 }
 
-#nameList li {
-    padding: 6px 8px;
-    border-bottom: 1px solid #ddd;
+.letterDivider {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #2A3647;
+}
+
+.contactCard {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+
+    transition: background-color 0.1s ease-in-out;
+}
+
+.contactCard:hover {
+    background-color: #f1f1f1;
+}
+
+.contactIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.contactDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactDetails .email {
+    font-size: 14px;
+    color: #29ABE2;
 }
 
 .contactsOverview {
