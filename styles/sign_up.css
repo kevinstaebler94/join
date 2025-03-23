@@ -62,8 +62,8 @@ form {
 .inputIcon {
   height: 1rem;
   position: absolute;
-  right: 4em;
-  top: 1.2em;
+  right: 4rem;
+  top: 1.5rem;
   z-index: 2;
 }
 
@@ -73,7 +73,7 @@ form {
 
 .inputfield {
   width: 75%;
-  margin: 0.7em auto;
+  margin: 1.125em auto;
   border-radius: 10px;
   border: 2px solid #DCDCDC;
   padding: 0.5em 1em;
@@ -168,6 +168,20 @@ form {
   width: 100%;
   max-height: 566px;
   height: 100%;
+}
+
+@media(max-height:1000px) {
+  .contentSignUp {
+    max-height: none;
+    height: fit-content;
+    margin: -2vh auto;
+  }
+}
+
+@media(max-height:800px) {
+  .contentSignUp {
+    margin: -2vh auto;
+  }
 }
 
 .checkbox {

@@ -17,7 +17,7 @@ function signUpTemplate() {
             <img class="inputIcon" src="./assets/img/person.svg" alt="">
           </div>
           <div class="inputWrapper">
-            <input id="email" class="inputfield" type="email" placeholder="Email" oninput="toggleSignUpButton()">
+            <input id="email" class="inputfield" type="email" placeholder="Email" oninput="toggleSignUpButton()" >
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
           </div>
           <div class="inputWrapper">
@@ -156,3 +156,5 @@ function checkPasswordInput() {
   
   return password.value.length > 0 && confirmedPassword.value.length > 0;
 }
+
+/*pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required*/
