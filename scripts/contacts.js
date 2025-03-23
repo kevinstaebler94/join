@@ -21,12 +21,7 @@ let colors = [
 
 function renderContacts() {
     let container = document.getElementById("contactList");
-    container.innerHTML = ""; // Leeren, falls neu gerendert wird
-
-    let randomColor = colors[Math.floor(Math.random() * colors.length)];
-
-
-    // Kontakte alphabetisch sortieren
+    container.innerHTML = "";
     let sorted = contacts.sort((a, b) => a.name.localeCompare(b.name));
     let currentLetter = "";
 
@@ -35,34 +30,44 @@ function renderContacts() {
 
         if (firstLetter !== currentLetter) {
             currentLetter = firstLetter;
-            const letterDiv = document.createElement("div");
-            letterDiv.classList.add("letterDivider");
-            letterDiv.textContent = currentLetter;
-            container.appendChild(letterDiv);
+            container.appendChild(createLetterDivider(firstLetter));
         }
 
-        let card = document.createElement("div");
-        card.classList.add("contactCard");
-
-        let initials = contact.name
-            .split(" ")
-            .map(word => word[0])
-            .join("")
-            .toUpperCase();
-
-        let bgColor = getColorFromName(contact.name + contact.email);
-
-        card.innerHTML = `
-        <div class="contactIcon" style="background-color: ${bgColor}">${initials}</div>
-        <div class="contactDetails">
-          <strong>${contact.name}</strong>
-          <span class="email">${contact.email}</span>
-        </div>
-      `;
-
-        container.appendChild(card);
+        container.appendChild(createContactCard(contact));
     });
 }
+
+function createLetterDivider(letter) {
+    let div = document.createElement("div");
+    div.classList.add("letterDivider");
+    div.textContent = letter;
+    return div;
+}
+
+function createContactCard(contact) {
+    let card = document.createElement("div");
+    card.classList.add("contactCard");
+    let initials = getInitials(contact.name);
+    let bgColor = getColorFromName(contact.name + contact.email);
+
+    card.innerHTML = `
+        <div class="contactIcon" style="background-color: ${bgColor}">${initials}</div>
+        <div class="contactDetails">
+            <strong>${contact.name}</strong>
+            <span class="email">${contact.email}</span>
+        </div>
+    `;
+    return card;
+}
+
+function getInitials(name) {
+    return name
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .toUpperCase();
+}
+
 
 window.addEventListener("DOMContentLoaded", renderContacts);
 
