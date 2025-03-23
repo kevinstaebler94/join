@@ -63,7 +63,7 @@ form {
   height: 1rem;
   position: absolute;
   right: 4rem;
-  top: 1.5rem;
+  top: 1.2rem;
   z-index: 2;
 }
 
@@ -73,7 +73,7 @@ form {
 
 .inputfield {
   width: 75%;
-  margin: 1.125em auto;
+  margin: 0.7em auto;
   border-radius: 10px;
   border: 2px solid #DCDCDC;
   padding: 0.5em 1em;
@@ -209,23 +209,29 @@ form {
   font-size: 0.6rem;
   color: red;
   position: relative;
-  top: -0.9em;
+  top: -1em;
   left: -1.6em;
+}
+
+.errorMsgEmail {
+  font-size: 0.6rem;
+  position: relative;
+  top: -1em;
+  left: -5em;
+  padding: 0;
 }
 
 .redBorder {
   border: 2px solid red;
 }
 
-.fade-out {
-  opacity: 0;
-  transform: scale(1 .95);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+.hide {
+  color: rgb(255, 255, 255);
+  font-size: 0.6rem;
 }
 
-.fade-in {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+.show {
+  display: flex;
+  color: red;
 }
 

@@ -69,12 +69,13 @@ function loginTemplate() {
           <div class="inputWrapper">
             <input id="emailLogin" class="inputfield" type="email" placeholder="Email">
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
+            <span class="hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
             <input id="passwordLogin" class="inputfield" type="password" placeholder="Password">
             <img id="passwordIcon" class="inputIcon password" src="./assets/img/lock.svg" alt="">
+            <span class="hide">Placeholder</span>
           </div>
-          <span id="loginErrorMsg" class="formValidation dNone">Check your email and password. Please try again.</span>
           <div class="buttonWrapper">
             <button disabled type="button" id="loginButton" class="button loginButton">Log in</button>
             <a class="button guestLoginButton" href="summary.html">Guest Log in</a>

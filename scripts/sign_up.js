@@ -15,19 +15,22 @@ function signUpTemplate() {
           <div class="inputWrapper">
             <input id="name" class="inputfield" type="text" placeholder="Name" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/person.svg" alt="">
+            <span class="hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
-            <input id="email" class="inputfield" type="email" placeholder="Email" oninput="toggleSignUpButton()" >
+            <input id="email" class="inputfield" type="text" placeholder="Email" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
+            <span id="errorMsgEmail" class="errorMsgEmail hide">Please enter a valid email adress.</span>
           </div>
           <div class="inputWrapper">
             <input id="password" class="inputfield password" type="password" placeholder="Password" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/lock.svg" alt="">
+            <span class="hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
             <input id="confirmedPassword" class="inputfield password" type="password" placeholder="Confirm Password" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/lock.svg" alt="">
-            <span id="errorMsgPassword" class="errorMsgPassword dNone">Your passwords don't match. Please try again.</span>
+            <span id="errorMsgPassword" class="errorMsgPassword hide">Your passwords don't match. Please try again.</span>
           </div>
           <div class="checkPrivacyPolicy">
             <input id="checkbox" class="checkbox" type="checkbox" onchange="toggleSignUpButton()">
@@ -53,6 +56,7 @@ function signUpTemplate() {
  */
 function signUp(event) {
   event.preventDefault();
+  checkEmailInput();
   validatesPasswords();
 }
 
@@ -80,6 +84,24 @@ function validateEmail() {
     return email.includes("@");
 }
 
+function checkEmailInput() {
+  let email = document.getElementById("email").value;
+  let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  let errorMsgEmail = document.getElementById("errorMsgEmail");
+  
+  if(!pattern.test(email)) {
+    /*showEmailErrorMessage(errorMsgEmail);*/
+    return false;
+  } else {
+    /*hideEmailErrorMessage(errorMsgEmail);*/
+    return true;
+  }
+}
+
+function showEmailErrorMessage(errorMsgEmail) {
+  errorMsgEmail.classList.add("show");
+}
+
 /**
  * Validates if passwords match and redirects if they do.
  */
@@ -97,6 +119,18 @@ function validatesPasswords() {
 }
 
 /**
+ * Checks if both password fields are filled.
+ * 
+ * @returns {boolean} - Returns true if both passwords are entered, otherwise false.
+ */
+function checkPasswordInput() {
+  let password = document.getElementById("password");
+  let confirmedPassword = document.getElementById("confirmedPassword");
+  
+  return password.value.length > 0 && confirmedPassword.value.length > 0;
+}
+
+/**
  * Hides the password error message.
  * 
  * @param {HTMLInputElement} password - The password input field.
@@ -104,7 +138,7 @@ function validatesPasswords() {
  * @param {HTMLElement} errorMsgPassword - The error message element.
  */
 function hidePasswordErrorMessage(password, confirmedPassword, errorMsgPassword) {
-  errorMsgPassword.classList.remove("dFlex");
+  errorMsgPassword.classList.remove("hide");
   password.classList.remove("redBorder");
   confirmedPassword.classList.remove("redBorder");
 }
@@ -117,7 +151,7 @@ function hidePasswordErrorMessage(password, confirmedPassword, errorMsgPassword)
  * @param {HTMLElement} errorMsgPassword - The error message element.
  */
 function showPasswordErrorMessage(password, confirmedPassword, errorMsgPassword) {
-  errorMsgPassword.classList.add("dFlex");
+  errorMsgPassword.classList.add("show");
   password.classList.add("redBorder");
   confirmedPassword.classList.add("redBorder");
 }
@@ -139,22 +173,10 @@ function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
   setTimeout(function() {
     password.classList.remove("redBorder");
     confirmedPassword.classList.remove("redBorder");
-    errorMsgPassword.classList.remove("dFlex");
-    errorMsgPassword.classList.add("dNone");
+    errorMsgPassword.classList.remove("show");
+    errorMsgPassword.classList.add("hide");
   }, 3500);
   return
 }
 
-/**
- * Checks if both password fields are filled.
- * 
- * @returns {boolean} - Returns true if both passwords are entered, otherwise false.
- */
-function checkPasswordInput() {
-  let password = document.getElementById("password");
-  let confirmedPassword = document.getElementById("confirmedPassword");
-  
-  return password.value.length > 0 && confirmedPassword.value.length > 0;
-}
 
-/*pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required*/
