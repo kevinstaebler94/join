@@ -4,10 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/legal.css">
+    <script src="./script.js"></script>
+    <script src="./scripts/add_task.js"></script>
+    <script src="./scripts/includeHTML.js"></script>
+    <script src="./scripts/header.js"></script>
+    <title>Legal Notice</title>
 </head>
 
-<body>
+<body onload="init()">
+
+    <div class="dFlex">
+        <div w3-include-html="./assets/templates/sidebar.html"></div>
+        <div class="includeHeader">
+            <div class="templateHTML" w3-include-html="./assets/templates/header.html"></div>
+            <main>
+                <div class="contentWrapper">
+                    <div class="mainContent">
+                        <div class="noticeSection">
+                            <h1>Privacy Policy</h1>
+                            <h2>Subtitles</h2>
+                            <p>
+                                Subtitle
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis,
+                                iaculis ut massa eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in
+                                scelerisque nulla convallis. Vestibulum eros lorem, sollicitudin eget eros non, varius
+                                aliquam mauris. Sed turpis ipsum, condimentum quis nulla at, lobortis facilisis ipsum.
+                                Nunc erat justo, hendrerit vel enim vitae, feugiat mattis dui. In auctor dignissim
+                                luctus. Mauris ornare ipsum at ultrices eleifend. Praesent tempus congue magna. Quisque
+                                libero erat, pharetra a neque et, imperdiet semper justo.
+
+                            </p>
+                        </div>
+                        <div class="noticeSection">
+                            <h2>Subtitles</h2>
+                            <p>
+                                Subtitle
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis,
+                                iaculis ut massa eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in
+                                scelerisque nulla convallis. Vestibulum eros lorem, sollicitudin eget eros non, varius
+                                aliquam mauris. Sed turpis ipsum, condimentum quis nulla at, lobortis facilisis ipsum.
+                                Nunc erat justo, hendrerit vel enim vitae, feugiat mattis dui. In auctor dignissim
+                                luctus. Mauris ornare ipsum at ultrices eleifend. Praesent tempus congue magna. Quisque
+                                libero erat, pharetra a neque et, imperdiet semper justo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
 
 </body>
 
