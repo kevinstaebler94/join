@@ -110,6 +110,7 @@ span {
     padding: 16px 19px;
     gap: 8px;
     transition: 0.1s ease-in-out;
+    box-shadow: 0px 0px 5px 0px #cdcdcd;
 }
 
 .toDoContainer:hover {
@@ -172,6 +173,7 @@ span {
     border-radius: 30px;
     padding: 16px 19px;
     transition: 0.1s ease-in-out;
+    box-shadow: 0px 0px 5px 0px #cdcdcd;
 }
 
 .midContent:hover {
@@ -232,7 +234,7 @@ span {
 }
 
 .bottomBarTasks {
-    width: 50%;
+    width: 170px;
     background-color: white;
     display: flex;
     align-items: center;
@@ -240,6 +242,7 @@ span {
     border-radius: 30px;
     padding: 16px 19px;
     transition: 0.1s ease-in-out;
+    box-shadow: 0px 0px 5px 0px #cdcdcd;
 }
 
 .bottomBarTasks:hover {
