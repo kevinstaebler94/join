@@ -7,6 +7,12 @@ html, body {
     background-color: #f6f7f8;
 }
 
+@media(min-width:1921px) {
+    html, body {
+        font-size: 20px;
+    }
+}
+
 @media(max-width:1500px) {
     html, body {
         font-size: 14px;
