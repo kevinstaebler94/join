@@ -197,7 +197,7 @@ function togglePasswordVisibility(id) {
  * @param {HTMLElement} errorMsgPassword - The error message element.
  */
 function hidePasswordErrorMessage(password, confirmedPassword, errorMsgPassword) {
-  errorMsgPassword.classList.remove("hide");
+  errorMsgPassword.classList.remove("show");
   password.classList.remove("redBorder");
   confirmedPassword.classList.remove("redBorder");
 }
