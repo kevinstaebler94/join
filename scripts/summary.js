@@ -22,3 +22,10 @@ function updateGreeting() {
 
     document.getElementById("timeOfDay").textContent = greeting;
 }
+
+function showDate() {
+    let date = new Date();
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+    let formattedDate = date.toLocaleDateString('en-US', options);
+    document.getElementById('date').innerHTML = formattedDate;
+}
