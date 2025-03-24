@@ -7,8 +7,16 @@
 }
 
 main {
-    overflow: hidden;
-    overflow: scroll;
+    height: 100vh;
+    overflow-y: scroll;
+    background-color: #F6F7F8;
+}
+
+.contentWrapper {
+    max-width: 1920px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .mainContent {
