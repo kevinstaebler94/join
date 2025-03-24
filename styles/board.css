@@ -117,14 +117,14 @@ h2 {
     transition: background-color 125ms ease-in-out;
   }
 
-  .addTaskButton:hover {
+.addTaskButton:hover {
     background-color: #29abe2;
-  }
+}
 
-  .addTaskButton img {
+.addTaskButton img {
     margin-left: 0.5em;
     height: 1.5rem;
-  }
+}
 
 .taskButtonsWrapper {
     display: flex;
@@ -164,7 +164,6 @@ h2 {
 }
 
 .boardContentWrapper {
-    display: flex;
     overflow-y: auto;
 }
 
