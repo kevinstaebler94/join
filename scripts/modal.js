@@ -6,11 +6,21 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
+function openFilledTaskModal() {
+    let overlay = document.getElementById('boardOverlay');
+    let filledTaskModal = document.getElementById('filledTaskModal');
+    overlay.classList.remove('dNone');
+    filledTaskModal.classList.remove('dNone');
+    getFilledStructure();
+}
+
 function closeModal() {
     let overlay = document.getElementById('boardOverlay');
     let addTaskModal = document.getElementById('addTaskModal');
+    let filledTaskModal = document.getElementById('filledTaskModal');
     overlay.classList.add('dNone');
     addTaskModal.classList.add('dNone');
+    filledTaskModal.classList.add('dNone');
 }
 
 function getAddTaskStructure() {
@@ -146,4 +156,32 @@ function getAddTaskStructure() {
                             </div>
                         </div>
                     </div>`;
+}
+
+function getFilledStructure() {
+    let filledTaskModal = document.getElementById('filledTaskModal');
+    filledTaskModal.innerHTML = `<div id="filledTask1" class="filledTaskModal marginBottom">
+                                <div class="modalTaskHeadSection">
+                                    <h3 class="taskCategoryModal userStoryModal">User Story</h3>
+                                    <div class="closeIconTaskContainer">
+                                        <img onclick="closeModal()" class="closeIconTask" src="./assets/img/closeIcon.svg" alt="">
+                                    </div>
+                                </div>
+                                <h4 class="taskTitleModal">Kochwelt Page & Recipe Recommender</h4>
+                                    <p class="taskDescriptionModal">Build start page with recipe recommendation</p>
+                                    <div class="subtasksContainerModal">
+                                        <div class="progressBarContainerModal">
+                                            <div class="progressBarModal halfFilledModal"></div>  
+                                        </div>
+                                        <span class="subtaskInfoModal">1/2 Subtasks</span>
+                                    </div>
+                                <div class="assignedToContainerModal">
+                                    <div class="assignedUsersModal">
+                                        <span class="assignedUserModal">KS</span>
+                                        <span class="assignedUserModal">DB</span>
+                                        <span class="assignedUserModal">OG</span>
+                                    </div>
+                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal">
+                                </div>
+                            </div>`;
 }

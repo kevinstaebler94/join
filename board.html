@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./styles/board.css">
     <link rel="stylesheet" href="./styles/modal.css">
     <link rel="stylesheet" href="./styles/addTaskModal.css">
+    <link rel="stylesheet" href="./styles/boardModal.css">
     <script src="./script.js"></script>
     <script src="./scripts/includeHTML.js"></script>
     <script src="./scripts/header.js"></script>
@@ -28,6 +29,7 @@
             <main id="boardMainContainer">
                 <div onclick="closeModal()" id="boardOverlay" class="overlay dNone"></div>
                 <div id="addTaskModal" class="addTaskModal dNone"></div>
+                <div id="filledTaskModal" class="filledTaskModal dNone"></div>
                 <section class="bordHeaderWrapper">
                     <div class="boardHeaderContent">
                         <h2>Board</h2>
@@ -69,7 +71,7 @@
                         </div>
 
                         <div class="column">
-                            <div class="filledTask marginBottom">
+                            <div onclick="openFilledTaskModal()" id="filledTask1" class="filledTask marginBottom">
                                 <h3 class="taskCategory userStory">User Story</h3>
                                 <h4 class="taskTitle">Kochwelt Page & Recipe Recommender</h4>
                                 <p class="taskDescription">Build start page with recipe recommendation</p>

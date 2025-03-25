@@ -1,0 +1,156 @@
+.blankTaskModal {
+    border: 2px dotted #acacac;
+    border-radius: 10px;
+    color: #b7b7b7;
+    text-align: center;
+    margin-bottom: 0.75em;
+    padding: 0.5em 0;
+    background-color: #e7e7e7;
+}
+
+.filledTaskModal {
+    width: 500px;
+    height: 700px;
+    border-radius: 24px;
+    background-color: #FFFFFF;
+    padding: 1.25em;
+}
+
+.modalTaskHeadSection {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.closeIconTask {
+    width: 24px;
+}
+
+.closeIconTask:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #D1D1D1;
+}
+
+.marginBottomModal {
+    margin-bottom: 2em;
+}
+
+.taskCategoryModal {
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    width: fit-content;
+    padding: 0.1em 0.85em;
+    font-weight: 400;
+    margin-bottom: 1.5em;
+}
+
+.userStoryModal {
+    background-color: #0038ff;
+}
+
+.technicalTaskModal {
+    background-color: #1fd7c1;
+}
+
+.taskTitleModal {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2A3647;
+    margin-bottom: 0.75em;
+    overflow-wrap: break-word;
+}
+
+.taskDescriptionModal {
+    color: #A8A8A8;
+    font-size: 1.2rem;
+    font-weight: 300;      
+    margin-bottom: 1.5em;
+    overflow-wrap: break-word;
+}
+
+.subtasksContainerModal {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    margin-bottom: 1.5em;
+}
+
+.progressBarContainerModal {
+    width: 60%;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+}
+
+.progressBarModal {
+    height: 10px;
+    background-color: #4589ff;
+    border-radius: 10px;
+}
+
+.halfFilledModal {
+    width: 50%;
+}
+
+.fullFilledModal {
+    width: 100%;
+}
+
+
+.subtaskInfoModal {
+    text-align: start;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.assignedToContainerModal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assignedUsersModal {
+    position: relative;
+}
+
+.assignedUserModal {
+    border-radius: 50%;
+    padding: 0.5em 0.4em;
+    position: relative;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.assignedUserModal:nth-child(1) {
+    background-color: chartreuse;
+}
+
+.assignedUserModal:nth-child(2) {
+    background-color: rgb(51, 0, 255);
+    left: -0.75em;
+}
+
+.assignedUserModal:nth-child(3) {
+    background-color: rgb(255, 68, 0);
+    left: -1.5em;
+}
+
+.taskPrioLowModal,
+.taskPrioUrgentModal {
+    width: 1rem;
+}
+
+.taskPrioMediumModal {
+    width: 2rem;
+}
+
+
+
+
+
+
+
+
+
+

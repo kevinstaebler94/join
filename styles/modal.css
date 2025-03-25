@@ -24,3 +24,11 @@
     flex-direction: column;
     z-index: 6;
 }
+
+.filledTaskModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+}
