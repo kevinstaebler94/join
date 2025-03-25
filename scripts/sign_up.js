@@ -20,7 +20,7 @@ function signUpTemplate() {
           <div class="inputWrapper">
             <input id="email" class="inputfield" type="text" placeholder="Email" oninput="toggleSignUpButton()">
             <img class="inputIcon" src="./assets/img/mail.svg" alt="">
-            <span id="errorMsgEmail" class="errorMsgEmail hide">Please enter a valid email adress.</span>
+            <span id="errorMsgEmail" class="errorMsgEmail hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
             <input id="password" class="inputfield password" type="password" placeholder="Password" oninput="toggleSignUpButton()">
@@ -57,10 +57,11 @@ function signUpTemplate() {
  */
 function signUp(event) {
   event.preventDefault();
-  if (checkInput()) {
+  if(checkInput()) {
     updateContent("login");
   }
 }
+
 
 /**
  * Enables or disables the sign-up button based on input validation.
@@ -69,21 +70,11 @@ function toggleSignUpButton() {
   let name = document.getElementById("name").value;
   let checkbox = document.getElementById("checkbox").checked;
 
-  if(name && validateEmail() && checkPasswordInput() && checkbox) {
+  if(name && checkPasswordInput() && checkbox) {
     document.getElementById("signUpButton").disabled = false;
   } else {
     document.getElementById("signUpButton").disabled = true;
   }
-}
-
-/**
- * Checks if the entered email is valid.
- * 
- * @returns {boolean} - Returns true if the email is valid, otherwise false.
- */
-function validateEmail() {
-  let email = document.getElementById("email").value;
-    return email.includes("@");
 }
 
 /**
@@ -92,19 +83,38 @@ function validateEmail() {
  * 
  * @returns {boolean} True if the email is valid, otherwise false.
  */
-function checkEmailInput() {
+function validateEmailFormat() {
   let email = document.getElementById("email").value.trim();
   let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let errorMsgEmail = document.getElementById("errorMsgEmail");
-  
-  if(!pattern.test(email)) {
-    showEmailErrorMessage(errorMsgEmail);
+
+  if (!pattern.test(email)) {
+    showEmailErrorMessage(errorMsgEmail, "Please enter a valid email address.");
     clearEmailInput(errorMsgEmail);
     return false;
-  } else {
-    hideEmailErrorMessage(errorMsgEmail);
-    return true;
+  } 
+
+  if (emailExists()) {
+    showEmailErrorMessage(errorMsgEmail, "Email is already registered.");
+    clearEmailInput(errorMsgEmail);
+    return false;
   }
+
+  hideEmailErrorMessage(errorMsgEmail);
+  return true;
+}
+
+/**
+ * Checks if the entered email is already registered.
+ * 
+ * @returns {boolean} True if the email exists, otherwise false.
+ */
+function emailExists() {
+  let email = document.getElementById("email").value.trim();
+  let users = globalBackend.flatMap(obj => obj.users);
+  let exists = users.some(users => users.email === email);
+
+  return exists;
 }
 
 /**
@@ -112,7 +122,9 @@ function checkEmailInput() {
  * 
  * @param {HTMLElement} errorMsgEmail - The email error message element.
  */
-function showEmailErrorMessage(errorMsgEmail) {
+function showEmailErrorMessage(errorMsgEmail, message) {
+  errorMsgEmail.textContent = message;
+  errorMsgEmail.classList.remove("hide");
   errorMsgEmail.classList.add("show");
   document.getElementById("email").classList.add("redBorder");
 }
@@ -123,6 +135,7 @@ function showEmailErrorMessage(errorMsgEmail) {
  * @param {HTMLElement} errorMsgEmail - The email error message element.
  */
 function hideEmailErrorMessage(errorMsgEmail) {
+  errorMsgEmail.classList.remove("show");
   errorMsgEmail.classList.add("hide");
   document.getElementById("email").classList.remove("redBorder");
 }
@@ -244,8 +257,11 @@ function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
  * @returns {boolean} True if all inputs are valid, otherwise false.
  */
 function checkInput() {
-  let emailValid = checkEmailInput();
+  let emailFormatValid = validateEmailFormat();
+  let emailTaken = emailExists();
   let passwordsValid = validatePasswords();
-  return emailValid && passwordsValid;
+  return emailFormatValid && !emailTaken && passwordsValid;
 }
+
+
 
