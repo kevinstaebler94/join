@@ -16,3 +16,7 @@
 .dFlex {
     display: flex;
 }
+
+.dNone {
+    display: none !important;
+}

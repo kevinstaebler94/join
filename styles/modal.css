@@ -6,7 +6,7 @@
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 5;
+    z-index: 3;
 }
 
 .addTaskModal {
@@ -22,5 +22,5 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    z-index: 2;
+    z-index: 6;
 }

@@ -1,18 +1,21 @@
 function openModal() {
     let overlay = document.getElementById('boardOverlay');
+    let addTaskModal = document.getElementById('addTaskModal');
     overlay.classList.remove('dNone');
-    overlay.innerHTML += `<div id="addTaskModal" class="addTaskModal"></div>`;
+    addTaskModal.classList.remove('dNone');
     getAddTaskStructure();
 }
 
 function closeModal() {
     let overlay = document.getElementById('boardOverlay');
+    let addTaskModal = document.getElementById('addTaskModal');
     overlay.classList.add('dNone');
+    addTaskModal.classList.add('dNone');
 }
 
 function getAddTaskStructure() {
     let addTaskModal = document.getElementById('addTaskModal');
-    addTaskModal.innerHTML += `<div class="mainContent">
+    addTaskModal.innerHTML = `<div class="mainContent">
                         <div class="modalHeadSection">
                             <h1>Add Task</h1>
                             <div class="closeIconContainer">
