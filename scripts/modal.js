@@ -1,4 +1,4 @@
-function openModal() {
+function openAddTaskModal() {
     let overlay = document.getElementById('boardOverlay');
     let addTaskModal = document.getElementById('addTaskModal');
     overlay.classList.remove('dNone');
