@@ -78,7 +78,7 @@ h2 {
 }
 
 .taskInputfield {
-    height: 4rem;
+    height: 3rem;
     border-radius: 10px;
     padding: 0 1em;
     font-size: 1.5rem;
@@ -88,7 +88,7 @@ h2 {
 }
 
 .verticalLine {
-    height: 3.5rem;
+    height: 2rem;
     color: #d1d1d1;
     width: 2px;
     position: relative;
@@ -117,7 +117,7 @@ h2 {
     font-size: 1.5rem;
     font-weight: 500;
     cursor: pointer;
-    height: 4rem;
+    height: 3rem;
     display: flex;
     align-items: center;
     transition: background-color 125ms ease-in-out;
