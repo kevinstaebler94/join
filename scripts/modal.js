@@ -1,31 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+function openModal() {
+    let overlay = document.getElementById('boardOverlay');
+    overlay.classList.remove('dNone');
+    overlay.innerHTML += `<div id="addTaskModal" class="addTaskModal"></div>`;
+    getAddTaskStructure();
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./styles/sidebar.css">
-    <link rel="stylesheet" href="./styles/addTask.css">
-    <link rel="stylesheet" href="./styles/header.css">
-    <script src="./script.js"></script>
-    <script src="./scripts/add_task.js"></script>
-    <script src="./scripts/includeHTML.js"></script>
-    <script src="./scripts/header.js"></script>
-    <title>Add Task</title>
-</head>
+function closeModal() {
+    let overlay = document.getElementById('boardOverlay');
+    overlay.classList.add('dNone');
+}
 
-<body onload="init()">
-
-    <div class="dFlex">
-        <div w3-include-html="./assets/templates/sidebar.html"></div>
-        <div class="includeHeader">
-            <div class="templateHTML" w3-include-html="./assets/templates/header.html"></div>
-            <main>
-                <div class="contentWrapper">
-                    <div class="mainContent">
-                        <h1>Add Task</h1>
+function getAddTaskStructure() {
+    let addTaskModal = document.getElementById('addTaskModal');
+    addTaskModal.innerHTML += `<div class="mainContent">
+                        <div class="modalHeadSection">
+                            <h1>Add Task</h1>
+                            <div class="closeIconContainer">
+                            <img onclick="closeModal()" class="closeIcon" src="./assets/img/closeIcon.svg" alt="">
+                            </div>
+                        </div>
+                        
                         <div class="addTaskContent">
                             <div class="leftContainer">
                                 <form class="leftAddTaskForm">
@@ -148,20 +142,5 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
-
-
-            </main>
-
-
-
-
-        </div>
-
-    </div>
-
-
-
-</body>
-
-</html>
+                    </div>`;
+}
