@@ -164,5 +164,15 @@ function checkValidation() {
     } else if (dateInput.value.length < 10) {
         dateInput.classList.add('required');
         requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
+    } else {
+        showAddedBoardImg();
     }
+}
+
+function showAddedBoardImg() {
+    let addedBoardImg = document.getElementById('addedBoardImg');
+    addedBoardImg.classList.remove('dNone');
+    setTimeout(() => {
+        window.location.href = "./board.html";;
+    }, 3000);
 }
