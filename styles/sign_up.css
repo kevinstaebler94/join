@@ -59,6 +59,14 @@ form {
   flex-direction: column;
 }
 
+.inputWrapper span {
+  width: 75%;
+  margin: 0 auto;
+  position: relative;
+  top: -1em;
+  left: 1.75em;
+}
+
 .inputIcon {
   height: 1rem;
   position: absolute;
@@ -215,10 +223,8 @@ form {
 
 .errorMsgEmail {
   font-size: 0.6rem;
-  position: relative;
-  top: -1em;
-  left: -5em;
   padding: 0;
+  
 }
 
 .redBorder {
