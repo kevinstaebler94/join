@@ -55,6 +55,7 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .inputIcon {
@@ -71,21 +72,6 @@ form {
   border-radius: 10px;
   border: 1px solid #DCDCDC;
   padding: 0.5em 1em;
-}
-
-.forgetPassword {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1em;
-  cursor: pointer;
-  transition: text-decoration 125ms ease-in-out;
-  transition: font-weight 125ms ease-in-out;
-}
-
-.forgetPassword:hover {
-  text-decoration: underline #28ABE2;
-  font-weight: 500;
 }
 
 .buttonWrapper {
@@ -196,6 +182,19 @@ form {
 .loginButton:hover {
   background-color: #28ABE2;
   border: 1px solid transparent;
+}
+
+.loginButton:disabled {
+  background-color: grey;
+  color: lightgray;
+  border: 1px solid transparent;
+  cursor: default;
+  transition: background-color 125ms ease-in-out, border 125ms ease-in-out;
+}
+
+.loginButton:disabled:hover {
+  background-color: grey;
+  color: lightgray;
 }
 
 .guestLoginButton {
