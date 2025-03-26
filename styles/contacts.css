@@ -130,6 +130,7 @@ h3 {
 
 .contactCard:hover {
     background-color: #f1f1f1;
+    cursor: pointer;
 }
 
 .contactIcon {
@@ -153,8 +154,6 @@ h3 {
     font-size: 14px;
     color: #29ABE2;
 }
-
-
 
 .contactsOverview {
     display: flex;
@@ -199,7 +198,10 @@ h3 {
 }
 
 .userNameEditContainer:hover {
-    color: #29ABE2
+    color: #29ABE2;
+    transform: scale(1.08);
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .userNameEditIconContainer {
@@ -224,15 +226,21 @@ h3 {
 
 .userNameEditContainer:hover .hoverIcon {
     opacity: 1;
+    transform: scale(1.08);
+    cursor: pointer;
 }
 
 .userNameDeleteContainer {
     display: flex;
     gap: 8px;
+
 }
 
 .userNameDeleteContainer:hover {
-    color: #29ABE2
+    color: #29ABE2;
+    transform: scale(1.08);
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .userNameDeleteIconContainer {
@@ -261,6 +269,8 @@ h3 {
 
 .userNameDeleteContainer:hover .hoverIcon {
     opacity: 1;
+    transform: scale(1.08);
+    cursor: pointer;
 }
 
 .userIconContainer {
@@ -275,7 +285,6 @@ h3 {
     background-color: #FF7A00;
     color: white;
     font-weight: 500;
-    cursor: pointer;
 }
 
 .contactsInfoContainer {
