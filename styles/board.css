@@ -97,7 +97,7 @@ h2 {
 
 .searchIcon {
     position: relative;
-    left: -55px;
+    left: -62px;
     width: 2.5rem;
     cursor: pointer;
     transition: border-radius 125ms ease-in-out, background-color 125ms ease-in-out;

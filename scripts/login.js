@@ -73,7 +73,7 @@ function loginTemplate() {
           </div>
           <div class="inputWrapper">
             <input id="passwordLogin" class="inputfield" type="password" placeholder="Password" oninput="toggleLoginButton()">
-            <img id="passwordIcon" class="inputIcon password" src="./assets/img/lock.svg" alt="">
+            <img onclick="togglePasswordVisibility('passwordLogin')" id="passwordIcon" class="inputIcon passwordIcon" src="./assets/img/lock.svg" alt="">
             <span id="errorMsgLogin" class="errorMsgPassword hide">Check your email and password. Please try again.</span>
           </div>
           <div class="buttonWrapper">
@@ -146,6 +146,17 @@ function hideLoginErrorMessage(error) {
   return true;
 }
 
-
+function togglePasswordVisibility(id) {
+  let input = document.getElementById(id)
+  let icon = input.nextElementSibling;
+  
+  if(input.type === "password") {
+    input.type = "text";
+    icon.src = "./assets/img/visibility.svg";
+  } else {
+    input.type = "password";
+    icon.src = "./assets/img/visibilityOff.svg";
+  }
+}
 
 
