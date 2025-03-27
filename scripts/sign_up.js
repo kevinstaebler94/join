@@ -5,6 +5,10 @@
  */
 function signUpTemplate() {
   return `
+    <div class="overlayBackground"></div>
+    <div class="signUpOverlay">
+      <span>You signed up successfully</span>
+    </div>
     <img class="heroLogo" src="./assets/img/joinLogoSmall.svg" alt="">
     <main id="contentSignUp" class="contentSignUp">
       <div class="signUpContainer">
