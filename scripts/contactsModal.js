@@ -14,7 +14,7 @@ function getContactsModalStructure() {
             <h1>Add contact</h1>
             <h2>Tasks are better with a team!</h2>
             </div>
-            <p class="blueDivider"></p>
+            <p class="blueUnderline"></p>
         </div>
         <div class="contentSection">
             <button onclick="closeContactsModal()">X</button>
