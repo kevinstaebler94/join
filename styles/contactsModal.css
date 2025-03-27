@@ -1,0 +1,48 @@
+.headlineSection {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 470px;
+    background-color: #2A3647;
+    color: white;
+    gap: 16px;
+    padding-left: 48px;
+    padding-right: 24px;
+}
+
+.headlineContainer {
+    display: flex;
+    flex-direction: column;
+    height: 130px;
+    width: 370px;
+    gap: 16px;
+}
+
+.headlineSection h1 {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.headlineSection h2 {
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.blueDivider {
+    width: 90px;
+    height: 3px;
+    background-color: #29ABE2;
+}
+
+.contentSection {
+    display: flex;
+
+    height: 100%;
+    width: 558px;
+}
+
+.contactsModalImage {
+    height: 66px;
+    width: 55px;
+}

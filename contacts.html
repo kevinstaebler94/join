@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="./styles/sidebar.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/contacts.css">
+    <link rel="stylesheet" href="./styles/contactsModal.css">
 
     <script src="./script.js"></script>
     <script src="./scripts/includeHTML.js"></script>
     <script src="./scripts/header.js"></script>
     <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/contactsModal.js"></script>
 
     <title>Contacts</title>
 
@@ -27,8 +29,8 @@
             <main>
                 <div class="mainContent">
                     <div class="contactListContainer">
-                        <button class="addContactButton">Add new contact <img src="./assets/img/addPerson.svg"
-                                alt=""></button>
+                        <button onclick="openContactsModal()" class="addContactButton">Add new contact <img
+                                src="./assets/img/addPerson.svg" alt=""></button>
                         <div class="contactList" id="contactList">
                         </div>
                     </div>
@@ -74,6 +76,10 @@
             </main>
         </div>
     </div>
+
+    <div id="modalOverlay" class="modalOverlay dNone"></div>
+    <div id="contactsModal" class="dNone"></div>
+
 </body>
 
 </html>
