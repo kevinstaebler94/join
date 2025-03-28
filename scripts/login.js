@@ -27,6 +27,7 @@ let globalBackend = [
  */
 function init() {
   updateContent("login");
+  
 }
 
 /**
