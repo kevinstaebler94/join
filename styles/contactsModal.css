@@ -37,12 +37,141 @@
 
 .contentSection {
     display: flex;
-
+    justify-content: space-between;
     height: 100%;
-    width: 558px;
+    width: 100%;
 }
 
 .contactsModalImage {
     height: 66px;
     width: 55px;
+}
+
+.modalIconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 200px;
+}
+
+.contactsModalIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 47px;
+    border: white 2px solid;
+    height: 120px;
+    width: 120px;
+    border-radius: 60px;
+    background-color: #D1D1D1;
+    color: white;
+    font-weight: 500;
+}
+
+.contactsModalIcon img {
+    width: 42px;
+    height: 42px;
+}
+
+.modalContentContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 32px;
+    width: 450px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+}
+
+.inputFields {
+    width: 420px;
+    height: 50px;
+    border: solid 1px #D1D1D1;
+    border-radius: 8px;
+    color: #D1D1D1;
+    font-weight: 400;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+input::placeholder {
+    opacity: 30%;
+}
+
+.modalCloseButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    border-radius: 55px;
+    border: none;
+    background-color: white;
+}
+
+.modalCloseButton:hover {
+    background-color: #efefef;
+    cursor: pointer;
+}
+
+.modalCloseButtonWrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    width: 420px;
+}
+
+.buttonsContainer {
+    display: flex;
+    gap: 24px;
+}
+
+.modalCancelButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    width: 126px;
+    border-radius: 10px;
+    border: 1px;
+    padding: 16px;
+    gap: 4px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    border: solid 1px;
+    cursor: pointer;
+
+}
+
+.modalCancelButton:hover {
+    box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
+    color: #29ABE2;
+    border: solid 2px;
+}
+
+.modalCreateButton {
+    height: 56px;
+    width: 214px;
+    border-radius: 10px;
+    border: 1px;
+    padding: 16px;
+    gap: 4px;
+    background-color: #2A3647;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modalCreateButton:hover {
+    box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
+    background-color: #29ABE2;
 }

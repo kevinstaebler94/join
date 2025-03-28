@@ -9,21 +9,33 @@ function getContactsModalStructure() {
     container.innerHTML = `
     <div class="modalMainContent">
         <div class="headlineSection">
-        <img class="contactsModalImage" src="./assets/img/joinLogoSidebar.svg" alt="">
+            <img class="contactsModalImage" src="./assets/img/joinLogoSidebar.svg" alt="">
             <div class="headlineContainer">
-            <h1>Add contact</h1>
-            <h2>Tasks are better with a team!</h2>
+                <h1>Add contact</h1>
+                <h2>Tasks are better with a team!</h2>
             </div>
             <p class="blueUnderline"></p>
         </div>
         <div class="contentSection">
-            <button onclick="closeContactsModal()">X</button>
-            <form onsubmit="addContact(); return false;">
-            <input type="text" placeholder="Name" id="contactName" required>
-            <input type="email" placeholder="Email" id="contactEmail" required>
-            <input type="text" placeholder="Phone" id="contactPhone" required>
-            <button type="submit">Create Contact</button>
-            </form>
+            <div class="modalIconContainer">
+                <div class="contactsModalIcon">
+                    <img src="./assets/img/whitePerson.svg" alt=""
+                </div>
+            </div>
+            <div class="modalContentContainer">
+                <div class="modalCloseButtonWrapper">
+                    <button class="modalCloseButton" onclick="closeContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
+                </div>
+                <form onsubmit="addContact(); return false;">
+                <input class="inputFields" type="text" placeholder="Name" id="contactName" required>
+                <input class="inputFields" type="email" placeholder="Email" id="contactEmail" required>
+                <input class="inputFields" type="text" placeholder="Phone" id="contactPhone" required>
+                </form>
+                <div class="buttonsContainer">
+                    <button class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
+                    <button class="modalCreateButton" type="submit">Create Contact</button>
+                </div>
+            </div>
         </div>
     </div>`
 }
