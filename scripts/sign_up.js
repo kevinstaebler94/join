@@ -5,8 +5,7 @@
  */
 function signUpTemplate() {
   return `
-    <div class="overlayBackground"></div>
-    <div class="signUpOverlay">
+    <div id="signUpOverlay" class="signUpOverlay dNone">
       <span>You signed up successfully</span>
     </div>
     <img class="heroLogo" src="./assets/img/joinLogoSmall.svg" alt="">
@@ -62,6 +61,7 @@ function signUpTemplate() {
 function signUp(event) {
   event.preventDefault();
   if(checkInput()) {
+    document.getElementById("signUpOverlay")
     updateContent("login");
   }
 }
@@ -265,6 +265,10 @@ function checkInput() {
   let emailTaken = emailExists();
   let passwordsValid = validatePasswords();
   return emailFormatValid && !emailTaken && passwordsValid;
+}
+
+function toggleSignUpOverlay() {
+  let overlay = document.getElementById("signUpOverlay");
 }
 
 
