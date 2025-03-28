@@ -25,11 +25,12 @@ async function getData(path='') {
 
 async function postData(path='', users) {
         let response = await fetch(BASE_URL + path + '.json',{
-            method : 'PUT',
+            method : 'POST',
             headers : {
                 'Content-type' : 'application/json',
             }, 
-            body : JSON.stringify(users)
+            body : JSON.stringify(users),
+            
         });
         let data = await response.json();
         console.log(data);
