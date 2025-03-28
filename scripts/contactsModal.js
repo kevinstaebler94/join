@@ -18,7 +18,9 @@ function getContactsModalStructure() {
         </div>
         <div class="contentSection">
             <div class="modalIconContainer">
-                <img class="contactsModalIcon" src="./assets/img/whitePerson.svg" alt="">
+                <div class="contactsModalIcon">
+                <img src="./assets/img/whitePerson.svg" alt="">
+                </div>
             </div>
             <div class="modalContentContainer">
                 <div class="modalCloseButtonWrapper">
