@@ -18,13 +18,11 @@ function getContactsModalStructure() {
         </div>
         <div class="contentSection">
             <div class="modalIconContainer">
-                <div class="contactsModalIcon">
-                    <img src="./assets/img/whitePerson.svg" alt=""
-                </div>
+                <img class="contactsModalIcon" src="./assets/img/whitePerson.svg" alt="">
             </div>
             <div class="modalContentContainer">
                 <div class="modalCloseButtonWrapper">
-                    <button class="modalCloseButton" onclick="closeContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
+                <button class="modalCloseButton" onclick="closeContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
                 </div>
                 <form onsubmit="addContact(); return false;">
                 <input class="inputFields" type="text" placeholder="Name" id="contactName" required>
@@ -32,8 +30,8 @@ function getContactsModalStructure() {
                 <input class="inputFields" type="text" placeholder="Phone" id="contactPhone" required>
                 </form>
                 <div class="buttonsContainer">
-                    <button class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
-                    <button class="modalCreateButton" type="submit">Create Contact</button>
+                <button class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
+                <button class="modalCreateButton" type="submit">Create Contact</button>
                 </div>
             </div>
         </div>
