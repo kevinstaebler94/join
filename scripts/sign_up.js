@@ -60,6 +60,7 @@ function signUpTemplate() {
  */
 function signUp(event) {
   event.preventDefault();
+  pushUsers();
   if(checkInput()) {
     document.getElementById("signUpOverlay");
     updateContent("login");

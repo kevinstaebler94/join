@@ -19,12 +19,11 @@ async function getData(path='') {
     } catch (error) {
         console.warn(error.message);
     }
-    console.log('test');
 }
 
-async function postData(path='', users) {
-        let response = await fetch(BASE_URL + path + '.json',{
-            method : 'POST',
+async function postData(path='', users, userId) {
+        let response = await fetch(`${BASE_URL}${path}/${userId}.json`,{
+            method : 'PUT',
             headers : {
                 'Content-type' : 'application/json',
             }, 
@@ -34,19 +33,21 @@ async function postData(path='', users) {
         let data = await response.json();
         console.log(data);
         return data;
-        
 }
 
 function pushUsers() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
+    let userId = adjustEmail(email.value);
     let userData = ({
         name:email.value.trim(),
         email:email.value.trim(),
         password:password.value.trim()
     
     });
-    postData('/users', userData);
-    console.log(users);
-    
+    postData('/users', userData, userId);
+}
+
+function adjustEmail(email) {
+    return email.replace(/\./g, "_").replace(/@/g, "-at-");
 }
