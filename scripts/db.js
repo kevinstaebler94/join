@@ -21,7 +21,7 @@ async function getData(path='') {
     }
 }
 
-async function postData(path='', users, userId) {
+async function putUserData(path='', users, userId) {
         let response = await fetch(`${BASE_URL}${path}/${userId}.json`,{
             method : 'PUT',
             headers : {
@@ -35,6 +35,21 @@ async function postData(path='', users, userId) {
         return data;
 }
 
+async function putTaskData(path='', users, userId) {
+    let response = await fetch(`${BASE_URL}${path}/${userId}.json`,{
+        method : 'PUT',
+        headers : {
+            'Content-type' : 'application/json',
+        }, 
+        body : JSON.stringify(users),
+        
+    });
+    let data = await response.json();
+    console.log(data);
+    return data;
+}
+
+
 function pushUsers() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
@@ -45,8 +60,30 @@ function pushUsers() {
         password:password.value.trim()
     
     });
-    postData('/users', userData, userId);
+    putUserData('/users', userData, userId);
 }
+
+function pushTasks(contacts) {
+    let title = document.getElementById('titleInput');
+    let description = document.getElementById('taskDescription');
+    let date = document.getElementById('dateInput');
+    // let priority = 
+    console.log(contacts);
+    
+    let category = document.getElementById('selectedCategory');
+    // let subTask = 
+    let taskId = 'test Task';
+    let userData = ({
+        title:title.value,
+        description:description.value,
+        date:date.value,
+        contact:contacts,
+        category:category.innerHTML
+    
+    });
+    putTaskData('/tasks', userData, taskId);
+}
+
 
 function adjustEmail(email) {
     return email.replace(/\./g, "_").replace(/@/g, "-at-");

@@ -3,7 +3,7 @@
 //         'name' : 'Kevin',
 //         'checkbox' : false
 //     }, 
-    
+
 //     {
 //         'name' : 'Oliver',
 //         'checkbox' : false
@@ -16,12 +16,13 @@
 // ];
 
 let listNames = ['Kevin', 'Oliver', 'Daniel'];
+let listCategory = [];
 
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
     myCheckbox.checked = false;
     console.log(myCheckbox.checked);
-    
+
 }
 
 
@@ -33,7 +34,7 @@ function toggleDropdownName() {
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
     selectName();
-    
+
 }
 
 
@@ -126,19 +127,19 @@ function formatDate(input) {
 
 function selectName() {
     let dropdownListName = document.getElementById('dropdownListName');
-    
+
     dropdownListName.innerHTML = '';
     for (let nameIndex = 0; nameIndex < listNames.length; nameIndex++) {
         let checkbox = document.getElementById('checkbox');
         let myContact = listNames[nameIndex];
-        let listItem = `<li id="listName${nameIndex}" class="listElement">
-        <p>${myContact}</p>
-        <input type="checkbox" id="checkbox${nameIndex}" class="checkbox" name="selectedNames" checked="false">
+        let listItem = `<li id="listName${myContact}" class="listElement">
+        <p id="myContactName${myContact}">${myContact}</p>
+        <input type="checkbox" id="checkbox${myContact}" class="checkbox" name="selectedNames" checked="false">
         </li>`;
 
         dropdownListName.innerHTML += listItem;
     }
-    
+
 }
 
 function uncheckCheckbox(nameIndex) {
@@ -157,6 +158,7 @@ function checkValidation() {
     let requiredTitle = document.getElementById('requiredTitle');
     let dateInput = document.getElementById('dateInput');
     let requiredDate = document.getElementById('requiredDate');
+    
     if (titleInput.value == '') {
         console.log('this is required');
         titleInput.classList.add('required');
@@ -165,6 +167,11 @@ function checkValidation() {
         dateInput.classList.add('required');
         requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
     } else {
+        for (let contactIndex = 0; contactIndex < listNames.length; contactIndex++) {
+            let contacts = listNames[contactIndex];
+            pushTasks(contacts);
+        }
+        
         showAddedBoardImg();
     }
 }
@@ -175,4 +182,11 @@ function showAddedBoardImg() {
     setTimeout(() => {
         window.location.href = "./board.html";;
     }, 3000);
+}
+
+function getContactIndex() {
+    for (let listIndex = 0; listIndex < listNames.length; listIndex++) {
+        selectetContact.push(listIndex);
+        return selectetContact;
+    }
 }
