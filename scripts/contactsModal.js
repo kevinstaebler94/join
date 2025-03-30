@@ -26,14 +26,12 @@ function getContactsModalStructure() {
                 <div class="modalCloseButtonWrapper">
                 <button class="modalCloseButton" onclick="closeContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
                 </div>
-                <form onsubmit="addContact(); return false;">
                 <input class="inputFields" type="text" placeholder="Name" id="contactName" required>
                 <input class="inputFields" type="email" placeholder="Email" id="contactEmail" required>
                 <input class="inputFields" type="text" placeholder="Phone" id="contactPhone" required>
-                </form>
                 <div class="buttonsContainer">
                 <button class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
-                <button class="modalCreateButton" type="submit">Create Contact</button>
+                <button onclick="pushContactData()" class="modalCreateButton" type="submit">Create Contact</button>
                 </div>
             </div>
         </div>

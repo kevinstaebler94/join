@@ -6,7 +6,7 @@ const BASE_URL = "https://join-contacts-fcc04-default-rtdb.europe-west1.firebase
 
 function onloadFunc() {
     console.log("test");
-    postContactsData("/contacts", { "name": "Kevin Stäbler", "email": "kevin.staebler@beispiel.de", "number": "+49 2222 222 22 2" });
+    //postContactsData("/contacts", { "name": "Kevin Stäbler", "email": "kevin.staebler@beispiel.de", "number": "+49 2222 222 22 2" });
 }
 
 async function getContactsData(path = "") {
@@ -18,10 +18,35 @@ async function getContactsData(path = "") {
 async function postContactsData(path = "", data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
-        header: {
+        headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data)
     });
     return responseToJson = await response.json();
+}
+
+async function pushContactData() {
+    let name = document.getElementById('contactName');
+    let email = document.getElementById('contactEmail');
+    let phone = document.getElementById('contactPhone');
+    let contactData = ({
+        name: name.value.trim(),
+        email: email.value.trim(),
+        number: phone.value.trim()
+    });
+    try {
+        await postContactsData('/contacts', contactData);
+        console.log("Gespeichert:", contactData);
+    } catch (error) {
+        console.error("Fehler beim Speichern:", error);
+    }
+
+    name.value = "";
+    email.value = "";
+    phone.value = "";
+}
+
+function clearInputFields() {
+
 }
