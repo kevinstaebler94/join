@@ -17,7 +17,7 @@ function toggleSignUpButton() {
   }
 }
 
-function validateEmailFormat() {
+async function validateEmailFormat() {
   let email = document.getElementById("email").value.trim();
   let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let errorMsgEmail = document.getElementById("errorMsgEmail");
@@ -28,7 +28,7 @@ function validateEmailFormat() {
     return false;
   } 
 
-  if (emailExists()) {
+  if (await emailExists()) {
     showEmailErrorMessage(errorMsgEmail, "Email is already registered.");
     clearEmailInput(errorMsgEmail);
     return false;
@@ -126,9 +126,9 @@ function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
   return
 }
 
-function checkInput() {
+async function checkInput() {
   let emailFormatValid = validateEmailFormat();
-  let emailTaken = emailExists();
+  let emailTaken = await emailExists();
   let passwordsValid = validatePasswords();
   return emailFormatValid && !emailTaken && passwordsValid;
 }
