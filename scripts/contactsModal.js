@@ -30,7 +30,7 @@ function getContactsModalStructure() {
                 <input class="inputFields" type="email" placeholder="Email" id="contactEmail" required>
                 <input class="inputFields" type="text" placeholder="Phone" id="contactPhone" required>
                 <div class="buttonsContainer">
-                <button class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
+                <button onclick="clearInputFields()" class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
                 <button onclick="pushContactData()" class="modalCreateButton" type="submit">Create Contact</button>
                 </div>
             </div>

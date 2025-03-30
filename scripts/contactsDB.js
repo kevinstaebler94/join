@@ -42,11 +42,11 @@ async function pushContactData() {
         console.error("Fehler beim Speichern:", error);
     }
 
-    name.value = "";
-    email.value = "";
-    phone.value = "";
+    clearInputFields();
 }
 
 function clearInputFields() {
-
+    document.getElementById('contactName').value = "";
+    document.getElementById('contactEmail').value = "";
+    document.getElementById('contactPhone').value = "";
 }
