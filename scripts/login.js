@@ -26,6 +26,7 @@ let globalBackend = [
  * Initializes the user interface by displaying the login template.
  */
 function init() {
+  getData("/users");
   updateContent("login");
   
 }

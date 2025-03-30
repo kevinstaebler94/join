@@ -3,10 +3,9 @@ let users = {
     'password' : '1234',
     'email' : 'Testname@dev.com'
 };
-let tasks = {
-
-};
+let tasks = {};
 let contacts = {};
+
 const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/';
 
 async function getData(path='') {

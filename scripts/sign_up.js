@@ -67,7 +67,6 @@ function signUp(event) {
   }
 }
 
-
 /**
  * Enables or disables the sign-up button based on input validation.
  */
