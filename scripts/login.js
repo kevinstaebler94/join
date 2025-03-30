@@ -22,6 +22,7 @@ let globalBackend = [
     ]
   }
 ];
+
 /**
  * Initializes the user interface by displaying the login template.
  */

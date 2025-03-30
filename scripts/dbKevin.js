@@ -18,7 +18,14 @@ function processUserData(userData) {
     email: userInfo.email,
     password: userInfo.password
   }))
-  console.log(usersArr);
-  usersArr
+  console.log("usersArr", usersArr);
+  findInput(usersArr);
+}
+
+function findInput(usersArr) {
+  let email = document.getElementById("email").value.trim();
+  let exists = usersArr.some(user => user.email === email);
+  console.log("exists", exists);
+  
 }
 

@@ -62,7 +62,6 @@ function signUp(event) {
   event.preventDefault();
   if(checkInput()) {
     document.getElementById("signUpOverlay");
-    pushUsers('/users');
     updateContent("login");
   }
 }
