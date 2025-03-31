@@ -78,7 +78,15 @@ function pushContacts() {
         email:contactEmail.value,
         phone:contactPhone.value
     });
-    putData(path, userData, contactId);
+    try {
+        putData(path, userData, contactId);
+        console.log("Gespeichert:", contactData);
+    } catch (error) {
+        console.error("Fehler beim Speichern:", error);
+    }
+
+    clearInputFields();
+    
 }
 
 

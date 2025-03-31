@@ -53,3 +53,9 @@ function closeContactsModal() {
     document.getElementById('modalOverlay').classList.add('dNone');
     document.getElementById('contactsModal').classList.add('dNone');
 }
+
+function clearInputFields() {
+    document.getElementById('contactName').value = "";
+    document.getElementById('contactEmail').value = "";
+    document.getElementById('contactPhone').value = "";
+}
