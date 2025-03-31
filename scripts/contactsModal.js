@@ -42,7 +42,7 @@ function getContactsModalStructure() {
                 </div>
                 <div class="buttonsContainer">
                 <button onclick="clearInputFields()" class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
-                <button onclick="pushContactData()" class="modalCreateButton" type="submit">Create Contact <img src="./assets/img/createIcon.svg"></button>
+                <button onclick="pushContacts()" class="modalCreateButton" type="submit">Create Contact <img src="./assets/img/createIcon.svg"></button>
                 </div>
             </div>
         </div>

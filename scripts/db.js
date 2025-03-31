@@ -1,10 +1,10 @@
-let users = {
-    'name' : 'Testname',
-    'password' : '1234',
-    'email' : 'Testname@dev.com'
-};
-let tasks = {};
-let contacts = {};
+// let users = {
+//     'name' : 'Testname',
+//     'password' : '1234',
+//     'email' : 'Testname@dev.com'
+// };
+// let tasks = {};
+// let contacts = {};
 
 const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/';
 
@@ -14,14 +14,13 @@ async function getData(path='') {
         if (!response.ok)
             throw new Error(`problem while fetching, ${response.status}`);
             let data = await response.json();
-            console.log(data);
             return data;
     } catch (error) {
         console.warn(error.message);
     }
 }
 
-async function putUserData(path='', users, userId) {
+async function putData(path='', users, userId) {
         let response = await fetch(`${BASE_URL}${path}/${userId}.json`,{
             method : 'PUT',
             headers : {
@@ -31,26 +30,11 @@ async function putUserData(path='', users, userId) {
             
         });
         let data = await response.json();
-        console.log(data);
         return data;
 }
 
-async function putTaskData(path='', users, userId) {
-    let response = await fetch(`${BASE_URL}${path}/${userId}.json`,{
-        method : 'PUT',
-        headers : {
-            'Content-type' : 'application/json',
-        }, 
-        body : JSON.stringify(users),
-        
-    });
-    let data = await response.json();
-    console.log(data);
-    return data;
-}
-
-
 function pushUsers() {
+    let path = '/users';
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let userId = adjustEmail(email.value);
@@ -60,15 +44,15 @@ function pushUsers() {
         password:password.value.trim()
     
     });
-    putUserData('/users', userData, userId);
+    putData(path, userData, userId);
 }
 
 function pushTasks(contacts) {
+    let path = '/tasks';
     let title = document.getElementById('titleInput');
     let description = document.getElementById('taskDescription');
     let date = document.getElementById('dateInput');
     // let priority = 
-    console.log(contacts);
     
     let category = document.getElementById('selectedCategory');
     // let subTask = 
@@ -81,7 +65,21 @@ function pushTasks(contacts) {
         category:category.innerHTML
     
     });
-    putTaskData('/tasks', userData, taskId);
+    putData(path, userData, taskId);
+}
+
+function pushContacts() {
+    let path = '/contacts';
+    let contactName = document.getElementById('contactName');
+    let contactEmail = document.getElementById('contactEmail');
+    let contactPhone = document.getElementById('contactPhone');
+    let contactId = adjustEmail(contactEmail.value);
+    let userData = ({
+        name:contactName.value,
+        email:contactEmail.value,
+        phone:contactPhone.value
+    });
+    putData(path, userData, contactId);
 }
 
 

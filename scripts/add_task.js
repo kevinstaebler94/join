@@ -16,13 +16,11 @@
 // ];
 
 let listNames = ['Kevin', 'Oliver', 'Daniel'];
-let listCategory = [];
+let contactArr = [];
 
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
     myCheckbox.checked = false;
-    console.log(myCheckbox.checked);
-
 }
 
 
@@ -34,7 +32,6 @@ function toggleDropdownName() {
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
     selectName();
-
 }
 
 
@@ -128,24 +125,69 @@ function formatDate(input) {
 function selectName() {
     let dropdownListName = document.getElementById('dropdownListName');
 
-    dropdownListName.innerHTML = '';
+    dropdownListName.innerHTML = ''; // Liste zurücksetzen
+    contactArr = []; // Sicherstellen, dass das Array sauber bleibt
+
     for (let nameIndex = 0; nameIndex < listNames.length; nameIndex++) {
-        let checkbox = document.getElementById('checkbox');
         let myContact = listNames[nameIndex];
-        let listItem = `<li id="listName${myContact}" class="listElement">
-        <p id="myContactName${myContact}">${myContact}</p>
-        <input type="checkbox" id="checkbox${myContact}" class="checkbox" name="selectedNames" checked="false">
-        </li>`;
+        let checkboxId = `checkbox-${nameIndex}`; // Eindeutige ID
 
-        dropdownListName.innerHTML += listItem;
+        let listItem = document.createElement('li');
+        listItem.classList.add('listElement');
+        listItem.id = `listName-${myContact}`;
+
+        let nameElement = document.createElement('p');
+        nameElement.id = `myContactName-${myContact}`;
+        nameElement.textContent = myContact;
+
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.classList.add('checkbox');
+        checkbox.name = 'selectedNames';
+        checkbox.id = checkboxId;
+        checkbox.checked = false; // Hier setzen wir explizit "false"
+        checkbox.addEventListener("click", function (event) {
+            event.preventDefault(); // Verhindert, dass die Checkbox automatisch ihren Status ändert
+            checkbox.checked = !checkbox.checked; // Setzt den Status manuell um
+            event.stopPropagation(); // Verhindert, dass `window.onclick` getriggert wird
+        });
+
+
+        // console.log(`Checkbox ${checkboxId} checked:`, checkbox.checked); // Debug-Check
+
+        listItem.appendChild(nameElement);
+        listItem.appendChild(checkbox);
+        dropdownListName.appendChild(listItem);
+
+        contactArr.push(myContact);
     }
-
 }
 
-function uncheckCheckbox(nameIndex) {
-    let checkbox = document.getElementById(`checkbox${nameIndex}`);
-    checkbox.checked = false;
-}
+
+
+// function selectName() {
+//     let dropdownListName = document.getElementById('dropdownListName');
+
+//     dropdownListName.innerHTML = '';
+//     for (let nameIndex = 0; nameIndex < listNames.length; nameIndex++) {
+//         let checkbox = document.getElementById('checkbox');
+//         let myContact = listNames[nameIndex];
+//         let listItem = `<li id="listName${myContact}" class="listElement">
+//         <p id="myContactName${myContact}">${myContact}</p>
+//         <input type="checkbox" id="checkbox${0}" class="checkbox" name="selectedNames">
+//         </li>`;
+//         dropdownListName.innerHTML += listItem;
+//         contactArr.push(myContact) 
+//     }
+// }
+
+// function addCheckbox() {
+//     for (let contactIndex = 0; contactIndex < contactArr.length; contactIndex++) {
+//         let listName = document.getElementById(`listName${contactArr[contactIndex]}`);
+//         let checkbox = `<input type="checkbox" id="checkbox${0}" class="checkbox" name="selectedNames">`;
+//         listName.innerHTML += checkbox;
+//     }
+// }
 
 function selectCategory(myCategory) {
     let selectedCategory = document.getElementById('selectedCategory');
@@ -158,9 +200,8 @@ function checkValidation() {
     let requiredTitle = document.getElementById('requiredTitle');
     let dateInput = document.getElementById('dateInput');
     let requiredDate = document.getElementById('requiredDate');
-    
+
     if (titleInput.value == '') {
-        console.log('this is required');
         titleInput.classList.add('required');
         requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
     } else if (dateInput.value.length < 10) {
@@ -171,7 +212,7 @@ function checkValidation() {
             let contacts = listNames[contactIndex];
             pushTasks(contacts);
         }
-        
+
         showAddedBoardImg();
     }
 }
