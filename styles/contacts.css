@@ -24,10 +24,11 @@ h1 {
 
 h2 {
     font-size: 47px;
+    font-weight: 500px;
 }
 
 h3 {
-    font-size: 27px;
+    font-size: 20px;
     padding-top: 30px;
     padding-bottom: 30px;
     font-weight: 400;
@@ -151,6 +152,11 @@ h3 {
     cursor: pointer;
 }
 
+.contactCard.active {
+    background-color: #2a3647;
+    color: white;
+}
+
 .contactIcon {
     width: 40px;
     height: 40px;
@@ -205,9 +211,16 @@ h3 {
     gap: 54px;
 }
 
+.userNameContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .userNameIconContainer {
     display: flex;
     gap: 20px;
+    font-weight: 400;
 }
 
 .userNameEditContainer {
