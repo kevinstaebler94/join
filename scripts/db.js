@@ -26,8 +26,7 @@ async function putData(path='', users, userId) {
             headers : {
                 'Content-type' : 'application/json',
             }, 
-            body : JSON.stringify(users),
-            
+            body : JSON.stringify(users),     
         });
         let data = await response.json();
         return data;
