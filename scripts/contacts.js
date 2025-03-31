@@ -31,9 +31,10 @@ function renderContacts() {
         if (firstLetter !== currentLetter) {
             currentLetter = firstLetter;
             container.appendChild(createLetterDivider(firstLetter));
+            container.appendChild(createLetterDividerLine());
         }
-
         container.appendChild(createContactCard(contact, index));
+
     });
 
     renderContactDetails();
@@ -44,6 +45,13 @@ function createLetterDivider(letter) {
     div.classList.add("letterDivider");
     div.textContent = letter;
     return div;
+
+}
+
+function createLetterDividerLine() {
+    let div = document.createElement("div");
+    div.classList.add("letterDividerLine");
+    return div
 }
 
 function createContactCard(contact, index) {

@@ -90,7 +90,7 @@ h3 {
 .contactList {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 16px;
+    padding: 46px;
     min-height: 0;
 }
 
@@ -112,11 +112,22 @@ h3 {
 }
 
 .letterDivider {
-    margin-top: 16px;
-    margin-bottom: 8px;
-    font-size: 18px;
+    margin-top: 32px;
+    padding-bottom: 12px;
+    margin-left: 32px;
+    font-size: 21px;
     color: #2A3647;
 }
+
+.letterDividerLine {
+    width: 350px;
+    height: 2px;
+    background-color: #2A3647;
+    margin-bottom: 8px;
+    margin-top: 16px;
+    opacity: 15%;
+}
+
 
 .contactCard {
     display: flex;
