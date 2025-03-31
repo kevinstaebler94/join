@@ -24,14 +24,25 @@ function getContactsModalStructure() {
             </div>
             <div class="modalContentContainer">
                 <div class="modalCloseButtonWrapper">
-                <button class="modalCloseButton" onclick="closeContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
+                    <button class="modalCloseButton" onclick="closeContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
                 </div>
-                <input class="inputFields" type="text" placeholder="Name" id="contactName" required>
-                <input class="inputFields" type="email" placeholder="Email" id="contactEmail" required>
-                <input class="inputFields" type="text" placeholder="Phone" id="contactPhone" required>
+                <div class="inputFieldContainer">
+                    <div class="inputFieldWrapper">
+                        <input class="inputFields" type="text" placeholder="Name" id="contactName" required>
+                        <img class="inputIcon" src="./assets/img/person.svg">
+                    </div>
+                    <div class="inputFieldWrapper">
+                        <input class="inputFields" type="email" placeholder="Email" id="contactEmail" required>
+                        <img class="inputIcon" src="./assets/img/mail.svg">
+                    </div>
+                    <div class="inputFieldWrapper">
+                        <input class="inputFields" type="text" placeholder="Phone" id="contactPhone" required>
+                        <img class="inputIcon" src="./assets/img/phone.svg">
+                    </div>
+                </div>
                 <div class="buttonsContainer">
                 <button onclick="clearInputFields()" class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
-                <button onclick="pushContactData()" class="modalCreateButton" type="submit">Create Contact</button>
+                <button onclick="pushContactData()" class="modalCreateButton" type="submit">Create Contact <img src="./assets/img/createIcon.svg"></button>
                 </div>
             </div>
         </div>
