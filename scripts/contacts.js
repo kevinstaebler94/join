@@ -57,6 +57,7 @@ function createLetterDividerLine() {
 function createContactCard(contact, index) {
     let card = document.createElement("div");
     card.classList.add("contactCard");
+    // card.id.add("contactCard");
     let initials = getInitials(contact.name);
     let bgColor = getColorFromName(contact.name + contact.email);
 
@@ -67,7 +68,11 @@ function createContactCard(contact, index) {
             <span class="email">${contact.email}</span>
         </div>
     `;
-    card.onclick = () => openContact(index);
+    card.onclick = () => {
+        openContact(index);
+        addContactCardBgToggle(card);
+    };
+
     return card;
 }
 
@@ -117,7 +122,10 @@ function renderContactDetails() {
 function getUserName() {
     if (contacts.length > 0) {
         document.getElementById("userName").innerHTML = contacts[0].name;
+        let userNamerContainer = document.getElementById("userName");
+        userNamerContainer.style.fontWeight = "500";
     }
+
 }
 
 function getContactEmail() {
@@ -140,5 +148,16 @@ function getContactInitials() {
         container.innerHTML = initials;
         container.style.backgroundColor = color;
         container.style.color = "white";
+    }
+}
+
+function addContactCardBgToggle(cardElement) {
+    let allCards = document.querySelectorAll('.contactCard');
+
+    if (cardElement.classList.contains('active')) {
+        cardElement.classList.remove('active');
+    } else {
+        allCards.forEach(card => card.classList.remove('active'));
+        cardElement.classList.add('active');
     }
 }
