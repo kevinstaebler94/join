@@ -18,6 +18,8 @@
 let listNames = ['Kevin', 'Oliver', 'Daniel'];
 let prioBtn = 'medium';
 let subtasksArr = [];
+let currentTaskId = 0;
+let contacts;
 
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
@@ -222,10 +224,9 @@ function checkValidation() {
         requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
     } else {
         for (let contactIndex = 0; contactIndex < listNames.length; contactIndex++) {
-            let contacts = listNames[contactIndex];
-            pushTasks(contacts);
+            contacts = listNames[contactIndex]; 
         }
-
+        pushTasks();
         showAddedBoardImg();
     }
 }

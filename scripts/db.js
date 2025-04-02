@@ -66,7 +66,8 @@ function pushTasks(contacts) {
     let date = document.getElementById('dateInput');
     let category = document.getElementById('selectedCategory');
     let subTask = subtasksArr;
-    let taskId = 'test Task';
+    let newTaskId = currentTaskId + 1;
+    let taskId = title.value + newTaskId;
     let userData = ({
         title: title.value,
         description: description.value,
@@ -76,6 +77,7 @@ function pushTasks(contacts) {
         category: category.innerHTML,
         subtask: subTask
     });
+    currentTaskId = newTaskId;
     putData(path, userData, taskId);
 }
 
@@ -105,13 +107,15 @@ async function pushContacts() {
     clearInputFields();
 }
 
-async function deleteContacts(contactId) {
-    let path = `/contacts/${contactId}`;
+async function deleteTask(taskId) {
+    let path = `/contacts/${taskId}`;
     deleteData(path);
 }
 
-
-
+async function deleteContact(contactId) {
+    let path = `/contacts/${contactId}`;
+    deleteData(path);
+}
 
 function adjustEmail(email) {
     return email.replace(/\./g, "_").replace(/@/g, "-at-");
