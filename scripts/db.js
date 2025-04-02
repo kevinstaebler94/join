@@ -68,7 +68,10 @@ function pushTasks(contacts) {
     putData(path, userData, taskId);
 }
 
-function pushContacts() {
+async function pushContacts() {
+    let isValid = await validateContactInput();
+    if (!isValid) return;
+
     let path = '/contacts';
     let contactName = document.getElementById('contactName');
     let contactEmail = document.getElementById('contactEmail');
@@ -80,14 +83,16 @@ function pushContacts() {
         phone: contactPhone.value
     });
     try {
-        putData(path, userData, contactId);
-        console.log("Gespeichert:", contactData);
+        await putData(path, userData, contactId);
+        console.log("saved:", userData);
+        clearInputFields();
+        closeContactsModal();
     } catch (error) {
-        console.error("Fehler beim Speichern:", error);
+        console.error("error while saving:", error);
+        showValidationError("error while saving")
     }
 
     clearInputFields();
-
 }
 
 

@@ -59,3 +59,34 @@ function clearInputFields() {
     document.getElementById('contactEmail').value = "";
     document.getElementById('contactPhone').value = "";
 }
+
+/// Formvalidation ///
+
+async function validateContactInput() {
+    let nameInput = document.getElementById('contactName').value.trim().toLowerCase()
+    let emailInput = document.getElementById('contactEmail').value.trim().toLowerCase()
+    let phoneInput = document.getElementById('contactPhone').value.trim();
+
+    let existingContacts = await getData('/contacts');
+
+    if (!existingContacts) existingContacts = {};
+
+    for (let key in existingContacts) {
+        let contact = existingContacts[key];
+
+        if (
+            contact.name.trim().toLowerCase() === nameInput ||
+            contact.email.trim().toLowerCase() === emailInput ||
+            contact.phone.trim() === phoneInput
+        ) {
+            showValidationError("Contact already exists")
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function showValidationError(message) {
+    alert(message);
+}
