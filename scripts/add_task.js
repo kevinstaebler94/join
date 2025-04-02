@@ -16,7 +16,8 @@
 // ];
 
 let listNames = ['Kevin', 'Oliver', 'Daniel'];
-let contactArr = [];
+let prioBtn = 'medium';
+let subtasksArr = [];
 
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
@@ -94,16 +95,19 @@ function setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon
         urgentBtn.classList.add('activeUrgentBtn');
         urgentIcon.classList.add('dNone');
         urgentIconWhite.classList.remove('dNone');
+        prioBtn = 'urgent';
     } else if (priority === 'medium') {
         mediumBtn.classList.remove('hoverBtn');
         mediumBtn.classList.add('activeMediumBtn');
         mediumIcon.classList.add('dNone');
         mediumIconWhite.classList.remove('dNone');
+        prioBtn = 'medium';
     } else if (priority === 'low') {
         lowBtn.classList.remove('hoverBtn');
         lowBtn.classList.add('activeLowBtn');
         lowIcon.classList.add('dNone');
         lowIconWhite.classList.remove('dNone');
+        prioBtn = 'low';
     }
 }
 
@@ -193,6 +197,15 @@ function selectCategory(myCategory) {
     let selectedCategory = document.getElementById('selectedCategory');
     selectedCategory.innerHTML = `${myCategory}`;
     toggleDropdownCategory();
+}
+
+function getSubtask() {
+    let subtaskInput = document.getElementById('subtaskInput');
+    let subtaskList = document.getElementById('subtaskList');
+    subtaskList.innerHTML += `<li>${subtaskInput.value}</li>`;
+    subtasksArr.push(`${subtaskInput.value}`);
+    console.log(subtasksArr);
+    subtaskInput.value = '';
 }
 
 function checkValidation() {

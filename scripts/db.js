@@ -6,8 +6,8 @@
 // let tasks = {};
 // let contacts = {};
 
-//const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
-const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
+const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+// const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
 
 async function getData(path = '') {
     try {
@@ -52,17 +52,17 @@ function pushTasks(contacts) {
     let title = document.getElementById('titleInput');
     let description = document.getElementById('taskDescription');
     let date = document.getElementById('dateInput');
-    // let priority = 
-
     let category = document.getElementById('selectedCategory');
-    // let subTask = 
+    let subTask = subtasksArr;
     let taskId = 'test Task';
     let userData = ({
         title: title.value,
         description: description.value,
         date: date.value,
+        prio: prioBtn,
         contact: contacts,
-        category: category.innerHTML
+        category: category.innerHTML,
+        subtask: subTask
 
     });
     putData(path, userData, taskId);

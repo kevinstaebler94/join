@@ -67,10 +67,10 @@
                                                     id="urgentIconWhite" class="priorityIconWhite dNone"
                                                     src="./assets/img/prioUrgentWhite.svg" alt=""></span>
                                             <span onclick="selectPriority('medium')" id="priorityMediumBtn"
-                                                class="priorityBtn priorityMediumBtn hoverBtn">Medium<img
-                                                    id="mediumIcon" class="priorityIconMedium"
+                                                class="priorityBtn priorityMediumBtn activeMediumBtn">Medium<img
+                                                    id="mediumIcon" class="priorityIconMedium dNone"
                                                     src="./assets/img/prioMedium.svg" alt=""><img id="mediumIconWhite"
-                                                    class="priorityIconWhite dNone"
+                                                    class="priorityIconWhite"
                                                     src="./assets/img/prioMediumWhite.svg" alt=""></span>
                                             <span onclick="selectPriority('low')" id="priorityLowBtn"
                                                 class="priorityBtn hoverBtn">Low<img id="lowIcon" class="priorityIcon"
@@ -119,9 +119,11 @@
                                         </div>
                                     </label>
                                     <label class="directionColumn">Subtasks
-                                        <input class="inputFields" type="text" placeholder="Add new subtask">
-                                        <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                        <input id="subtaskInput" class="inputFields" type="text" placeholder="Add new subtask">
+                                        <img onclick="getSubtask()" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                        <ul id="subtaskList" class="subtaskList"></ul>
                                     </label>
+                                    
                                 </form>
                             </div>
                         </div>
