@@ -33,6 +33,18 @@ async function putData(path = '', users, userId) {
     return data;
 }
 
+async function deleteData(path = '') {
+    let response = await fetch(`${BASE_URL}${path}.json`, {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(),
+    });
+    let data = await response.json();
+    return data;
+}
+
 function pushUsers() {
     let path = '/users';
     let email = document.getElementById('email');
@@ -63,7 +75,6 @@ function pushTasks(contacts) {
         contact: contacts,
         category: category.innerHTML,
         subtask: subTask
-
     });
     putData(path, userData, taskId);
 }
@@ -93,6 +104,13 @@ async function pushContacts() {
 
     clearInputFields();
 }
+
+async function deleteContacts(contactId) {
+    let path = `/contacts/${contactId}`;
+    deleteData(path);
+}
+
+
 
 
 function adjustEmail(email) {
