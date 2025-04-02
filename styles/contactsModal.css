@@ -204,3 +204,18 @@ input::placeholder {
     box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
     background-color: #29ABE2;
 }
+
+.inputError {
+    color: red;
+    font-size: 14px;
+    margin-top: -20px;
+    padding-left: 10px;
+}
+
+.inputFields.error {
+    border: 1px solid red;
+}
+
+.dNone {
+    display: none;
+}

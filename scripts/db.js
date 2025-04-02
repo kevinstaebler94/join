@@ -89,7 +89,6 @@ async function pushContacts() {
         closeContactsModal();
     } catch (error) {
         console.error("error while saving:", error);
-        showValidationError("error while saving")
     }
 
     clearInputFields();
