@@ -1,34 +1,3 @@
-let globalBackend = [
-  {
-    users: [
-      {
-        name: "Daniel",
-        email: "daniel@dev.com",
-        password: "Test123",
-        confirmedPassword: "Test123"
-      },
-      {
-        name: "Oliver",
-        email: "oliver@dev.com",
-        password: "!DevTest",
-        confirmedPassword: "!DevTest"
-      },
-      {
-        name: "Kevin",
-        email: "kevin@dev.com",
-        password: "K.dev!!",
-        confirmedPassword: "K.dev!!"
-      }
-    ]
-  }
-];
-
-function init() {
-  getData("/users");
-  updateContent("login");
-  
-}
-
 function updateContent(section) {
   let contentWrapper = document.getElementById("contentWrapper");
   contentWrapper.innerHTML = "";
