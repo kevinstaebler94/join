@@ -45,7 +45,7 @@ function toggleLoginButton() {
   let loginButton = document.getElementById("loginButton");
   
   if(pattern.test(email)) {
-    if(email.length > 0 && password.length > 3) {
+    if(email.length > 0 && password.length >= 3) {
       loginButton.disabled = false;
     } else {
       loginButton.disabled = true;

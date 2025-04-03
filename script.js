@@ -1,7 +1,9 @@
 function init() {
     updateContent("login");
+    localStorage.removeItem("registeredEmail");
+    localStorage.removeItem("registeredPassword");
     includeHTML();
-    window.onload = updateGreeting();
-    window.onload = greetingByName();
+    updateGreeting();
+    greetingByName();
     showDate();
 }

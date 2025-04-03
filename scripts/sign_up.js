@@ -1,11 +1,22 @@
 async function signUp(event) {
   event.preventDefault();
-  if(await checkInput()) {
+  
+  if (await checkInput()) {
+    let overlay = document.getElementById("signUpOverlay");
+    overlay.classList.remove("dNone");
+    overlay.classList.add("dFlex");
+
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    localStorage.setItem("registeredEmail", email);
+    localStorage.setItem("registeredPassword", password);
     pushUsers();
-    updateContent('login');
+
     setTimeout(() => {
-      init();
-    }, 100);
+      updateContent('login');
+      setTimeout(init, 100);
+    }, 1500); 
   }
 }
 
@@ -25,7 +36,7 @@ function checkPasswordInput() {
   let password = document.getElementById("password").value.trim();
   let confirmedPassword = document.getElementById("confirmedPassword").value.trim();
 
-  return password.length > 0 && confirmedPassword.length > 0;
+  return password.length >= 3 && confirmedPassword.length >= 3;
 }
 
 function togglePasswordVisibility(id) {
@@ -150,3 +161,4 @@ async function checkInput() {
   let passwordsValid = validatePasswords();
   return emailFormatValid && !emailTaken && passwordsValid;
 }
+
