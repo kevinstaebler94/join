@@ -110,7 +110,7 @@ async function pushContacts() {
 }
 
 async function deleteTask(taskId) {
-    let path = `/contacts/${taskId}`;
+    let path = `/tasks/${taskId}`;
     deleteData(path);
 }
 

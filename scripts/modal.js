@@ -167,21 +167,30 @@ function getFilledStructure() {
                                         <img onclick="closeModal()" class="closeIconTask" src="./assets/img/closeIcon.svg" alt="">
                                     </div>
                                 </div>
-                                <h4 class="taskTitleModal">Kochwelt Page & Recipe Recommender</h4>
+                                    <h4 class="taskTitleModal">Kochwelt Page & Recipe Recommender</h4>
                                     <p class="taskDescriptionModal">Build start page with recipe recommendation</p>
-                                    <div class="subtasksContainerModal">
-                                        <div class="progressBarContainerModal">
-                                            <div class="progressBarModal halfFilledModal"></div>  
-                                        </div>
-                                        <span class="subtaskInfoModal">1/2 Subtasks</span>
+                                    <div class="dueContainerModal">
+                                        <div class="dueInfo"><p>Due date:</p><span>04/04/2025</span></div>
+                                        <div class="dueInfo"><p>Priority:</p><span class="priorityContainer">Medium<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
                                     </div>
-                                <div class="assignedToContainerModal">
                                     <div class="assignedUsersModal">
-                                        <span class="assignedUserModal">KS</span>
-                                        <span class="assignedUserModal">DB</span>
-                                        <span class="assignedUserModal">OG</span>
+                                        <p>Assigned to:</p>
+                                        <div class="assignedToModal"><span class="assignedUserModal">KS</span><p>Kevin Staebler</p></div>
+                                        <div class="assignedToModal"><span class="assignedUserModal">DB</span><p>Daniel Bumbuc</p></div>
+                                        <div class="assignedToModal"><span class="assignedUserModal">OG</span><p>Oliver Geschine</p></div>
                                     </div>
-                                    <img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal">
+                                    <div class="subtaskContainerModal">
+                                        <p>Subtasks</p>
+                                        <div class="assignedToModal"><input type="checkbox"><p>Subtask 1</p></div>
+                                        <div class="assignedToModal"><input type="checkbox"><p>Subtask 2</p></div>
+                                        <div class="assignedToModal"><input type="checkbox"><p>Subtask 3</p></div>
+                                    </div>
+                                    <div class="subtaskContainerModal">
+                                        <button onclick="deleteTask('nächster test1')">Delete</button>
+                                        <span>|</span>
+                                        <button>Edit</button>
+                                    </div>
+                                    
                                 </div>
                             </div>`;
 }
