@@ -1,3 +1,9 @@
+function initLogin() {
+  updateContent("login");
+  localStorage.removeItem("registeredEmail");
+  localStorage.removeItem("registeredPassword");
+}
+
 function updateContent(section) {
   let contentWrapper = document.getElementById("contentWrapper");
   contentWrapper.innerHTML = "";
