@@ -48,11 +48,12 @@ async function deleteData(path = '') {
 
 function pushUsers() {
     let path = '/users';
+    let name = document.getElementById('name');
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let userId = adjustEmail(email.value);
     let userData = ({
-        name: email.value.trim(),
+        name: name.value,
         email: email.value.trim(),
         password: password.value.trim()
 
