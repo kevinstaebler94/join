@@ -24,24 +24,36 @@ function login(event) {
   verifyLogin();
 }
 
-function verifyLogin() {
+async function verifyLogin() {
   let email = document.getElementById("emailLogin").value.trim();
+  let formattedEmail = email.replace(/\./g, "_").replace(/@/g, "-at-");
   let password = document.getElementById("passwordLogin").value.trim();
-  let users = globalBackend.flatMap(obj => obj.users);
-  let user = users.find(user => user.email === email && user.password === password);
+  let userData = await getData("/users")
   let error = document.getElementById("errorMsgLogin");
 
-  if(user) {
-    hideLoginErrorMessage(error)
+  if(!userData) {
+    document.getElementById("passwordLogin").value = "";
+    showLoginErrorMessage(error);
+    setTimeout(() => {
+      hideLoginErrorMessage(error)
+    },3500);
+    return false;
+  }
+  if(
+    userData[formattedEmail] && 
+    userData[formattedEmail].email === email && 
+    userData[formattedEmail].password === password
+  ) {
     window.location.href = "summary.html";
+    return true;
   } else {
     document.getElementById("passwordLogin").value = "";
     showLoginErrorMessage(error);
-    setTimeout(function() {
+    setTimeout(() => {
       hideLoginErrorMessage(error)
-    }, 3500)
+    },3500);
+    return false;
   }
-  return;
 }
 
 function toggleLoginButton() {

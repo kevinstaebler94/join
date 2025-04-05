@@ -15,7 +15,7 @@ async function signUp(event) {
 
     setTimeout(() => {
       updateContent('login');
-      setTimeout(init, 100);
+      setTimeout(initLogin(), 100);
     }, 1500); 
   }
 }
