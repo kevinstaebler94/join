@@ -387,3 +387,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-position: right 3px bottom 3px;
     background-size: 12px;
 }
+
+.editTaskContent {
+    flex-direction: column;
+}
+
+.mainEditContent {
+    width: 100%;
+}
+
+.editHeadSection {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 48px;
+}

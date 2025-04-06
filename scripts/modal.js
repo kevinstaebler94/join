@@ -186,11 +186,94 @@ function getFilledStructure() {
                                         <div class="assignedToModal"><input type="checkbox"><p>Subtask 3</p></div>
                                     </div>
                                     <div class="subtaskContainerModal">
-                                        <button onclick="deleteTask('nächster test1')">Delete</button>
+                                        <button onclick="deleteTask('dieser task wird gelöscht1')">Delete</button>
                                         <span>|</span>
-                                        <button>Edit</button>
+                                        <button onclick="openTaskEdit()">Edit</button>
                                     </div>
                                     
                                 </div>
                             </div>`;
+}
+
+function openTaskEdit() {
+    let editTaskModal = document.getElementById('filledTaskModal');
+    editTaskModal.innerHTML = `<div class="mainEditContent">
+                        <div class="editHeadSection">
+                            <div class="closeIconContainer">
+                            <img onclick="closeModal()" class="closeIcon" src="./assets/img/closeIcon.svg" alt="">
+                            </div>
+                        </div>
+                        
+                        <div class="addTaskContent editTaskContent">
+                            <div class="leftContainer">
+                                <form class="leftAddTaskForm">
+                                    <label class="directionColumn">
+                                        <div class="dFlex">
+                                            <p>Title</p>
+                                        </div>
+                                        <input id="titleInput" class="inputFields" type="text"
+                                            placeholder="Enter a title">
+                                    </label>
+                                    <label class="directionColumn">Description
+                                        <textarea class="inputFields textArea resizeIcon" name="description"
+                                            id="taskDescription" placeholder="Enter a Description"></textarea>
+                                    </label>
+                                    <label class="directionColumn">
+                                        <div class="dFlex">
+                                            <p>Due date</p>
+                                        </div>
+                                        <input class="inputFields" type="text" id="dateInput" placeholder="dd/mm/yyyy"
+                                            oninput="formatDate(this)" maxlength="10">
+                                        <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="">
+                                    </label>
+                                </form>
+                            </div>
+                            <span class="dividingLine"></span>
+                            <div class="rightContainer">
+                                <form class="rightAddTaskForm" action="">
+                                    <label class="directionColumn maxWidth">Priority
+                                        <div class="btnContainer flexOne">
+                                            <span onclick="selectPriority('urgent')" id="priorityUrgentBtn"
+                                                class="priorityBtn hoverBtn">Urgent<img id="urgentIcon"
+                                                    class="priorityIcon" src="./assets/img/prioUrgent.svg" alt=""><img
+                                                    id="urgentIconWhite" class="priorityIconWhite dNone"
+                                                    src="./assets/img/prioUrgentWhite.svg" alt=""></span>
+                                            <span onclick="selectPriority('medium')" id="priorityMediumBtn"
+                                                class="priorityBtn priorityMediumBtn hoverBtn">Medium<img
+                                                    id="mediumIcon" class="priorityIconMedium"
+                                                    src="./assets/img/prioMedium.svg" alt=""><img id="mediumIconWhite"
+                                                    class="priorityIconWhite dNone"
+                                                    src="./assets/img/prioMediumWhite.svg" alt=""></span>
+                                            <span onclick="selectPriority('low')" id="priorityLowBtn"
+                                                class="priorityBtn hoverBtn">Low<img id="lowIcon" class="priorityIcon"
+                                                    src="./assets/img/prioLow.svg" alt=""><img id="lowIconWhite"
+                                                    class="priorityIconWhite dNone" src="./assets/img/prioLowWhite.svg"
+                                                    alt=""></span>
+                                        </div>
+                                    </label>
+                                    <label class="directionColumn customSelectWrapper">Assigned to
+                                        <div id="customDropdownName" class="customDropdown"
+                                            onclick="toggleDropdownName()">
+                                            <div class="dropdownHeader">
+                                                <span id="selectedName">Assigned to</span>
+                                                <img id="dropdownIconName" class="dropdownIcon"
+                                                    src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
+                                            </div>
+                                        </div>
+                                        <div class="listContainer">
+                                            <ul class="dropdownList dNone" id="dropdownListName">
+                                                <span class="puffer"></span>
+                                                <span id="listElements"></span>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                    <label class="directionColumn">Subtasks
+                                        <input class="inputFields" type="text" placeholder="Add new subtask">
+                                        <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                    </label>
+                                </form>
+                                <button>OK</button>
+                            </div>
+                        </div>
+                    </div>`;
 }
