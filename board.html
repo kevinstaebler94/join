@@ -65,29 +65,13 @@
                 </section>
                 <section class="boardContentWrapper">
                     <div class="columnWrapper">
-                        <div id="toDo" class="column">
-                            <div class="blankTask marginBottom">
-                                <span>No tasks To do</span>
-                            </div>
-                        </div>
+                        <div id="toDo" class="column dropZone" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"></div>
 
-                        <div id="inProgress" class="column">
-                            <div class="blankTask marginBottom">
-                                <span>No tasks in progress</span>
-                            </div>
-                        </div>
+                        <div id="inProgress" class="column dropZone" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"></div>
 
-                        <div id="awaitFeedback" class="column">
-                            <div class="blankTask marginBottom">
-                                <span>No tasks await feedback</span>
-                            </div>
-                        </div>
+                        <div id="awaitFeedback" class="column dropZone" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"></div>
 
-                        <div id="done" class="column">
-                            <div class="blankTask marginBottom">
-                                <span>No tasks done</span>
-                            </div>
-                        </div>
+                        <div id="done" class="column dropZone" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"></div>
                     </div> 
                 </section>
             </main>
