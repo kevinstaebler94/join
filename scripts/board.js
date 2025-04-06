@@ -27,9 +27,14 @@ async function renderTasks() {
 function filledTaskTemplate(task, taskIdCounter) {
   const capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase()
   const taskId = capitalizedPrio;
-
+  let taskCategory = task.category;
+  let taskTitle = task.title;
+  let taskDescription = task.description;
+  let taskDate = task.date;
+  let taskPriority = task.prio;
+  let taskSubtask = task.subtask;
   return `
-    <div id="taskId${taskIdCounter++}" onclick="openFilledTaskModal()" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+    <div id="taskId${taskIdCounter++}" onclick="openFilledTaskModal('${taskCategory}', '${taskTitle}', '${taskDescription}', '${taskDate}', '${taskPriority}', '${taskSubtask}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${task.category}</h3>
       <h4 class="taskTitle">${task.title}</h4>
       <p class="taskDescription">${task.description}</p>

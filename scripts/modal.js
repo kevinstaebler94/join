@@ -6,12 +6,13 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
-function openFilledTaskModal() {
+function openFilledTaskModal(category, title, description, date, priority, subtask) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
-    getFilledStructure();
+    getFilledStructure(category, title, description, date, priority);
+    getSubtasksModal(subtask);
 }
 
 function closeModal() {
@@ -158,20 +159,20 @@ function getAddTaskStructure() {
                     </div>`;
 }
 
-function getFilledStructure() {
+function getFilledStructure(category, title, description, date, priority) {
     let filledTaskModal = document.getElementById('filledTaskModal');
     filledTaskModal.innerHTML = `<div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
-                                    <h3 class="taskCategoryModal userStoryModal">User Story</h3>
+                                    <h3 class="taskCategoryModal userStoryModal">${category}</h3>
                                     <div class="closeIconTaskContainer">
                                         <img onclick="closeModal()" class="closeIconTask" src="./assets/img/closeIcon.svg" alt="">
                                     </div>
                                 </div>
-                                    <h4 class="taskTitleModal">Kochwelt Page & Recipe Recommender</h4>
-                                    <p class="taskDescriptionModal">Build start page with recipe recommendation</p>
+                                    <h4 class="taskTitleModal">${title}</h4>
+                                    <p class="taskDescriptionModal">${description}</p>
                                     <div class="dueContainerModal">
-                                        <div class="dueInfo"><p>Due date:</p><span>04/04/2025</span></div>
-                                        <div class="dueInfo"><p>Priority:</p><span class="priorityContainer">Medium<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
+                                        <div class="dueInfo"><p>Due date:</p><span>${date}</span></div>
+                                        <div class="dueInfo"><p>Priority:</p><span class="priorityContainer">${priority}<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
                                     </div>
                                     <div class="assignedUsersModal">
                                         <p>Assigned to:</p>
@@ -186,6 +187,7 @@ function getFilledStructure() {
                                         <div class="assignedToModal"><input type="checkbox"><p>Subtask 3</p></div>
                                     </div>
                                     <div class="subtaskContainerModal">
+                                        <ul id="subtaskModalList"></ul>
                                         <button onclick="deleteTask('dieser task wird gelöscht1')">Delete</button>
                                         <span>|</span>
                                         <button onclick="openTaskEdit()">Edit</button>
@@ -193,6 +195,11 @@ function getFilledStructure() {
                                     
                                 </div>
                             </div>`;
+}
+
+async function getSubtasksModal(subtask) {
+    let subtaskModalList = document.getElementById('subtaskModalList');
+    subtaskModalList.innerHTML += `<li>${subtask}</li>`;
 }
 
 function openTaskEdit() {
