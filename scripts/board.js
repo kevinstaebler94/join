@@ -12,7 +12,7 @@ async function renderTasks() {
     for (let taskKey in tasks) {
       let task = tasks[taskKey];
       task.taskDivId = taskIdCounter++;
-      taskListContainer.innerHTML += filledTaskTemplate(task, taskIdCounter);
+      taskListContainer.innerHTML += generateFilledTaskHTML(task, taskIdCounter);
     }
     
   } else {
@@ -24,20 +24,28 @@ async function renderTasks() {
   }
 }
 
-function filledTaskTemplate(task, taskIdCounter) {
-  const capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase()
-  const taskId = capitalizedPrio;
-  let taskCategory = task.category;
-  let taskTitle = task.title;
-  let taskDescription = task.description;
-  let taskDate = task.date;
-  let taskPriority = task.prio;
-  let taskSubtask = task.subtask;
+function generateFilledTaskHTML(task, taskIdCounter) {
+  const capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase();
+
+  const taskComponents = {
+    id: taskIdCounter,
+    category: task.category,
+    title: task.title,
+    description: task.description,
+    date: task.date,
+    prio: task.prio,
+    subtask: task.subtask,
+    capitalizedPrio: capitalizedPrio
+  };
+  return filledTaskTemplate(taskComponents);
+}
+
+function filledTaskTemplate(taskData) {
   return `
-    <div id="taskId${taskIdCounter++}" onclick="openFilledTaskModal('${taskCategory}', '${taskTitle}', '${taskDescription}', '${taskDate}', '${taskPriority}', '${taskSubtask}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
-      <h3 class="taskCategory userStory">${task.category}</h3>
-      <h4 class="taskTitle">${task.title}</h4>
-      <p class="taskDescription">${task.description}</p>
+    <div id="taskId${taskData.id++}" onclick="openFilledTaskModal('${taskData.category}', '${taskData.title}', '${taskData.description}', '${taskData.date}', '${taskData.prio}', '${taskData.subtask}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+      <h3 class="taskCategory userStory">${taskData.category}</h3>
+      <h4 class="taskTitle">${taskData.title}</h4>
+      <p class="taskDescription">${taskData.description}</p>
       <div class="subtasksContainer">
         <div class="progressBarContainer">
           <div class="progressBar halfFilled"></div>  
@@ -50,7 +58,7 @@ function filledTaskTemplate(task, taskIdCounter) {
           <span class="assignedUser">DB</span>
           <span class="assignedUser">OG</span>
         </div>
-        <img src="/assets/img/prio${taskId}.svg" alt="" class="taskPrio${taskId}">
+        <img src="/assets/img/prio${taskData.capitalizedPrio}.svg" alt="" class="taskPrio${taskData.capitalizedPrio}">
       </div>
     </div>
   `
@@ -59,7 +67,7 @@ function filledTaskTemplate(task, taskIdCounter) {
 function blankTask() {
   return `
     <div class="blankTask marginBottom">
-      <span id="blankTask${column}">No tasks To do</span>
+      <span id="blankTask">No tasks To do</span>
     </div>
   `
 }
