@@ -25,7 +25,7 @@ async function renderTasks() {
 }
 
 function generateFilledTaskHTML(task, taskIdCounter) {
-  const capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase();
+  const capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase(); 
 
   const taskComponents = {
     id: taskIdCounter,
@@ -37,6 +37,7 @@ function generateFilledTaskHTML(task, taskIdCounter) {
     subtask: task.subtask,
     capitalizedPrio: capitalizedPrio
   };
+  //const subtask = taskComponents.subtask.filter(Boolean).map(subtask => `<span class="subtaskInfo">${subtask || ""}</span>`).join("");
   return filledTaskTemplate(taskComponents);
 }
 
@@ -50,13 +51,11 @@ function filledTaskTemplate(taskData) {
         <div class="progressBarContainer">
           <div class="progressBar halfFilled"></div>  
         </div>
-        <span class="subtaskInfo">1/2 Subtasks</span>
+        <span class="subtaskInfo"></span>
       </div>
       <div class="assignedToContainer">
         <div class="assignedUsers">
-          <span class="assignedUser">KS</span>
-          <span class="assignedUser">DB</span>
-          <span class="assignedUser">OG</span>
+          <span id="assignedUser" class="assignedUser">KS</span>
         </div>
         <img src="/assets/img/prio${taskData.capitalizedPrio}.svg" alt="" class="taskPrio${taskData.capitalizedPrio}">
       </div>
