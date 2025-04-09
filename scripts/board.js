@@ -35,7 +35,8 @@ function generateFilledTaskHTML(task) {
     date: task.date,
     prio: task.prio,
     subtask: task.subtask,
-    id: task.id
+    id: task.id,
+    capitalizedPrio: capitalizedPrio
   }
   return filledTaskTemplate(taskComponents);
 }
@@ -57,7 +58,7 @@ function filledTaskTemplate(taskComponents) {
         <div class="assignedUsers">
           <span id="assignedUser" class="assignedUser">KS</span>
         </div>
-        <img src="/assets/img/prio.svg" alt="" class="taskPrio">
+        <img src="/assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
       </div>
     </div>
   `
