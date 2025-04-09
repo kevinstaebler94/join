@@ -156,6 +156,7 @@ input::placeholder {
     gap: 24px;
     padding-top: 24px;
     padding-bottom: 48px;
+    padding-left: 16px;
 }
 
 .modalCancelButton {
@@ -218,4 +219,26 @@ input::placeholder {
 
 .dNone {
     display: none;
+}
+
+.modalSafeButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    width: 111px;
+    border-radius: 10px;
+    border: 1px;
+    padding: 16px;
+    gap: 4px;
+    background-color: #2A3647;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modalSafeButton:hover {
+    box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
+    background-color: #29ABE2;
 }
