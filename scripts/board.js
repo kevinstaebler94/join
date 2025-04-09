@@ -6,8 +6,9 @@ function initBoard() {
 async function renderTasks() {
   let tasks = await getData("/tasks");
   let taskListContainer = document.getElementById("toDo");
-
-  if (tasks) {
+  let taskIdCounter = 0;
+  
+  if(tasks) {
     for (let taskKey in tasks) {
       let task = tasks[taskKey];
       let taskId = task.id;
