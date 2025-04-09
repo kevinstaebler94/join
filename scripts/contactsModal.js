@@ -1,13 +1,21 @@
 function openContactsModal() {
-    document.getElementById('modalOverlay').classList.remove('dNone');
-    document.getElementById('contactsModal').classList.remove('dNone');
+    let overlay = document.getElementById('modalOverlay');
+    let container = document.getElementById('contactsModal');
+
+    overlay.classList.remove('dNone');
+    container.classList.remove('dNone');
     getContactsModalStructure();
+
+    setTimeout(() => {
+        const modal = document.getElementById('modalContent');
+        modal.classList.add('show');
+    }, 10);
 }
 
 function getContactsModalStructure() {
     let container = document.getElementById('contactsModal');
     container.innerHTML = `
-    <div class="modalMainContent">
+    <div class="modalMainContent" id="modalContent">
         <div class="headlineSection">
             <img class="contactsModalImage" src="./assets/img/joinLogoSidebar.svg" alt="">
             <div class="headlineContainer">
@@ -53,8 +61,18 @@ function getContactsModalStructure() {
 }
 
 function closeContactsModal() {
-    document.getElementById('modalOverlay').classList.add('dNone');
-    document.getElementById('contactsModal').classList.add('dNone');
+    let modal = document.getElementById('modalContent');
+    let overlay = document.getElementById('modalOverlay');
+    let container = document.getElementById('contactsModal');
+
+    if (modal) {
+        modal.classList.remove('show');
+
+        setTimeout(() => {
+            overlay.classList.add('dNone');
+            container.classList.add('dNone');
+        }, 300);
+    }
 }
 
 function clearInputFields() {
