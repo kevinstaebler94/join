@@ -239,9 +239,8 @@ function showAddedBoardImg() {
     }, 3000);
 }
 
-function getContactIndex() {
-    for (let listIndex = 0; listIndex < listNames.length; listIndex++) {
-        selectetContact.push(listIndex);
-        return selectetContact;
-    }
+async function getContact() {
+    let contacts = await getData("/contacts");
+    console.log(contacts);
+    
 }

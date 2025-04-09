@@ -6,12 +6,12 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
-function openFilledTaskModal(category, title, description, date, priority, subtask) {
+function openFilledTaskModal(taskId, category, title, description, date, priority, subtask) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
-    getFilledStructure(category, title, description, date, priority);
+    getFilledStructure(taskId, category, title, description, date, priority);
     getSubtasksModal(subtask);
 }
 
@@ -159,8 +159,9 @@ function getAddTaskStructure() {
                     </div>`;
 }
 
-function getFilledStructure(category, title, description, date, priority) {
+function getFilledStructure(taskId, category, title, description, date, priority) {
     let filledTaskModal = document.getElementById('filledTaskModal');
+    
     filledTaskModal.innerHTML = `<div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
                                     <h3 class="taskCategoryModal userStoryModal">${category}</h3>
@@ -188,11 +189,11 @@ function getFilledStructure(category, title, description, date, priority) {
                                     </div>
                                     <div class="subtaskContainerModal">
                                         <ul id="subtaskModalList"></ul>
-                                        <button onclick="deleteTask('dieser task wird gelöscht1')">Delete</button>
+                                        <button onclick="deleteTask('${taskId}')">Delete</button>
                                         <span>|</span>
-                                        <button onclick="openTaskEdit()">Edit</button>
+                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}')">Edit</button>
                                     </div>
-                                    
+                                    <p>${taskId}</p>
                                 </div>
                             </div>`;
 }
@@ -202,7 +203,7 @@ async function getSubtasksModal(subtask) {
     subtaskModalList.innerHTML += `<li>${subtask}</li>`;
 }
 
-function openTaskEdit() {
+function openTaskEdit(taskId, category, title, description, date, priority) {
     let editTaskModal = document.getElementById('filledTaskModal');
     editTaskModal.innerHTML = `<div class="mainEditContent">
                         <div class="editHeadSection">
@@ -219,17 +220,17 @@ function openTaskEdit() {
                                             <p>Title</p>
                                         </div>
                                         <input id="titleInput" class="inputFields" type="text"
-                                            placeholder="Enter a title">
+                                            value="${title}">
                                     </label>
                                     <label class="directionColumn">Description
                                         <textarea class="inputFields textArea resizeIcon" name="description"
-                                            id="taskDescription" placeholder="Enter a Description"></textarea>
+                                            id="taskDescription" value="${description}"></textarea>
                                     </label>
                                     <label class="directionColumn">
                                         <div class="dFlex">
                                             <p>Due date</p>
                                         </div>
-                                        <input class="inputFields" type="text" id="dateInput" placeholder="dd/mm/yyyy"
+                                        <input class="inputFields" type="text" id="dateInput" value="${date}"
                                             oninput="formatDate(this)" maxlength="10">
                                         <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="">
                                     </label>
@@ -279,7 +280,7 @@ function openTaskEdit() {
                                         <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                     </label>
                                 </form>
-                                <button>OK</button>
+                                <button onclick="changeTasks(taskId)">OK</button>
                             </div>
                         </div>
                     </div>`;
