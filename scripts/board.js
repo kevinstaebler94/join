@@ -6,7 +6,6 @@ function initBoard() {
 async function renderTasks() {
   let tasks = await getData("/tasks");
   let taskListContainer = document.getElementById("toDo");
-  let taskIdCounter = 0;
   
   if(tasks) {
     for (let taskKey in tasks) {
@@ -26,7 +25,7 @@ async function renderTasks() {
   }
 }
 
-function generateFilledTaskHTML(task, taskId) {
+function generateFilledTaskHTML(task) {
   const capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase();
 
   let taskComponents = {
@@ -38,10 +37,6 @@ function generateFilledTaskHTML(task, taskId) {
     subtask: task.subtask,
     id: task.id
   }
-
-
-  // capitalizedPrio: capitalizedPrio 
-  //const subtask = taskComponents.subtask.filter(Boolean).map(subtask => `<span class="subtaskInfo">${subtask || ""}</span>`).join("");
   return filledTaskTemplate(taskComponents);
 }
 
