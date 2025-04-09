@@ -203,6 +203,15 @@ h3 {
     flex-direction: column;
     padding-top: 20px;
     gap: 20px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    right: -1024px;
+    opacity: 0;
+}
+
+.contactsBody.show {
+    right: 0;
+    opacity: 1;
 }
 
 .contactsNameContainer {

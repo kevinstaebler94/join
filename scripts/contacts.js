@@ -71,6 +71,7 @@ function createContactCard(contact, index) {
     card.onclick = () => {
         openContact(index);
         addContactCardBgToggle(card);
+        showContactDetailsToggle(card);
     };
 
     return card;
@@ -159,5 +160,15 @@ function addContactCardBgToggle(cardElement) {
     } else {
         allCards.forEach(card => card.classList.remove('active'));
         cardElement.classList.add('active');
+    }
+}
+
+function showContactDetailsToggle(cardElement) {
+    let overview = document.getElementById('showContactDetails');
+
+    if (cardElement.classList.contains('active', 'show')) {
+        overview.classList.add('active', 'show');
+    } else {
+        overview.classList.remove('active', 'show');
     }
 }
