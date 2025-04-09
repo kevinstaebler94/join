@@ -94,52 +94,97 @@ function clearInputFields() {
 /// Formvalidation ///
 
 async function validateContactInput() {
-    let nameInput = document.getElementById('contactName');
-    let emailInput = document.getElementById('contactEmail');
-    let phoneInput = document.getElementById('contactPhone');
-    let nameError = document.getElementById('nameError');
-    let emailError = document.getElementById('emailError');
-    let phoneError = document.getElementById('phoneError');
+    let inputs = getContactInputs();
+    let values = {
+        name: inputs.nameInput.value.trim().toLowerCase(),
+        email: inputs.emailInput.value.trim().toLowerCase(),
+        phone: inputs.phoneInput.value.trim()
+    };
 
-    let name = nameInput.value.trim().toLowerCase();
-    let email = emailInput.value.trim().toLowerCase();
-    let phone = phoneInput.value.trim();
+    resetContactInputErrors(inputs);
 
-    [nameInput, emailInput, phoneInput].forEach(input => input.classList.remove('error'));
-    [nameError, emailError, phoneError].forEach(el => {
+    if (checkEmptyFields(inputs, values)) return false;
+
+    let existingContacts = await getData('/contacts') || {};
+
+    if (checkDuplicateFields(inputs, values, existingContacts)) return false;
+
+    return true;
+}
+
+function getContactInputs() {
+    return {
+        nameInput: document.getElementById('contactName'),
+        emailInput: document.getElementById('contactEmail'),
+        phoneInput: document.getElementById('contactPhone'),
+        nameError: document.getElementById('nameError'),
+        emailError: document.getElementById('emailError'),
+        phoneError: document.getElementById('phoneError')
+    };
+}
+
+function resetContactInputErrors(inputs) {
+    [inputs.nameInput, inputs.emailInput, inputs.phoneInput].forEach(input => input.classList.remove('error'));
+    [inputs.nameError, inputs.emailError, inputs.phoneError].forEach(el => {
         el.classList.add('dNone');
         el.innerText = "";
     });
+}
 
-    let existingContacts = await getData('/contacts');
-    if (!existingContacts) existingContacts = {};
+function checkEmptyFields(inputs, values) {
+    let hasError = false;
 
+    if (!values.name) {
+        inputs.nameInput.classList.add('error');
+        inputs.nameError.innerText = "Please enter a name.";
+        inputs.nameError.classList.remove('dNone');
+        hasError = true;
+    }
+
+    if (!values.email) {
+        inputs.emailInput.classList.add('error');
+        inputs.emailError.innerText = "Please enter an e-mail adress.";
+        inputs.emailError.classList.remove('dNone');
+        hasError = true;
+    }
+
+    if (!values.phone) {
+        inputs.phoneInput.classList.add('error');
+        inputs.phoneError.innerText = "please enter a phone number.";
+        inputs.phoneError.classList.remove('dNone');
+        hasError = true;
+    }
+
+    return hasError;
+}
+
+function checkDuplicateFields(inputs, values, existingContacts) {
     let hasError = false;
 
     for (let key in existingContacts) {
         let contact = existingContacts[key];
 
-        if (contact.name.trim().toLowerCase() === name) {
-            nameInput.classList.add('error');
-            nameError.innerText = "Dieser Name ist bereits vergeben.";
-            nameError.classList.remove('dNone');
+        if (contact.name?.trim().toLowerCase() === values.name) {
+            inputs.nameInput.classList.add('error');
+            inputs.nameError.innerText = "Name already used.";
+            inputs.nameError.classList.remove('dNone');
             hasError = true;
         }
 
-        if (contact.email.trim().toLowerCase() === email) {
-            emailInput.classList.add('error');
-            emailError.innerText = "Diese E-Mail ist bereits vergeben.";
-            emailError.classList.remove('dNone');
+        if (contact.email?.trim().toLowerCase() === values.email) {
+            inputs.emailInput.classList.add('error');
+            inputs.emailError.innerText = "E-Mail already used.";
+            inputs.emailError.classList.remove('dNone');
             hasError = true;
         }
 
-        if (contact.phone.trim() === phone) {
-            phoneInput.classList.add('error');
-            phoneError.innerText = "Diese Telefonnummer ist bereits vergeben.";
-            phoneError.classList.remove('dNone');
+        if (contact.phone?.trim() === values.phone) {
+            inputs.phoneInput.classList.add('error');
+            inputs.phoneError.innerText = "Phone number already used.";
+            inputs.phoneError.classList.remove('dNone');
             hasError = true;
         }
     }
 
-    return !hasError;
+    return hasError;
 }
