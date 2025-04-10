@@ -34,7 +34,7 @@ function toggleDropdownName() {
     customDropdownName.classList.add('activeBorder');
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
-    selectName();
+    
 }
 
 
@@ -242,5 +242,6 @@ function showAddedBoardImg() {
 async function getContact() {
     let contacts = await getData("/contacts");
     console.log(contacts);
+    selectName();
     
 }

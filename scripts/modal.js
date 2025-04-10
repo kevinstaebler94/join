@@ -219,18 +219,18 @@ function openTaskEdit(taskId, category, title, description, date, priority) {
                                         <div class="dFlex">
                                             <p>Title</p>
                                         </div>
-                                        <input id="titleInput" class="inputFields" type="text"
+                                        <input id="titleInputEdit" class="inputFields" type="text"
                                             value="${title}">
                                     </label>
                                     <label class="directionColumn">Description
                                         <textarea class="inputFields textArea resizeIcon" name="description"
-                                            id="taskDescription" value="${description}"></textarea>
+                                            id="taskDescriptionEdit" value="${description}"></textarea>
                                     </label>
                                     <label class="directionColumn">
                                         <div class="dFlex">
                                             <p>Due date</p>
                                         </div>
-                                        <input class="inputFields" type="text" id="dateInput" value="${date}"
+                                        <input class="inputFields" type="text" id="dateInputEdit" value="${date}"
                                             oninput="formatDate(this)" maxlength="10">
                                         <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="">
                                     </label>
@@ -241,18 +241,18 @@ function openTaskEdit(taskId, category, title, description, date, priority) {
                                 <form class="rightAddTaskForm" action="">
                                     <label class="directionColumn maxWidth">Priority
                                         <div class="btnContainer flexOne">
-                                            <span onclick="selectPriority('urgent')" id="priorityUrgentBtn"
+                                            <span onclick="selectPriority('urgent')" id="priorityUrgentBtnEdit"
                                                 class="priorityBtn hoverBtn">Urgent<img id="urgentIcon"
                                                     class="priorityIcon" src="./assets/img/prioUrgent.svg" alt=""><img
                                                     id="urgentIconWhite" class="priorityIconWhite dNone"
                                                     src="./assets/img/prioUrgentWhite.svg" alt=""></span>
-                                            <span onclick="selectPriority('medium')" id="priorityMediumBtn"
+                                            <span onclick="selectPriority('medium')" id="priorityMediumBtnEdit"
                                                 class="priorityBtn priorityMediumBtn hoverBtn">Medium<img
                                                     id="mediumIcon" class="priorityIconMedium"
                                                     src="./assets/img/prioMedium.svg" alt=""><img id="mediumIconWhite"
                                                     class="priorityIconWhite dNone"
                                                     src="./assets/img/prioMediumWhite.svg" alt=""></span>
-                                            <span onclick="selectPriority('low')" id="priorityLowBtn"
+                                            <span onclick="selectPriority('low')" id="priorityLowBtnEdit"
                                                 class="priorityBtn hoverBtn">Low<img id="lowIcon" class="priorityIcon"
                                                     src="./assets/img/prioLow.svg" alt=""><img id="lowIconWhite"
                                                     class="priorityIconWhite dNone" src="./assets/img/prioLowWhite.svg"
@@ -260,7 +260,7 @@ function openTaskEdit(taskId, category, title, description, date, priority) {
                                         </div>
                                     </label>
                                     <label class="directionColumn customSelectWrapper">Assigned to
-                                        <div id="customDropdownName" class="customDropdown"
+                                        <div id="customDropdownNameEdit" class="customDropdown"
                                             onclick="toggleDropdownName()">
                                             <div class="dropdownHeader">
                                                 <span id="selectedName">Assigned to</span>
@@ -269,9 +269,9 @@ function openTaskEdit(taskId, category, title, description, date, priority) {
                                             </div>
                                         </div>
                                         <div class="listContainer">
-                                            <ul class="dropdownList dNone" id="dropdownListName">
+                                            <ul class="dropdownList dNone" id="dropdownListNameEdit">
                                                 <span class="puffer"></span>
-                                                <span id="listElements"></span>
+                                                <span id="listElementsEdit"></span>
                                             </ul>
                                         </div>
                                     </label>
@@ -280,7 +280,7 @@ function openTaskEdit(taskId, category, title, description, date, priority) {
                                         <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                     </label>
                                 </form>
-                                <button onclick="changeTasks(taskId)">OK</button>
+                                <button onclick="changeTasks('${taskId}')">OK</button>
                             </div>
                         </div>
                     </div>`;

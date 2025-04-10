@@ -68,8 +68,8 @@ function pushTasks(contacts) {
     let date = document.getElementById('dateInput');
     let category = document.getElementById('selectedCategory');
     let subTask = subtasksArr;
-    let newTaskId = currentTaskId ++;
-    let taskId = title.value + currentTaskId;
+    let time = getTimeStamp();
+    let taskId = title.value + time;
     let userData = ({
         id: taskId,
         title: title.value,
@@ -80,16 +80,14 @@ function pushTasks(contacts) {
         category: category.innerHTML,
         subtask: subTask
     });
-    currentTaskId = newTaskId;
     putData(path, userData, taskId);
 }
 
 function changeTasks(taskId) {
-    let path = `/tasks/${taskId}`;
-    let title = document.getElementById('titleInput');
-    let description = document.getElementById('taskDescription');
-    let date = document.getElementById('dateInput');
-    let category = document.getElementById('selectedCategory');
+    let path = `/tasks`;
+    let title = document.getElementById('titleInputEdit');
+    let description = document.getElementById('taskDescriptionEdit');
+    let date = document.getElementById('dateInputEdit');
     let subTask = subtasksArr;
     let userData = ({
         id: taskId,
@@ -98,10 +96,8 @@ function changeTasks(taskId) {
         date: date.value,
         prio: prioBtn,
         contact: contacts,
-        category: category.innerHTML,
         subtask: subTask
     });
-    currentTaskId = newTaskId;
     putData(path, userData, taskId);
 }
 
@@ -143,4 +139,20 @@ async function deleteContact(contactId) {
 
 function adjustEmail(email) {
     return email.replace(/\./g, "_").replace(/@/g, "-at-");
+}
+
+function getTimeStamp() {
+    const d = new Date();
+    let h = addZero(d.getHours());
+    let m = addZero(d.getMinutes());
+    let s = addZero(d.getSeconds());
+    let time = "-" + h + ":" + m + ":" + s;
+    return time;    
+}
+
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
 }
