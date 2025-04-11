@@ -4,25 +4,25 @@ function initBoard() {
 }
 
 async function renderTasks() {
-  let tasks = await getData("/tasks");
-  let taskListContainer = document.getElementById("toDo");
-  
-  if(tasks) {
-    for (let taskKey in tasks) {
-      let task = tasks[taskKey];
-      let taskId = task.id;
-      console.log(taskId);
-      taskListContainer.innerHTML += generateFilledTaskHTML(task, taskId);
-    }
+  let taskList = await getData("/tasks");
+  const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
+  columns.forEach(id => document.getElementById(id).innerHTML = "");
+  let taskArr = Object.values(taskList);
 
-  } else {
-    taskListContainer.innerHTML = `
-      <div class="blankTask marginBottom">
-        <span>No tasks To do</span>
-      </div>
-    `
+  if(taskArr) {
+    taskArr.forEach(task => {
+      const targetId = task.column;
+      const target = document.getElementById(targetId);
+      target.innerHTML += generateFilledTaskHTML(task)
+    })
   }
+  columns.forEach(id => {
+    const column = document.getElementById(id);
+    if(!column.innerHTML.trim()) {
+      column.innerHTML = blankTask(id);
+    }
+  })
 }
 
 function generateFilledTaskHTML(task) {
@@ -42,7 +42,6 @@ function generateFilledTaskHTML(task) {
 }
 
 function filledTaskTemplate(taskComponents) {
-
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.subtask}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
@@ -64,16 +63,17 @@ function filledTaskTemplate(taskComponents) {
   `
 }
 
-function blankTask() {
+function blankTask(columnName) {
   return `
     <div class="blankTask marginBottom">
-      <span id="blankTask">No tasks To do</span>
+      <span>No tasks ${columnName.replace(/([a-z])([A-Z])/g, '$1 $2')}</span>
     </div>
   `
 }
 
 function dragstartHandler(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
+  ev.dataTransfer.setData("column", ev.target.closest(".dropZone").id);
 }
 
 function dragoverHandler(ev) {
@@ -82,10 +82,11 @@ function dragoverHandler(ev) {
 
 function dropHandler(ev) {
   ev.preventDefault();
-  const data = ev.dataTransfer.getData("text");
-  const dropZone = ev.target.closest(".dropZone"); // sucht die nächstgelegene dropzone, verschachteln einzelner tasks wird dadurch vermieden
+  const taskId = ev.dataTransfer.getData("text");
+  const taskElement = document.getElementById(taskId);
+  const dropZone = ev.target.closest(".dropZone");
 
-  if (dropZone) {
-    dropZone.appendChild(document.getElementById(data));
+  if (dropZone && taskElement) {
+    dropZone.appendChild(taskElement);
   }
 }

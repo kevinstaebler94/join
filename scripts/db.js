@@ -6,9 +6,9 @@
 // let tasks = {};
 // let contacts = {};
 
-const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+//const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
 //const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
-//const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
+const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 async function getData(path = '') {
     try {
@@ -78,7 +78,7 @@ function pushTasks(contacts) {
         prio: prioBtn,
         contact: contacts,
         category: category.innerHTML,
-        subtask: subTask
+        subtask: subTask,
     });
     putData(path, userData, taskId);
 }
