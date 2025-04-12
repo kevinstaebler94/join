@@ -79,6 +79,7 @@ function pushTasks(contacts) {
         contact: contacts,
         category: category.innerHTML,
         subtask: subTask,
+        column: "toDo"
     });
     putData(path, userData, taskId);
 }

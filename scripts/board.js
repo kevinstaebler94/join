@@ -80,13 +80,20 @@ function dragoverHandler(ev) {
   ev.preventDefault();
 }
 
-function dropHandler(ev) {
+async function dropHandler(ev) {
   ev.preventDefault();
   const taskId = ev.dataTransfer.getData("text");
   const taskElement = document.getElementById(taskId);
   const dropZone = ev.target.closest(".dropZone");
 
   if (dropZone && taskElement) {
-    dropZone.appendChild(taskElement);
+    const newColumn = dropZone.id;
+    let task = await getData(`/tasks/${taskId}`);
+
+    if(task) {
+      task.column = newColumn;
+      await putData("/tasks", task, task.id);
+      await renderTasks();
+    }
   }
 }
