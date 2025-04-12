@@ -8,7 +8,7 @@ async function renderTasks() {
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
   columns.forEach(id => document.getElementById(id).innerHTML = "");
-  let taskArr = Object.values(taskList);
+  let taskArr = Object.values(taskList || {});
 
   if(taskArr) {
     taskArr.forEach(task => {
@@ -96,4 +96,17 @@ async function dropHandler(ev) {
       await renderTasks();
     }
   }
+}
+
+async function filterTasks() {
+  let tasks = await getData("/tasks");
+  let input = document.getElementById("taskInputfield").value.toLowerCase();
+  let tasksArr = Object.values(tasks || {});
+
+  let result = tasksArr.filter(task => 
+    task.title.toLowerCase() === input
+  );
+  console.log(result);
+  
+  
 }
