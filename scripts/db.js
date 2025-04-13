@@ -89,8 +89,10 @@ function changeTasks(taskId) {
     let description = document.getElementById('taskDescriptionEdit');
     let date = document.getElementById('dateInputEdit');
     let subTask = subtasksArr;
+    let time = getTimeStamp();
+    let newTaskId = title.value + time;
     let userData = ({
-        id: taskId,
+        id: newTaskId,
         title: title.value,
         description: description.value,
         date: date.value,
@@ -98,7 +100,9 @@ function changeTasks(taskId) {
         contact: contacts,
         subtask: subTask
     });
-    putData(path, userData, taskId);
+    putData(path, userData, newTaskId);
+    deleteTask(taskId);
+    closeModal();
 }
 
 async function pushContacts() {

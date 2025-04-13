@@ -11,7 +11,6 @@ async function renderTasks() {
     for (let taskKey in tasks) {
       let task = tasks[taskKey];
       let taskId = task.id;
-      console.log(taskId);
       taskListContainer.innerHTML += generateFilledTaskHTML(task, taskId);
     }
 
@@ -42,6 +41,7 @@ function generateFilledTaskHTML(task) {
 }
 
 function filledTaskTemplate(taskComponents) {
+console.log(taskComponents.subtask);
 
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.subtask}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">

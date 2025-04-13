@@ -206,7 +206,6 @@ function getSubtask() {
     let subtaskList = document.getElementById('subtaskList');
     subtaskList.innerHTML += `<li>${subtaskInput.value}</li>`;
     subtasksArr.push(`${subtaskInput.value}`);
-    console.log(subtasksArr);
     subtaskInput.value = '';
 }
 

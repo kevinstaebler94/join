@@ -199,8 +199,10 @@ function getFilledStructure(taskId, category, title, description, date, priority
 }
 
 async function getSubtasksModal(subtask) {
-    let subtaskModalList = document.getElementById('subtaskModalList');
-    subtaskModalList.innerHTML += `<li>${subtask}</li>`;
+    console.log(subtask);
+    
+    // let subtaskModalList = document.getElementById('subtaskModalList');
+    // subtaskModalList.innerHTML += `<li>${subtask}</li>`;
 }
 
 function openTaskEdit(taskId, category, title, description, date, priority) {
