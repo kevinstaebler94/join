@@ -1,14 +1,4 @@
-let contacts = [
-    { name: "Oliver Geschine", email: "oli.geschine@beispiel.de", number: "+49 1111 111 11 1" },
-    { name: "Kevin Stäbler", email: "kevin.staebler@beispiel.de", number: "+49 2222 222 22 2" },
-    { name: "Daniel Bumbuc", email: "daniel.bumbuc@beispiel.de", number: "+49 3333 333 33 3" },
-    { name: "Anton Mayer", email: "antom@gmail.com", number: "+49 4444 444 44 4" },
-    { name: "Anja Schulz", email: "schulz@hotmail.com", number: "+49 5555 555 55 5" },
-    { name: "Benedikt Ziegler", email: "benedikt@gmail.com", number: "+49 6666 666 66 6" },
-    { name: "David Eisenberg", email: "davidberg@gmail.com", number: "+49 7777 777 77 7" },
-    { name: "Eva Fischer", email: "eva@gmail.com", number: "+49 8888 888 88 8" },
-    { name: "Emmanuel Mauer", email: "emmanuelma@gmail.com", number: "+49 9999 999 99 9" },
-];
+let contacts = [];
 
 let colors = [
     "#9327ff", // lila
@@ -19,9 +9,19 @@ let colors = [
     "#6e52ff", // gelb
 ];
 
-function renderContacts() {
+async function renderContacts() {
     let container = document.getElementById("contactList");
     container.innerHTML = "";
+    contacts = [];
+
+    let data = await getData('/contacts');
+    if (!data) return;
+
+    for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+            contacts.push(data[key]);
+        }
+    }
     let sorted = contacts.sort((a, b) => a.name.localeCompare(b.name));
     let currentLetter = "";
 
@@ -69,6 +69,8 @@ function createContactCard(contact, index) {
         </div>
     `;
     card.onclick = () => {
+        currentContactIndex = index;
+        originalContactId = adjustEmail(contact.email);
         openContact(index);
         addContactCardBgToggle(card);
         showContactDetailsToggle(card);
@@ -81,7 +83,7 @@ function openContact(index) {
     let contact = contacts[index];
     document.getElementById("userName").innerHTML = contact.name;
     document.getElementById("userEmail").innerHTML = contact.email;
-    document.getElementById("userPhoneNumber").innerHTML = contact.number;
+    document.getElementById("userPhoneNumber").innerHTML = contact.phone;
 
     let initials = getInitials(contact.name);
     let color = getColorFromName(contact.name + contact.email);
@@ -101,7 +103,9 @@ function getInitials(name) {
 }
 
 
-window.addEventListener("DOMContentLoaded", renderContacts);
+window.addEventListener("DOMContentLoaded", () => {
+    renderContacts();
+});
 
 
 function getColorFromName(name) {
@@ -137,7 +141,7 @@ function getContactEmail() {
 
 function getPhoneNumber() {
     if (contacts.length > 0) {
-        document.getElementById("userPhoneNumber").innerHTML = contacts[0].number;
+        document.getElementById("userPhoneNumber").innerHTML = contacts[0].phone;
     }
 }
 

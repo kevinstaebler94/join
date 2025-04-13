@@ -16,7 +16,6 @@
     <script src="./scripts/modal.js"></script>
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/board.js"></script>
-    <script src="./scripts/db.js"></script>
     <title>Board</title>
 </head>
 
@@ -36,9 +35,9 @@
                         <h2>Board</h2>
                         <div class="taskActionWrapper">
                             <div class="taskSearch">
-                                <input class="taskInputfield" type="text" placeholder="Find task">
+                                <input id="taskInputfield" class="taskInputfield" type="text" placeholder="Find task">
                                 <img class="verticalLine" src="/assets/img/verticalLine.svg" alt="">
-                                <img class="searchIcon" src="/assets/img/search.svg" alt="">
+                                <img onclick="filterTasks()" class="searchIcon" src="/assets/img/search.svg" alt="">
                             </div>
                             <div class="addTaskContainer">
                                 <button onclick="openAddTaskModal()" class="addTaskButton">Add task<img src="./assets/img/plusIconWhite.svg" alt=""></button>
