@@ -14,7 +14,7 @@
 //         'checkbox' : false
 //     }
 // ];
-
+let contactArr = [];
 let listNames = ['Kevin', 'Oliver', 'Daniel'];
 let prioBtn = 'medium';
 let subtasksArr = [];
@@ -34,7 +34,7 @@ function toggleDropdownName() {
     customDropdownName.classList.add('activeBorder');
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
-    
+    getContact();
 }
 
 
@@ -128,73 +128,6 @@ function formatDate(input) {
     input.value = formattedValue;
 }
 
-function selectName() {
-    let dropdownListName = document.getElementById('dropdownListName');
-
-    dropdownListName.innerHTML = ''; // Liste zurücksetzen
-    contactArr = []; // Sicherstellen, dass das Array sauber bleibt
-
-    for (let nameIndex = 0; nameIndex < listNames.length; nameIndex++) {
-        let myContact = listNames[nameIndex];
-        let checkboxId = `checkbox-${nameIndex}`; // Eindeutige ID
-
-        let listItem = document.createElement('li');
-        listItem.classList.add('listElement');
-        listItem.id = `listName-${myContact}`;
-
-        let nameElement = document.createElement('p');
-        nameElement.id = `myContactName-${myContact}`;
-        nameElement.textContent = myContact;
-
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.classList.add('checkbox');
-        checkbox.name = 'selectedNames';
-        checkbox.id = checkboxId;
-        checkbox.checked = false; // Hier setzen wir explizit "false"
-        checkbox.addEventListener("click", function (event) {
-            event.preventDefault(); // Verhindert, dass die Checkbox automatisch ihren Status ändert
-            checkbox.checked = !checkbox.checked; // Setzt den Status manuell um
-            event.stopPropagation(); // Verhindert, dass `window.onclick` getriggert wird
-        });
-
-
-        // console.log(`Checkbox ${checkboxId} checked:`, checkbox.checked); // Debug-Check
-
-        listItem.appendChild(nameElement);
-        listItem.appendChild(checkbox);
-        dropdownListName.appendChild(listItem);
-
-        contactArr.push(myContact);
-    }
-}
-
-
-
-// function selectName() {
-//     let dropdownListName = document.getElementById('dropdownListName');
-
-//     dropdownListName.innerHTML = '';
-//     for (let nameIndex = 0; nameIndex < listNames.length; nameIndex++) {
-//         let checkbox = document.getElementById('checkbox');
-//         let myContact = listNames[nameIndex];
-//         let listItem = `<li id="listName${myContact}" class="listElement">
-//         <p id="myContactName${myContact}">${myContact}</p>
-//         <input type="checkbox" id="checkbox${0}" class="checkbox" name="selectedNames">
-//         </li>`;
-//         dropdownListName.innerHTML += listItem;
-//         contactArr.push(myContact) 
-//     }
-// }
-
-// function addCheckbox() {
-//     for (let contactIndex = 0; contactIndex < contactArr.length; contactIndex++) {
-//         let listName = document.getElementById(`listName${contactArr[contactIndex]}`);
-//         let checkbox = `<input type="checkbox" id="checkbox${0}" class="checkbox" name="selectedNames">`;
-//         listName.innerHTML += checkbox;
-//     }
-// }
-
 function selectCategory(myCategory) {
     let selectedCategory = document.getElementById('selectedCategory');
     selectedCategory.innerHTML = `${myCategory}`;
@@ -240,7 +173,15 @@ function showAddedBoardImg() {
 
 async function getContact() {
     let contacts = await getData("/contacts");
-    console.log(contacts);
-    selectName();
-    
+    let dropdownListName = document.getElementById('dropdownListName');
+    dropdownListName.innerHTML = '';
+    for (let key in contacts) {
+        if (contacts.hasOwnProperty(key)) {
+            contactArr.push(contacts[key])
+        }
+        dropdownListName.innerHTML += `<li id="listName${contacts[key].name}" class="listElement">
+                                        <p id="myContactName="${contacts[key].name}">${contacts[key].name}</p>
+                                        <input type="checkbox" id="checkbox${0}" class="checkbox" name="selectedNames">
+                                    </li>`; 
+    }
 }
