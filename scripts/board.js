@@ -106,13 +106,31 @@ async function filterTasks() {
   let tasks = await getData("/tasks");
   let input = document.getElementById("taskInputfield").value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
-  console.log(tasksArr.category);
-  
-
   let result = tasksArr.filter(task => 
     task.title.toLowerCase().includes(input)
   );
-  console.log(result);
+  renderFilteredTasks(result);
+}
+
+async function renderFilteredTasks(filtered) {
+  const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
+  columns.forEach(id => document.getElementById(id).innerHTML = "");
+
+  if(filtered.length === 0) {
+    columns.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
+    return;
+  }
   
-  
+  for (const task of filtered) {
+    let taskData = await getData(`/tasks/${task.id}`);
+    const targetId = task.column;
+    const target = document.getElementById(targetId);
+    target.innerHTML += generateFilledTaskHTML(taskData)
+    columns.forEach(id => {
+      const column = document.getElementById(id);
+      if(!column.innerHTML.trim()) {
+        column.innerHTML = blankTask(id);
+      }
+    })
+  }
 }
