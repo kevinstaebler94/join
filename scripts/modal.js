@@ -6,13 +6,16 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
-function openFilledTaskModal(taskId, category, title, description, date, priority, subtask) {
+function openFilledTaskModal(taskId, category, title, description, date, priority, encodedSubtasks) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
+
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
-    getFilledStructure(taskId, category, title, description, date, priority);
-    getSubtasksModal(subtask);
+
+
+    getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks);
+    // getSubtasksModal(subtask);
 }
 
 function closeModal() {
@@ -159,9 +162,9 @@ function getAddTaskStructure() {
                     </div>`;
 }
 
-function getFilledStructure(taskId, category, title, description, date, priority) {
+function getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks) {
     let filledTaskModal = document.getElementById('filledTaskModal');
-    
+    let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     filledTaskModal.innerHTML = `<div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
                                     <h3 class="taskCategoryModal userStoryModal">${category}</h3>
@@ -181,11 +184,8 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                         <div class="assignedToModal"><span class="assignedUserModal">DB</span><p>Daniel Bumbuc</p></div>
                                         <div class="assignedToModal"><span class="assignedUserModal">OG</span><p>Oliver Geschine</p></div>
                                     </div>
-                                    <div class="subtaskContainerModal">
+                                    <div id="subtaskContainerModal" class="subtaskContainerModal">
                                         <p>Subtasks</p>
-                                        <div class="assignedToModal"><input type="checkbox"><p>Subtask 1</p></div>
-                                        <div class="assignedToModal"><input type="checkbox"><p>Subtask 2</p></div>
-                                        <div class="assignedToModal"><input type="checkbox"><p>Subtask 3</p></div>
                                     </div>
                                     <div class="subtaskContainerModal">
                                         <ul id="subtaskModalList"></ul>
@@ -196,13 +196,15 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                     <p>${taskId}</p>
                                 </div>
                             </div>`;
+    getSubtasksModal(subtasks);
 }
 
-async function getSubtasksModal(subtask) {
-    console.log(subtask);
-    
-    // let subtaskModalList = document.getElementById('subtaskModalList');
-    // subtaskModalList.innerHTML += `<li>${subtask}</li>`;
+async function getSubtasksModal(subtasks) {
+    console.log(subtasks);
+    subtasks.forEach(subtask => {
+        let subtaskContainer = document.getElementById('subtaskContainerModal');
+        subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox"><p>${subtask}</p></div>`;    
+    });
 }
 
 function openTaskEdit(taskId, category, title, description, date, priority) {
