@@ -126,6 +126,7 @@ async function pushContacts() {
     }
 
     clearInputFields();
+    await renderContacts();
 }
 
 async function deleteTask(taskId) {
