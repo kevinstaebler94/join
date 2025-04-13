@@ -102,9 +102,11 @@ async function filterTasks() {
   let tasks = await getData("/tasks");
   let input = document.getElementById("taskInputfield").value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
+  console.log(tasksArr.category);
+  
 
   let result = tasksArr.filter(task => 
-    task.title.toLowerCase() === input
+    task.title.toLowerCase().includes(input)
   );
   console.log(result);
   
