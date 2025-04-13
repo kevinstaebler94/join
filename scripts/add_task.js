@@ -112,6 +112,10 @@ function formatDate(input) {
     input.value = formattedValue;
 }
 
+function selectName() {
+    
+}
+
 function selectCategory(myCategory) {
     let selectedCategory = document.getElementById('selectedCategory');
     selectedCategory.innerHTML = `${myCategory}`;
@@ -131,7 +135,7 @@ function checkValidation() {
     let requiredTitle = document.getElementById('requiredTitle');
     let dateInput = document.getElementById('dateInput');
     let requiredDate = document.getElementById('requiredDate');
-
+    let selectedNames = selectName();
     if (titleInput.value == '') {
         titleInput.classList.add('required');
         requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
@@ -139,9 +143,10 @@ function checkValidation() {
         dateInput.classList.add('required');
         requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
     } else {
-        for (let contactIndex = 0; contactIndex < listNames.length; contactIndex++) {
-            contacts = listNames[contactIndex]; 
-        }
+        // for (let contactIndex = 0; contactIndex < listNames.length; contactIndex++) {
+        //     contacts = listNames[contactIndex]; 
+        // }
+        
         pushTasks();
         showAddedBoardImg();
     }
