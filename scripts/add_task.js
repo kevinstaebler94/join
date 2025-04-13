@@ -1,19 +1,3 @@
-// let listNames = [
-//     {
-//         'name' : 'Kevin',
-//         'checkbox' : false
-//     }, 
-
-//     {
-//         'name' : 'Oliver',
-//         'checkbox' : false
-//     },
-
-//     {
-//         'name' : 'Daniel',
-//         'checkbox' : false
-//     }
-// ];
 let contactArr = [];
 let listNames = ['Kevin', 'Oliver', 'Daniel'];
 let prioBtn = 'medium';
