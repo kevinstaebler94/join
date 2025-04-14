@@ -44,8 +44,7 @@ function generateFilledTaskHTML(task) {
 
 function filledTaskTemplate(taskComponents) {
   let serializedSubtasks = encodeURIComponent(JSON.stringify(taskComponents.subtask));
-  console.log(typeof serializedSubtasks);
-  
+
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
