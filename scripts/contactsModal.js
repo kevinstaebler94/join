@@ -170,10 +170,11 @@ function checkEmptyFields(inputs, values) {
     return hasError;
 }
 
-function checkDuplicateFields(inputs, values, existingContacts) {
+function checkDuplicateFields(inputs, values, existingContacts, mode = 'add', originalID) {
     let hasError = false;
 
     for (let key in existingContacts) {
+        if (mode === 'edit' && key === originalID) continue;
         let contact = existingContacts[key];
 
         if (contact.name?.trim().toLowerCase() === values.name) {

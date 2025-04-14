@@ -40,16 +40,19 @@ function getEditContactsModalStructure() {
                     <div class="inputFieldWrapper">
                         <input class="inputFields" type="text" placeholder="Name" id="contactNameEdit" required>
                         <img class="inputIcon" src="./assets/img/person.svg">
+                        <span id="namePlaceholderError" class="errorMsg">Placeholder</span>
                     </div>
                     <div id="nameError" class="inputError dNone">Fehlertext</div>
                     <div class="inputFieldWrapper">
                         <input class="inputFields" type="email" placeholder="Email" id="contactEmailEdit" required>
                         <img class="inputIcon" src="./assets/img/mail.svg">
+                        <span id="emailPlaceholderError" class="errorMsg">Placeholder</span>
                     </div>
                     <div id="emailError" class="inputError dNone">Fehlertext</div>
                     <div class="inputFieldWrapper">
                         <input class="inputFields" type="text" placeholder="Phone" id="contactPhoneEdit" required>
                         <img class="inputIcon" src="./assets/img/phone.svg">
+                        <span id="phonePlaceholderError" class="errorMsg">Placeholder</span>
                     </div>
                     <div id="phoneError" class="inputError dNone">Fehlertext</div>
                 </div>
@@ -82,7 +85,7 @@ async function updateContacts() {
     let name = document.getElementById('contactNameEdit').value.trim();
     let email = document.getElementById('contactEmailEdit').value.trim();
     let phone = document.getElementById('contactPhoneEdit').value.trim();
-    let contactId = originalContactId;
+    let newContactId = adjustEmail(email);
     let updatedContact = {
         name: name,
         email: email,
@@ -90,7 +93,10 @@ async function updateContacts() {
     };
 
     try {
-        await putData('/contacts', updatedContact, contactId);
+        await putData('/contacts', updatedContact, newContactId);
+        if (newContactId !== originalContactId) {
+            await deleteContact(originalContactId);
+        }
         closeContactsModal();
         await renderContacts();
     } catch (error) {
@@ -99,32 +105,32 @@ async function updateContacts() {
 }
 
 async function validateEditContactInput() {
-    let nameInput = document.getElementById('contactNameEdit');
-    let emailInput = document.getElementById('contactEmailEdit');
-    let phoneInput = document.getElementById('contactPhoneEdit');
+    let inputs = getEditContactInputs();
+    let values = {
+        name: inputs.nameInput.value.trim().toLowerCase(),
+        email: inputs.emailInput.value.trim().toLowerCase(),
+        phone: inputs.phoneInput.value.trim()
+    };
 
-    if (!nameInput || !emailInput || !phoneInput) return false;
+    resetContactInputErrors(inputs);
 
-    let name = nameInput.value.trim();
-    let email = emailInput.value.trim();
-    let phone = phoneInput.value.trim();
+    if (checkEmptyFields(inputs, values)) return false;
 
-    let hasError = false;
+    let existingContacts = await getData('/contacts') || {};
 
-    if (!name) {
-        nameInput.classList.add('error');
-        hasError = true;
-    }
+    if (checkDuplicateFields(inputs, values, existingContacts, 'edit', originalContactId)) return false;
 
-    if (!email) {
-        emailInput.classList.add('error');
-        hasError = true;
-    }
+    return true;
+}
 
-    if (!phone) {
-        phoneInput.classList.add('error');
-        hasError = true;
-    }
 
-    return !hasError;
+function getEditContactInputs() {
+    return {
+        nameInput: document.getElementById('contactNameEdit'),
+        emailInput: document.getElementById('contactEmailEdit'),
+        phoneInput: document.getElementById('contactPhoneEdit'),
+        nameError: document.getElementById('nameError'),
+        emailError: document.getElementById('emailError'),
+        phoneError: document.getElementById('phoneError')
+    };
 }
