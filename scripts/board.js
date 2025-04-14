@@ -13,7 +13,6 @@ async function renderTasks() {
   if(taskArr) {
     taskArr.forEach(task => {
       const targetId = task.column;
-      // const targetId = 'toDo';
       const target = document.getElementById(targetId);
       target.innerHTML += generateFilledTaskHTML(task);
     })
@@ -105,6 +104,11 @@ async function filterTasks() {
   let tasks = await getData("/tasks");
   let input = document.getElementById("taskInputfield").value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
+
+  if(!input.trim()) {
+    await renderTasks();
+    return;
+  }
   let result = tasksArr.filter(task => 
     task.title.toLowerCase().includes(input)
   );
@@ -119,17 +123,27 @@ async function renderFilteredTasks(filtered) {
     columns.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
     return;
   }
-  
+
   for (const task of filtered) {
     let taskData = await getData(`/tasks/${task.id}`);
     const targetId = task.column;
     const target = document.getElementById(targetId);
-    target.innerHTML += generateFilledTaskHTML(taskData)
-    columns.forEach(id => {
-      const column = document.getElementById(id);
-      if(!column.innerHTML.trim()) {
-        column.innerHTML = blankTask(id);
-      }
-    })
+    target.innerHTML += generateFilledTaskHTML(taskData);
+  }
+
+  columns.forEach(id => {
+    const column = document.getElementById(id);
+    if(!column.innerHTML.trim()) {
+      column.innerHTML = blankTask(id);
+    }
+  })
+}
+
+async function handleTaskInput() {
+  const input = document.getElementById("taskInputfield").value.trim();
+
+  if(!input.length) {
+    await renderTasks();
+    return;
   }
 }
