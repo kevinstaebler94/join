@@ -12,10 +12,10 @@ async function renderTasks() {
 
   if(taskArr) {
     taskArr.forEach(task => {
-      // const targetId = task.column;
-      const targetId = 'toDo';
+      const targetId = task.column;
+      // const targetId = 'toDo';
       const target = document.getElementById(targetId);
-      target.innerHTML += generateFilledTaskHTML(task)
+      target.innerHTML += generateFilledTaskHTML(task);
     })
   }
   columns.forEach(id => {
