@@ -57,7 +57,6 @@ function createLetterDividerLine() {
 function createContactCard(contact, index) {
     let card = document.createElement("div");
     card.classList.add("contactCard");
-    // card.id.add("contactCard");
     let initials = getInitials(contact.name);
     let bgColor = getColorFromName(contact.name + contact.email);
 
@@ -176,3 +175,13 @@ function showContactDetailsToggle(cardElement) {
         overview.classList.remove('active', 'show');
     }
 }
+
+// function showSuccessOverlayImg() {
+//     let successOverlayImg = document.getElementById('succesfullyCreatedOverlayImg');
+
+//     if () {
+//         successOverlayImg.classList.add('show');
+//     } else {
+//         successOverlayImg.classList.remove('show');
+//     }
+// }

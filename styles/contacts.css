@@ -381,3 +381,18 @@ h3 {
 .dNone {
     display: none;
 }
+
+.succesfullyCreatedOverlayImg {
+    z-index: 3;
+    display: flex;
+    position: absolute;
+    right: -350px;
+    top: 105px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.succesfullyCreatedOverlayImg.show {
+    opacity: 1;
+    transform: translate(10px, 105px);
+}
