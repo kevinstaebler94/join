@@ -9,13 +9,9 @@ function openAddTaskModal() {
 function openFilledTaskModal(taskId, category, title, description, date, priority, encodedSubtasks) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
-
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
-
-
     getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks);
-    // getSubtasksModal(subtask);
 }
 
 function closeModal() {
@@ -191,24 +187,39 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                         <ul id="subtaskModalList"></ul>
                                         <button onclick="deleteTask('${taskId}')">Delete</button>
                                         <span>|</span>
-                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}')">Edit</button>
+                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${encodedSubtasks}')">Edit</button>
                                     </div>
-                                    <p>${taskId}</p>
                                 </div>
                             </div>`;
     getSubtasksModal(subtasks);
 }
 
 async function getSubtasksModal(subtasks) {
-    console.log(subtasks);
     subtasks.forEach(subtask => {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
-        subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox"><p>${subtask}</p></div>`;    
+        subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox"><p>${subtask}</p></div>`;
     });
 }
 
-function openTaskEdit(taskId, category, title, description, date, priority) {
+function getSubtaskEdit(subtasks) {
+    subtasks.forEach(subtask => {
+        let subtaskList = document.getElementById('subtaskListEdit');
+        subtaskList.innerHTML += `<li>
+                                    <div class="subtaskListElement">
+                                        <span class="liText"><p class="liMarker"></p>${subtask}</span>
+                                        <span class="iconContainer">
+                                            <img class="editIcons" src="./assets/img/edit.svg" alt="">
+                                            <span class="iconDivider">|</span>
+                                            <img class="editIcons" src="./assets/img/delete.svg" alt="">
+                                        </span>
+                                    </div>
+                                </li>`;
+    });
+}
+
+function openTaskEdit(taskId, category, title, description, date, priority, encodedSubtasks) {
     let editTaskModal = document.getElementById('filledTaskModal');
+    let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     editTaskModal.innerHTML = `<div class="mainEditContent">
                         <div class="editHeadSection">
                             <div class="closeIconContainer">
@@ -282,10 +293,12 @@ function openTaskEdit(taskId, category, title, description, date, priority) {
                                     <label class="directionColumn">Subtasks
                                         <input class="inputFields" type="text" placeholder="Add new subtask">
                                         <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                        <ul id="subtaskListEdit" class="subtaskListEdit"></ul>
                                     </label>
                                 </form>
                                 <button onclick="changeTasks('${taskId}')">OK</button>
                             </div>
                         </div>
                     </div>`;
+    getSubtaskEdit(subtasks);
 }
