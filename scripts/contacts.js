@@ -26,7 +26,6 @@ async function renderContacts() {
             container.appendChild(createLetterDividerLine());
         }
         container.appendChild(createContactCard(contact, id));
-
     };
 }
 
@@ -94,11 +93,9 @@ function getInitials(name) {
         .toUpperCase();
 }
 
-
 window.addEventListener("DOMContentLoaded", () => {
     renderContacts();
 });
-
 
 function getColorFromName(name) {
     let sum = 0;
@@ -107,45 +104,6 @@ function getColorFromName(name) {
     }
     let index = sum % colors.length;
     return colors[index];
-}
-
-function renderContactDetails() {
-    getUserName();
-    getContactEmail();
-    getPhoneNumber();
-    getContactInitials();
-}
-
-function getUserName() {
-    if (contacts.length > 0) {
-        document.getElementById("userName").innerHTML = contacts[0].name;
-        let userNameContainer = document.getElementById("userName");
-        userNameContainer.style.fontWeight = "500";
-    }
-
-}
-
-function getContactEmail() {
-    if (contacts.length > 0) {
-        document.getElementById("userEmail").innerHTML = contacts[0].email;
-    }
-}
-
-function getPhoneNumber() {
-    if (contacts.length > 0) {
-        document.getElementById("userPhoneNumber").innerHTML = contacts[0].phone;
-    }
-}
-
-function getContactInitials() {
-    if (contacts.length > 0) {
-        let initials = getInitials(contacts[0].name);
-        let color = getColorFromName(contacts[0].name + contacts[0].email);
-        let container = document.getElementById("contactInitials");
-        container.innerHTML = initials;
-        container.style.backgroundColor = color;
-        container.style.color = "white";
-    }
 }
 
 function addContactCardBgToggle(cardElement) {

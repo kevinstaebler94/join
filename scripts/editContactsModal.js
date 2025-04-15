@@ -172,11 +172,6 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
     let hasError = false;
     let original = existingContacts[originalContactId];
 
-    if (!original) {
-        console.warn("Original contact not found:", originalContactId);
-        return false;
-    }
-
     for (let key in existingContacts) {
         if (key === originalContactId) continue;
         let contact = existingContacts[key];

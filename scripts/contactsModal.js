@@ -105,13 +105,9 @@ async function validateContactInput() {
     };
 
     resetContactInputErrors(inputs);
-
     if (checkEmptyFields(inputs, values)) return false;
-
     let existingContacts = await getData('/contacts') || {};
-
     if (checkDuplicateFields(inputs, values, existingContacts)) return false;
-
     return true;
 }
 
@@ -166,7 +162,6 @@ function checkEmptyFields(inputs, values) {
         hideErrorMessages('phonePlaceholderError', 'contactPhone');
         hasError = true;
     }
-
     return hasError;
 }
 
@@ -180,7 +175,7 @@ function checkDuplicateFields(inputs, values, existingContacts) {
             inputs.nameInput.classList.add('error');
             document.getElementById('namePlaceholderError').innerHTML = "Name already used.";
             document.getElementById('namePlaceholderError').classList.add('visible');
-            hideErrorMessages('namePlaceholderError', 'contactName');
+            hideErrorMessages('namePlaceholderError', inputs.nameInput.id);
             hasError = true;
         }
 
@@ -188,7 +183,7 @@ function checkDuplicateFields(inputs, values, existingContacts) {
             inputs.emailInput.classList.add('error');
             document.getElementById('emailPlaceholderError').innerHTML = "E-Mail already used.";
             document.getElementById('emailPlaceholderError').classList.add('visible');
-            hideErrorMessages('emailPlaceholderError', 'contactEmail');
+            hideErrorMessages('emailPlaceholderError', inputs.emailInput.id);
             hasError = true;
         }
 
@@ -196,7 +191,7 @@ function checkDuplicateFields(inputs, values, existingContacts) {
             inputs.phoneInput.classList.add('error');
             document.getElementById('phonePlaceholderError').innerHTML = "Phone number already used.";
             document.getElementById('phonePlaceholderError').classList.add('visible');
-            hideErrorMessages('phonePlaceholderError', 'contactPhone');
+            hideErrorMessages('phonePlaceholderError', inputs.phoneInput.id);
             hasError = true;
         }
     }
