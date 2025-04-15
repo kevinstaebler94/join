@@ -109,27 +109,24 @@ async function updateContacts() {
     };
 
     try {
-        await putData('/contacts', updatedContact, newContactId);
         if (newContactId !== originalContactId) {
             await deleteContact(originalContactId);
         }
-        let data = await getData('/contacts');
-        if (!data) return;
 
-        contacts = Object.values(data).sort((a, b) => a.name.localeCompare(b.name));
-
-        let updatedIndex = contacts.findIndex(c => adjustEmail(c.email) === newContactId);
-        if (updatedIndex !== -1) {
-            currentContactId = updatedIndex;
-        }
-
+        await putData('/contacts', updatedContact, newContactId);
         await renderContacts();
-        openContactById(currentContactId);
+
+        currentContactId = newContactId;
+
+        await openContactById(currentContactId);
 
         let allCards = document.querySelectorAll('.contactCard');
         allCards.forEach(card => card.classList.remove('active'));
 
-        let updatedCard = allCards[currentContactId];
+        let updatedCard = Array.from(allCards).find(
+            c => c.dataset.contactId === currentContactId
+        );
+
         if (updatedCard) {
             addContactCardBgToggle(updatedCard);
             showContactDetailsToggle(updatedCard);
