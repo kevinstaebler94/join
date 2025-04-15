@@ -1,21 +1,36 @@
 function openEditContactsModal() {
     let overlay = document.getElementById('modalOverlay');
-    let container = document.getElementById('contactsModal');
+    let container = document.getElementById('editContactsModal');
 
     overlay.classList.remove('dNone');
     container.classList.remove('dNone');
     getEditContactsModalStructure();
 
     setTimeout(() => {
-        const modal = document.getElementById('modalContent');
+        let modal = document.getElementById('modalContent');
         modal.classList.add('show');
     }, 10);
 
     fillEditContactsForm();
 }
 
+function closeEditContactsModal() {
+    let modal = document.getElementById('modalContent');
+    let overlay = document.getElementById('modalOverlay');
+    let container = document.getElementById('editContactsModal');
+
+    if (modal) {
+        modal.classList.remove('show');
+
+        setTimeout(() => {
+            overlay.classList.add('dNone');
+            container.classList.add('dNone');
+        }, 300);
+    }
+}
+
 function getEditContactsModalStructure() {
-    let container = document.getElementById('contactsModal');
+    let container = document.getElementById('editContactsModal');
     container.innerHTML = `
     <div class="modalMainContent" id="modalContent">
         <div class="headlineSection">
@@ -34,7 +49,7 @@ function getEditContactsModalStructure() {
             </div>
             <div class="modalContentContainer">
                 <div class="modalCloseButtonWrapper">
-                    <button class="modalCloseButton" onclick="closeContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
+                    <button class="modalCloseButton" onclick="closeEditContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
                 </div>
                 <div class="inputFieldContainer">
                     <div class="inputFieldWrapper">
@@ -68,14 +83,15 @@ function getEditContactsModalStructure() {
 
 /// Editation ///
 
-let currentContactIndex = null;
+async function fillEditContactsForm() {
+    if (!currentContactId) return;
+    let contact = await getData(`/contacts/${currentContactId}`);
+    if (!contact) return;
+    document.getElementById("contactNameEdit").value = contact.name;
+    document.getElementById("contactEmailEdit").value = contact.email;
+    document.getElementById("contactPhoneEdit").value = contact.phone;
 
-function fillEditContactsForm() {
-    if (currentContactIndex === null) return;
-    let contact = contacts[currentContactIndex];
-    document.getElementById("contactNameEdit").value = contacts[currentContactIndex].name;
-    document.getElementById("contactEmailEdit").value = contacts[currentContactIndex].email;
-    document.getElementById("contactPhoneEdit").value = contacts[currentContactIndex].phone;
+    originalContactId = currentContactId;
 }
 
 async function updateContacts() {
@@ -97,8 +113,29 @@ async function updateContacts() {
         if (newContactId !== originalContactId) {
             await deleteContact(originalContactId);
         }
-        closeContactsModal();
+        let data = await getData('/contacts');
+        if (!data) return;
+
+        contacts = Object.values(data).sort((a, b) => a.name.localeCompare(b.name));
+
+        let updatedIndex = contacts.findIndex(c => adjustEmail(c.email) === newContactId);
+        if (updatedIndex !== -1) {
+            currentContactId = updatedIndex;
+        }
+
         await renderContacts();
+        openContactById(currentContactId);
+
+        let allCards = document.querySelectorAll('.contactCard');
+        allCards.forEach(card => card.classList.remove('active'));
+
+        let updatedCard = allCards[currentContactId];
+        if (updatedCard) {
+            addContactCardBgToggle(updatedCard);
+            showContactDetailsToggle(updatedCard);
+        }
+
+        closeEditContactsModal();
     } catch (error) {
         console.error('Error while updating contact:', error);
     }
@@ -139,7 +176,7 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
     let original = existingContacts[originalContactId];
 
     if (!original) {
-        console.warn("Originalkontakt nicht gefunden:", originalContactId);
+        console.warn("Original contact not found:", originalContactId);
         return false;
     }
 

@@ -1,5 +1,3 @@
-let contacts = [];
-
 let colors = [
     "#9327ff", // lila
     "#1fd7c1", // grün
@@ -13,32 +11,23 @@ async function renderContacts() {
     console.log("renderContacts wurde aufgerufen");
     let container = document.getElementById("contactList");
     container.innerHTML = "";
-    contacts = [];
 
     let data = await getData('/contacts');
     if (!data) return;
 
-    for (let key in data) {
-        if (data.hasOwnProperty(key)) {
-            contacts.push(data[key]);
-        }
-    }
-    let sorted = contacts.sort((a, b) => a.name.localeCompare(b.name));
+    let entries = Object.entries(data).sort((a, b) => a[1].name.localeCompare(b[1].name));
     let currentLetter = "";
 
-    sorted.forEach((contact, index) => {
+    for (let [id, contact] of entries) {
         let firstLetter = contact.name.charAt(0).toUpperCase();
-
         if (firstLetter !== currentLetter) {
             currentLetter = firstLetter;
             container.appendChild(createLetterDivider(firstLetter));
             container.appendChild(createLetterDividerLine());
         }
-        container.appendChild(createContactCard(contact, index));
+        container.appendChild(createContactCard(contact, id));
 
-    });
-
-    renderContactDetails();
+    };
 }
 
 function createLetterDivider(letter) {
@@ -55,23 +44,23 @@ function createLetterDividerLine() {
     return div
 }
 
-function createContactCard(contact, index) {
+function createContactCard(contact, contactId) {
     let card = document.createElement("div");
     card.classList.add("contactCard");
+    card.dataset.contactId = contactId;
     let initials = getInitials(contact.name);
     let bgColor = getColorFromName(contact.name + contact.email);
 
     card.innerHTML = `
         <div class="contactIcon" style="background-color: ${bgColor}">${initials}</div>
-        <div class="contactDetails" onclick="openContact">
+        <div class="contactDetails" onclick="openContactById">
             <strong>${contact.name}</strong>
             <span class="email">${contact.email}</span>
         </div>
     `;
-    card.onclick = () => {
-        currentContactIndex = index;
-        originalContactId = adjustEmail(contact.email);
-        openContact(index);
+    card.onclick = async () => {
+        currentContactId = contactId;
+        await openContactById(contactId);
         addContactCardBgToggle(card);
         showContactDetailsToggle(card);
     };
@@ -79,8 +68,9 @@ function createContactCard(contact, index) {
     return card;
 }
 
-function openContact(index) {
-    let contact = contacts[index];
+async function openContactById(contactId) {
+    let contact = (await getData(`/contacts/${contactId}`));
+    if (!contact) return;
     document.getElementById("userName").innerHTML = contact.name;
     document.getElementById("userEmail").innerHTML = contact.email;
     document.getElementById("userPhoneNumber").innerHTML = contact.phone;
@@ -92,6 +82,8 @@ function openContact(index) {
     initialsContainer.innerHTML = initials;
     initialsContainer.style.backgroundColor = color;
     initialsContainer.style.color = "white";
+
+    currentContactId = adjustEmail(contact.email);
 }
 
 function getInitials(name) {
@@ -127,8 +119,8 @@ function renderContactDetails() {
 function getUserName() {
     if (contacts.length > 0) {
         document.getElementById("userName").innerHTML = contacts[0].name;
-        let userNamerContainer = document.getElementById("userName");
-        userNamerContainer.style.fontWeight = "500";
+        let userNameContainer = document.getElementById("userName");
+        userNameContainer.style.fontWeight = "500";
     }
 
 }
