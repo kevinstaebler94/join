@@ -1,9 +1,17 @@
 let contactArr = [];
-let listNames = ['Kevin', 'Oliver', 'Daniel'];
+let assignedArr = [];
 let prioBtn = 'medium';
 let subtasksArr = [];
 let currentTaskId = 0;
 let contacts;
+let colors = [
+    "#9327ff", // lila
+    "#1fd7c1", // grün
+    "#fc71ff", // pink
+    "#6e52ff", // blau
+    "#ff7a02", // orange
+    "#6e52ff", // gelb
+];
 
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
@@ -164,9 +172,38 @@ async function getContact() {
         if (contacts.hasOwnProperty(key)) {
             contactArr.push(contacts[key])
         }
-        dropdownListName.innerHTML += `<li id="listName${contacts[key].name}" class="listElement">
-                                        <p id="myContactName="${contacts[key].name}">${contacts[key].name}</p>
-                                        <input type="checkbox" id="checkbox${0}" class="checkbox" name="selectedNames">
-                                    </li>`; 
+        dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
+                                        <p id="${contacts[key].name}">${contacts[key].name}</p>
+                                        <input onclick="checkAssignedContact(this)" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}">
+                                    </li></label>`;
+
     }
+
+}
+
+function checkAssignedContact(checkboxElement) {
+    let assignedContainer = document.getElementById('assignedContainer');
+    let checkedName = checkboxElement.dataset.name;
+    let index = assignedArr.indexOf(checkedName);
+    if (checkboxElement.checked) {
+        assignedArr.push(checkedName);
+    } else {
+        if (index > -1) {
+            assignedArr.splice(index, 1);
+        }
+    }
+    assignedContainer.innerHTML = '';
+    console.log(assignedArr);
+    assignedArr.forEach(contact => {
+        assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
+    });
+    ;
+}
+
+function getInitials(name) {
+    return name
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .toUpperCase();
 }

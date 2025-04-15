@@ -322,6 +322,22 @@ h1 {
     background-color: #2A3647;
 }
 
+.assignedContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.contactInitial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #29ABE2;
+    width: 28px;
+    height: 28px;
+    border-radius: 50px;
+}
+
 .hidden {
     display: none;
     opacity: 0;
