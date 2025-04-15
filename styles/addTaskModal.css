@@ -401,3 +401,63 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: flex-end;
     margin-right: 48px;
 }
+
+.subtaskListEdit {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: -10px 0 16px 0;
+}
+
+.subtaskListElement {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    padding: 2px 16px;
+    border-radius: 8px;
+    min-height: 20px;
+}
+
+.subtaskListElement:hover {
+    cursor: pointer;
+    background-color: #F0F0F0; 
+    min-height: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.liMarker {
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    background: #000;
+}
+
+.liText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.editIcons {
+    width: 16px;
+}
+
+.editIcons:hover {
+    width: 15px;
+}
+
+.iconDivider {
+    color: #A8A8A8;
+}

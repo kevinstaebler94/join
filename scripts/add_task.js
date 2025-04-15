@@ -39,7 +39,7 @@ function toggleAnimation(dropdown) {
         dropdown.classList.remove("visible");
         setTimeout(() => {
             dropdown.classList.add("hidden");
-        }, 300); // Timeout auf die Transition-Dauer setzen
+        }, 300);
     } else {
         dropdown.classList.remove("hidden");
         dropdown.classList.add("visible");
@@ -113,7 +113,7 @@ function formatDate(input) {
 }
 
 function selectName() {
-    
+
 }
 
 function selectCategory(myCategory) {
@@ -143,10 +143,6 @@ function checkValidation() {
         dateInput.classList.add('required');
         requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
     } else {
-        // for (let contactIndex = 0; contactIndex < listNames.length; contactIndex++) {
-        //     contacts = listNames[contactIndex]; 
-        // }
-        
         pushTasks();
         showAddedBoardImg();
     }

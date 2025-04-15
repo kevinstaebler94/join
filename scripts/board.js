@@ -10,7 +10,7 @@ async function renderTasks() {
   columns.forEach(id => document.getElementById(id).innerHTML = "");
   let taskArr = Object.values(taskList || {});
 
-  if(taskArr) {
+  if (taskArr) {
     taskArr.forEach(task => {
       const targetId = task.column;
       const target = document.getElementById(targetId);
@@ -19,7 +19,7 @@ async function renderTasks() {
   }
   columns.forEach(id => {
     const column = document.getElementById(id);
-    if(!column.innerHTML.trim()) {
+    if (!column.innerHTML.trim()) {
       column.innerHTML = blankTask(id);
     }
   })
@@ -42,8 +42,8 @@ function generateFilledTaskHTML(task) {
 }
 
 function filledTaskTemplate(taskComponents) {
-  let serializedSubtasks = encodeURIComponent(JSON.stringify(taskComponents.subtask));
-
+  let subtaskData = taskComponents.subtask ? taskComponents.subtask : [];
+  let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskData));
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
@@ -92,7 +92,7 @@ async function dropHandler(ev) {
     const newColumn = dropZone.id;
     let task = await getData(`/tasks/${taskId}`);
 
-    if(task) {
+    if (task) {
       task.column = newColumn;
       await putData("/tasks", task, task.id);
       await renderTasks();
@@ -105,11 +105,11 @@ async function filterTasks() {
   let input = document.getElementById("taskInputfield").value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
 
-  if(!input.trim()) {
+  if (!input.trim()) {
     await renderTasks();
     return;
   }
-  let result = tasksArr.filter(task => 
+  let result = tasksArr.filter(task =>
     task.title.toLowerCase().includes(input)
   );
   renderFilteredTasks(result);
@@ -119,7 +119,7 @@ async function renderFilteredTasks(filtered) {
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
   columns.forEach(id => document.getElementById(id).innerHTML = "");
 
-  if(filtered.length === 0) {
+  if (filtered.length === 0) {
     columns.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
     return;
   }
@@ -133,7 +133,7 @@ async function renderFilteredTasks(filtered) {
 
   columns.forEach(id => {
     const column = document.getElementById(id);
-    if(!column.innerHTML.trim()) {
+    if (!column.innerHTML.trim()) {
       column.innerHTML = blankTask(id);
     }
   })
@@ -142,7 +142,7 @@ async function renderFilteredTasks(filtered) {
 async function handleTaskInput() {
   const input = document.getElementById("taskInputfield").value.trim();
 
-  if(!input.length) {
+  if (!input.length) {
     await renderTasks();
     return;
   }
