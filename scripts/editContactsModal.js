@@ -117,8 +117,7 @@ async function validateEditContactInput() {
     if (checkEmptyFields(inputs, values)) return false;
 
     let existingContacts = await getData('/contacts') || {};
-
-    if (checkDuplicateFields(inputs, values, existingContacts, 'edit', originalContactId)) return false;
+    if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
 
     return true;
 }
@@ -133,4 +132,45 @@ function getEditContactInputs() {
         emailError: document.getElementById('emailError'),
         phoneError: document.getElementById('phoneError')
     };
+}
+
+function checkEditDuplicateFields(inputs, values, existingContacts, originalContactId) {
+    let hasError = false;
+    let original = existingContacts[originalContactId];
+
+    if (!original) {
+        console.warn("Originalkontakt nicht gefunden:", originalContactId);
+        return false;
+    }
+
+    for (let key in existingContacts) {
+        if (key === originalContactId) continue;
+        let contact = existingContacts[key];
+
+        if (contact.name?.trim().toLowerCase() === values.name && values.name !== original.name?.trim().toLowerCase()) {
+            inputs.nameInput.classList.add('error');
+            document.getElementById('namePlaceholderError').innerHTML = "Name already used.";
+            document.getElementById('namePlaceholderError').classList.add('visible');
+            hideErrorMessages('namePlaceholderError', inputs.nameInput.id);
+            hasError = true;
+        }
+
+        if (contact.email?.trim().toLowerCase() === values.email && values.email !== original.email?.trim().toLowerCase()) {
+            inputs.emailInput.classList.add('error');
+            document.getElementById('emailPlaceholderError').innerHTML = "E-Mail already used.";
+            document.getElementById('emailPlaceholderError').classList.add('visible');
+            hideErrorMessages('emailPlaceholderError', inputs.emailInput.id);
+            hasError = true;
+        }
+
+        if (contact.phone?.trim() === values.phone && values.phone !== original.phone?.trim()) {
+            inputs.phoneInput.classList.add('error');
+            document.getElementById('phonePlaceholderError').innerHTML = "Phone number already used.";
+            document.getElementById('phonePlaceholderError').classList.add('visible');
+            hideErrorMessages('phonePlaceholderError', inputs.phoneInput.id);
+            hasError = true;
+        }
+    }
+
+    return hasError;
 }

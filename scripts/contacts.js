@@ -10,6 +10,7 @@ let colors = [
 ];
 
 async function renderContacts() {
+    console.log("renderContacts wurde aufgerufen");
     let container = document.getElementById("contactList");
     container.innerHTML = "";
     contacts = [];
