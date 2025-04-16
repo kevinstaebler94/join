@@ -193,44 +193,6 @@ function getFilledStructure(taskId, category, title, description, date, priority
     getSubtasksModal(subtasks);
 }
 
-async function getContactsModal(contacts) {
-    contacts.forEach(contact => {
-        let contactContainer = document.getElementById('assignedContainerModal');
-        contactContainer.innerHTML += `<div class="assignedToModal"><span class="assignedContactModal">${getInitials(contact)}</span><p>${contact}</p></div>`;
-    });
-}
-
-function getContactEdit(contacts) {
-    contacts.forEach(contact => {
-        let assignetContainer = document.getElementById('assignedContainerEdit');
-        assignetContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
-    });
-}
-
-
-async function getSubtasksModal(subtasks) {
-    subtasks.forEach(subtask => {
-        let subtaskContainer = document.getElementById('subtaskContainerModal');
-        subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox"><p>${subtask}</p></div>`;
-    });
-}
-
-function getSubtaskEdit(subtasks) {
-    subtasks.forEach(subtask => {
-        let subtaskList = document.getElementById('subtaskListEdit');
-        subtaskList.innerHTML += `<li>
-                                    <div class="subtaskListElement">
-                                        <span class="liText"><p class="liMarker"></p>${subtask}</span>
-                                        <span class="iconContainer">
-                                            <img class="editIcons" src="./assets/img/edit.svg" alt="">
-                                            <span class="iconDivider">|</span>
-                                            <img class="editIcons" src="./assets/img/delete.svg" alt="">
-                                        </span>
-                                    </div>
-                                </li>`;
-    });
-}
-
 function openTaskEdit(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts) {
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
@@ -291,20 +253,20 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                     </label>
                                     <label class="directionColumn customSelectWrapper">Assigned to
                                         <div id="customDropdownNameEdit" class="customDropdown"
-                                            onclick="toggleDropdownName()">
+                                            onclick="toggleDropdownNameEdit()">
                                             <div class="dropdownHeader">
-                                                <span id="selectedName">Assigned to</span>
-                                                <img id="dropdownIconName" class="dropdownIcon"
+                                                <span id="selectedNameEdit">Assigned to</span>
+                                                <img id="dropdownIconNameEdit" class="dropdownIcon"
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
-                                        <div id="assignedContainerEdit" class="assignedContainer"></div>
                                         <div class="listContainer">
-                                            <ul class="dropdownList dNone" id="dropdownListNameEdit">
+                                            <ul class="dropdownList dNone" id="dropdownListName">
                                                 <span class="puffer"></span>
                                                 <span id="listElementsEdit"></span>
                                             </ul>
                                         </div>
+                                        <div id="assignedContainerEdit" class="assignedContainer"></div>
                                     </label>
                                     <label class="directionColumn">Subtasks
                                         <input class="inputFields" type="text" placeholder="Add new subtask">
@@ -316,6 +278,88 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                             </div>
                         </div>
                     </div>`;
-    getContactEdit(contacts);
+    getContactsEdit(contacts);
     getSubtaskEdit(subtasks);
+}
+
+async function getContactsModal(contacts) {
+    contacts.forEach(contact => {
+        let contactContainer = document.getElementById('assignedContainerModal');
+        contactContainer.innerHTML += `<div class="assignedToModal"><span class="assignedContactModal">${getInitials(contact)}</span><p>${contact}</p></div>`;
+    });
+}
+
+function getContactsEdit(contacts) {
+    contacts.forEach(contact => {
+        let assignetContainer = document.getElementById('assignedContainerEdit');
+        assignetContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
+    });
+}
+
+
+async function getSubtasksModal(subtasks) {
+    subtasks.forEach(subtask => {
+        let subtaskContainer = document.getElementById('subtaskContainerModal');
+        subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox"><p>${subtask}</p></div>`;
+    });
+}
+
+function getSubtaskEdit(subtasks) {
+    subtasks.forEach(subtask => {
+        let subtaskList = document.getElementById('subtaskListEdit');
+        subtaskList.innerHTML += `<li>
+                                    <div class="subtaskListElement">
+                                        <span class="liText"><p class="liMarker"></p>${subtask}</span>
+                                        <span class="iconContainer">
+                                            <img class="editIcons" src="./assets/img/edit.svg" alt="">
+                                            <span class="iconDivider">|</span>
+                                            <img class="editIcons" src="./assets/img/delete.svg" alt="">
+                                        </span>
+                                    </div>
+                                </li>`;
+    });
+}
+
+function toggleDropdownNameEdit() {
+    let customDropdownName = document.getElementById('customDropdownNameEdit');
+    let dropdown = document.getElementById('dropdownListName');
+    let dropdownIcon = document.getElementById('dropdownIconNameEdit');
+    customDropdownName.classList.add('activeBorder');
+    dropdown.classList.toggle('dNone');
+    dropdownIcon.classList.toggle('rotate');
+    getContactEdit();
+}
+
+async function getContactEdit() {
+    let contacts = await getData("/contacts");
+    let dropdownListName = document.getElementById('dropdownListName');
+    dropdownListName.innerHTML = '';
+    for (let key in contacts) {
+        if (contacts.hasOwnProperty(key)) {
+            contactArr.push(contacts[key])
+        }
+        dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
+                                        <p id="${contacts[key].name}">${contacts[key].name}</p>
+                                        <input onclick="checkAssignedContactEdit(this)" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}" ${assignedArr.includes(contacts[key].name) ? 'checked' : ''}>
+
+                                    </li></label>`;
+    }
+}
+
+function checkAssignedContactEdit(checkboxElement) {
+    let assignedContainer = document.getElementById('assignedContainerEdit');
+    let checkedName = checkboxElement.dataset.name;
+    let index = assignedArr.indexOf(checkedName);
+    if (checkboxElement.checked) {
+        assignedArr.push(checkedName);
+    } else {
+        if (index > -1) {
+            assignedArr.splice(index, 1);
+        }
+    }
+    assignedContainer.innerHTML = '';
+    console.log(assignedArr);
+    assignedArr.forEach(contact => {
+        assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
+    });
 }

@@ -29,8 +29,6 @@ function toggleDropdownName() {
     getContact();
 }
 
-
-
 function toggleDropdownCategory() {
     let customDropdownCategory = document.getElementById('customDropdownCategory');
     let dropdown = document.getElementById('dropdownListCategory');
@@ -41,8 +39,6 @@ function toggleDropdownCategory() {
 }
 
 function toggleAnimation(dropdown) {
-
-
     if (dropdown.classList.contains("visible")) {
         dropdown.classList.remove("visible");
         setTimeout(() => {
