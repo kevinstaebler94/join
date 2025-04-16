@@ -127,12 +127,11 @@ function showContactDetailsToggle(cardElement) {
     }
 }
 
-// function showSuccessOverlayImg() {
-//     let successOverlayImg = document.getElementById('succesfullyCreatedOverlayImg');
+function showSuccessOverlayImg() {
+    let successOverlayImg = document.getElementById('succesfullyCreatedOverlayImg');
 
-//     if () {
-//         successOverlayImg.classList.add('show');
-//     } else {
-//         successOverlayImg.classList.remove('show');
-//     }
-// }
+    successOverlayImg.classList.add('show');
+    setTimeout(() => {
+        successOverlayImg.classList.remove('show');
+    }, 2000);
+}

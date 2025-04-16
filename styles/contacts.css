@@ -382,7 +382,7 @@ h3 {
     display: none;
 }
 
-.succesfullyCreatedOverlayImg {
+/* .succesfullyCreatedOverlayImg {
     z-index: 3;
     display: flex;
     position: absolute;
@@ -395,4 +395,20 @@ h3 {
 .succesfullyCreatedOverlayImg.show {
     opacity: 1;
     transform: translate(10px, 105px);
+} */
+
+.succesfullyCreatedOverlayImg {
+    z-index: 3;
+    display: flex;
+    position: absolute;
+    right: -240px;
+    top: 105px;
+    transform: translateX(100px);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.succesfullyCreatedOverlayImg.show {
+    opacity: 1;
+    transform: translateX(-250px);
 }
