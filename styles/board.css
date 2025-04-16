@@ -155,6 +155,10 @@ h2 {
     overflow-y: auto;
 }
 
+.boardContentWrapper::-webkit-scrollbar {
+    display: none;
+}
+
 .columnWrapper {
     display: flex;
     margin: 0 2.5em;
