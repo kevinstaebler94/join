@@ -6,12 +6,12 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
-function openFilledTaskModal(taskId, category, title, description, date, priority, encodedSubtasks) {
+function openFilledTaskModal(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
-    getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks);
+    getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts);
 }
 
 function closeModal() {
@@ -158,9 +158,10 @@ function getAddTaskStructure() {
                     </div>`;
 }
 
-function getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks) {
+function getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts) {
     let filledTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
+    let contacts = JSON.parse(decodeURIComponent(encodedContacts));
     filledTaskModal.innerHTML = `<div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
                                     <h3 class="taskCategoryModal userStoryModal">${category}</h3>
@@ -174,11 +175,8 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                         <div class="dueInfo"><p>Due date:</p><span>${date}</span></div>
                                         <div class="dueInfo"><p>Priority:</p><span class="priorityContainer">${priority}<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
                                     </div>
-                                    <div class="assignedUsersModal">
+                                    <div id="assignedContainerModal" class="assignedContainerModal">
                                         <p>Assigned to:</p>
-                                        <div class="assignedToModal"><span class="assignedUserModal">KS</span><p>Kevin Staebler</p></div>
-                                        <div class="assignedToModal"><span class="assignedUserModal">DB</span><p>Daniel Bumbuc</p></div>
-                                        <div class="assignedToModal"><span class="assignedUserModal">OG</span><p>Oliver Geschine</p></div>
                                     </div>
                                     <div id="subtaskContainerModal" class="subtaskContainerModal">
                                         <p>Subtasks</p>
@@ -187,12 +185,28 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                         <ul id="subtaskModalList"></ul>
                                         <button onclick="deleteTask('${taskId}')">Delete</button>
                                         <span>|</span>
-                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${encodedSubtasks}')">Edit</button>
+                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${encodedSubtasks}', '${encodedContacts}')">Edit</button>
                                     </div>
                                 </div>
                             </div>`;
+    getContactsModal(contacts);
     getSubtasksModal(subtasks);
 }
+
+async function getContactsModal(contacts) {
+    contacts.forEach(contact => {
+        let contactContainer = document.getElementById('assignedContainerModal');
+        contactContainer.innerHTML += `<div class="assignedToModal"><span class="assignedContactModal">${getInitials(contact)}</span><p>${contact}</p></div>`;
+    });
+}
+
+function getContactEdit(contacts) {
+    contacts.forEach(contact => {
+        let assignetContainer = document.getElementById('assignedContainerEdit');
+        assignetContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
+    });
+}
+
 
 async function getSubtasksModal(subtasks) {
     subtasks.forEach(subtask => {
@@ -217,9 +231,10 @@ function getSubtaskEdit(subtasks) {
     });
 }
 
-function openTaskEdit(taskId, category, title, description, date, priority, encodedSubtasks) {
+function openTaskEdit(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts) {
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
+    let contacts = JSON.parse(decodeURIComponent(encodedContacts));
     editTaskModal.innerHTML = `<div class="mainEditContent">
                         <div class="editHeadSection">
                             <div class="closeIconContainer">
@@ -283,6 +298,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
+                                        <div id="assignedContainerEdit" class="assignedContainer"></div>
                                         <div class="listContainer">
                                             <ul class="dropdownList dNone" id="dropdownListNameEdit">
                                                 <span class="puffer"></span>
@@ -300,5 +316,6 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                             </div>
                         </div>
                     </div>`;
+    getContactEdit(contacts);
     getSubtaskEdit(subtasks);
 }

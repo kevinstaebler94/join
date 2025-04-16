@@ -36,16 +36,19 @@ function generateFilledTaskHTML(task) {
     prio: task.prio,
     subtask: task.subtask,
     id: task.id,
-    capitalizedPrio: capitalizedPrio
+    capitalizedPrio: capitalizedPrio,
+    contact: task.contact
   }
   return filledTaskTemplate(taskComponents);
 }
 
 function filledTaskTemplate(taskComponents) {
   let subtaskData = taskComponents.subtask ? taskComponents.subtask : [];
+  let contactData = taskComponents.contact ? taskComponents.contact : [];
   let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskData));
+  let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   return `
-    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
       <h4 class="taskTitle">${taskComponents.title}</h4>
       <p class="taskDescription">${taskComponents.description}</p>
