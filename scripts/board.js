@@ -47,6 +47,7 @@ function filledTaskTemplate(taskComponents) {
   let contactData = taskComponents.contact ? taskComponents.contact : [];
   let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskData));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
+  let initial = convertNameToInitial(contactData);
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
@@ -60,7 +61,7 @@ function filledTaskTemplate(taskComponents) {
       </div>
       <div class="assignedToContainer">
         <div class="assignedUsers">
-          <span id="assignedUser" class="assignedUser">KS</span>
+          <span id="assignedUser" class="assignedUser">${initial}</span>
         </div>
         <img src="/assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
       </div>
@@ -151,3 +152,11 @@ async function handleTaskInput() {
   }
 }
 
+function convertNameToInitial(contactData) {
+  return contactData.map(name =>
+    name
+    .split(" ")
+    .map(n => n.charAt(0).toUpperCase())
+    .join("")
+  ) 
+}

@@ -299,6 +299,10 @@ h2 {
     font-size: 0.9rem;
 }
 
+.assignedUser:empty {
+    display: none;
+}
+
 .assignedUser:nth-child(1) {
     background-color: chartreuse;
 }
