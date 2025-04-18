@@ -212,3 +212,27 @@ function hideErrorMessages(id, inputId) {
         }
     }, 3000);
 }
+
+async function validateAddEmailFormat() {
+    let email = document.getElementById("contactEmail").value.trim().toLowerCase();
+    let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let errorMsgEmail = document.getElementById("emailError");
+
+    if (!pattern.test(email)) {
+        errorMsgEmail.innerText = "Please enter a valid email address.";
+        errorMsgEmail.classList.remove("dNone");
+        return false;
+    }
+
+    let existingContacts = await getData("/contacts") || {};
+    for (let key in existingContacts) {
+        if (existingContacts[key].email.trim().toLowerCase() === email) {
+            errorMsgEmail.innerText = "Email is already used.";
+            errorMsgEmail.classList.remove("dNone");
+            return false;
+        }
+    }
+
+    errorMsgEmail.classList.add("dNone");
+    return true;
+}

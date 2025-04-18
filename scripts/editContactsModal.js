@@ -1,3 +1,5 @@
+let originalContactEmail = null;
+
 function openEditContactsModal() {
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('editContactsModal');
@@ -92,11 +94,15 @@ async function fillEditContactsForm() {
     document.getElementById("contactPhoneEdit").value = contact.phone;
 
     originalContactId = currentContactId;
+    originalContactEmail = contact.email;
 }
 
 async function updateContacts() {
     let isValid = await validateEditContactInput();
     if (!isValid) return;
+
+    let emailValid = await validateEditEmailFormat(originalContactEmail);
+    if (!emailValid) return;
 
     let name = document.getElementById('contactNameEdit').value.trim();
     let email = document.getElementById('contactEmailEdit').value.trim();
@@ -202,4 +208,30 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
     }
 
     return hasError;
+}
+
+async function validateEditEmailFormat(originalEmail) {
+    let email = document.getElementById("contactEmailEdit").value.trim().toLowerCase();
+    let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let errorMsgEmail = document.getElementById("emailError");
+
+    if (!pattern.test(email)) {
+        errorMsgEmail.innerText = "Please enter a valid email address.";
+        errorMsgEmail.classList.remove("dNone");
+        return false;
+    }
+
+    if (email !== originalEmail.toLowerCase()) {
+        let existingContacts = await getData("/contacts") || {};
+        for (let key in existingContacts) {
+            if (existingContacts[key].email.trim().toLowerCase() === email) {
+                errorMsgEmail.innerText = "Email is already used.";
+                errorMsgEmail.classList.remove("dNone");
+                return false;
+            }
+        }
+    }
+
+    errorMsgEmail.classList.add("dNone");
+    return true;
 }

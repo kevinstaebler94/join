@@ -6,8 +6,8 @@
 // let tasks = {};
 // let contacts = {};
 
-const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
-// const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
+// const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
 // const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 async function getData(path = '') {
@@ -109,6 +109,9 @@ function changeTasks(taskId) {
 async function pushContacts() {
     let isValid = await validateContactInput();
     if (!isValid) return;
+
+    let emailValid = await validateAddEmailFormat();
+    if (!emailValid) return false;
 
     let path = '/contacts';
     let contactName = document.getElementById('contactName');
