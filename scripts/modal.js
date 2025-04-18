@@ -300,7 +300,7 @@ function getContactsEdit(contacts) {
 async function getSubtasksModal(subtasks) {
     subtasks.forEach(subtask => {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
-        subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox"><p>${subtask}</p></div>`;
+        subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtasks}" type="checkbox"><p>${subtask}</p></div>`;
     });
 }
 
