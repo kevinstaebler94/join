@@ -62,7 +62,7 @@ function pushUsers() {
     putData(path, userData, userId);
 }
 
-function changeUsers(userId, email, password, name, login) {
+async function changeUsers(userId, email, password, name, login) {
     let path = '/users';
     let userData = ({
         name: name,
@@ -70,13 +70,13 @@ function changeUsers(userId, email, password, name, login) {
         password: password,
         login: login
     });
-    putData(path, userData, userId);
+    await putData(path, userData, userId);
 }
 
-function pushTasks(contacts) {
+function pushTasks(loggedInUser, contacts) {
     console.log(loggedInUser);
     
-    let path = '/users/tasks';
+    let path = '/users/' + loggedInUser + '/tasks';
     let title = document.getElementById('titleInput');
     let description = document.getElementById('taskDescription');
     let date = document.getElementById('dateInput');
@@ -99,7 +99,7 @@ function pushTasks(contacts) {
 }
 
 function changeTasks(taskId) {
-    let path = `/tasks`;
+    let path = '/users/' + loggedInUser + '/tasks';
     let title = document.getElementById('titleInputEdit');
     let description = document.getElementById('taskDescriptionEdit');
     let date = document.getElementById('dateInputEdit');
@@ -120,14 +120,14 @@ function changeTasks(taskId) {
     closeModal();
 }
 
-async function pushContacts() {
+async function pushContacts(loggedInUser) {
     let isValid = await validateContactInput();
     if (!isValid) return;
 
     let emailValid = await validateAddEmailFormat();
     if (!emailValid) return false;
 
-    let path = '/contacts';
+    let path = '/users/' + loggedInUser + '/contacts';
     let contactName = document.getElementById('contactName');
     let contactEmail = document.getElementById('contactEmail');
     let contactPhone = document.getElementById('contactPhone');
@@ -151,8 +151,8 @@ async function pushContacts() {
     showSuccessOverlayImg();
 }
 
-async function deleteTask(taskId) {
-    let path = `/tasks/${taskId}`;
+async function deleteTask(loggedInUser, taskId) {
+    let path = '/users/' +loggedInUser + '/tasks/' + taskId;
     deleteData(path);
     closeModal();
 }
