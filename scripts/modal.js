@@ -340,14 +340,14 @@ async function getContactEdit() {
         }
         dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
                                         <p id="${contacts[key].name}">${contacts[key].name}</p>
-                                        <input onclick="checkAssignedContactEdit(this)" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}" ${assignedArr.includes(contacts[key].name) ? 'checked' : ''}>
-
+                                        <input onclick="checkAssignedContactEdit(this)" id="checkboxEdit" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}">
                                     </li></label>`;
     }
 }
 
 function checkAssignedContactEdit(checkboxElement) {
     let assignedContainer = document.getElementById('assignedContainerEdit');
+    let checkbox = document.getElementById('checkboxEdit');
     let checkedName = checkboxElement.dataset.name;
     let index = assignedArr.indexOf(checkedName);
     if (checkboxElement.checked) {

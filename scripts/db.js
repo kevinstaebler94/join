@@ -6,8 +6,8 @@
 // let tasks = {};
 // let contacts = {};
 
-// const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
-const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
+const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+// const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
 // const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 async function getData(path = '') {
@@ -43,6 +43,7 @@ async function deleteData(path = '') {
         body: JSON.stringify(),
     });
     let data = await response.json();
+    window.location.reload();
     return data;
 }
 
@@ -140,6 +141,7 @@ async function pushContacts() {
 async function deleteTask(taskId) {
     let path = `/tasks/${taskId}`;
     deleteData(path);
+    closeModal();
 }
 
 async function deleteContact(contactId) {
