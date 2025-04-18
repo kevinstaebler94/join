@@ -56,14 +56,27 @@ function pushUsers() {
     let userData = ({
         name: name.value,
         email: email.value.trim(),
-        password: password.value.trim()
+        password: password.value.trim(),
+        login: false
+    });
+    putData(path, userData, userId);
+}
 
+function changeUsers(userId, email, password, name, login) {
+    let path = '/users';
+    let userData = ({
+        name: name,
+        email: email,
+        password: password,
+        login: login
     });
     putData(path, userData, userId);
 }
 
 function pushTasks(contacts) {
-    let path = '/tasks';
+    console.log(loggedInUser);
+    
+    let path = '/users/tasks';
     let title = document.getElementById('titleInput');
     let description = document.getElementById('taskDescription');
     let date = document.getElementById('dateInput');

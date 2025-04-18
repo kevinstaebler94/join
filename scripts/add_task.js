@@ -13,6 +13,17 @@ let colors = [
     "#6e52ff", // gelb
 ];
 
+async function getLoggedInUser() {
+    let userData = await getData("/users");
+    for (let key in userData) {
+        if (userData.hasOwnProperty(key)) {
+            userArr.push(userData[key].login)
+            console.log(userData[key].login);
+        }
+  
+    }  
+}
+
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
     myCheckbox.checked = false;

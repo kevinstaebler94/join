@@ -1,3 +1,5 @@
+let userArr = [];
+
 function initLogin() {
   updateContent("login");
   localStorage.removeItem("registeredEmail");
@@ -7,8 +9,8 @@ function initLogin() {
 function updateContent(section) {
   let contentWrapper = document.getElementById("contentWrapper");
   contentWrapper.innerHTML = "";
-  
-  switch(section) {
+
+  switch (section) {
     case "login":
       contentWrapper.innerHTML = loginTemplate();
       break;
@@ -30,20 +32,23 @@ async function verifyLogin() {
   let password = document.getElementById("passwordLogin").value.trim();
   let userData = await getData("/users")
   let error = document.getElementById("errorMsgLogin");
+  let login;
 
-  if(!userData) {
+  if (!userData) {
     document.getElementById("passwordLogin").value = "";
     showLoginErrorMessage(error);
     setTimeout(() => {
       hideLoginErrorMessage(error)
-    },3500);
+    }, 3500);
     return false;
   }
-  if(
-    userData[formattedEmail] && 
-    userData[formattedEmail].email === email && 
+  if (
+    userData[formattedEmail] &&
+    userData[formattedEmail].email === email &&
     userData[formattedEmail].password === password
   ) {
+    login = true;
+    changeUsers(formattedEmail, userData[formattedEmail].email, userData[formattedEmail].password, userData[formattedEmail].name, login);
     window.location.href = "summary.html";
     return true;
   } else {
@@ -51,7 +56,7 @@ async function verifyLogin() {
     showLoginErrorMessage(error);
     setTimeout(() => {
       hideLoginErrorMessage(error)
-    },3500);
+    }, 3500);
     return false;
   }
 }
@@ -61,9 +66,9 @@ function toggleLoginButton() {
   let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let password = document.getElementById("passwordLogin").value.trim();
   let loginButton = document.getElementById("loginButton");
-  
-  if(pattern.test(email)) {
-    if(email.length > 0 && password.length >= 3) {
+
+  if (pattern.test(email)) {
+    if (email.length > 0 && password.length >= 3) {
       loginButton.disabled = false;
     } else {
       loginButton.disabled = true;
@@ -72,11 +77,11 @@ function toggleLoginButton() {
 }
 
 function showLoginErrorMessage(error) {
-    error.textContent = "Check your email and password. Please try again.";
-    error.classList.remove("hide");
-    document.getElementById("emailLogin").classList.add("redBorder");
-    document.getElementById("passwordLogin").classList.add("redBorder");
-    return false;
+  error.textContent = "Check your email and password. Please try again.";
+  error.classList.remove("hide");
+  document.getElementById("emailLogin").classList.add("redBorder");
+  document.getElementById("passwordLogin").classList.add("redBorder");
+  return false;
 }
 
 function hideLoginErrorMessage(error) {
@@ -90,8 +95,8 @@ function hideLoginErrorMessage(error) {
 function togglePasswordVisibility(id) {
   let input = document.getElementById(id)
   let icon = input.nextElementSibling;
-  
-  if(input.type === "password") {
+
+  if (input.type === "password") {
     input.type = "text";
     icon.src = "./assets/img/visibility.svg";
   } else {
