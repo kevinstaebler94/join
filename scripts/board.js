@@ -1,14 +1,22 @@
 function initBoard() {
   includeHTML();
-  renderTasks();
+  extractUserData();
 }
 
-async function renderTasks() {
-  let taskList = await getData("/tasks");
+async function extractUserData() {
+  let users = await getData("/users");
+  for(let userId in users) {
+    let user = users[userId]
+    let tasks = user.tasks;
+    renderTasks(tasks);
+  }
+}
+
+function renderTasks(tasks) {
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
   columns.forEach(id => document.getElementById(id).innerHTML = "");
-  let taskArr = Object.values(taskList || {});
+  let taskArr = Object.values(tasks || {});
 
   if (taskArr) {
     taskArr.forEach(task => {
@@ -160,3 +168,5 @@ function convertNameToInitial(contactData) {
     .join("")
   ) 
 }
+
+

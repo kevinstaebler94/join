@@ -1,5 +1,3 @@
-let userArr = [];
-
 function initLogin() {
   updateContent("login");
   localStorage.removeItem("registeredEmail");
