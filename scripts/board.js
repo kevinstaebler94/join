@@ -1,15 +1,18 @@
-function initBoard() {
+async function initBoard() {
   includeHTML();
+  await getLoggedInUser(); 
   extractUserData();
 }
 
 async function extractUserData() {
-  let users = await getData("/users");
-  for(let userId in users) {
-    let user = users[userId]
-    let tasks = user.tasks;
-    renderTasks(tasks);
-  }
+  let tasks = await getData('/users/' + loggedInUser + '/tasks'); 
+  renderTasks(tasks);
+  
+  // for(let userId in users) {
+  //   let user = users[userId]
+  //   let tasks = user.tasks;
+  //   renderTasks(tasks);
+  // }
 }
 
 function renderTasks(tasks) {
@@ -102,12 +105,12 @@ async function dropHandler(ev) {
 
   if (dropZone && taskElement) {
     const newColumn = dropZone.id;
-    let task = await getData(`/tasks/${taskId}`);
+    let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
 
     if (task) {
       task.column = newColumn;
-      await putData("/tasks", task, task.id);
-      await renderTasks();
+      await putData(`/users/${loggedInUser}/tasks/${taskId}`, task, task.id);
+      renderTasks();
     }
   }
 }

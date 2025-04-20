@@ -62,13 +62,14 @@ function pushUsers() {
     putData(path, userData, userId);
 }
 
-async function changeUsers(userId, email, password, name, login) {
+async function changeUsers(userId, email, password, name, login, tasks) {
     let path = '/users';
     let userData = ({
         name: name,
         email: email,
         password: password,
-        login: login
+        login: login,
+        tasks: tasks
     });
     await putData(path, userData, userId);
 }

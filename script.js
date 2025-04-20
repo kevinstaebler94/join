@@ -40,7 +40,6 @@ async function getLoggedInUser() {
                 let email = userData[key].email;
                 let formattedEmail = email.replace(/\./g, "_").replace(/@/g, "-at-");
                 loggedInUser = formattedEmail;
-                console.log(loggedInUser);
             }
         }
     }
@@ -53,7 +52,8 @@ async function logoutUser() {
     let password = userData.password;
     let name = userData.name;
     let login = userData.login;
+    let tasks = userData.tasks;
     login = false;
-    await changeUsers(userId, email, password, name, login);
+    await changeUsers(userId, email, password, name, login, tasks);
     window.location.href = "login.html";
 }
