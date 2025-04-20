@@ -1,15 +1,11 @@
 async function initBoard() {
   includeHTML();
   await getLoggedInUser(); 
-  await extractUserData();
+  await renderTasks();
 }
 
-async function extractUserData() {
+async function renderTasks() {
   let tasks = await getData('/users/' + loggedInUser + '/tasks'); 
-  renderTasks(tasks);
-}
-
-function renderTasks(tasks) {
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
   columns.forEach(id => document.getElementById(id).innerHTML = "");
@@ -53,6 +49,7 @@ function filledTaskTemplate(taskComponents) {
   let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskData));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initial = convertNameToInitial(contactData);
+  
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
@@ -116,7 +113,7 @@ async function filterTasks() {
   let tasksArr = Object.values(tasks || {});
 
   if (!input.trim()) {
-    extractUserData();
+    renderTasks();
     return;
   }
   let result = tasksArr.filter(task =>
@@ -153,7 +150,7 @@ async function handleTaskInput() {
   const input = document.getElementById("taskInputfield").value.trim();
 
   if (!input.length) {
-    extractUserData();
+    renderTasks();
     return;
   }
 }
@@ -167,4 +164,17 @@ function convertNameToInitial(contactData) {
   ) 
 }
 
+function handleCheckbox(checkbox) {
+  updateProgressBar(checkbox.checked);
+}
+
+function updateProgressBar(checked) {
+  let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  let filteredCheckboxes = Array.from(checkboxes).filter(c => c.checked )
+  if(filteredCheckboxes) {
+    console.log("True");
+  } else {
+    console.log("false");
+  }
+}
 

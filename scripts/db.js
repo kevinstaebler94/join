@@ -93,8 +93,12 @@ function pushTasks(loggedInUser, contacts) {
         prio: prioBtn,
         contact: contacts,
         category: category.innerHTML,
-        subtask: subTask,
-        column: "toDo"
+        // subtask: subTask,
+        column: "toDo",
+        subTasks: {
+            subtask: subTask,
+            checked: false
+        }
     });
     putData(path, userData, taskId);
 }
