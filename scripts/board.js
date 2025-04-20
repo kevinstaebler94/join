@@ -6,13 +6,8 @@ async function initBoard() {
 
 async function extractUserData() {
   let tasks = await getData('/users/' + loggedInUser + '/tasks'); 
+  console.log("Extracted", tasks);
   renderTasks(tasks);
-  
-  // for(let userId in users) {
-  //   let user = users[userId]
-  //   let tasks = user.tasks;
-  //   renderTasks(tasks);
-  // }
 }
 
 function renderTasks(tasks) {
@@ -106,22 +101,23 @@ async function dropHandler(ev) {
   if (dropZone && taskElement) {
     const newColumn = dropZone.id;
     let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
-
+    
     if (task) {
       task.column = newColumn;
-      await putData(`/users/${loggedInUser}/tasks/${taskId}`, task, task.id);
-      renderTasks();
+      await putData(`/users/${loggedInUser}/tasks/`, task, task.id);
+      let updatedTasks = await getData(`/users/${loggedInUser}/tasks`);
+      renderTasks(updatedTasks);
     }
   }
 }
 
 async function filterTasks() {
-  let tasks = await getData("/tasks");
+  let tasks = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
   let input = document.getElementById("taskInputfield").value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
 
   if (!input.trim()) {
-    await renderTasks();
+    renderTasks();
     return;
   }
   let result = tasksArr.filter(task =>
@@ -140,7 +136,7 @@ async function renderFilteredTasks(filtered) {
   }
 
   for (const task of filtered) {
-    let taskData = await getData(`/tasks/${task.id}`);
+    let taskData = await getData(`/users/${loggedInUser}/tasks/${task.id}`);
     const targetId = task.column;
     const target = document.getElementById(targetId);
     target.innerHTML += generateFilledTaskHTML(taskData);
@@ -158,7 +154,7 @@ async function handleTaskInput() {
   const input = document.getElementById("taskInputfield").value.trim();
 
   if (!input.length) {
-    await renderTasks();
+    renderTasks();
     return;
   }
 }
