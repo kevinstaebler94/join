@@ -1,12 +1,11 @@
 async function initBoard() {
   includeHTML();
   await getLoggedInUser(); 
-  extractUserData();
+  await extractUserData();
 }
 
 async function extractUserData() {
   let tasks = await getData('/users/' + loggedInUser + '/tasks'); 
-  console.log("Extracted", tasks);
   renderTasks(tasks);
 }
 
@@ -112,12 +111,12 @@ async function dropHandler(ev) {
 }
 
 async function filterTasks() {
-  let tasks = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
+  let tasks = await getData(`/users/${loggedInUser}/tasks`);
   let input = document.getElementById("taskInputfield").value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
 
   if (!input.trim()) {
-    renderTasks();
+    extractUserData();
     return;
   }
   let result = tasksArr.filter(task =>
@@ -154,7 +153,7 @@ async function handleTaskInput() {
   const input = document.getElementById("taskInputfield").value.trim();
 
   if (!input.length) {
-    renderTasks();
+    extractUserData();
     return;
   }
 }
