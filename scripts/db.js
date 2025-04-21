@@ -82,9 +82,9 @@ function pushTasks(loggedInUser, contacts) {
     let description = document.getElementById('taskDescription');
     let date = document.getElementById('dateInput');
     let category = document.getElementById('selectedCategory');
-    let subTask = subtasksArr;
     let time = getTimeStamp();
     let taskId = title.value + time;
+    let subtasks = subtasksArr;
     let userData = ({
         id: taskId,
         title: title.value,
@@ -93,8 +93,11 @@ function pushTasks(loggedInUser, contacts) {
         prio: prioBtn,
         contact: contacts,
         category: category.innerHTML,
-        subtask: subTask,
         column: "toDo",
+        subtaskObj: {
+            subtask: subtasksArr,
+            done: false
+        }
     });
     putData(path, userData, taskId);
 }
@@ -108,8 +111,11 @@ async function pushGuestTasks(taskObj, guestUser) {
         date: taskObj.date,
         prio: taskObj.prio,
         contact: taskObj.contact,
-        subtask: taskObj.subtask,
-        column: taskObj.column
+        column: taskObj.column,
+        subtaskObj: {
+            subtask: taskObj.subtask,
+            done: false
+        }
     });
     await putData(path, userData, userData.id);
 }

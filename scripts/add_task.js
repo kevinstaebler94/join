@@ -147,7 +147,7 @@ function checkValidation() {
 }
 
 function showAddedBoardImg() {
-    let addedBoardImg = document.getElementById('addedBoardImg');
+    let addedBoardImg = document.getElementById('addedBoardImgModal');
     addedBoardImg.classList.remove('dNone');
     setTimeout(() => {
         window.location.href = "./board.html";;
