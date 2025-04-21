@@ -57,7 +57,7 @@ function filledTaskTemplate(taskComponents) {
       <p class="taskDescription">${taskComponents.description}</p>
       <div class="subtasksContainer">
         <div class="progressBarContainer">
-          <div class="progressBar halfFilled"></div>  
+          <div id="progressBar" class="progressBar"></div>  
         </div>
         <span class="subtaskInfo"></span>
       </div>
@@ -164,17 +164,15 @@ function convertNameToInitial(contactData) {
   ) 
 }
 
-function handleCheckbox(checkbox) {
-  updateProgressBar(checkbox.checked);
+function handleCheckbox() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const total = checkboxes.length;
+  const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+  const percent = (checkedCount/total) * 100;
+  updateProgressbar(percent);  
 }
 
-function updateProgressBar(checked) {
-  let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  let filteredCheckboxes = Array.from(checkboxes).filter(c => c.checked )
-  if(filteredCheckboxes) {
-    console.log("True");
-  } else {
-    console.log("false");
-  }
+function updateProgressbar(percent) {
+  let progressbar = document.getElementById("progressBar");
+  progressbar.style.width = percent + "%";
 }
-
