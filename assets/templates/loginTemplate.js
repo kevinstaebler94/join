@@ -26,7 +26,7 @@ function loginTemplate() {
           </div>
           <div class="buttonWrapper">
             <button disabled  type="submit" id="loginButton" class="button loginButton">Log in</button>
-            <a class="button guestLoginButton" href="summary.html">Guest Log in</a>
+            <a class="button guestLoginButton" onclick="getGuestUserData()">Guest Log in</a>
           </div>
         </form>
       </div>

@@ -6,9 +6,9 @@
 // let tasks = {};
 // let contacts = {};
 
-// const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
 // const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
-const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
+// const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 async function getData(path = '') {
     try {
@@ -76,7 +76,7 @@ async function changeUsers(userId, email, password, name, login, tasks) {
 
 function pushTasks(loggedInUser, contacts) {
     console.log(loggedInUser);
-    
+
     let path = '/users/' + loggedInUser + '/tasks';
     let title = document.getElementById('titleInput');
     let description = document.getElementById('taskDescription');
@@ -101,6 +101,21 @@ function pushTasks(loggedInUser, contacts) {
         }
     });
     putData(path, userData, taskId);
+}
+
+async function pushGuestTasks(taskObj, guestUser) {
+    let path = '/users/' + guestUser + '/tasks';
+    let userData = ({
+        id: taskObj.id,
+        title: taskObj.title,
+        description: taskObj.description,
+        date: taskObj.date,
+        prio: taskObj.prio,
+        contact: taskObj.contact,
+        subtask: taskObj.subtask,
+        column: taskObj.column
+    });
+    await putData(path, userData, userData.id);
 }
 
 function changeTasks(taskId) {
@@ -156,8 +171,19 @@ async function pushContacts(loggedInUser) {
     showSuccessOverlayImg();
 }
 
+async function pushGuestContacts(contactObj, guestUser) {
+    let path = '/users/' + guestUser + '/contacts';
+    let contactId = adjustEmail(contactObj.email);
+    let userData = ({
+        name: contactObj.name,
+        email: contactObj.email,
+        phone: contactObj.phone
+    });
+    await putData(path, userData, contactId);
+}
+
 async function deleteTask(loggedInUser, taskId) {
-    let path = '/users/' +loggedInUser + '/tasks/' + taskId;
+    let path = '/users/' + loggedInUser + '/tasks/' + taskId;
     deleteData(path);
     closeModal();
 }
