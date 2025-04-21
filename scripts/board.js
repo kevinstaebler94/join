@@ -169,7 +169,7 @@ function handleCheckbox() {
   const total = checkboxes.length;
   const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
   const percent = (checkedCount/total) * 100;
-  updateProgressbar(percent);  
+  updateProgressbar(percent); 
 }
 
 function updateProgressbar(percent) {
