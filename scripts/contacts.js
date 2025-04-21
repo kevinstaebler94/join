@@ -11,8 +11,10 @@ async function renderContacts() {
     console.log("renderContacts wurde aufgerufen");
     let container = document.getElementById("contactList");
     container.innerHTML = "";
-
-    let data = await getData('/contacts');
+    
+    let data = await getData('/users/' +loggedInUser + '/contacts');
+    
+    
     if (!data) return;
 
     let entries = Object.entries(data).sort((a, b) => a[1].name.localeCompare(b[1].name));

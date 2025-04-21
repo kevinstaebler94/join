@@ -1,7 +1,7 @@
 let loggedInUser;
 
-function init() {
-    getLoggedInUser();
+async function init() {
+    await getLoggedInUser();
     if (window.location.href.includes("login.html")) {
         getLogin();
         return;
@@ -11,6 +11,8 @@ function init() {
     } if (window.location.href.includes("board.html")) {
         getBoard();
         return;
+    } if (window.location.href.includes("contacts.html")) {
+        getContacts();
     } else {
         includeHTML();
     }
@@ -30,6 +32,11 @@ function getSummary() {
 function getBoard() {
     includeHTML();
     initBoard();
+}
+
+function getContacts() {
+    includeHTML();
+    renderContacts();
 }
 
 async function getLoggedInUser() {
