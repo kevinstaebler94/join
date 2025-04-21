@@ -162,7 +162,8 @@ function getFilledStructure(taskId, category, title, description, date, priority
     let filledTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
-    filledTaskModal.innerHTML = `<div id="filledTask1" class="filledTaskModal marginBottom">
+    filledTaskModal.innerHTML = `<img id="addedBoardImgModal" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
+                                <div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
                                     <h3 class="taskCategoryModal userStoryModal">${category}</h3>
                                     <div class="closeIconTaskContainer">
@@ -183,12 +184,14 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                     </div>
                                     <div class="subtaskContainerModal">
                                         <ul id="subtaskModalList"></ul>
-                                        <button onclick="deleteTask('${taskId}')">Delete</button>
+                                        <button onclick="deleteTask('${loggedInUser}', '${taskId}')">Delete</button>
                                         <span>|</span>
                                         <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${encodedSubtasks}', '${encodedContacts}')">Edit</button>
                                     </div>
                                 </div>
                             </div>`;
+                            
+                            
     getContactsModal(contacts);
     getSubtasksModal(subtasks);
 }
