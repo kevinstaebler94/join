@@ -84,7 +84,7 @@ function pushTasks(loggedInUser, contacts) {
     let category = document.getElementById('selectedCategory');
     let time = getTimeStamp();
     let taskId = title.value + time;
-    let subtasks = subtasksArr;
+    // let subtasks = subtasksArr;
     let userData = ({
         id: taskId,
         title: title.value,

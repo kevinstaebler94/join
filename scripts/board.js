@@ -39,6 +39,7 @@ function generateFilledTaskHTML(task) {
     capitalizedPrio: capitalizedPrio,
     contact: task.contact
   }
+  
   return filledTaskTemplate(taskComponents);
 }
 
@@ -48,6 +49,10 @@ function filledTaskTemplate(taskComponents) {
   let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskData));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initial = convertNameToInitial(contactData);
+  let subtasks = taskComponents.subtask;
+  let subtaskTotal = taskComponents.subtask.length;
+  let finishedCount = subtasks.filter(st => st.done).length;
+  let finishedTasks = finishedCount + "/" + subtaskTotal;
   
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
@@ -58,7 +63,7 @@ function filledTaskTemplate(taskComponents) {
         <div class="progressBarContainer">
           <div id="progressBar" class="progressBar"></div>  
         </div>
-        <span class="subtaskInfo"></span>
+        <span class="subtaskInfo">${finishedTasks}</span>
       </div>
       <div class="assignedToContainer">
         <div class="assignedUsers">
@@ -163,15 +168,8 @@ function convertNameToInitial(contactData) {
   ) 
 }
 
-function handleCheckbox() {
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  const total = checkboxes.length;
-  const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-  const percent = (checkedCount/total) * 100;
-  updateProgressbar(percent); 
-}
-
-function updateProgressbar(percent) {
-  let progressbar = document.getElementById("progressBar");
-  progressbar.style.width = percent + "%";
+function handleCheckbox(checkbox) {
+  let isChecked = checkbox.checked;
+  let id = checkbox.id;
+  console.log(`Checkbox mit ID "${id}" ist ${isChecked ? 'aktiviert' : 'nicht aktiviert'}.`);
 }

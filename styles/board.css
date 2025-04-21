@@ -265,14 +265,8 @@ h2 {
     height: 10px;
     background-color: #4589ff;
     border-radius: 10px;
-}
-
-.halfFilled {
-    width: 50%;
-}
-
-.fullFilled {
-    width: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
 }
 
 .subtaskInfo {
