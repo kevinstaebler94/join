@@ -28,14 +28,13 @@ async function renderTasks() {
 
 function generateFilledTaskHTML(task) {
   const capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase();
-
   let taskComponents = {
     category: task.category,
     title: task.title,
     description: task.description,
     date: task.date,
     prio: task.prio,
-    subtask: task.subtask,
+    subtask: task.subtaskObj.subtask,
     id: task.id,
     capitalizedPrio: capitalizedPrio,
     contact: task.contact
