@@ -55,7 +55,12 @@ function getContactsModalStructure() {
                     <div id="phoneError" class="inputError dNone">Fehlertext</div>
                 </div>
                 <div class="buttonsContainer">
-                <button onclick="clearInputFields()" class="modalCancelButton">Cancel <img src="./assets/img/closeIcon.svg"></button>
+                <button onclick="clearInputFields()" class="modalCancelButton">
+                Cancel 
+                <div class="modalCancelButtonImgContainer">
+                <img class="defaultIcon" src="./assets/img/cancelIcon.svg">
+                <img class="hoverIcon" src="./assets/img/cancelIconHover.svg"</button>
+                </div>
                 <button onclick="pushContacts('${loggedInUser}')" class="modalCreateButton" type="submit">Create Contact <img src="./assets/img/createIcon.svg"></button>
                 </div>
             </div>
