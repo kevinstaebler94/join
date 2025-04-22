@@ -106,6 +106,8 @@ span {
     gap: 8px;
     transition: 0.1s ease-in-out;
     box-shadow: 0px 0px 5px 0px #cdcdcd;
+    text-decoration: none;
+    color: #2A3647;
 }
 
 .toDoContainer:hover {
@@ -169,6 +171,8 @@ span {
     padding: 16px 19px;
     transition: 0.1s ease-in-out;
     box-shadow: 0px 0px 5px 0px #cdcdcd;
+    text-decoration: none;
+    color: #2A3647;
 }
 
 .midContent:hover {
@@ -238,6 +242,8 @@ span {
     padding: 16px 19px;
     transition: 0.1s ease-in-out;
     box-shadow: 0px 0px 5px 0px #cdcdcd;
+    text-decoration: none;
+    color: #2A3647;
 }
 
 .bottomBarTasks:hover {

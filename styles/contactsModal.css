@@ -175,7 +175,37 @@ input::placeholder {
     font-weight: 400;
     border: solid 1px;
     cursor: pointer;
+}
 
+.modalCancelButtonImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hoverIcon {
+    position: absolute;
+    opacity: 0;
+}
+
+.defaultIcon {
+    position: relative;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.modalCancelButton:hover .hoverIcon {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.modalCancelButton:hover .defaultIcon {
+    opacity: 0;
+}
+
+.modalCancelButtonImgContainer {
+    display: flex;
+    position: relative;
 }
 
 .modalCancelButton:hover {
