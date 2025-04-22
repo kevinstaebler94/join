@@ -162,7 +162,7 @@ function getFilledStructure(taskId, category, title, description, date, priority
     let filledTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
-    filledTaskModal.innerHTML = `<img id="addedBoardImgModal" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
+    filledTaskModal.innerHTML = `<img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
                                 <div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
                                     <h3 class="taskCategoryModal userStoryModal">${category}</h3>

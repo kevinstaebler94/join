@@ -4,6 +4,7 @@ let prioBtn = 'medium';
 let subtasksArr = [];
 let currentTaskId = 0;
 let contacts;
+let isOpen = false;
 let colors = [
     "#9327ff", // lila
     "#1fd7c1", // grün
@@ -18,14 +19,24 @@ function checkCheckbox(nameIndex) {
     myCheckbox.checked = false;
 }
 
-function toggleDropdownName() {
+function toggleOpen() {
+    isOpen = !isOpen;
+}
+
+function toggleDropdownName(event) {
+    event.stopPropagation();
+    toggleOpen();
     let customDropdownName = document.getElementById('customDropdownName');
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
     customDropdownName.classList.add('activeBorder');
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
-    getContact();
+
+    if (isOpen) {
+        
+        getContact();
+    }
 }
 
 function toggleDropdownCategory() {
@@ -147,7 +158,7 @@ function checkValidation() {
 }
 
 function showAddedBoardImg() {
-    let addedBoardImg = document.getElementById('addedBoardImgModal');
+    let addedBoardImg = document.getElementById('addedBoardImg');
     addedBoardImg.classList.remove('dNone');
     setTimeout(() => {
         window.location.href = "./board.html";;
@@ -155,18 +166,20 @@ function showAddedBoardImg() {
 }
 
 async function getContact() {
-    let contacts = await getData("/contacts");
+    
+    let contacts = await getData("/users/" +loggedInUser + "/contacts");
     let dropdownListName = document.getElementById('dropdownListName');
     dropdownListName.innerHTML = '';
     for (let key in contacts) {
+        
+        let isChecked = assignedArr.includes(contacts[key].name) ? 'checked' : '';
         if (contacts.hasOwnProperty(key)) {
             contactArr.push(contacts[key])
         }
         dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
                                         <p id="${contacts[key].name}">${contacts[key].name}</p>
-                                        <input onclick="checkAssignedContact(this)" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}">
+                                        <input onclick="checkAssignedContact(this)" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}" ${isChecked}>
                                     </li></label>`;
-
     }
 
 }
@@ -187,7 +200,6 @@ function checkAssignedContact(checkboxElement) {
     assignedArr.forEach(contact => {
         assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
     });
-    ;
 }
 
 function getInitials(name) {
