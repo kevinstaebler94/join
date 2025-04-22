@@ -21,6 +21,7 @@ function checkCheckbox(nameIndex) {
 
 function toggleOpen() {
     isOpen = !isOpen;
+
 }
 
 function toggleDropdownName(event) {
