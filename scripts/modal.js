@@ -6,12 +6,12 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
-function openFilledTaskModal(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts) {
+function openFilledTaskModal(taskId, category, title, description, date, priority, subtaskObj, encodedContacts) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
-    getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts);
+    getFilledStructure(taskId, category, title, description, date, priority, subtaskObj, encodedContacts);
 }
 
 function closeModal() {
@@ -158,9 +158,11 @@ function getAddTaskStructure() {
                     </div>`;
 }
 
-function getFilledStructure(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts) {
+function getFilledStructure(taskId, category, title, description, date, priority, subtaskObj, encodedContacts) {
     let filledTaskModal = document.getElementById('filledTaskModal');
-    let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
+    let subtasks = JSON.parse(decodeURIComponent(subtaskObj));
+    console.log(subtasks);
+    
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
     filledTaskModal.innerHTML = `<img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
                                 <div id="filledTask1" class="filledTaskModal marginBottom">
@@ -186,7 +188,7 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                         <ul id="subtaskModalList"></ul>
                                         <button onclick="deleteTask('${loggedInUser}', '${taskId}')">Delete</button>
                                         <span>|</span>
-                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${encodedSubtasks}', '${encodedContacts}')">Edit</button>
+                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${subtaskObj}', '${encodedContacts}')">Edit</button>
                                     </div>
                                 </div>
                             </div>`;
@@ -301,9 +303,15 @@ function getContactsEdit(contacts) {
 
 
 async function getSubtasksModal(subtasks) {
-    subtasks.forEach(subtask => {
+    let mySubtask = subtasks.subtask;
+    let subObj = Object.values(mySubtask);
+    let serializedSubtasks = encodeURIComponent(JSON.stringify(subtasks));
+    
+    subObj.forEach(subtask => {
+        console.log(subtask.subtask);
+        
         let subtaskContainer = document.getElementById('subtaskContainerModal');
-        subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtasks}" type="checkbox" onchange="handleCheckbox(this)"><p>${subtask}</p></div>`;
+        subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtask.subtask}" type="checkbox" onchange="handleCheckbox('${serializedSubtasks}')"><p>${subtask.subtask}</p></div>`;
     });
 }
 

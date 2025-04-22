@@ -21,11 +21,9 @@ function checkCheckbox(nameIndex) {
 
 function toggleOpen() {
     isOpen = !isOpen;
-
 }
 
-function toggleDropdownName(event) {
-    event.stopPropagation();
+function toggleDropdownName() {
     toggleOpen();
     let customDropdownName = document.getElementById('customDropdownName');
     let dropdown = document.getElementById('dropdownListName');
@@ -136,8 +134,9 @@ function selectCategory(myCategory) {
 function getSubtask() {
     let subtaskInput = document.getElementById('subtaskInput');
     let subtaskList = document.getElementById('subtaskList');
+    let subtaskObj = {subtask: subtaskInput.value, done: false}
     subtaskList.innerHTML += `<li>${subtaskInput.value}</li>`;
-    subtasksArr.push(`${subtaskInput.value}`);
+    subtasksArr.push(subtaskObj);    
     subtaskInput.value = '';
 }
 
@@ -197,7 +196,6 @@ function checkAssignedContact(checkboxElement) {
         }
     }
     assignedContainer.innerHTML = '';
-    console.log(assignedArr);
     assignedArr.forEach(contact => {
         assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
     });

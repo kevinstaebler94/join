@@ -1,11 +1,11 @@
 async function initBoard() {
   includeHTML();
-  await getLoggedInUser(); 
+  await getLoggedInUser();
   await renderTasks();
 }
 
 async function renderTasks() {
-  let tasks = await getData('/users/' + loggedInUser + '/tasks'); 
+  let tasks = await getData('/users/' + loggedInUser + '/tasks');
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
   columns.forEach(id => document.getElementById(id).innerHTML = "");
@@ -15,8 +15,12 @@ async function renderTasks() {
     taskArr.forEach(task => {
       const targetId = task.column;
       const target = document.getElementById(targetId);
-      target.innerHTML += generateFilledTaskHTML(task);
+      let taskComponents = getTaskComponents(task);
+
+      // target.innerHTML += generateFilledTaskHTML(task);
+      target.innerHTML += filledTaskTemplate(taskComponents, task)
     })
+    // return ;
   }
   columns.forEach(id => {
     const column = document.getElementById(id);
@@ -26,34 +30,28 @@ async function renderTasks() {
   })
 }
 
-function generateFilledTaskHTML(task) {
+function getTaskComponents(task) {
   const capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase();
-  let taskComponents = {
+  return taskComponents = {
     category: task.category,
     title: task.title,
     description: task.description,
     date: task.date,
     prio: task.prio,
-    subtask: task.subtaskObj.subtask,
+    subtask: task.subtask,
     id: task.id,
     capitalizedPrio: capitalizedPrio,
     contact: task.contact
   }
-  
-  return filledTaskTemplate(taskComponents);
 }
 
-function filledTaskTemplate(taskComponents) {
+function filledTaskTemplate(taskComponents, task) {
   let subtaskData = taskComponents.subtask ? taskComponents.subtask : [];
   let contactData = taskComponents.contact ? taskComponents.contact : [];
-  let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskData));
+  let serializedSubtasks = encodeURIComponent(JSON.stringify(task));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initial = convertNameToInitial(contactData);
-  let subtasks = taskComponents.subtask;
-  let subtaskTotal = taskComponents.subtask.length;
-  let finishedCount = subtasks.filter(st => st.done).length;
-  let finishedTasks = finishedCount + "/" + subtaskTotal;
-  
+
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
@@ -63,7 +61,7 @@ function filledTaskTemplate(taskComponents) {
         <div class="progressBarContainer">
           <div id="progressBar" class="progressBar"></div>  
         </div>
-        <span class="subtaskInfo">${finishedTasks}</span>
+        <span class="subtaskInfo"></span>
       </div>
       <div class="assignedToContainer">
         <div class="assignedUsers">
@@ -101,7 +99,7 @@ async function dropHandler(ev) {
   if (dropZone && taskElement) {
     const newColumn = dropZone.id;
     let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
-    
+
     if (task) {
       task.column = newColumn;
       await putData(`/users/${loggedInUser}/tasks/`, task, task.id);
@@ -162,14 +160,25 @@ async function handleTaskInput() {
 function convertNameToInitial(contactData) {
   return contactData.map(name =>
     name
-    .split(" ")
-    .map(n => n.charAt(0).toUpperCase())
-    .join("")
-  ) 
+      .split(" ")
+      .map(n => n.charAt(0).toUpperCase())
+      .join("")
+  )
 }
 
-function handleCheckbox(checkbox) {
-  let isChecked = checkbox.checked;
-  let id = checkbox.id;
-  console.log(`Checkbox mit ID "${id}" ist ${isChecked ? 'aktiviert' : 'nicht aktiviert'}.`);
+function handleCheckbox(encodedSubtasks) {
+  let subtask = JSON.parse(decodeURIComponent(encodedSubtasks));
+  let taskId = subtask.id;
+  let done;
+  for (let subtaskIndex = 0; subtaskIndex < subtask.subtask.length; subtaskIndex++) {
+    let currentSubtask = subtask.subtask[subtaskIndex].subtask;
+    let checkbox = document.getElementById(currentSubtask);
+    let isChecked = checkbox.checked;
+    if (isChecked) {
+      done = true;
+    } else {
+      done = false;
+    }
+    pushSubtasks(loggedInUser, taskId, done, currentSubtask, [subtaskIndex]);
+  }
 }
