@@ -297,7 +297,7 @@ function getContactsEdit(contacts) {
 
 async function getSubtasksModal(subtasks) {
     let mySubtask = subtasks.subtask;
-    let subObj = Object.values(mySubtask);
+    let subObj = Object.values(mySubtask || {});
     let serializedSubtasks = encodeURIComponent(JSON.stringify(subtasks));
     
     subObj.forEach(subtask => {
