@@ -86,7 +86,7 @@ function pushTasks(loggedInUser, contacts) {
     let taskId = title.value + time;
     let subtasks = subtasksArr;
     console.log(subtasks);
-    
+
     let userData = ({
         id: taskId,
         title: title.value,
@@ -198,8 +198,8 @@ async function deleteTask(loggedInUser, taskId) {
     closeModal();
 }
 
-async function deleteContact(contactId) {
-    let path = `/contacts/${contactId}`;
+async function deleteContact(loggedInUser, contactId) {
+    let path = '/users' + loggedInUser + '/contacts/' + contactId;
     deleteData(path);
 }
 
