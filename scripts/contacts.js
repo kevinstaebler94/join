@@ -11,10 +11,10 @@ async function renderContacts() {
     console.log("renderContacts wurde aufgerufen");
     let container = document.getElementById("contactList");
     container.innerHTML = "";
-    
-    let data = await getData('/users/' +loggedInUser + '/contacts');
-    
-    
+
+    let data = await getData('/users/' + loggedInUser + '/contacts');
+
+
     if (!data) return;
 
     let entries = Object.entries(data).sort((a, b) => a[1].name.localeCompare(b[1].name));
@@ -70,7 +70,10 @@ function createContactCard(contact, contactId) {
 }
 
 async function openContactById(contactId) {
-    let contact = (await getData(`/contacts/${contactId}`));
+    let contact = (await getData(`/users/${loggedInUser}/contacts/${contactId}`));
+    let userNameDeleteContainer = document.getElementById('userNameDeleteContainer');
+
+
     if (!contact) return;
     document.getElementById("userName").innerHTML = contact.name;
     document.getElementById("userEmail").innerHTML = contact.email;
@@ -83,8 +86,10 @@ async function openContactById(contactId) {
     initialsContainer.innerHTML = initials;
     initialsContainer.style.backgroundColor = color;
     initialsContainer.style.color = "white";
+    userNameDeleteContainer.innerHTML = `<span onclick="deleteContact('${contactId}')">Delete</span>`;
 
     currentContactId = adjustEmail(contact.email);
+
 }
 
 function getInitials(name) {

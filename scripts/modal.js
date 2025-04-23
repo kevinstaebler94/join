@@ -25,7 +25,7 @@ function closeModal() {
 
 function getAddTaskStructure() {
     let addTaskModal = document.getElementById('addTaskModal');
-    addTaskModal.innerHTML = `<div class="mainContent">
+    addTaskModal.innerHTML = `<img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt=""><div class="mainContent">
                         <div class="modalHeadSection">
                             <h1>Add Task</h1>
                             <div class="closeIconContainer">
@@ -94,11 +94,12 @@ function getAddTaskStructure() {
                                             </div>
                                         </div>
                                         <div class="listContainer">
-                                            <ul class="dropdownList dNone" id="dropdownListName">
+                                            <ul class="dropdownList ddListName dNone" id="dropdownListName">
                                                 <span class="puffer"></span>
                                                 <span id="listElements"></span>
                                             </ul>
                                         </div>
+                                        <div id="assignedContainer" class="assignedContainer"></div>
                                     </label>
                                     <label class="directionColumn customSelectWrapper">
                                         <div class="dFlex">
@@ -124,8 +125,9 @@ function getAddTaskStructure() {
                                         </div>
                                     </label>
                                     <label class="directionColumn">Subtasks
-                                        <input class="inputFields" type="text" placeholder="Add new subtask">
-                                        <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                        <input id="subtaskInput" class="inputFields" type="text" placeholder="Add new subtask">
+                                        <img onclick="getSubtask()" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                        <ul id="subtaskList" class="subtaskList"></ul>
                                     </label>
                                 </form>
                             </div>
@@ -137,19 +139,10 @@ function getAddTaskStructure() {
                             </div>
 
                             <div class="submitBtnContainer">
-                                <span class="submitBtn clearBtn hoverBtn">Clear
+                                <span class="submitBtn clearBtn hoverBtn" onclick="clearAddTask()">Clear
                                     <img class="submitIcons" src="./assets/img/cancelIcon.svg" alt="">
                                     <img class="submitIcons" src="./assets/img/cancelIconHover.svg" alt="">
                                 </span>
-                                <!-- <a href="">
-                                    <img class="submitBtn clearBtn" src="./assets/img/cancelIcon.svg" alt="">
-                                    <img class="submitBtn clearBtn" src="./assets/img/cancelIconHover.svg" alt="">
-                                </a>
-                                <a href="">
-                                    <img class="submitBtn addTaskBtn" src="./assets/img/addTaskIcon.svg" alt="">
-                                    <img class="submitBtn addTaskBtn" src="./assets/img/addTaskHover.svg" alt="">
-                                </a> -->
-
                                 <span class="submitBtn checkBtn hoverBtn" onclick="checkValidation()">Create Task
                                     <img class="submitIcons" src="./assets/img/createIcon.svg" alt="">
                                 </span>

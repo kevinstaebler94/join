@@ -477,3 +477,8 @@ ul {
 .iconDivider {
     color: #A8A8A8;
 }
+
+.ddListName {
+    max-height: 178px;
+    overflow-y: scroll;
+}

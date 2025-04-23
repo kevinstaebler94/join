@@ -198,8 +198,8 @@ async function deleteTask(loggedInUser, taskId) {
     closeModal();
 }
 
-async function deleteContact(loggedInUser, contactId) {
-    let path = '/users' + loggedInUser + '/contacts/' + contactId;
+async function deleteContact(contactId) {
+    let path = '/users/' + loggedInUser + '/contacts/' + contactId;
     deleteData(path);
 }
 

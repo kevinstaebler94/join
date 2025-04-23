@@ -21,6 +21,8 @@ function checkCheckbox(nameIndex) {
 
 function toggleOpen() {
     isOpen = !isOpen;
+    console.log(isOpen);
+    
 }
 
 function toggleDropdownName() {
@@ -38,6 +40,15 @@ function toggleDropdownName() {
     }
 }
 
+function closeDropdownName() {
+    let customDropdownName = document.getElementById('customDropdownName');
+    let dropdown = document.getElementById('dropdownListName');
+    let dropdownIcon = document.getElementById('dropdownIconName');
+    customDropdownName.classList.remove('activeBorder');
+    dropdown.classList.add('dNone');
+    dropdownIcon.classList.remove('rotate');
+}
+
 function toggleDropdownCategory() {
     let customDropdownCategory = document.getElementById('customDropdownCategory');
     let dropdown = document.getElementById('dropdownListCategory');
@@ -47,17 +58,17 @@ function toggleDropdownCategory() {
     dropdownIcon.classList.toggle('rotate');
 }
 
-function toggleAnimation(dropdown) {
-    if (dropdown.classList.contains("visible")) {
-        dropdown.classList.remove("visible");
-        setTimeout(() => {
-            dropdown.classList.add("hidden");
-        }, 300);
-    } else {
-        dropdown.classList.remove("hidden");
-        dropdown.classList.add("visible");
-    }
-}
+// function toggleAnimation(dropdown) {
+//     if (dropdown.classList.contains("visible")) {
+//         dropdown.classList.remove("visible");
+//         setTimeout(() => {
+//             dropdown.classList.add("hidden");
+//         }, 300);
+//     } else {
+//         dropdown.classList.remove("hidden");
+//         dropdown.classList.add("visible");
+//     }
+// }
 
 function selectPriority(priority) {
     let urgentBtn = document.getElementById('priorityUrgentBtn');
@@ -163,6 +174,30 @@ function showAddedBoardImg() {
     setTimeout(() => {
         window.location.href = "./board.html";;
     }, 3000);
+}
+
+function clearAddTask() {
+    let titleInput = document.getElementById('titleInput');
+    let descriptionInput = document.getElementById('taskDescription');
+    let dateInput = document.getElementById('dateInput');
+    let assignedContainer = document.getElementById('assignedContainer');
+    let subtaskInput = document.getElementById('subtaskInput');
+    let subtaskList = document.getElementById('subtaskList');
+    deleteTaskValues(titleInput, descriptionInput, dateInput, assignedContainer, subtaskInput, subtaskList)
+}
+
+function deleteTaskValues(titleInput, descriptionInput, dateInput, assignedContainer, subtaskInput, subtaskList) {
+    titleInput.value = '';
+    descriptionInput.value = '';
+    dateInput.value = '';
+    assignedContainer.innerHTML = '';
+    assignedArr = [];
+    subtaskInput.value = '';
+    subtaskList.innerHTML = '';
+    selectPriority('medium');
+    closeDropdownName();
+    selectCategory('Select category');
+    toggleDropdownCategory();
 }
 
 async function getContact() {
