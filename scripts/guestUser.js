@@ -1,52 +1,57 @@
 let tasks = [
     {
+        category: 'User Story',
         id: 'task-001',
-        title: 'Team Meeting vorbereiten',
-        description: 'Agenda für das wöchentliche Team Meeting erstellen und Teilnehmer einladen.',
+        title: 'Als Nutzer möchte ich mich registrieren können',
+        description: 'Ein Registrierungsformular mit Validierung implementieren, damit neue Nutzer ein Konto erstellen können.',
         date: '2025/04/15',
         prio: 'medium',
         contact: ['Anna Schmidt', 'Max Müller'],
-        subtask: ['Agenda schreiben', 'Meeting-Link erstellen', 'Teilnehmer einladen'],
+        subtask: ['Formular mit Feldern erstellen', 'Clientseitige Validierung hinzufügen', 'API-Endpunkt zur Registrierung integrieren'],
         column: 'inProgress'
     },
     {
+        category: 'User Story',
         id: 'task-002',
-        title: 'Kundendaten aktualisieren',
-        description: 'Die aktuellen Kundendaten in der Datenbank prüfen und fehlende Infos ergänzen.',
+        title: 'Als Admin möchte ich alle Nutzer sehen',
+        description: 'Eine Übersicht aller registrierten Nutzer im Admin-Panel anzeigen lassen.',
         date: '2025/04/16',
         prio: 'medium',
         contact: ['Lukas Weber'],
-        subtask: ['Adresse prüfen', 'Telefonnummern ergänzen'],
+        subtask: ['Backend-Route erstellen', 'Daten abrufen und formatieren', 'Tabelle mit Nutzerdaten im Frontend anzeigen'],
         column: 'done'
     },
     {
+        category: 'User Story',
         id: 'task-003',
-        title: 'Landingpage finalisieren',
-        description: 'Die letzte Review-Runde der neuen Landingpage durchführen und Feedback einarbeiten.',
+        title: 'Als Nutzer möchte ich die Landingpage auf dem Handy sehen',
+        description: 'Die Landingpage für mobile Geräte optimieren.',
         date: '2025/04/18',
         prio: 'medium',
         contact: ['Clara Meier', 'Ben Fischer'],
-        subtask: ['Feedback einholen', 'Bilder anpassen', 'Responsive Design testen'],
+        subtask: ['Responsives Layout mit CSS anpassen', 'Mobile Tests mit DevTools', 'Feedback vom Team einholen'],
         column: 'awaitFeedback'
     },
     {
+        category: 'User Story',
         id: 'task-004',
-        title: 'Social Media Plan erstellen',
-        description: 'Content-Plan für den kommenden Monat vorbereiten und Posts terminieren.',
+        title: 'Als Entwickler möchte ich einen sauberen Branch-Workflow nutzen',
+        description: 'Dokumentation zum Git-Workflow für das Team bereitstellen und Prozesse vereinheitlichen.',
         date: '2025/04/20',
         prio: 'low',
         contact: ['Marie Jung'],
-        subtask: ['Kalender anlegen', 'Contentideen sammeln', 'Post-Zeiten planen'],
+        subtask: ['Branching-Strategie dokumentieren', 'Pull-Request-Template erstellen', 'Team informieren'],
         column: 'toDo'
     },
     {
+        category: 'Technical Task',
         id: 'task-005',
-        title: 'Fehler im Backend beheben',
-        description: 'Das Problem mit der Benutzerregistrierung im Backend analysieren und fixen.',
+        title: 'Bug: Registrierung schlägt fehl bei ungültiger E-Mail',
+        description: 'Fehlerhafte Validierung im Backend bei ungültiger E-Mail-Adresse beheben.',
         date: '2025/04/21',
         prio: 'urgent',
         contact: ['Tobias König'],
-        subtask: ['Fehler lokalisieren', 'Bug fixen', 'Tests durchführen'],
+        subtask: ['Fehler im Validator analysieren', 'Testfälle anpassen', 'Fix implementieren und testen'],
         column: 'inProgress'
     }
 ];
