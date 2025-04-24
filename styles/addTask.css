@@ -297,13 +297,33 @@ h1 {
 
 .ddListName {
     max-height: 197px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.3) transparent;
 }
+
+.ddListName::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ddListName::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+}
+
+.ddListName::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
 
 .listContainer {
     position: relative;
     z-index: 0;
-    top: -8px;
+    top: -14px;
+    width: 100%;
 }
 
 .dropdownList li {

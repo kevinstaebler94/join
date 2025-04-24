@@ -93,14 +93,14 @@ function getAddTaskStructure() {
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
-                                        <div class="listContainer">
+                                    </label>
+                                    <div class="listContainer">
                                             <ul class="dropdownList ddListName dNone" id="dropdownListName">
                                                 <span class="puffer"></span>
                                                 <span id="listElements"></span>
                                             </ul>
                                         </div>
                                         <div id="assignedContainer" class="assignedContainer"></div>
-                                    </label>
                                     <label class="directionColumn customSelectWrapper">
                                         <div class="dFlex">
                                             <p>Category</p>

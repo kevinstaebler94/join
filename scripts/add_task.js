@@ -230,6 +230,7 @@ function checkAssignedContact(checkboxElement) {
             assignedArr.splice(index, 1);
         }
     }
+    
     assignedContainer.innerHTML = '';
     assignedArr.forEach(contact => {
         assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
