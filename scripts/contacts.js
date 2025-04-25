@@ -86,7 +86,12 @@ async function openContactById(contactId) {
     initialsContainer.innerHTML = initials;
     initialsContainer.style.backgroundColor = color;
     initialsContainer.style.color = "white";
-    userNameDeleteContainer.innerHTML = `<span onclick="deleteContact('${contactId}')">Delete</span>`;
+    userNameDeleteContainer.innerHTML = `
+    <div class="userNameDeleteIconContainer">
+    <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
+    <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
+    </div>
+    <span onclick="deleteContact('${contactId}')">Delete</span>`;
 
     currentContactId = adjustEmail(contact.email);
 
