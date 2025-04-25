@@ -1,9 +1,10 @@
-let names = ["Oliver", "Daniel", "Kevin"]
+async function greetingByName() {
+    console.log("greetingByName wurde aufgerufen");
 
-function greetingByName() {
-    let randomName = names[Math.floor(Math.random() * names.length)];
+    let nameData = await getData('/users/' + loggedInUser + '/name');
+    if (!nameData) return;
 
-    document.getElementById("userName").textContent = randomName;
+    document.getElementById("userName").textContent = nameData;
 }
 
 function updateGreeting() {
