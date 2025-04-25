@@ -1,11 +1,13 @@
-<header>
+<header onload="showUserInitials()">
     <div class="headerContent">
         <div class="headerText">
             <h3>Kanban Project Management Tool</h3>
         </div>
         <div class="headerLinks">
             <a href="./help.html"><img src="assets/img/help.svg" alt="?-Logo"></a>
-            <div onclick="showBurgerMenu()" id="userIcon" class="userIcon"><img src="" alt="">G</div>
+            <div onclick="showBurgerMenu()" id="userIcon" class="userIcon">
+                <div id="userIconInitials">G</div>
+            </div>
             <div id="burgerMenu" class="burgerMenu">
                 <a href="../../legal_notice.html">Legal Notice</a>
                 <a href="../../privacy_policy.html">Privacy Policy</a>

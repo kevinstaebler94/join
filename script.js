@@ -16,9 +16,10 @@ async function init() {
     } else {
         includeHTML();
     }
+    showUserInitials();
 }
 
-function getLogin() {  
+function getLogin() {
     initLogin();
 }
 
