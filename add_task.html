@@ -23,7 +23,7 @@
         <div w3-include-html="./assets/templates/sidebar.html"></div>
         <div class="includeHeader">
             <div class="templateHTML" w3-include-html="./assets/templates/header.html"></div>
-            
+
             <main>
                 <div class="contentWrapper">
                     <img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
@@ -71,8 +71,8 @@
                                                 class="priorityBtn priorityMediumBtn activeMediumBtn">Medium<img
                                                     id="mediumIcon" class="priorityIconMedium dNone"
                                                     src="./assets/img/prioMedium.svg" alt=""><img id="mediumIconWhite"
-                                                    class="priorityIconWhite"
-                                                    src="./assets/img/prioMediumWhite.svg" alt=""></span>
+                                                    class="priorityIconWhite" src="./assets/img/prioMediumWhite.svg"
+                                                    alt=""></span>
                                             <span onclick="selectPriority('low')" id="priorityLowBtn"
                                                 class="priorityBtn hoverBtn">Low<img id="lowIcon" class="priorityIcon"
                                                     src="./assets/img/prioLow.svg" alt=""><img id="lowIconWhite"
@@ -89,14 +89,15 @@
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
-                                        <div class="listContainer">
-                                            <ul class="dropdownList ddListName dNone" id="dropdownListName">
-                                                <span class="puffer"></span>
-                                                <span id="listElements"></span>
-                                            </ul>
-                                        </div>
-                                        <div id="assignedContainer" class="assignedContainer"></div>
                                     </label>
+                                    <div id="listContainer" class="listContainer dNone">
+                                        <ul class="dropdownList ddListName dNone" id="dropdownListName">
+                                            <span class="puffer"></span>
+                                            <span id="listElements"></span>
+                                        </ul>
+                                    </div>
+                                    <div id="assignedContainer" class="assignedContainer dNone"></div>
+
                                     <label class="directionColumn customSelectWrapper">
                                         <div class="dFlex">
                                             <p>Category</p>
@@ -121,11 +122,13 @@
                                         </div>
                                     </label>
                                     <label class="directionColumn">Subtasks
-                                        <input id="subtaskInput" class="inputFields" type="text" placeholder="Add new subtask">
-                                        <img onclick="getSubtask()" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                        <input id="subtaskInput" class="inputFields" type="text"
+                                            placeholder="Add new subtask">
+                                        <img onclick="getSubtask()" class="plusIcon" src="./assets/img/plusIcon.svg"
+                                            alt="plus-icon">
                                         <ul id="subtaskList" class="subtaskList"></ul>
                                     </label>
-                                    
+
                                 </form>
                             </div>
                         </div>

@@ -113,6 +113,7 @@ function pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId) {
 async function pushGuestTasks(taskObj, guestUser) {
     let path = '/users/' + guestUser + '/tasks';
     let userData = ({
+        category: taskObj.category,
         id: taskObj.id,
         title: taskObj.title,
         description: taskObj.description,

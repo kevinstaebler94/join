@@ -93,14 +93,14 @@ function getAddTaskStructure() {
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
-                                        <div class="listContainer">
+                                    </label>
+                                    <div class="listContainer">
                                             <ul class="dropdownList ddListName dNone" id="dropdownListName">
                                                 <span class="puffer"></span>
                                                 <span id="listElements"></span>
                                             </ul>
                                         </div>
                                         <div id="assignedContainer" class="assignedContainer"></div>
-                                    </label>
                                     <label class="directionColumn customSelectWrapper">
                                         <div class="dFlex">
                                             <p>Category</p>
@@ -114,7 +114,7 @@ function getAddTaskStructure() {
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
-                                        <div class="listContainer">
+                                        <div id="listContainer" class="listContainer dNone">
                                             <ul class="dropdownList dNone" id="dropdownListCategory">
                                                 <span class="puffer"></span>
                                                 <li class="listElement" onclick="selectCategory('Technical Task')">
@@ -149,13 +149,12 @@ function getAddTaskStructure() {
                             </div>
                         </div>
                     </div>`;
+    selectPriority('medium')
 }
 
 function getFilledStructure(taskId, category, title, description, date, priority, subtaskObj, encodedContacts) {
     let filledTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(subtaskObj));
-    console.log(subtasks);
-    
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
     filledTaskModal.innerHTML = `<img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
                                 <div id="filledTask1" class="filledTaskModal marginBottom">
@@ -185,8 +184,8 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                     </div>
                                 </div>
                             </div>`;
-                            
-                            
+
+
     getContactsModal(contacts);
     getSubtasksModal(subtasks);
 }
@@ -297,12 +296,12 @@ function getContactsEdit(contacts) {
 
 async function getSubtasksModal(subtasks) {
     let mySubtask = subtasks.subtask;
-    let subObj = Object.values(mySubtask);
+    let subObj = Object.values(mySubtask || {});
     let serializedSubtasks = encodeURIComponent(JSON.stringify(subtasks));
-    
+
     subObj.forEach(subtask => {
         console.log(subtask.subtask);
-        
+
         let subtaskContainer = document.getElementById('subtaskContainerModal');
         subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtask.subtask}" type="checkbox" onchange="handleCheckbox('${serializedSubtasks}')"><p>${subtask.subtask}</p></div>`;
     });

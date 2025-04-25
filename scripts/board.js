@@ -16,11 +16,8 @@ async function renderTasks() {
       const targetId = task.column;
       const target = document.getElementById(targetId);
       let taskComponents = getTaskComponents(task);
-
-      // target.innerHTML += generateFilledTaskHTML(task);
       target.innerHTML += filledTaskTemplate(taskComponents, task)
     })
-    // return ;
   }
   columns.forEach(id => {
     const column = document.getElementById(id);
@@ -50,22 +47,31 @@ function filledTaskTemplate(taskComponents, task) {
   let contactData = taskComponents.contact ? taskComponents.contact : [];
   let serializedSubtasks = encodeURIComponent(JSON.stringify(task));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
-  let initial = convertNameToInitial(contactData);
+  let initials = convertNameToInitial(contactData);
+  let doneCount = 0; 
+  
 
+  for (let index = 0; index < subtaskData.length; index++) {
+    const element = subtaskData[index];
+    if (element.done) {
+      doneCount++; 
+    }
+  }
+  
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
       <h4 class="taskTitle">${taskComponents.title}</h4>
       <p class="taskDescription">${taskComponents.description}</p>
       <div class="subtasksContainer">
-        <div class="progressBarContainer">
+        <div id="progressBarContainer" class="progressBarContainer">
           <div id="progressBar" class="progressBar"></div>  
         </div>
-        <span class="subtaskInfo"></span>
+        <span class="subtaskInfo">${doneCount}/${subtaskData.length}</span>
       </div>
       <div class="assignedToContainer">
         <div class="assignedUsers">
-          <span id="assignedUser" class="assignedUser">${initial}</span>
+          <span id="assignedUser" class="assignedUser">${initials}</span>
         </div>
         <img src="/assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
       </div>
@@ -166,10 +172,11 @@ function convertNameToInitial(contactData) {
   )
 }
 
-function handleCheckbox(encodedSubtasks) {
+async function handleCheckbox(encodedSubtasks) {
   let subtask = JSON.parse(decodeURIComponent(encodedSubtasks));
   let taskId = subtask.id;
   let done;
+  
   for (let subtaskIndex = 0; subtaskIndex < subtask.subtask.length; subtaskIndex++) {
     let currentSubtask = subtask.subtask[subtaskIndex].subtask;
     let checkbox = document.getElementById(currentSubtask);

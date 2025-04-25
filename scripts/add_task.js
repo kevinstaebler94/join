@@ -21,8 +21,6 @@ function checkCheckbox(nameIndex) {
 
 function toggleOpen() {
     isOpen = !isOpen;
-    console.log(isOpen);
-    
 }
 
 function toggleDropdownName() {
@@ -30,12 +28,14 @@ function toggleDropdownName() {
     let customDropdownName = document.getElementById('customDropdownName');
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
+    let listContainer = document.getElementById('listContainer');
+    let assignedContainer = document.getElementById('assignedContainer');
     customDropdownName.classList.add('activeBorder');
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
-
+    listContainer.classList.toggle('dNone');
+    assignedContainer.classList.toggle('dNone');
     if (isOpen) {
-        
         getContact();
     }
 }
@@ -57,18 +57,6 @@ function toggleDropdownCategory() {
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
 }
-
-// function toggleAnimation(dropdown) {
-//     if (dropdown.classList.contains("visible")) {
-//         dropdown.classList.remove("visible");
-//         setTimeout(() => {
-//             dropdown.classList.add("hidden");
-//         }, 300);
-//     } else {
-//         dropdown.classList.remove("hidden");
-//         dropdown.classList.add("visible");
-//     }
-// }
 
 function selectPriority(priority) {
     let urgentBtn = document.getElementById('priorityUrgentBtn');
@@ -230,6 +218,7 @@ function checkAssignedContact(checkboxElement) {
             assignedArr.splice(index, 1);
         }
     }
+    
     assignedContainer.innerHTML = '';
     assignedArr.forEach(contact => {
         assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
