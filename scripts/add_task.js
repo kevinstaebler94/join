@@ -29,14 +29,30 @@ function toggleDropdownName() {
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
     let listContainer = document.getElementById('listContainer');
-    let assignedContainer = document.getElementById('assignedContainer');
     customDropdownName.classList.add('activeBorder');
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
     listContainer.classList.toggle('dNone');
-    assignedContainer.classList.toggle('dNone');
     if (isOpen) {
         getContact();
+    }
+}
+
+function toggleDropdownNameEdit(encodedContacts) {
+    let contacts = JSON.parse(decodeURIComponent(encodedContacts));
+    console.log(contacts);
+    
+    toggleOpen();
+    let customDropdownName = document.getElementById('customDropdownName');
+    let dropdown = document.getElementById('dropdownListName');
+    let dropdownIcon = document.getElementById('dropdownIconName');
+    let listContainer = document.getElementById('listContainer');
+    customDropdownName.classList.add('activeBorder');
+    dropdown.classList.toggle('dNone');
+    dropdownIcon.classList.toggle('rotate');
+    listContainer.classList.toggle('dNone');
+    if (isOpen) {
+        getContactEdit(contacts);
     }
 }
 
@@ -189,22 +205,42 @@ function deleteTaskValues(titleInput, descriptionInput, dateInput, assignedConta
 }
 
 async function getContact() {
-    
     let contacts = await getData("/users/" +loggedInUser + "/contacts");
     let dropdownListName = document.getElementById('dropdownListName');
     dropdownListName.innerHTML = '';
     for (let key in contacts) {
-        
         let isChecked = assignedArr.includes(contacts[key].name) ? 'checked' : '';
         if (contacts.hasOwnProperty(key)) {
             contactArr.push(contacts[key])
         }
         dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
                                         <p id="${contacts[key].name}">${contacts[key].name}</p>
-                                        <input onclick="checkAssignedContact(this)" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}" ${isChecked}>
+                                        <input onclick="checkAssignedContact(this)" id="${contacts[key].name}" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}" ${isChecked}>
                                     </li></label>`;
     }
+}
 
+async function getContactEdit(assignedContacts) {
+    let contacts = await getData("/users/" +loggedInUser + "/contacts");
+    let dropdownListName = document.getElementById('dropdownListName');    
+    dropdownListName.innerHTML = '';
+    pushAssignedContacts(assignedContacts);
+    for (let key in contacts) {
+        let isChecked = assignedArr.includes(contacts[key].name) ? 'checked' : '';
+        if (contacts.hasOwnProperty(key)) {
+            contactArr.push(contacts[key])
+        }
+        dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
+                                        <p id="${contacts[key].name}">${contacts[key].name}</p>
+                                        <input onclick="checkAssignedContactEdit(this)" id="${contacts[key].name}" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}" ${isChecked}>
+                                    </li></label>`;
+    }
+}
+
+function pushAssignedContacts(assignedContacts) {
+    assignedContacts.forEach(assignedContact => {
+        assignedArr.push(assignedContact);
+    });
 }
 
 function checkAssignedContact(checkboxElement) {
@@ -217,8 +253,24 @@ function checkAssignedContact(checkboxElement) {
         if (index > -1) {
             assignedArr.splice(index, 1);
         }
-    }
-    
+    } 
+    assignedContainer.innerHTML = '';
+    assignedArr.forEach(contact => {
+        assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
+    });
+}
+
+function checkAssignedContactEdit(checkboxElement) {
+    let assignedContainer = document.getElementById('assignedContainer');
+    let checkedName = checkboxElement.dataset.name;
+    let index = assignedArr.indexOf(checkedName);
+    if (checkboxElement.checked) {
+        assignedArr.push(checkedName);
+    } else {
+        if (index > -1) {
+            assignedArr.splice(index, 1);
+        }
+    } 
     assignedContainer.innerHTML = '';
     assignedArr.forEach(contact => {
         assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;

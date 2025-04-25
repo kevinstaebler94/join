@@ -194,6 +194,8 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
+    console.log(description);
+
     editTaskModal.innerHTML = `<div class="mainEditContent">
                         <div class="editHeadSection">
                             <div class="closeIconContainer">
@@ -213,7 +215,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                     </label>
                                     <label class="directionColumn">Description
                                         <textarea class="inputFields textArea resizeIcon" name="description"
-                                            id="taskDescriptionEdit" value="${description}"></textarea>
+                                            id="taskDescriptionEdit" >${description}</textarea>
                                     </label>
                                     <label class="directionColumn">
                                         <div class="dFlex">
@@ -230,18 +232,18 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                 <form class="rightAddTaskForm" action="">
                                     <label class="directionColumn maxWidth">Priority
                                         <div class="btnContainer flexOne">
-                                            <span onclick="selectPriority('urgent')" id="priorityUrgentBtnEdit"
+                                            <span onclick="selectPriority('urgent')" id="priorityUrgentBtn"
                                                 class="priorityBtn hoverBtn">Urgent<img id="urgentIcon"
                                                     class="priorityIcon" src="./assets/img/prioUrgent.svg" alt=""><img
                                                     id="urgentIconWhite" class="priorityIconWhite dNone"
                                                     src="./assets/img/prioUrgentWhite.svg" alt=""></span>
-                                            <span onclick="selectPriority('medium')" id="priorityMediumBtnEdit"
+                                            <span onclick="selectPriority('medium')" id="priorityMediumBtn"
                                                 class="priorityBtn priorityMediumBtn hoverBtn">Medium<img
                                                     id="mediumIcon" class="priorityIconMedium"
                                                     src="./assets/img/prioMedium.svg" alt=""><img id="mediumIconWhite"
                                                     class="priorityIconWhite dNone"
                                                     src="./assets/img/prioMediumWhite.svg" alt=""></span>
-                                            <span onclick="selectPriority('low')" id="priorityLowBtnEdit"
+                                            <span onclick="selectPriority('low')" id="priorityLowBtn"
                                                 class="priorityBtn hoverBtn">Low<img id="lowIcon" class="priorityIcon"
                                                     src="./assets/img/prioLow.svg" alt=""><img id="lowIconWhite"
                                                     class="priorityIconWhite dNone" src="./assets/img/prioLowWhite.svg"
@@ -249,22 +251,22 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                         </div>
                                     </label>
                                     <label class="directionColumn customSelectWrapper">Assigned to
-                                        <div id="customDropdownNameEdit" class="customDropdown"
-                                            onclick="toggleDropdownNameEdit()">
+                                        <div id="customDropdownName" class="customDropdown"
+                                            onclick="toggleDropdownNameEdit('${encodedContacts}')">
                                             <div class="dropdownHeader">
-                                                <span id="selectedNameEdit">Assigned to</span>
-                                                <img id="dropdownIconNameEdit" class="dropdownIcon"
+                                                <span id="selectedName">Assigned to</span>
+                                                <img id="dropdownIconName" class="dropdownIcon"
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
-                                        <div class="listContainer">
-                                            <ul class="dropdownList dNone" id="dropdownListName">
-                                                <span class="puffer"></span>
-                                                <span id="listElementsEdit"></span>
-                                            </ul>
-                                        </div>
-                                        <div id="assignedContainerEdit" class="assignedContainer"></div>
                                     </label>
+                                    <div id="listContainer" class="listContainer dNone">
+                                        <ul class="dropdownList ddListName dNone" id="dropdownListName">
+                                            <span class="puffer"></span>
+                                            <span id="listElements"></span>
+                                        </ul>
+                                    </div>
+                                    <div id="assignedContainer" class="assignedContainer dNone"></div>
                                     <label class="directionColumn">Subtasks
                                         <input class="inputFields" type="text" placeholder="Add new subtask">
                                         <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
@@ -275,6 +277,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                             </div>
                         </div>
                     </div>`;
+    selectPriority(priority);
     getContactsEdit(contacts);
     getSubtaskEdit(subtasks);
 }
@@ -286,9 +289,10 @@ async function getContactsModal(contacts) {
     });
 }
 
-function getContactsEdit(contacts) {
+function getContactsEdit(contacts) {    
     contacts.forEach(contact => {
-        let assignetContainer = document.getElementById('assignedContainerEdit');
+        let assignetContainer = document.getElementById('assignedContainer');
+        
         assignetContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
     });
 }
@@ -308,11 +312,11 @@ async function getSubtasksModal(subtasks) {
 }
 
 function getSubtaskEdit(subtasks) {
-    subtasks.forEach(subtask => {
+    subtasks.subtask.forEach(subtask => {
         let subtaskList = document.getElementById('subtaskListEdit');
         subtaskList.innerHTML += `<li>
                                     <div class="subtaskListElement">
-                                        <span class="liText"><p class="liMarker"></p>${subtask}</span>
+                                        <span class="liText"><p class="liMarker"></p>${subtask.subtask}</span>
                                         <span class="iconContainer">
                                             <img class="editIcons" src="./assets/img/edit.svg" alt="">
                                             <span class="iconDivider">|</span>
