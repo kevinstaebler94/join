@@ -267,9 +267,11 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                         </ul>
                                     </div>
                                     <div id="assignedContainer" class="assignedContainer dNone"></div>
-                                    <label class="directionColumn">Subtasks
-                                        <input class="inputFields" type="text" placeholder="Add new subtask">
-                                        <img class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                    <label id="subtaskLabel" class="directionColumn">Subtasks
+                                        <input onfocus="addNewSubtask()" onblur="resetSubtaskIcons()" class="inputFields" type="text" placeholder="Add new subtask">
+                                        <span id="inputIconContainer">
+                                            <img id="plusIcon" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                        </span>
                                         <ul id="subtaskListEdit" class="subtaskListEdit"></ul>
                                     </label>
                                 </form>
@@ -289,10 +291,10 @@ async function getContactsModal(contacts) {
     });
 }
 
-function getContactsEdit(contacts) {    
+function getContactsEdit(contacts) {
     contacts.forEach(contact => {
         let assignetContainer = document.getElementById('assignedContainer');
-        
+
         assignetContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
     });
 }
@@ -315,16 +317,64 @@ function getSubtaskEdit(subtasks) {
     subtasks.subtask.forEach(subtask => {
         let subtaskList = document.getElementById('subtaskListEdit');
         subtaskList.innerHTML += `<li>
-                                    <div class="subtaskListElement">
-                                        <span class="liText"><p class="liMarker"></p>${subtask.subtask}</span>
-                                        <span class="iconContainer">
-                                            <img class="editIcons" src="./assets/img/edit.svg" alt="">
+                                    <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
+                                        <span id="subtaskElement${subtask.subtask}" class="liText"><p class="liMarker"></p>${subtask.subtask}</span>
+                                        <span id="editIconContainer" class="iconContainer dNone">
+                                            <img  class="editIcons" onclick="editSubtask('${subtask.subtask}')" src="./assets/img/edit.svg" alt="">
                                             <span class="iconDivider">|</span>
-                                            <img class="editIcons" src="./assets/img/delete.svg" alt="">
+                                            <img id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
                                         </span>
                                     </div>
                                 </li>`;
     });
+}
+
+function showEditIcons(element) {
+    let iconContainer = element.querySelector('.iconContainer');
+    iconContainer.classList.remove('dNone');
+}
+
+function hideEditIcons(element) {
+    let iconContainer = element.querySelector('.iconContainer');
+    iconContainer.classList.add('dNone');
+}
+
+function addNewSubtask() {
+    let inputIconContainer = document.getElementById('inputIconContainer');
+    let plusIcon = document.getElementById('plusIcon');
+    inputIconContainer.classList.add('inputIconContainer');
+    plusIcon.classList.remove('plusIcon');
+    inputIconContainer.innerHTML = `<img id="plusIcon" class="editIcons" src="./assets/img/cancel.svg" alt="plus-icon">
+                                    <span class="iconDivider">|</span>
+                                    <img id="deleteIcon" class="editIcons" src="./assets/img/done.svg" alt="">`;
+
+
+}
+
+function resetSubtaskIcons() {
+    let inputIconContainer = document.getElementById('inputIconContainer');
+    let plusIcon = document.getElementById('plusIcon');
+    inputIconContainer.classList.remove('inputIconContainer');
+    plusIcon.classList.add('plusIcon');
+    inputIconContainer.innerHTML = `
+        <img id="plusIcon" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+    `;
+}
+
+function editSubtask(subtaskId) {
+    let subtaskElement = document.getElementById('subtaskElement' + subtaskId);
+    let editIcons = document.getElementById('editIconContainer');
+    subtaskElement.innerHTML = `<li>
+                                    <div class="subtaskListElement">
+                                        <input value="${subtaskId}">
+                                    </div>
+                                </li>`;
+    editIcons.innerHTML = `<span id="editIconContainer" class="iconContainer">
+                                            <img class="editIcons" onclick="editSubtask()" src="./assets/img/delete.svg" alt="">
+                                            <span class="iconDivider">|</span>
+                                            <img class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
+                                        </span>`;
+
 }
 
 function toggleDropdownNameEdit() {

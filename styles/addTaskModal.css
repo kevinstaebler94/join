@@ -466,12 +466,26 @@ ul {
     gap: 6px;
 }
 
+.inputIconContainer {
+    position: relative;
+    left: 290px;
+    bottom: 27px;
+}
+
 .editIcons {
     width: 16px;
 }
 
+.doneIcon {
+    width: 24px;
+}
+
 .editIcons:hover {
     width: 15px;
+}
+
+.doneIcon:hover {
+    width: 22px;
 }
 
 .iconDivider {
