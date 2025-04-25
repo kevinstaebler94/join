@@ -19,7 +19,7 @@ window.onclick = function (event) {
     // console.log("Clicked Element:", event.target); // Zeigt an, worauf geklickt wurde
     // console.log("Checkbox Status vor Klick:", document.querySelector(".checkbox")?.checked);
 
-    if (menu.classList.contains("show") && event.target !== menu && event.target !== userIcon) {
+    if (menu.classList.contains("show") && !menu.contains(event.target) && !userIcon.contains(event.target)) {
         menu.classList.remove("show");
     }
 
