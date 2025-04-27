@@ -16,7 +16,6 @@ async function init() {
     } else {
         includeHTML();
     }
-    showUserInitials();
 }
 
 function getLogin() {
@@ -51,6 +50,7 @@ async function getLoggedInUser() {
             }
         }
     }
+    showUserInitials();
 }
 
 async function logoutUser() {
