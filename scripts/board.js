@@ -49,6 +49,7 @@ function filledTaskTemplate(taskComponents, task) {
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initials = convertNameToInitial(contactData);
   let doneCount = 0; 
+  console.log("Task", task);
   
 
   for (let index = 0; index < subtaskData.length; index++) {
@@ -183,9 +184,17 @@ async function handleCheckbox(encodedSubtasks) {
     let isChecked = checkbox.checked;
     if (isChecked) {
       done = true;
+      renderTasks();
     } else {
       done = false;
+      renderTasks();
     }
     pushSubtasks(loggedInUser, taskId, done, currentSubtask, [subtaskIndex]);
+    showProgressbar(encodedSubtasks);
   }
+}
+
+function showProgressbar(encodedSubtasks) {
+  let subtask = JSON.parse(decodeURIComponent(encodedSubtasks));
+  let progressBar = document.getElementById("subtasksContainer");
 }
