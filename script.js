@@ -27,6 +27,8 @@ function getSummary() {
     updateGreeting();
     greetingByName();
     showDate();
+    getToDoTasksCounter();
+    getDoneTasksCounter();
 }
 
 function getBoard() {

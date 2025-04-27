@@ -30,3 +30,37 @@ function showDate() {
     let formattedDate = date.toLocaleDateString('en-US', options);
     document.getElementById('date').innerHTML = formattedDate;
 }
+
+async function getToDoTasksCounter() {
+    console.log("getToDoTasksCounter wurde aufgerufen");
+
+    let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
+    if (!tasksData) return;
+
+    let toDoCount = 0;
+
+    for (let key in tasksData) {
+        if (tasksData[key].column === "toDo") {
+            toDoCount++;
+        }
+    }
+
+    document.getElementById("toDoTasksCounter").textContent = toDoCount;
+}
+
+async function getDoneTasksCounter() {
+    console.log("getDoneTasksCounter wurde aufgerufen");
+
+    let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
+    if (!tasksData) return;
+
+    let doneCount = 0;
+
+    for (let key in tasksData) {
+        if (tasksData[key].column === "Done") {
+            doneCount++;
+        }
+    }
+
+    document.getElementById("doneTasksCounter").textContent = doneCount;
+}
