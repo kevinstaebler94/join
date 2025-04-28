@@ -71,3 +71,24 @@ async function logoutUser() {
     await changeUsers(userId, email, password, name, login, tasks, contacts);
     window.location.href = "login.html";
 }
+
+async function showUserInitials() {
+    console.log("showUserInitials wurde aufgerufen");
+    let userName = await getData('/users/' + loggedInUser + '/name');
+    if (!userName) return;
+
+    let initials = getInitials(userName);
+    let initialsContainer = document.getElementById("userIconInitials");
+
+    if (initialsContainer) {
+        initialsContainer.textContent = initials;
+    }
+}
+
+function getInitials(name) {
+    return name
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .toUpperCase();
+}
