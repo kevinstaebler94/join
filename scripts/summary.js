@@ -79,7 +79,7 @@ async function getFeedbackCounter() {
         }
     }
 
-    document.getElementById("doneFeedbackCounter").textContent = feedbackCount;
+    document.getElementById("feedbackCounter").textContent = feedbackCount;
 }
 
 async function getInProgressCounter() {
@@ -96,5 +96,23 @@ async function getInProgressCounter() {
         }
     }
 
-    document.getElementById("doneTasksCounter").textContent = inProgressCount;
+    document.getElementById("inProgressCounter").textContent = inProgressCount;
+}
+
+async function getInBoardCounter() {
+    let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
+    if (!tasksData) return;
+
+    let inBoardCount = 0;
+
+    for (let key in tasksData) {
+        if (tasksData[key].column === "toDo" ||
+            tasksData[key].column === "done" ||
+            tasksData[key].column === "awaitFeedback" ||
+            tasksData[key].column === "inProgress") {
+            inBoardCount++;
+        }
+    }
+
+    document.getElementById("inBoardCounter").textContent = inBoardCount;
 }

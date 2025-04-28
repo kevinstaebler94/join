@@ -31,6 +31,7 @@ function getSummary() {
     getDoneTasksCounter();
     getFeedbackCounter();
     getInProgressCounter();
+    getInBoardCounter();
 }
 
 function getBoard() {
