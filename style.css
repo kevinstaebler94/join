@@ -1,7 +1,8 @@
 @font-face {
     font-family: "Inter";
-    src: url("/assets/fonts/Inter-VariableFont_opsz\,wght.ttf") format('truetype');
-}
+    src: url("./assets/fonts/inter.woff2") format('woff2');
+    font-display: swap;
+  }
 
 * {
     margin: 0;
