@@ -159,13 +159,16 @@ function checkValidation() {
     let titleInput = document.getElementById('titleInput');
     let requiredTitle = document.getElementById('requiredTitle');
     let dateInput = document.getElementById('dateInput');
-    let requiredDate = document.getElementById('requiredDate');    
+    let requiredDate = document.getElementById('requiredDate');
+    let selectedCategory = document.getElementById('selectedCategory');    
     if (titleInput.value == '') {
         titleInput.classList.add('required');
         requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
     } else if (dateInput.value.length < 10) {
         dateInput.classList.add('required');
         requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
+    } else if (selectedCategory.innerHTML == 'Select category') {
+        titleInput.classList.add('required');
     } else {
         pushTasks(loggedInUser, assignedArr);
         showAddedBoardImg();
