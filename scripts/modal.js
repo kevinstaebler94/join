@@ -309,7 +309,8 @@ async function getSubtasksModal(subtasks) {
         console.log(subtask.subtask);
 
         let subtaskContainer = document.getElementById('subtaskContainerModal');
-        subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtask.subtask}" type="checkbox" onchange="handleCheckbox('${serializedSubtasks}')"><p>${subtask.subtask}</p></div>`;
+        let isChecked = subtask.done ? 'checked' : '';
+        subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtask.subtask}" type="checkbox" ${isChecked} onchange="handleCheckbox('${serializedSubtasks}')"><p>${subtask.subtask}</p></div>`;
     });
 }
 
