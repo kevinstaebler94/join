@@ -46,7 +46,7 @@ async function verifyLogin() {
     userData[formattedEmail].password === password
   ) {
     login = true;
-    await changeUsers(formattedEmail, userData[formattedEmail].email, userData[formattedEmail].password, userData[formattedEmail].name, login, userData[formattedEmail].tasks);
+    await changeUsers(formattedEmail, userData[formattedEmail].email, userData[formattedEmail].password, userData[formattedEmail].name, login, userData[formattedEmail].tasks, userData[formattedEmail].contacts);
     console.log(userData[formattedEmail]);
     
     window.location.href = "summary.html";

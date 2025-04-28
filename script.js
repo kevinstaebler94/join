@@ -66,7 +66,8 @@ async function logoutUser() {
     let name = userData.name;
     let login = userData.login;
     let tasks = userData.tasks;
+    let contacts = userData.contacts;
     login = false;
-    await changeUsers(userId, email, password, name, login, tasks);
+    await changeUsers(userId, email, password, name, login, tasks, contacts);
     window.location.href = "login.html";
 }
