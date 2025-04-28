@@ -29,6 +29,8 @@ function getSummary() {
     showDate();
     getToDoTasksCounter();
     getDoneTasksCounter();
+    getFeedbackCounter();
+    getInProgressCounter();
 }
 
 function getBoard() {

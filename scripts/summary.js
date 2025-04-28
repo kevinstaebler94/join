@@ -57,10 +57,44 @@ async function getDoneTasksCounter() {
     let doneCount = 0;
 
     for (let key in tasksData) {
-        if (tasksData[key].column === "Done") {
+        if (tasksData[key].column === "done") {
             doneCount++;
         }
     }
 
     document.getElementById("doneTasksCounter").textContent = doneCount;
+}
+
+async function getFeedbackCounter() {
+    console.log("getFeedbackCounter wurde aufgerufen");
+
+    let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
+    if (!tasksData) return;
+
+    let feedbackCount = 0;
+
+    for (let key in tasksData) {
+        if (tasksData[key].column === "awaitFeedback") {
+            feedbackCount++;
+        }
+    }
+
+    document.getElementById("doneFeedbackCounter").textContent = feedbackCount;
+}
+
+async function getInProgressCounter() {
+    console.log("getInProgressCounter wurde aufgerufen");
+
+    let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
+    if (!tasksData) return;
+
+    let inProgressCount = 0;
+
+    for (let key in tasksData) {
+        if (tasksData[key].column === "inProgress") {
+            inProgressCount++;
+        }
+    }
+
+    document.getElementById("doneTasksCounter").textContent = inProgressCount;
 }
