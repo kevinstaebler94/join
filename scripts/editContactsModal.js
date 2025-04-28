@@ -156,7 +156,7 @@ async function validateEditContactInput() {
 
     if (checkEmptyFields(inputs, values)) return false;
 
-    let existingContacts = await getData('/contacts') || {};
+    let existingContacts = await getData('/users/' + loggedInUser + '/contacts' + originalContactId) || {};
     if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
 
     return true;
