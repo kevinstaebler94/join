@@ -142,7 +142,7 @@ async function renderFilteredTasks(filtered) {
     let taskData = await getData(`/users/${loggedInUser}/tasks/${task.id}`);
     const targetId = task.column;
     const target = document.getElementById(targetId);
-    target.innerHTML += generateFilledTaskHTML(taskData);
+    target.innerHTML += filledTaskTemplate(taskData);
   }
 
   columns.forEach(id => {
@@ -184,12 +184,10 @@ async function handleCheckbox(encodedSubtasks) {
       done = true;
       pushSubtasks(loggedInUser, taskId, done, currentSubtask, [subtaskIndex]);
       renderTasks();
-      console.log("done", done);
     } else {
       done = false;
       pushSubtasks(loggedInUser, taskId, done, currentSubtask, [subtaskIndex]);
       renderTasks();
-      console.log("false", false);
     }
     showProgressbar(encodedSubtasks);
   }
