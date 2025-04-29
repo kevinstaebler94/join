@@ -171,6 +171,7 @@ function checkValidation() {
         titleInput.classList.add('required');
     } else {
         pushTasks(loggedInUser, assignedArr);
+        return;
         showAddedBoardImg();
     }
 }

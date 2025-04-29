@@ -7,7 +7,11 @@ let tasks = [
         date: '2025/04/15',
         prio: 'medium',
         contact: ['Anna Schmidt', 'Max Müller'],
-        subtask: ['Formular mit Feldern erstellen', 'Clientseitige Validierung hinzufügen', 'API-Endpunkt zur Registrierung integrieren'],
+        subtask: [
+            { subtask: 'Formular mit Feldern erstellen', done: false },
+            { subtask: 'Clientseitige Validierung hinzufügen', done: false },
+            { subtask: 'API-Endpunkt zur Registrierung integrieren', done: false }
+        ],
         column: 'inProgress'
     },
     {
@@ -18,7 +22,11 @@ let tasks = [
         date: '2025/04/16',
         prio: 'medium',
         contact: ['Lukas Weber'],
-        subtask: ['Backend-Route erstellen', 'Daten abrufen und formatieren', 'Tabelle mit Nutzerdaten im Frontend anzeigen'],
+        subtask: [
+            { subtask: 'Backend-Route erstellen', done: false },
+            { subtask: 'Daten abrufen und formatieren', done: false },
+            { subtask: 'Tabelle mit Nutzerdaten im Frontend anzeigen', done: false }
+        ],
         column: 'done'
     },
     {
@@ -29,7 +37,11 @@ let tasks = [
         date: '2025/04/18',
         prio: 'medium',
         contact: ['Clara Meier', 'Ben Fischer'],
-        subtask: ['Responsives Layout mit CSS anpassen', 'Mobile Tests mit DevTools', 'Feedback vom Team einholen'],
+        subtask: [
+            { subtask: 'Responsives Layout mit CSS anpassen', done: false },
+            { subtask: 'Mobile Tests mit DevTools', done: false },
+            { subtask: 'Feedback vom Team einholen', done: false }
+        ],
         column: 'awaitFeedback'
     },
     {
@@ -40,7 +52,11 @@ let tasks = [
         date: '2025/04/20',
         prio: 'low',
         contact: ['Marie Jung'],
-        subtask: ['Branching-Strategie dokumentieren', 'Pull-Request-Template erstellen', 'Team informieren'],
+        subtask: [
+            { subtask: 'Branching-Strategie dokumentieren', done: false },
+            { subtask: 'Pull-Request-Template erstellen', done: false },
+            { subtask: 'Team informieren', done: false }
+        ],
         column: 'toDo'
     },
     {
@@ -51,10 +67,15 @@ let tasks = [
         date: '2025/04/21',
         prio: 'urgent',
         contact: ['Tobias König'],
-        subtask: ['Fehler im Validator analysieren', 'Testfälle anpassen', 'Fix implementieren und testen'],
+        subtask: [
+            { subtask: 'Fehler im Validator analysieren', done: false },
+            { subtask: 'Testfälle anpassen', done: false },
+            { subtask: 'Fix implementieren und testen', done: false }
+        ],
         column: 'inProgress'
     }
 ];
+
 
 let contacts = [
     {
@@ -108,7 +129,7 @@ async function getGuestUserData() {
     await changeUsers(userId, email, password, name, login);
     await getGuestUserTasks(userId);
     await getGuestUserContacts(userId);
-    window.location.href = "summary.html";    
+    window.location.href = "summary.html";
 }
 
 async function getGuestUserTasks(guestUser) {

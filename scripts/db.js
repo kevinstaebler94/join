@@ -122,10 +122,7 @@ async function pushGuestTasks(taskObj, guestUser) {
         prio: taskObj.prio,
         contact: taskObj.contact,
         column: taskObj.column,
-        subtaskObj: {
-            subtask: taskObj.subtask,
-            done: false
-        }
+        subtask: taskObj.subtask
     });
     await putData(path, userData, userData.id);
 }
