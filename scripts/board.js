@@ -194,6 +194,14 @@ async function handleCheckbox(encodedSubtasks) {
 }
 
 function showProgressbar(encodedSubtasks) {
-  let subtask = JSON.parse(decodeURIComponent(encodedSubtasks));
-  let progressBar = document.getElementById("subtasksContainer");
+  let {subtask} = JSON.parse(decodeURIComponent(encodedSubtasks));
+  let doneCount = subtask.filter(st => st.done).length;
+  let progress = subtask.length? (doneCount / subtask.length) * 100 : 0;
+
+  let progressBar = document.getElementById("progressBar");
+  if(!progressBar) return
+
+  progressBar.style.width = `${progress}%`;
+  console.log(progress);
+  
 }
