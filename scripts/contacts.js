@@ -74,7 +74,7 @@ async function openContactById(contactId) {
     let userNameDeleteContainer = document.getElementById('userNameDeleteContainer');
 
 
-    if (!contact) return;
+    if (!contact || !contact.name || !contact.email) return;
     document.getElementById("userName").innerHTML = contact.name;
     document.getElementById("userEmail").innerHTML = contact.email;
     document.getElementById("userPhoneNumber").innerHTML = contact.phone;
@@ -98,6 +98,7 @@ async function openContactById(contactId) {
 }
 
 function getInitials(name) {
+    if (!name || typeof name !== 'string') return '';
     return name
         .split(" ")
         .map(word => word[0])

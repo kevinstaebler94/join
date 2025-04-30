@@ -171,12 +171,15 @@ async function pushContacts(loggedInUser) {
         console.log("saved:", userData);
         clearInputFields();
         closeContactsModal();
+        window.location.reload();
     } catch (error) {
         console.error("error while saving:", error);
     }
 
     clearInputFields();
     await renderContacts();
+    currentContactId = adjustEmail(contactEmail.value);
+    await openContactById(currentContactId);
     showSuccessOverlayImg();
 }
 
