@@ -1,4 +1,5 @@
 let originalContactEmail = null;
+let originalContactId = null;
 
 function openEditContactsModal() {
     let overlay = document.getElementById('modalOverlay');
@@ -75,7 +76,7 @@ function getEditContactsModalStructure() {
                 </div>
                 <div class="buttonsContainer">
                 <button onclick="clearInputFields()" class="modalCancelButton">Delete</button>
-                <button onclick="updateContacts()" class="modalSafeButton" type="submit">Save <img src="./assets/img/createIcon.svg"></button>
+                <button onclick="updateContacts()" class="modalSafeButton" type="button">Save <img src="./assets/img/createIcon.svg"></button>
                 </div>
             </div>
         </div>
@@ -87,17 +88,20 @@ function getEditContactsModalStructure() {
 
 async function fillEditContactsForm() {
     if (!currentContactId) return;
-    let contact = await getData(`/contacts/${currentContactId}`);
+    let contact = await getData(`/users/${loggedInUser}/contacts/${currentContactId}`);
     if (!contact) return;
     document.getElementById("contactNameEdit").value = contact.name;
     document.getElementById("contactEmailEdit").value = contact.email;
     document.getElementById("contactPhoneEdit").value = contact.phone;
 
     originalContactId = currentContactId;
+    console.log("originalContactID:", originalContactId);
     originalContactEmail = contact.email;
 }
 
 async function updateContacts() {
+    console.log("updateContacts wurde aufgerufen");
+
     let isValid = await validateEditContactInput();
     if (!isValid) return;
 
@@ -115,15 +119,14 @@ async function updateContacts() {
     };
 
     try {
+        await putData('/users/' + loggedInUser + '/contacts', updatedContact, newContactId);
         if (newContactId !== originalContactId) {
+            console.log("Will delete old contact:", originalContactId);
             await deleteContact(originalContactId);
         }
 
-        await putData('/contacts', updatedContact, newContactId);
-        await renderContacts();
-
         currentContactId = newContactId;
-
+        await renderContacts();
         await openContactById(currentContactId);
 
         let allCards = document.querySelectorAll('.contactCard');
@@ -221,8 +224,8 @@ async function validateEditEmailFormat(originalEmail) {
         return false;
     }
 
-    if (email !== originalEmail.toLowerCase()) {
-        let existingContacts = await getData("/contacts") || {};
+    if (!originalEmail || email !== originalEmail.toLowerCase()) {
+        let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
         for (let key in existingContacts) {
             if (existingContacts[key].email.trim().toLowerCase() === email) {
                 errorMsgEmail.innerText = "Email is already used.";

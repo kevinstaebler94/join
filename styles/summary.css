@@ -11,7 +11,8 @@ h1 {
 }
 
 span {
-    line-height: 32.4px;
+    line-height: 2.025rem;
+    /* 32.4px */
 }
 
 .main {
@@ -35,21 +36,27 @@ span {
 .summaryHeadline {
     display: flex;
     align-items: center;
-    gap: 30px;
-    padding-top: 64px;
+    gap: 1.875rem;
+    /* 30px */
+    padding-top: 4rem;
+    /* 64px */
 }
 
 .blueDivider {
-    width: 3px;
-    height: 59px;
+    width: 0.1875rem;
+    /* 3px */
+    height: 3.6875rem;
+    /* 59px */
     background-color: #29ABE2;
 }
 
 .mainContentWrapper {
     display: flex;
     flex-direction: column;
-    padding-left: 64px;
-    padding-right: 64px;
+    padding-left: 4rem;
+    /* 64px */
+    padding-right: 4rem;
+    /* 64px */
 }
 
 .mainContainer {
@@ -63,17 +70,21 @@ span {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 350px;
-    padding-left: 48px;
+    padding-top: 21.875rem;
+    /* 350px */
+    padding-left: 3rem;
+    /* 48px */
 }
 
 .timeOfDay {
-    font-size: 47px;
+    font-size: 2.9375rem;
+    /* 47px */
     font-weight: 500;
 }
 
 .userName {
-    font-size: 64px;
+    font-size: 4rem;
+    /* 64px */
     color: #29abe2;
     font-weight: 700;
 }
@@ -82,14 +93,17 @@ span {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: clamp(300px, 100%, 550px);
-    width: clamp(300px, 100%, 550px);
-    gap: 16px;
+    height: clamp(18.75rem, 100%, 34.375rem);
+    /* 300px-550px */
+    width: clamp(18.75rem, 100%, 34.375rem);
+    gap: 1rem;
+    /* 16px */
 }
 
 .topTasks {
     display: flex;
-    gap: 32px;
+    gap: 2rem;
+    /* 32px */
     height: 30%;
     width: 100%;
 }
@@ -100,11 +114,15 @@ span {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 30px;
-    padding: 16px 19px;
-    gap: 8px;
+    border-radius: 1.875rem;
+    /* 30px */
+    padding: 1rem 1.1875rem;
+    /* 16px 19px */
+    gap: 0.5rem;
+    /* 8px */
     transition: 0.1s ease-in-out;
-    box-shadow: 0px 0px 5px 0px #cdcdcd;
+    box-shadow: 0px 0px 0.3125rem 0px #cdcdcd;
+    /* 5px */
     text-decoration: none;
     color: #2A3647;
 }
@@ -118,8 +136,10 @@ span {
 
 .toDoImg {
     background-color: #2A3647;
-    width: 69px;
-    height: 69px;
+    width: 4.3125rem;
+    /* 69px */
+    height: 4.3125rem;
+    /* 69px */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -150,7 +170,8 @@ span {
 }
 
 .toDoCount span {
-    font-size: 20px;
+    font-size: 1.25rem;
+    /* 20px */
     font-weight: 400;
 }
 
@@ -160,7 +181,8 @@ span {
 
 .midSection {
     display: flex;
-    gap: 32px;
+    gap: 2rem;
+    /* 32px */
     height: 30%;
     width: 100%;
 }
@@ -171,10 +193,13 @@ span {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    border-radius: 30px;
-    padding: 16px 19px;
+    border-radius: 1.875rem;
+    /* 30px */
+    padding: 1rem 1.1875rem;
+    /* 16px 19px */
     transition: 0.1s ease-in-out;
-    box-shadow: 0px 0px 5px 0px #cdcdcd;
+    box-shadow: 0px 0px 0.3125rem 0px #cdcdcd;
+    /* 5px */
     text-decoration: none;
     color: #2A3647;
 }
@@ -189,13 +214,16 @@ span {
 .midContentLeft {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 1.125rem;
+    /* 18px */
 }
 
 .urgentArrows {
     background-color: #FF3D01;
-    width: 69px;
-    height: 69px;
+    width: 4.3125rem;
+    /* 69px */
+    height: 4.3125rem;
+    /* 69px */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -210,11 +238,13 @@ span {
 
 .urgentContent span {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
+    /* 16px */
 }
 
 .midSectionDivider {
-    width: 1px;
+    width: 0.0625rem;
+    /* 1px */
     height: 100%;
     background-color: #D1D1D1;
 }
@@ -226,32 +256,39 @@ span {
 
 .dateContainer p {
     font-weight: 700;
-    font-size: 21px;
+    font-size: 1.3125rem;
+    /* 21px */
 }
 
 .dateContainer span {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
+    /* 16px */
 }
 
 .bottomBar {
     justify-content: space-evenly;
     display: flex;
-    gap: 32px;
+    gap: 2rem;
+    /* 32px */
     height: 30%;
     width: 100%;
 }
 
 .bottomBarTasks {
-    width: 170px;
+    width: 10.625rem;
+    /* 170px */
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 30px;
-    padding: 16px 19px;
+    border-radius: 1.875rem;
+    /* 30px */
+    padding: 1rem 1.1875rem;
+    /* 16px 19px */
     transition: 0.1s ease-in-out;
-    box-shadow: 0px 0px 5px 0px #cdcdcd;
+    box-shadow: 0px 0px 0.3125rem 0px #cdcdcd;
+    /* 5px */
     text-decoration: none;
     color: #2A3647;
 }
@@ -264,13 +301,15 @@ span {
 }
 
 p {
-    font-size: 64px;
+    font-size: 4rem;
+    /* 64px */
     font-weight: 600;
     margin: 0;
 }
 
 .bottomBarTasks span {
-    font-size: 20px;
+    font-size: 1.25rem;
+    /* 20px */
     font-weight: 400;
 }
 
