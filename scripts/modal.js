@@ -305,7 +305,8 @@ async function getSubtasksModal(subtasks) {
     subObj.forEach((subtask, index) => {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
         let isChecked = subtask.done ? 'checked' : '';
-        subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtask.subtask}" type="checkbox" ${isChecked} onchange="handleCheckbox('${serializedSubtasks}', ${index})"><p>${subtask.subtask}</p></div>`;
+        subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtask.subtask}" type="checkbox" ${isChecked}
+        onchange="handleCheckbox(${index}, this)"><p>${subtask.subtask}</p></div>`;
     });
 }
 
