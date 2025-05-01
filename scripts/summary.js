@@ -24,11 +24,60 @@ function updateGreeting() {
     document.getElementById("timeOfDay").textContent = greeting;
 }
 
-function showDate() {
-    let date = new Date();
-    let options = { year: 'numeric', month: 'long', day: 'numeric' };
-    let formattedDate = date.toLocaleDateString('en-US', options);
-    document.getElementById('date').innerHTML = formattedDate;
+// function showDate() {
+//     let date = new Date();
+//     let options = { year: 'numeric', month: 'long', day: 'numeric' };
+//     let formattedDate = date.toLocaleDateString('en-US', options);
+//     document.getElementById('date').innerHTML = formattedDate;
+// }
+
+// async function showUrgentDate() {
+//     let date = new Date();
+//     let options = { year: 'numeric', month: 'long', day: 'numeric' };
+//     let currentDate = date.toLocaleDateString('en-US', options);
+//     let urgentDateData = await getData('/users/' + loggedInUser + '/tasks/');
+//     if (!urgentDateData) return;
+
+//     for (let key in urgentDateData) {
+//         if (urgentDateData[key].prio === "urgent") {
+
+//         }
+
+//     }
+
+// }
+
+async function showUrgentDate() {
+    let tasks = await getData('/users/' + loggedInUser + '/tasks/');
+    if (!tasks) return;
+
+    let today = new Date();
+    let earliestDate = null;
+
+    for (let key in tasks) {
+        let task = tasks[key];
+
+        if (task.prio === "urgent" && task.date) {
+            // Format: "dd/mm/yyyy" → umwandeln in Date
+            let [day, month, year] = task.date.split("/");
+            let taskDate = new Date(`${year}-${month}-${day}`);
+
+            // Prüfen ob dieses Datum gültig und nach heute ist
+            if (!isNaN(taskDate.getTime()) && taskDate >= today) {
+                if (!earliestDate || taskDate < earliestDate) {
+                    earliestDate = taskDate;
+                }
+            }
+        }
+    }
+
+    if (earliestDate) {
+        let options = { year: 'numeric', month: 'long', day: 'numeric' };
+        let formattedDate = earliestDate.toLocaleDateString('en-US', options);
+        document.getElementById("date").textContent = formattedDate;
+    } else {
+        document.getElementById("date").textContent = "No urgent tasks";
+    }
 }
 
 async function getToDoTasksCounter() {
@@ -115,4 +164,21 @@ async function getInBoardCounter() {
     }
 
     document.getElementById("inBoardCounter").textContent = inBoardCount;
+}
+
+async function getUrgentTasksCounter() {
+    console.log("getToDoTasksCounter wurde aufgerufen");
+
+    let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
+    if (!tasksData) return;
+
+    let urgentCount = 0;
+
+    for (let key in tasksData) {
+        if (tasksData[key].prio === "urgent") {
+            urgentCount++;
+        }
+    }
+
+    document.getElementById("urgentTasksCounter").textContent = urgentCount;
 }

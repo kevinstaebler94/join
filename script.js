@@ -26,12 +26,17 @@ function getSummary() {
     includeHTML();
     updateGreeting();
     greetingByName();
-    showDate();
+    showUrgentDate();
+    getAllCounter();
+}
+
+function getAllCounter() {
     getToDoTasksCounter();
     getDoneTasksCounter();
     getFeedbackCounter();
     getInProgressCounter();
     getInBoardCounter();
+    getUrgentTasksCounter();
 }
 
 function getBoard() {
