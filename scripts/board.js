@@ -4,7 +4,7 @@ async function initBoard() {
   await renderTasks();
 }
 
-async function renderTasks() {
+async function renderTasks() {  
   let tasks = await getData('/users/' + loggedInUser + '/tasks');
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
@@ -16,7 +16,7 @@ async function renderTasks() {
       const targetId = task.column;
       const target = document.getElementById(targetId);
       let taskComponents = getTaskComponents(task);
-      target.innerHTML += filledTaskTemplate(taskComponents, task)
+      target.innerHTML += filledTaskTemplate(taskComponents, task);
     })
   }
   columns.forEach(id => {

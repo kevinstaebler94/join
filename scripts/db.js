@@ -6,9 +6,9 @@
 // let tasks = {};
 // let contacts = {};
 
-// const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
 // const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
-const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
+// const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 async function getData(path = '') {
     try {
@@ -127,11 +127,13 @@ async function pushGuestTasks(taskObj, guestUser) {
     await putData(path, userData, userData.id);
 }
 
-function changeTasks(taskId) {
+function changeTasks(taskId, prioBtn) {
     let path = '/users/' + loggedInUser + '/tasks';
     let title = document.getElementById('titleInputEdit');
     let description = document.getElementById('taskDescriptionEdit');
     let date = document.getElementById('dateInputEdit');
+    // let prioBtn = document.getElementById('');
+    let contacts = assignedArr;
     let subTask = subtasksArr;
     let time = getTimeStamp();
     let newTaskId = title.value + time;
@@ -142,11 +144,11 @@ function changeTasks(taskId) {
         date: date.value,
         prio: prioBtn,
         contact: contacts,
-        subtask: subTask
+        subtask: subTask,
+        column: "toDo",
     });
     putData(path, userData, newTaskId);
     deleteTask(taskId);
-    closeModal();
 }
 
 async function pushContacts(loggedInUser) {

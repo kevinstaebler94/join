@@ -263,22 +263,28 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                         </ul>
                                     </div>
                                     <div id="assignedContainer" class="assignedContainer dNone"></div>
-                                    <label id="subtaskLabel" class="directionColumn">Subtasks
-                                        <input id="subtaskInput" onfocus="getAddNewSubtask()" class="inputFields" type="text" placeholder="Add new subtask">
+                                    <label id="subtaskLabel" class="directionColumn" onfocusin="getAddNewSubtask()" onfocusout="handleFocusOut()">
+                                        Subtasks
+                                        <input id="subtaskInput" class="inputFields" type="text" placeholder="Add new subtask">
                                         <span id="inputIconContainer">
                                             <img id="plusIcon" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                         </span>
-                                        
                                     </label>
                                     <ul id="subtaskListEdit" class="subtaskListEdit"></ul>
                                 </form>
-                                <button onclick="changeTasks('${taskId}')">OK</button>
+                                <button onclick="changeTasks('${taskId}', '${priority}')">OK</button>
                             </div>
                         </div>
                     </div>`;
     selectPriority(priority);
     getContactsEdit(contacts);
-    getSubtaskEdit(subtasks, encodedSubtasks);
+    getSubtaskEdit(subtasks, encodedSubtasks);    
+}
+
+function handleFocusOut() {
+    setTimeout(() => {
+        resetSubtaskIcons();
+    }, 100);
 }
 
 async function getContactsModal(contacts) {
@@ -347,7 +353,7 @@ function getAddNewSubtask() {
     let plusIcon = document.getElementById('plusIcon');
     inputIconContainer.classList.add('inputIconContainer');
     plusIcon.classList.remove('plusIcon');
-    inputIconContainer.innerHTML = `<img id="plusIcon" class="editIcons" src="./assets/img/cancel.svg" alt="plus-icon">
+    inputIconContainer.innerHTML = `<img onclick="cancelValue()" id="plusIcon" class="editIcons" src="./assets/img/cancel.svg" alt="plus-icon">
                                     <span class="iconDivider">|</span>
                                     <img onclick="addNewSubtask()" id="doneIcon" class="editIcons" src="./assets/img/done.svg" alt="">`;
 }
@@ -366,17 +372,29 @@ function addNewSubtask() {
                                     </div>
                                 </li>`;
     inputValue.value = '';
+    subtaskInput.blur();
+    setTimeout(() => {
+        resetSubtaskIcons();
+    }, 50);
+
 }
 
 function resetSubtaskIcons() {
-    let inputIconContainer = document.getElementById('inputIconContainer');
-    let plusIcon = document.getElementById('plusIcon');
+    const inputIconContainer = document.getElementById('inputIconContainer');
+    while (inputIconContainer.firstChild) {
+        inputIconContainer.removeChild(inputIconContainer.firstChild);
+    }
+    const plusIcon = document.createElement('img');
+    plusIcon.id = 'plusIcon';
+    plusIcon.className = 'plusIcon';
+    plusIcon.src = './assets/img/plusIcon.svg';
+    plusIcon.alt = 'plus-icon';
+    inputIconContainer.appendChild(plusIcon);
     inputIconContainer.classList.remove('inputIconContainer');
-    plusIcon.classList.add('plusIcon');
-    inputIconContainer.innerHTML = `
-        <img id="plusIcon" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
-    `;
+    document.getElementById('subtaskInput').blur();
 }
+
+
 
 function getEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
@@ -417,6 +435,15 @@ function deleteSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
     subtasksArr = [];
     subtaskListEdit.innerHTML = '';
     getSubtaskEdit(subtasks, serializeObj(subtasks));
+}
+
+function cancelValue() {
+    let subtaskInput = document.getElementById('subtaskInput');
+    subtaskInput.value = '';
+    subtaskInput.blur();
+    setTimeout(() => {
+        resetSubtaskIcons();
+    }, 50);
 }
 
 function toggleDropdownNameEdit() {

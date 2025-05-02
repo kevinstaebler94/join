@@ -478,6 +478,7 @@ ul {
 
 .editIcons {
     width: 16px;
+    z-index: 100;
 }
 
 .doneIcon {
