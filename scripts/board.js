@@ -48,15 +48,7 @@ function filledTaskTemplate(taskComponents, task) {
   let serializedSubtasks = encodeURIComponent(JSON.stringify(task));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initials = convertNameToInitial(contactData);
-  let doneCount = 0; 
-  
-  for (let index = 0; index < subtaskData.length; index++) {
-    const element = subtaskData[index];
-    if (element.done) {
-      doneCount++; 
-    }
-  }
-  
+ 
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
@@ -64,9 +56,9 @@ function filledTaskTemplate(taskComponents, task) {
       <p class="taskDescription">${taskComponents.description}</p>
       <div id="subtasksContainer${taskComponents.id}" class="subtasksContainer">
         <div class="progressBarContainer">
-          <div id="progressBar" class="progressBar"></div>  
+          <div id="progressBar${taskComponents.id}" class="progressBar"></div>  
         </div>
-        <span class="subtaskInfo">${doneCount}/${subtaskData.length}</span>
+        <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">/${subtaskData.length}</span>
       </div>
       <div class="assignedToContainer">
         <div class="assignedUsers">
@@ -171,24 +163,23 @@ function convertNameToInitial(contactData) {
   )
 }
 
-function handleCheckbox(index, checkbox) {
+function handleCheckbox(checkbox) {
   let list = document.querySelectorAll('.assignedToModal input[type="checkbox"]')
+  let taskId = checkbox.dataset.taskId;
   let checkboxArr = Array.from(list);
+  let checkboxTotal = checkboxArr.length
   let isChecked = checkboxArr.filter(cb => cb.checked === true).length;
-  console.log("isChecked", isChecked);
   
-  showProgressBar(index, isChecked, checkbox.id);
+  
+  
+  // pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId);
+  showProgressBar(isChecked, checkboxTotal, taskId);
 }
 
-function showProgressBar(index, isChecked, id) {
-  console.log("Index", index);
-  console.log("Checked", isChecked);
-  console.log("Id", id);
-  let subtasksContainer = document.getElementById(`subtasksContainer${id}`);
-  let progressBar = document.getElementById(`progressBar${id}`);
-
-  if(!isChecked) {
-    subtasksContainer.style.display = "none";
-    return
-  }
+function showProgressBar(isChecked, checkboxTotal, taskId) {
+  // let subtasksContainer = document.getElementById(`subtasksContainer${taskId}`);
+  // let subtaskInfo = document.getElementById(`subtaskInfo${taskId}`)
+  let progressBar = document.getElementById(`progressBar${taskId}`);
+  let progress = (isChecked / checkboxTotal) * 100;
+  progressBar.style.width = `${progress}%`;
 }

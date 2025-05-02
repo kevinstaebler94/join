@@ -185,7 +185,7 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                 </div>
                             </div>`;
     getContactsModal(contacts);
-    getSubtasksModal(subtasks);
+    getSubtasksModal(subtasks, taskId);
 }
 
 function openTaskEdit(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts) {
@@ -303,16 +303,14 @@ function getContactsEdit(contacts) {
 }
 
 
-async function getSubtasksModal(subtasks) {
-    let mySubtask = subtasks.subtask;
-    let subObj = Object.values(mySubtask || {});
-    let serializedSubtasks = encodeURIComponent(JSON.stringify(subtasks));
-
-    subObj.forEach((subtask, index) => {
+async function getSubtasksModal(subtasks, taskId) {
+    let subObj = Object.values(subtasks?.subtask || {});
+     
+    subObj.forEach((subtask) => {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
         let isChecked = subtask.done ? 'checked' : '';
-        subtaskContainer.innerHTML += `<div class="assignedToModal"><input id="${subtask.subtask}" type="checkbox" ${isChecked}
-        onchange="handleCheckbox(${index}, this)"><p>${subtask.subtask}</p></div>`;
+        subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox" ${isChecked}
+        onchange="handleCheckbox(this)" data-task-id="${taskId}"><p>${subtask.subtask}</p></div>`;
     });
 }
 
