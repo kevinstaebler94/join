@@ -48,26 +48,10 @@ function filledTaskTemplate(taskComponents, task) {
   let serializedSubtasks = encodeURIComponent(JSON.stringify(task));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initials = convertNameToInitial(contactData);
- 
-  return `
-    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
-      <h3 class="taskCategory userStory">${taskComponents.category}</h3>
-      <h4 class="taskTitle">${taskComponents.title}</h4>
-      <p class="taskDescription">${taskComponents.description}</p>
-      <div id="subtasksContainer${taskComponents.id}" class="subtasksContainer">
-        <div class="progressBarContainer">
-          <div id="progressBar${taskComponents.id}" class="progressBar"></div>  
-        </div>
-        <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">/${subtaskData.length}</span>
-      </div>
-      <div class="assignedToContainer">
-        <div class="assignedUsers">
-          <span id="assignedUser" class="assignedUser">${initials}</span>
-        </div>
-        <img src="/assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
-      </div>
-    </div>
-  `
+  let progressBarHTML = getProgressBarHTML(taskComponents, subtaskData);
+  let filledTaskHTML = getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML);
+
+  return filledTaskHTML;
 }
 
 function blankTask(columnName) {
@@ -166,20 +150,49 @@ function convertNameToInitial(contactData) {
 function handleCheckbox(checkbox) {
   let list = document.querySelectorAll('.assignedToModal input[type="checkbox"]')
   let taskId = checkbox.dataset.taskId;
+  let currentSubtask = checkbox.nextElementSibling ?.textContent.trim();
+  let done = checkbox.checked
+  let subtaskId = checkbox.dataset.subtaskId;
   let checkboxArr = Array.from(list);
   let checkboxTotal = checkboxArr.length
   let isChecked = checkboxArr.filter(cb => cb.checked === true).length;
-  
-  
-  
-  // pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId);
   showProgressBar(isChecked, checkboxTotal, taskId);
+  pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId);
+  
 }
 
 function showProgressBar(isChecked, checkboxTotal, taskId) {
-  // let subtasksContainer = document.getElementById(`subtasksContainer${taskId}`);
-  // let subtaskInfo = document.getElementById(`subtaskInfo${taskId}`)
   let progressBar = document.getElementById(`progressBar${taskId}`);
   let progress = (isChecked / checkboxTotal) * 100;
   progressBar.style.width = `${progress}%`;
+}
+
+function getProgressBarHTML(taskComponents, subtaskData) {
+  return subtaskData.length > 0 ?
+  `
+    <div id="subtasksContainer${taskComponents.id}" class="subtasksContainer">
+      <div class="progressBarContainer">
+        <div id="progressBar${taskComponents.id}" class="progressBar"></div>  
+      </div>
+      <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">/${subtaskData.length}</span>
+    </div>
+  `
+  : "";
+}
+
+function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
+  return `
+    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+      <h3 class="taskCategory userStory">${taskComponents.category}</h3>
+      <h4 class="taskTitle">${taskComponents.title}</h4>
+      <p class="taskDescription">${taskComponents.description}</p>
+      ${progressBarHTML}
+      <div class="assignedToContainer">
+        <div class="assignedUsers">
+          <span id="assignedUser" class="assignedUser">${initials}</span>
+        </div>
+        <img src="/assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
+      </div>
+    </div>
+  `
 }

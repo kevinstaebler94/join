@@ -304,13 +304,13 @@ function getContactsEdit(contacts) {
 
 
 async function getSubtasksModal(subtasks, taskId) {
-    let subObj = Object.values(subtasks?.subtask || {});
+    let entries = Object.entries(subtasks?.subtask || {});
      
-    subObj.forEach((subtask) => {
+    entries.forEach(([subtaskId, subtask]) => {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
         let isChecked = subtask.done ? 'checked' : '';
         subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox" ${isChecked}
-        onchange="handleCheckbox(this)" data-task-id="${taskId}"><p>${subtask.subtask}</p></div>`;
+        onchange="handleCheckbox(this)" data-task-id="${taskId}" data-subtask-id="${subtaskId}"><p>${subtask.subtask}</p></div>`;
     });
 }
 
