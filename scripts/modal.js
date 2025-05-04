@@ -6,12 +6,12 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
-function openFilledTaskModal(taskId, category, title, description, date, priority, subtaskObj, encodedContacts) {
+function openFilledTaskModal(taskId, category, title, description, date, priority, column,subtaskObj, encodedContacts) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
-    getFilledStructure(taskId, category, title, description, date, priority, subtaskObj, encodedContacts);
+    getFilledStructure(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts);
 }
 
 function closeModal() {
@@ -95,12 +95,13 @@ function getAddTaskStructure() {
                                         </div>
                                     </label>
                                     <div id="contactListContainer" class="listContainer dNone">
-                                            <ul class="dropdownList ddListName dNone" id="dropdownListName">
-                                                <span class="puffer"></span>
-                                                <span id="listElements"></span>
-                                            </ul>
-                                        </div>
-                                        <div id="assignedContainer" class="assignedContainer"></div>
+                                        <ul class="dropdownList ddListName dNone" id="dropdownListName">
+                                            <span class="puffer"></span>
+                                            <span id="listElements"></span>
+                                        </ul>
+                                    </div>
+                                    <div id="assignedContainer" class="assignedContainer"></div>
+
                                     <label class="directionColumn customSelectWrapper">
                                         <div class="dFlex">
                                             <p>Category</p>
@@ -152,7 +153,7 @@ function getAddTaskStructure() {
     selectPriority('medium')
 }
 
-function getFilledStructure(taskId, category, title, description, date, priority, subtaskObj, encodedContacts) {
+function getFilledStructure(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts) {
     let filledTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(subtaskObj));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
@@ -180,7 +181,7 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                         <ul id="subtaskModalList"></ul>
                                         <button onclick="deleteTask('${loggedInUser}', '${taskId}')">Delete</button>
                                         <span>|</span>
-                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${subtaskObj}', '${encodedContacts}')">Edit</button>
+                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${column}', '${subtaskObj}', '${encodedContacts}')">Edit</button>
                                     </div>
                                 </div>
                             </div>`;
@@ -188,7 +189,7 @@ function getFilledStructure(taskId, category, title, description, date, priority
     getSubtasksModal(subtasks, taskId);
 }
 
-function openTaskEdit(taskId, category, title, description, date, priority, encodedSubtasks, encodedContacts) {
+function openTaskEdit(taskId, category, title, description, date, priority, column, encodedSubtasks, encodedContacts) {
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
@@ -248,7 +249,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                     </label>
                                     <label class="directionColumn customSelectWrapper">Assigned to
                                         <div id="customDropdownName" class="customDropdown"
-                                            onclick="toggleDropdownNameEdit('${encodedContacts}')">
+                                            onclick="toggleDropdownName()">
                                             <div class="dropdownHeader">
                                                 <span id="selectedName">Assigned to</span>
                                                 <img id="dropdownIconName" class="dropdownIcon"
@@ -256,13 +257,14 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                             </div>
                                         </div>
                                     </label>
-                                    <div id="listContainer" class="listContainer dNone">
+                                    <div id="contactListContainer" class="listContainer dNone">
                                         <ul class="dropdownList ddListName dNone" id="dropdownListName">
                                             <span class="puffer"></span>
                                             <span id="listElements"></span>
                                         </ul>
                                     </div>
-                                    <div id="assignedContainer" class="assignedContainer dNone"></div>
+                                    <div id="assignedContainer" class="assignedContainer"></div>
+
                                     <label id="subtaskLabel" class="directionColumn" onfocusin="getAddNewSubtask()" onfocusout="handleFocusOut()">
                                         Subtasks
                                         <input id="subtaskInput" class="inputFields" type="text" placeholder="Add new subtask">
@@ -272,13 +274,13 @@ function openTaskEdit(taskId, category, title, description, date, priority, enco
                                     </label>
                                     <ul id="subtaskListEdit" class="subtaskListEdit"></ul>
                                 </form>
-                                <button onclick="changeTasks('${taskId}', '${priority}')">OK</button>
+                                <button onclick="changeTasks('${taskId}', '${column}', '${category}')">OK</button>
                             </div>
                         </div>
                     </div>`;
     selectPriority(priority);
     getContactsEdit(contacts);
-    getSubtaskEdit(subtasks, encodedSubtasks);    
+    getSubtaskEdit(subtasks, encodedSubtasks);
 }
 
 function handleFocusOut() {
@@ -315,10 +317,9 @@ async function getSubtasksModal(subtasks, taskId) {
 
 function getSubtaskEdit(subtasks, encodedSubtasks) {
     subtasksArr.push(subtasks.subtask);
-    console.log(subtasks);
     for (let subtaskIndex = 0; subtaskIndex < subtasksArr[0].length; subtaskIndex++) {
         let sub = subtasksArr[0];
-        let currentSubtask = sub[subtaskIndex];        
+        let currentSubtask = sub[subtaskIndex];
         let subtaskList = document.getElementById('subtaskListEdit');
         subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
                                     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
@@ -331,8 +332,8 @@ function getSubtaskEdit(subtasks, encodedSubtasks) {
                                     </div>
                                 </li>`;
     };
-    
-    
+
+
 }
 
 function showEditIcons(element) {
@@ -368,6 +369,7 @@ function addNewSubtask() {
                                         </span>
                                     </div>
                                 </li>`;
+    subtasksArr[0].push({subtask: inputValue.value, done: false});
     inputValue.value = '';
     subtaskInput.blur();
     setTimeout(() => {
@@ -410,7 +412,7 @@ function editSubtask(subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let subtaskList = document.getElementById('subtaskListEdit');
     let editSubtaskInput = document.getElementById('editSubtaskInput');
-    subtasks.subtask[subtaskIndex] = {done: false, subtask: editSubtaskInput.value};
+    subtasks.subtask[subtaskIndex] = { done: false, subtask: editSubtaskInput.value };
     console.log(subtasks);
     subtasksArr = [];
     subtaskList.innerHTML = '';
@@ -441,30 +443,32 @@ function cancelValue() {
     }, 50);
 }
 
-function toggleDropdownNameEdit() {
-    let customDropdownName = document.getElementById('customDropdownNameEdit');
-    let dropdown = document.getElementById('dropdownListName');
-    let dropdownIcon = document.getElementById('dropdownIconNameEdit');
-    customDropdownName.classList.add('activeBorder');
-    dropdown.classList.toggle('dNone');
-    dropdownIcon.classList.toggle('rotate');
-    getContactEdit();
-}
+// FALSE FUNCTION???
+// function toggleDropdownNameEdit() {
+//     let customDropdownName = document.getElementById('customDropdownNameEdit');
+//     let dropdown = document.getElementById('dropdownListName');
+//     let dropdownIcon = document.getElementById('dropdownIconNameEdit');
+//     customDropdownName.classList.add('activeBorder');
+//     dropdown.classList.toggle('dNone');
+//     dropdownIcon.classList.toggle('rotate');
+//     getContactEdit();
+// }
 
-async function getContactEdit() {
-    let contacts = await getData("/contacts");
-    let dropdownListName = document.getElementById('dropdownListName');
-    dropdownListName.innerHTML = '';
-    for (let key in contacts) {
-        if (contacts.hasOwnProperty(key)) {
-            contactArr.push(contacts[key])
-        }
-        dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
-                                        <p id="${contacts[key].name}">${contacts[key].name}</p>
-                                        <input onclick="checkAssignedContactEdit(this)" id="checkboxEdit" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}">
-                                    </li></label>`;
-    }
-}
+// FALSE FUNCTION???
+// async function getContactEdit() {
+//     let contacts = await getData("/contacts");
+//     let dropdownListName = document.getElementById('dropdownListName');
+//     dropdownListName.innerHTML = '';
+//     for (let key in contacts) {
+//         if (contacts.hasOwnProperty(key)) {
+//             contactArr.push(contacts[key])
+//         }
+//         dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
+//                                         <p id="${contacts[key].name}">${contacts[key].name}</p>
+//                                         <input onclick="checkAssignedContactEdit(this)" id="checkboxEdit" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}">
+//                                     </li></label>`;
+//     }
+// }
 
 function checkAssignedContactEdit(checkboxElement) {
     let assignedContainer = document.getElementById('assignedContainerEdit');

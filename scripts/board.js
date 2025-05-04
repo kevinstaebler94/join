@@ -38,7 +38,8 @@ function getTaskComponents(task) {
     subtask: task.subtask,
     id: task.id,
     capitalizedPrio: capitalizedPrio,
-    contact: task.contact
+    contact: task.contact,
+    column: task.column
   }
 }
 
@@ -185,7 +186,7 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
 
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
   return `
-    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
       <h4 class="taskTitle">${taskComponents.title}</h4>
       <p class="taskDescription">${taskComponents.description}</p>

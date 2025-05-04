@@ -76,8 +76,6 @@ async function changeUsers(userId, email, password, name, login, tasks, contacts
 }
 
 function pushTasks(loggedInUser, contacts) {
-    console.log(loggedInUser);
-
     let path = '/users/' + loggedInUser + '/tasks';
     let title = document.getElementById('titleInput');
     let description = document.getElementById('taskDescription');
@@ -86,8 +84,6 @@ function pushTasks(loggedInUser, contacts) {
     let time = getTimeStamp();
     let taskId = title.value + time;
     let subtasks = subtasksArr;
-    console.log(subtasks);
-
     let userData = ({
         id: taskId,
         title: title.value,
@@ -127,14 +123,13 @@ async function pushGuestTasks(taskObj, guestUser) {
     await putData(path, userData, userData.id);
 }
 
-function changeTasks(taskId, prioBtn) {
+function changeTasks(taskId, column, category) {
     let path = '/users/' + loggedInUser + '/tasks';
     let title = document.getElementById('titleInputEdit');
     let description = document.getElementById('taskDescriptionEdit');
     let date = document.getElementById('dateInputEdit');
-    // let prioBtn = document.getElementById('');
     let contacts = assignedArr;
-    let subTask = subtasksArr;
+    let subTask = subtasksArr[0];
     let time = getTimeStamp();
     let newTaskId = title.value + time;
     let userData = ({
@@ -145,10 +140,11 @@ function changeTasks(taskId, prioBtn) {
         prio: prioBtn,
         contact: contacts,
         subtask: subTask,
-        column: "toDo",
+        column: column,
+        category: category
     });
     putData(path, userData, newTaskId);
-    deleteTask(taskId);
+    deleteTask(loggedInUser, taskId);
 }
 
 async function pushContacts(loggedInUser) {
