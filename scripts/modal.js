@@ -302,10 +302,9 @@ function getContactsEdit(contacts) {
     });
 }
 
-
 async function getSubtasksModal(subtasks, taskId) {
     let entries = Object.entries(subtasks?.subtask || {});
-     
+
     entries.forEach(([subtaskId, subtask]) => {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
         let isChecked = subtask.done ? 'checked' : '';
@@ -391,8 +390,6 @@ function resetSubtaskIcons() {
     inputIconContainer.classList.remove('inputIconContainer');
     document.getElementById('subtaskInput').blur();
 }
-
-
 
 function getEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));

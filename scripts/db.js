@@ -102,13 +102,13 @@ function pushTasks(loggedInUser, contacts) {
     putData(path, userData, taskId);
 }
 
-function pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId) {
+async function pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId) {
     let path = '/users/' + loggedInUser + '/tasks/' + taskId + '/subtask';
     let userData = ({
         done: done,
         subtask: currentSubtask
     });
-    putData(path, userData, subtaskId);
+    await putData(path, userData, subtaskId);
 }
 
 async function pushGuestTasks(taskObj, guestUser) {

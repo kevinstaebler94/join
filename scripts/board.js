@@ -9,22 +9,22 @@ async function renderTasks() {
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
   columns.forEach(id => document.getElementById(id).innerHTML = "");
+
   let taskArr = Object.values(tasks || {});
 
-  if (taskArr) {
-    taskArr.forEach(task => {
-      const targetId = task.column;
-      const target = document.getElementById(targetId);
-      let taskComponents = getTaskComponents(task);
-      target.innerHTML += filledTaskTemplate(taskComponents, task);
-    })
-  }
+  taskArr.forEach(task => {
+    const targetId = task.column;
+    const target = document.getElementById(targetId);
+    let taskComponents = getTaskComponents(task);
+    target.innerHTML += filledTaskTemplate(taskComponents, task);
+  });
+
   columns.forEach(id => {
     const column = document.getElementById(id);
     if (!column.innerHTML.trim()) {
       column.innerHTML = blankTask(id);
     }
-  })
+  });
 }
 
 function getTaskComponents(task) {
@@ -44,11 +44,12 @@ function getTaskComponents(task) {
 
 function filledTaskTemplate(taskComponents, task) {
   let subtaskData = taskComponents.subtask ? taskComponents.subtask : [];
+  let isChecked = subtaskData.filter(st => st.done === true).length
   let contactData = taskComponents.contact ? taskComponents.contact : [];
   let serializedSubtasks = encodeURIComponent(JSON.stringify(task));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initials = convertNameToInitial(contactData);
-  let progressBarHTML = getProgressBarHTML(taskComponents, subtaskData);
+  let progressBarHTML = getProgressBarHTML(taskComponents, subtaskData, isChecked);
   let filledTaskHTML = getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML);
 
   return filledTaskHTML;
@@ -85,7 +86,7 @@ async function dropHandler(ev) {
       task.column = newColumn;
       await putData(`/users/${loggedInUser}/tasks/`, task, task.id);
       let updatedTasks = await getData(`/users/${loggedInUser}/tasks`);
-      renderTasks(updatedTasks);
+      renderTasks();
     }
   }
 }
@@ -147,7 +148,7 @@ function convertNameToInitial(contactData) {
   )
 }
 
-function handleCheckbox(checkbox) {
+async function handleCheckbox(checkbox) {
   let list = document.querySelectorAll('.assignedToModal input[type="checkbox"]')
   let taskId = checkbox.dataset.taskId;
   let currentSubtask = checkbox.nextElementSibling ?.textContent.trim();
@@ -156,25 +157,27 @@ function handleCheckbox(checkbox) {
   let checkboxArr = Array.from(list);
   let checkboxTotal = checkboxArr.length
   let isChecked = checkboxArr.filter(cb => cb.checked === true).length;
+  await pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId);
+  await renderTasks();
   showProgressBar(isChecked, checkboxTotal, taskId);
-  pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId);
-  
 }
 
 function showProgressBar(isChecked, checkboxTotal, taskId) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
-  let progress = (isChecked / checkboxTotal) * 100;
-  progressBar.style.width = `${progress}%`;
+  if(progressBar) {
+    let progress = (isChecked / checkboxTotal) * 100;
+    progressBar.style.width = (`${progress}%`);
+  }
 }
 
-function getProgressBarHTML(taskComponents, subtaskData) {
+function getProgressBarHTML(taskComponents, subtaskData, isChecked) {  
   return subtaskData.length > 0 ?
   `
     <div id="subtasksContainer${taskComponents.id}" class="subtasksContainer">
       <div class="progressBarContainer">
         <div id="progressBar${taskComponents.id}" class="progressBar"></div>  
       </div>
-      <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">/${subtaskData.length}</span>
+      <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">${isChecked}/${subtaskData.length}</span>
     </div>
   `
   : "";
