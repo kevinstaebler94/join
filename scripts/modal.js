@@ -94,7 +94,7 @@ function getAddTaskStructure() {
                                             </div>
                                         </div>
                                     </label>
-                                    <div class="listContainer">
+                                    <div id="contactListContainer" class="listContainer dNone">
                                             <ul class="dropdownList ddListName dNone" id="dropdownListName">
                                                 <span class="puffer"></span>
                                                 <span id="listElements"></span>
@@ -114,8 +114,8 @@ function getAddTaskStructure() {
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
-                                        <div id="listContainer" class="listContainer dNone">
-                                            <ul class="dropdownList dNone" id="dropdownListCategory">
+                                        <div id="dropdownListCategory" class="listContainer dNone">
+                                            <ul class="dropdownList"> 
                                                 <span class="puffer"></span>
                                                 <li class="listElement" onclick="selectCategory('Technical Task')">
                                                     Technical Task</li>

@@ -28,7 +28,7 @@ function toggleDropdownName() {
     let customDropdownName = document.getElementById('customDropdownName');
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
-    let listContainer = document.getElementById('listContainer');
+    let listContainer = document.getElementById('contactListContainer');
     customDropdownName.classList.add('activeBorder');
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
