@@ -1,0 +1,146 @@
+.navbar a:hover {
+    color: #ffffff;
+    background-color: #091931;
+}
+
+.loginContainer {
+    width: 100%;
+}
+
+.loginIcon:hover {
+    color: #C6C6C6;
+}
+
+.legal-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 48px;
+}
+
+.legal-container a {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #C6C6C6;
+}
+
+.legal-container a:hover {
+    background-color: #091931;
+}
+
+.nav-icons {
+    width: 30px;
+}
+
+
+
+.img_off,
+#summary_icon:hover .img_on {
+    display: none;
+}
+
+.img_on,
+#summary_icon:hover .img_off {
+    display: block;
+}
+
+.img_off,
+#add_task_icon:hover .img_on {
+    display: none;
+}
+
+.img_on,
+#add_task_icon:hover .img_off {
+    display: block;
+}
+
+.img_off,
+#board_icon:hover .img_on {
+    display: none;
+}
+
+.img_on,
+#board_icon:hover .img_off {
+    display: block;
+}
+
+.img_off,
+#contacts_icon:hover .img_on {
+    display: none;
+}
+
+.img_on,
+#contacts_icon:hover .img_off {
+    display: block;
+}
+
+
+@media(max-width:430px) {
+    main {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    nav {
+        position: absolute;
+        overflow-y: hidden;
+        width: 430px;
+        height: 80px;
+        bottom: 0;
+        justify-content: flex-end;
+        flex-direction: row;
+    }
+
+    .navbar {
+        width: 430px;
+        position: absolute;
+        justify-content: space-between;
+        flex-direction: row;
+        overflow-y: hidden;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .navbar a {
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        text-decoration: none;
+        color: #C6C6C6;
+        gap: 8px;
+        width: 100%;
+        height: 45px;
+        padding-left: 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        gap: 10px;
+    }
+
+    .upper-container {
+        margin-top: 0;
+        width: 100vh;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .legal-container {
+        display: none;
+    }
+
+    .sidebar-logo-img {
+        display: none;
+    }
+
+    .hoverContainer {
+        width: 80px;
+        height: 76px;
+        overflow: hidden;
+        border-radius: 16px;
+    }
+}
