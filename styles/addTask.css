@@ -281,6 +281,10 @@ h1 {
     padding: 10px;
 }
 
+.assignedInput {
+    border: none;
+}
+
 .dropdownList {
     position: relative;
     width: 100%;

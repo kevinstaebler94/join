@@ -14,6 +14,17 @@ let colors = [
     "#6e52ff", // gelb
 ];
 
+window.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        // Dropdown schließen
+        document.getElementById('dropdownListName').classList.add('dNone');
+        document.getElementById('dropdownIconName').classList.remove('rotate');
+        document.getElementById('customDropdownName').classList.remove('activeBorder');
+        document.getElementById('contactListContainer').classList.add('dNone');
+    }
+});
+
+
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
     myCheckbox.checked = false;
@@ -29,12 +40,15 @@ function toggleDropdownName() {
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
     let listContainer = document.getElementById('contactListContainer');
+    let assignedInput = document.getElementById('assignedInput');
     customDropdownName.classList.add('activeBorder');
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
     listContainer.classList.toggle('dNone');
     if (isOpen) {
         getContact();
+    } else {
+        assignedInput.blur();
     }
 }
 
@@ -59,7 +73,7 @@ function toggleDropdownName() {
 //     }
 // }
 
-function closeDropdownName() {
+function closeDropdownName() { //check if needed
     let customDropdownName = document.getElementById('customDropdownName');
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
@@ -76,6 +90,33 @@ function toggleDropdownCategory() {
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
 }
+
+window.addEventListener('click', function (event) {
+    const wrappers = document.querySelectorAll('.customSelectWrapper');
+    const contactListContainer = document.getElementById('contactListContainer');
+    const assignedInput = document.getElementById('assignedInput');
+    const clickInsideContactList = contactListContainer.contains(event.target);
+    const clickInsideAssignedInput = event.target.closest('#assignedInput');
+    let clickInsideAnyWrapper = false;
+    wrappers.forEach(wrapper => {
+        if (wrapper.contains(event.target)) {
+            clickInsideAnyWrapper = true;
+        }
+    });
+    if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
+        // Klick war außerhalb aller Wrapper → Dropdowns schließen
+        document.getElementById('dropdownListName').classList.add('dNone');
+        document.getElementById('dropdownIconName').classList.remove('rotate');
+        document.getElementById('customDropdownName').classList.remove('activeBorder');
+        document.getElementById('customDropdownCategory').classList.remove('activeBorder');
+        document.getElementById('dropdownListCategory').classList.add('dNone');
+        document.getElementById('dropdownIconCategory').classList.remove('rotate');
+        contactListContainer.classList.add('dNone');
+    }
+});
+
+
+
 
 function selectPriority(priority) {
     let urgentBtn = document.getElementById('priorityUrgentBtn');
