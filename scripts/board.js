@@ -9,7 +9,6 @@ async function renderTasks() {
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
   columns.forEach(id => document.getElementById(id).innerHTML = "");
-
   let taskArr = Object.values(tasks || {});
 
   taskArr.forEach(task => {
@@ -186,6 +185,8 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
 }
 
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
+  let initial = initials.map(init => `<span id="assignedUser" class="assignedUser">${init}</span>`);
+
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
@@ -194,7 +195,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
       ${progressBarHTML}
       <div class="assignedToContainer">
         <div class="assignedUsers">
-          <span id="assignedUser" class="assignedUser">${initials}</span>
+          ${initial}
         </div>
         <img src="/assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
       </div>
