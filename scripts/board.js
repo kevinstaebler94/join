@@ -25,6 +25,7 @@ async function renderTasks() {
       column.innerHTML = blankTask(id);
     }
   });
+  await initProgressBar(tasks);
 }
 
 function getTaskComponents(task) {
@@ -163,7 +164,7 @@ async function handleCheckbox(checkbox) {
   showProgressBar(isChecked, checkboxTotal, taskId);
 }
 
-function showProgressBar(isChecked, checkboxTotal, taskId) {
+async function showProgressBar(isChecked, checkboxTotal, taskId) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
   if(progressBar) {
     let progress = (isChecked / checkboxTotal) * 100;
@@ -199,4 +200,13 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
       </div>
     </div>
   `
+}
+
+async function initProgressBar(tasksData) { 
+  Object.entries(tasksData).forEach(([taskId, tasksData]) => {
+    let subtask = tasksData.subtask || [];
+    let isChecked = subtask.filter(st => st.done === true).length;
+    let checkboxTotal = subtask.length;
+    showProgressBar(isChecked, checkboxTotal, taskId);
+  })
 }
