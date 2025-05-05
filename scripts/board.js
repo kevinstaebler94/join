@@ -167,7 +167,9 @@ async function showProgressBar(isChecked, checkboxTotal, taskId) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
   if(progressBar) {
     let progress = (isChecked / checkboxTotal) * 100;
-    progressBar.style.width = (`${progress}%`);
+    setTimeout(() => {
+      progressBar.style.width = (`${progress}%`);
+    }, 10);
   }
 }
 
