@@ -1,306 +1,99 @@
-body {
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-    font-family: "Inter", sans-serif;
-}
+@media (max-width: 430px) {
 
-h1 {
-    font-size: 61px;
-    font-weight: 700;
-}
+    html,
+    body {
+        overflow-x: hidden;
+    }
 
-span {
-    line-height: 2.025rem;
-}
-
-.main {
-    height: 100%;
-    display: flex;
-}
-
-.content {
-    display: flex;
-    min-height: 100vh;
-    overflow-x: hidden;
-    width: 100%;
-}
-
-.mainContent {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-
-
-.mainContentWrapper {
-    display: flex;
-    flex-direction: column;
-    padding-left: 4rem;
-    padding-right: 4rem;
-}
-
-.mainContainer {
-    display: flex;
-    background-color: #f6f7f8;
-    height: 100%;
-    justify-content: center;
-}
-
-.greetingContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 21.875rem;
-    padding-left: 3rem;
-}
-
-.timeOfDay {
-    font-size: 2.9375rem;
-    font-weight: 500;
-}
-
-.userName {
-    font-size: 4rem;
-    color: #29abe2;
-    font-weight: 700;
-}
-
-.overviewSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: clamp(18.75rem, 100%, 34.375rem);
-    width: clamp(18.75rem, 100%, 34.375rem);
-    gap: 1rem;
-}
-
-.topTasks {
-    display: flex;
-    gap: 2rem;
-    height: 30%;
-    width: 100%;
-}
-
-.toDoContainer {
-    width: 50%;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1.875rem;
-    padding: 1rem 1.1875rem;
-    gap: 0.5rem;
-    transition: 0.1s ease-in-out;
-    box-shadow: 0px 0px 0.3125rem 0px #cdcdcd;
-    text-decoration: none;
-    color: #2A3647;
-}
-
-.toDoContainer:hover {
-    transform: scale(1.08);
-    background-color: #2A3647;
-    color: white;
-    cursor: pointer;
-}
-
-.toDoImg {
-    background-color: #2A3647;
-    width: 4.3125rem;
-    height: 4.3125rem;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.toDoImg .hoverIcon {
-    position: absolute;
-    opacity: 0;
-}
-
-.toDoContainer:hover .toDoImg .defaultIcon {
-    opacity: 0;
-    cursor: pointer;
-}
-
-.toDoContainer:hover .toDoImg .hoverIcon {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.toDoCount {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.toDoCount span {
-    font-size: 1.25rem;
-    font-weight: 400;
-}
-
-.doneContainer {
-    display: flex;
-}
-
-.midSection {
-    display: flex;
-    gap: 2rem;
-    height: 30%;
-    width: 100%;
-}
-
-.midContent {
-    width: 100%;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    border-radius: 1.875rem;
-    padding: 1rem 1.1875rem;
-    transition: 0.1s ease-in-out;
-    box-shadow: 0px 0px 0.3125rem 0px #cdcdcd;
-    text-decoration: none;
-    color: #2A3647;
-}
-
-.midContent:hover {
-    transform: scale(1.08);
-    background-color: #2A3647;
-    color: white;
-    cursor: pointer;
-}
-
-.midContentLeft {
-    display: flex;
-    align-items: center;
-    gap: 1.125rem;
-}
-
-.urgentArrows {
-    background-color: #FF3D01;
-    width: 4.3125rem;
-    height: 4.3125rem;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.urgentContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.urgentContent span {
-    font-weight: 400;
-    font-size: 1rem;
-}
-
-.midSectionDivider {
-    width: 0.0625rem;
-    height: 100%;
-    background-color: #D1D1D1;
-}
-
-.dateContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.dateContainer p {
-    font-weight: 700;
-    font-size: 1.3125rem;
-}
-
-.dateContainer span {
-    font-weight: 400;
-    font-size: 1rem;
-}
-
-.bottomBar {
-    justify-content: space-evenly;
-    display: flex;
-    gap: 2rem;
-    height: 30%;
-    width: 100%;
-}
-
-.bottomBarTasks {
-    width: 10.625rem;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1.875rem;
-    padding: 1rem 1.1875rem;
-    transition: 0.1s ease-in-out;
-    box-shadow: 0px 0px 0.3125rem 0px #cdcdcd;
-    text-decoration: none;
-    color: #2A3647;
-}
-
-.bottomBarTasks:hover {
-    transform: scale(1.08);
-    background-color: #2A3647;
-    color: white;
-    cursor: pointer;
-}
-
-p {
-    font-size: 4rem;
-    font-weight: 600;
-    margin: 0;
-}
-
-.bottomBarTasks span {
-    font-size: 1.25rem;
-    font-weight: 400;
-}
-
-.taskCounterContainer {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-
-@media(max-width:430px) {
     .greetingContainer {
         display: none;
     }
 
     .summaryHeadline {
         flex-direction: column;
-        gap: 0.875rem;
+        gap: 0.5rem;
         padding-top: 2rem;
-        justify-content: flex-start;
+        align-items: flex-start;
     }
 
     h1 {
-        font-size: 47px;
+        font-size: 36px;
     }
 
     .blueDivider {
         display: none;
     }
 
+    .content {
+        width: 100%;
+    }
+
+    .mainContentWrapper {
+        padding: 1rem;
+    }
+
     .overviewSection {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: clamp(26.75rem, 100%, 30.375rem);
-        width: clamp(26.75rem, 100%, 30.375rem);
+        width: 100%;
         gap: 1rem;
     }
 
-    .mainContent {
-        overflow: auto;
-        width: 100vh;
+    .topTasks,
+    .midSection,
+    .bottomBar {
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .toDoContainer,
+    .midContent,
+    .bottomBarTasks {
+        width: calc(50% - -10.5rem);
+        box-sizing: border-box;
+    }
+
+    .midSection {
+        align-items: stretch;
+    }
+
+    .midContent {
+        flex-direction: row;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .midContentLeft {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bottomBarTasks .taskCounterContainer {
+        align-items: center;
+    }
+
+    p {
+        font-size: 32px;
+    }
+
+    .toDoImg,
+    .urgentArrows {
+        width: 50px;
+        height: 50px;
+    }
+
+    .toDoCount span,
+    .urgentContent span,
+    .bottomBarTasks span {
+        font-size: 14px;
+        line-height: 1.025rem;
+    }
+
+    .dateContainer p {
+        font-size: 16px;
+    }
+
+    .dateContainer span {
+        font-size: 12px;
     }
 }

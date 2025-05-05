@@ -1,86 +1,3 @@
-.navbar a:hover {
-    color: #ffffff;
-    background-color: #091931;
-}
-
-.loginContainer {
-    width: 100%;
-}
-
-.loginIcon:hover {
-    color: #C6C6C6;
-}
-
-.legal-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 48px;
-}
-
-.legal-container a {
-    width: 100%;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: #C6C6C6;
-}
-
-.legal-container a:hover {
-    background-color: #091931;
-}
-
-.nav-icons {
-    width: 30px;
-}
-
-
-
-.img_off,
-#summary_icon:hover .img_on {
-    display: none;
-}
-
-.img_on,
-#summary_icon:hover .img_off {
-    display: block;
-}
-
-.img_off,
-#add_task_icon:hover .img_on {
-    display: none;
-}
-
-.img_on,
-#add_task_icon:hover .img_off {
-    display: block;
-}
-
-.img_off,
-#board_icon:hover .img_on {
-    display: none;
-}
-
-.img_on,
-#board_icon:hover .img_off {
-    display: block;
-}
-
-.img_off,
-#contacts_icon:hover .img_on {
-    display: none;
-}
-
-.img_on,
-#contacts_icon:hover .img_off {
-    display: block;
-}
-
-
 @media(max-width:430px) {
     main {
         height: 100vh;
@@ -88,17 +5,16 @@
     }
 
     nav {
-        position: absolute;
-        overflow-y: hidden;
-        width: 430px;
+        position: fixed;
+        width: 100%;
         height: 80px;
         bottom: 0;
         justify-content: flex-end;
         flex-direction: row;
+        z-index: 99;
     }
 
     .navbar {
-        width: 430px;
         position: absolute;
         justify-content: space-between;
         flex-direction: row;
@@ -124,7 +40,7 @@
 
     .upper-container {
         margin-top: 0;
-        width: 100vh;
+        width: 100%;
         justify-content: space-between;
         flex-direction: row;
     }
