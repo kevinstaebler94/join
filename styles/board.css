@@ -332,7 +332,7 @@ h2 {
     }
 }
 
-@media(max-width:1200px) {
+@media(max-width:1250px) {
     html, body {
         font-size: 12px;
     }
