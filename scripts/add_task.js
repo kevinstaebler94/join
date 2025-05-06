@@ -14,16 +14,17 @@ let colors = [
     "#6e52ff", // gelb
 ];
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
-        // Dropdown schließen
         document.getElementById('dropdownListName').classList.add('dNone');
         document.getElementById('dropdownIconName').classList.remove('rotate');
         document.getElementById('customDropdownName').classList.remove('activeBorder');
         document.getElementById('contactListContainer').classList.add('dNone');
+        document.getElementById('customDropdownCategory').classList.remove('activeBorder');
+        document.getElementById('dropdownListCategory').classList.add('dNone');
+        document.getElementById('dropdownIconCategory').classList.remove('rotate');
     }
 });
-
 
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
@@ -46,7 +47,9 @@ function toggleDropdownName() {
     dropdownIcon.classList.toggle('rotate');
     listContainer.classList.toggle('dNone');
     if (isOpen) {
+
         getContact();
+        assignedInput.focus();
     } else {
         assignedInput.blur();
     }
@@ -55,10 +58,10 @@ function toggleDropdownName() {
 // NO LONGER NEEDED???
 
 // function toggleDropdownNameEdit(taskId, encodedContacts) {
-    
+
 //     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
 //     console.log(taskId);
-    
+
 //     toggleOpen();
 //     let customDropdownName = document.getElementById('customDropdownName');
 //     let dropdown = document.getElementById('dropdownListName');
@@ -91,32 +94,34 @@ function toggleDropdownCategory() {
     dropdownIcon.classList.toggle('rotate');
 }
 
-window.addEventListener('click', function (event) {
-    const wrappers = document.querySelectorAll('.customSelectWrapper');
-    const contactListContainer = document.getElementById('contactListContainer');
-    const assignedInput = document.getElementById('assignedInput');
-    const clickInsideContactList = contactListContainer.contains(event.target);
-    const clickInsideAssignedInput = event.target.closest('#assignedInput');
-    let clickInsideAnyWrapper = false;
-    wrappers.forEach(wrapper => {
-        if (wrapper.contains(event.target)) {
-            clickInsideAnyWrapper = true;
+window.addEventListener('mousedown', function (event) {
+    setTimeout(() => {
+        const wrappers = document.querySelectorAll('.customSelectWrapper');
+        const contactListContainer = document.getElementById('contactListContainer');
+        const assignedInput = document.getElementById('assignedInput');
+        const clickInsideContactList = contactListContainer.contains(event.target);
+        const clickInsideAssignedInput = assignedInput.contains(event.target);
+        let clickInsideAnyWrapper = false;
+        wrappers.forEach(wrapper => {
+            if (wrapper.contains(event.target)) {
+                clickInsideAnyWrapper = true;
+            }
+        });
+        if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
+            document.getElementById('dropdownListName').classList.add('dNone');
+            document.getElementById('dropdownIconName').classList.remove('rotate');
+            document.getElementById('customDropdownName').classList.remove('activeBorder');
+            document.getElementById('customDropdownCategory').classList.remove('activeBorder');
+            document.getElementById('dropdownListCategory').classList.add('dNone');
+            document.getElementById('dropdownIconCategory').classList.remove('rotate');
+            contactListContainer.classList.add('dNone');
+            isOpen = false;
+            if (assignedInput.value == '') {
+                assignedInput.value = 'Assigned to';
+            }
         }
-    });
-    if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
-        // Klick war außerhalb aller Wrapper → Dropdowns schließen
-        document.getElementById('dropdownListName').classList.add('dNone');
-        document.getElementById('dropdownIconName').classList.remove('rotate');
-        document.getElementById('customDropdownName').classList.remove('activeBorder');
-        document.getElementById('customDropdownCategory').classList.remove('activeBorder');
-        document.getElementById('dropdownListCategory').classList.add('dNone');
-        document.getElementById('dropdownIconCategory').classList.remove('rotate');
-        contactListContainer.classList.add('dNone');
-    }
+    }, 30);
 });
-
-
-
 
 function selectPriority(priority) {
     let urgentBtn = document.getElementById('priorityUrgentBtn');
@@ -193,9 +198,9 @@ function selectCategory(myCategory) {
 function getSubtask() {
     let subtaskInput = document.getElementById('subtaskInput');
     let subtaskList = document.getElementById('subtaskList');
-    let subtaskObj = {subtask: subtaskInput.value, done: false}
+    let subtaskObj = { subtask: subtaskInput.value, done: false }
     subtaskList.innerHTML += `<li>${subtaskInput.value}</li>`;
-    subtasksArr.push(subtaskObj);    
+    subtasksArr.push(subtaskObj);
     subtaskInput.value = '';
 }
 
@@ -204,7 +209,7 @@ function checkValidation() {
     let requiredTitle = document.getElementById('requiredTitle');
     let dateInput = document.getElementById('dateInput');
     let requiredDate = document.getElementById('requiredDate');
-    let selectedCategory = document.getElementById('selectedCategory');    
+    let selectedCategory = document.getElementById('selectedCategory');
     if (titleInput.value == '') {
         titleInput.classList.add('required');
         requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
@@ -215,7 +220,6 @@ function checkValidation() {
         titleInput.classList.add('required');
     } else {
         pushTasks(loggedInUser, assignedArr);
-        return; // only for testing
         showAddedBoardImg();
     }
 }
@@ -253,19 +257,41 @@ function deleteTaskValues(titleInput, descriptionInput, dateInput, assignedConta
 }
 
 async function getContact() {
-    let contacts = await getData("/users/" +loggedInUser + "/contacts");
-    let dropdownListName = document.getElementById('dropdownListName');
-    dropdownListName.innerHTML = '';
+    let contacts = await getData("/users/" + loggedInUser + "/contacts");
+    contactArr = [];
     for (let key in contacts) {
-        let isChecked = assignedArr.includes(contacts[key].name) ? 'checked' : '';
         if (contacts.hasOwnProperty(key)) {
-            contactArr.push(contacts[key])
+            contactArr.push(contacts[key]);
         }
-        dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
-                                        <p id="${contacts[key].name}">${contacts[key].name}</p>
-                                        <input onclick="checkAssignedContact(this)" id="${contacts[key].name}" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}" ${isChecked}>
-                                    </li></label>`;
     }
+    renderFilteredContacts();
+}
+
+function renderFilteredContacts(filter = '') {
+    const dropdownListName = document.getElementById('dropdownListName');
+    const filteredContacts = contactArr.filter(contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+    dropdownListName.innerHTML = '';
+    filteredContacts.forEach(contact => {
+        let isChecked = assignedArr.includes(contact.name) ? 'checked' : '';
+        dropdownListName.innerHTML += `<label>
+                                            <li id="listName${contact.name}" class="listElement">
+                                                <p>${contact.name}</p>
+                                                <input onclick="checkAssignedContact(this)" 
+                                                    id="${contact.name}" 
+                                                    type="checkbox" 
+                                                    class="checkbox" 
+                                                    name="selectedNames" 
+                                                    data-name="${contact.name}" 
+                                                    ${isChecked}>
+                                            </li>
+                                        </label>`;
+    });
+}
+
+function filterContacts(value) {
+    renderFilteredContacts(value);
 }
 
 // NO LONGER NEEDED???
@@ -290,7 +316,7 @@ async function getContact() {
 function pushAssignedContacts(assignedContacts) {
     assignedContacts.forEach(assignedContact => {
         assignedArr.push(assignedContact);
-        
+
     });
 }
 
@@ -298,14 +324,14 @@ function checkAssignedContact(checkboxElement) {
     let assignedContainer = document.getElementById('assignedContainer');
     let checkedName = checkboxElement.dataset.name;
     let index = assignedArr.indexOf(checkedName);
-    
+
     if (checkboxElement.checked) {
         assignedArr.push(checkedName);
     } else {
         if (index > -1) {
             assignedArr.splice(index, 1);
         }
-    } 
+    }
     assignedContainer.innerHTML = '';
     assignedArr.forEach(contact => {
         assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;

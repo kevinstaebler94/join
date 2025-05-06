@@ -84,11 +84,12 @@ function getAddTaskStructure() {
                                                     alt=""></span>
                                         </div>
                                     </label>
-                                    <label class="directionColumn customSelectWrapper">Assigned to
+                                    <label onfocusin="toggleDropdownName()" class="directionColumn customSelectWrapper">Assigned to
                                         <div id="customDropdownName" class="customDropdown"
-                                            onclick="toggleDropdownName()">
+                                            >
                                             <div class="dropdownHeader">
-                                                <span id="selectedName">Assigned to</span>
+                                                
+                                                <span id="selectedName"><input onfocus="this.select()" oninput="filterContacts(this.value)" id="assignedInput" class="assignedInput" value="Assigned to"></span>
                                                 <img id="dropdownIconName" class="dropdownIcon"
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
