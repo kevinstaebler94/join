@@ -1,0 +1,46 @@
+@media (max-width: 430px) {
+    header {
+        height: 80px;
+    }
+
+    .headerContent {
+        max-width: 100%;
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    h3 {
+        display: none;
+    }
+
+    .mobileHeaderImg {
+        display: flex;
+        width: 32px;
+        height: 39px;
+    }
+
+    .userIcon {
+        height: 40px;
+        width: 40px;
+    }
+
+    .burgerMenuMobileLink {
+        display: flex;
+    }
+
+    .burgerMenu {
+        height: 204px;
+        top: 40px;
+        padding: 9px;
+
+    }
+
+    .burgerMenu a {
+        font-size: 16px;
+        padding: 9px;
+    }
+
+    .burgerMenu.show {
+        right: -9px;
+    }
+}

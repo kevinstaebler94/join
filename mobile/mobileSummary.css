@@ -34,7 +34,7 @@
 
     .overviewSection {
         width: 100%;
-        gap: 1rem;
+        height: 384px;
     }
 
     .topTasks,
@@ -64,7 +64,7 @@
     }
 
     .midContentLeft {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
     }
 

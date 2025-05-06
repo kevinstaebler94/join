@@ -17,6 +17,9 @@ header {
     padding-left: 64px;
 }
 
+.mobileHeaderImg {
+    display: none;
+}
 
 .headerLinks {
     display: flex;
@@ -82,6 +85,10 @@ h3 {
     border-bottom-right-radius: 20px;
     text-decoration: none;
     cursor: pointer;
+}
+
+.burgerMenuMobileLink {
+    display: none;
 }
 
 .burgerMenu a:hover {
