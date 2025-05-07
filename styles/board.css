@@ -266,6 +266,10 @@ h2 {
     background-color: #4589ff;
     border-radius: 10px;
     transition: width 1s ease-in-out;  
+    /* width: 0%; */
+}
+
+.progressBarCurrentWith {
     width: 0%;
 }
 

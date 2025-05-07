@@ -4,7 +4,7 @@ async function initBoard() {
   await renderTasks();
 }
 
-async function renderTasks() {  
+async function renderTasks() {
   let tasks = await getData('/users/' + loggedInUser + '/tasks');
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
 
@@ -152,7 +152,7 @@ function convertNameToInitial(contactData) {
 async function handleCheckbox(checkbox) {
   let list = document.querySelectorAll('.assignedToModal input[type="checkbox"]')
   let taskId = checkbox.dataset.taskId;
-  let currentSubtask = checkbox.nextElementSibling ?.textContent.trim();
+  let currentSubtask = checkbox.nextElementSibling?.textContent.trim();
   let done = checkbox.checked
   let subtaskId = checkbox.dataset.subtaskId;
   let checkboxArr = Array.from(list);
@@ -165,7 +165,7 @@ async function handleCheckbox(checkbox) {
 
 async function showProgressBar(isChecked, checkboxTotal, taskId) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
-  if(progressBar) {
+  if (progressBar) {
     let progress = (isChecked / checkboxTotal) * 100;
     setTimeout(() => {
       progressBar.style.width = (`${progress}%`);
@@ -173,17 +173,17 @@ async function showProgressBar(isChecked, checkboxTotal, taskId) {
   }
 }
 
-function getProgressBarHTML(taskComponents, subtaskData, isChecked) {  
+function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
   return subtaskData.length > 0 ?
-  `
+    `
     <div id="subtasksContainer${taskComponents.id}" class="subtasksContainer">
       <div class="progressBarContainer">
-        <div id="progressBar${taskComponents.id}" class="progressBar"></div>  
+        <div id="progressBar${taskComponents.id}" class="progressBar progressBarCurrentWith"></div>  
       </div>
       <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">${isChecked}/${subtaskData.length}</span>
     </div>
   `
-  : "";
+    : "";
 }
 
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
@@ -205,7 +205,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
   `
 }
 
-async function initProgressBar(tasksData) { 
+async function initProgressBar(tasksData) {
   Object.entries(tasksData).forEach(([taskId, tasksData]) => {
     let subtask = tasksData.subtask || [];
     let isChecked = subtask.filter(st => st.done === true).length;
