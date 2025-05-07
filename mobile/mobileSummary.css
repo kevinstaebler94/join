@@ -12,16 +12,29 @@
     .summaryHeadline {
         flex-direction: column;
         gap: 0.5rem;
-        padding-top: 2rem;
+        padding-top: 3.5rem;
         align-items: flex-start;
     }
 
+    .summaryHeadline span {
+        font-size: 20px;
+    }
+
     h1 {
-        font-size: 36px;
+        font-size: 47px;
     }
 
     .blueDivider {
         display: none;
+    }
+
+    .blueDividerMobile {
+        display: flex;
+        width: 5.625rem;
+        height: 0.1875rem;
+        background-color: #29ABE2;
+        border-radius: 0.625rem;
+        ;
     }
 
     .content {
@@ -29,12 +42,18 @@
     }
 
     .mainContentWrapper {
-        padding: 1rem;
+        padding-left: 1rem;
+        padding-right: 0rem;
+        gap: 3rem;
+    }
+
+    .mainContainer {
+        display: block;
     }
 
     .overviewSection {
-        width: 100%;
-        height: 384px;
+        width: 396px;
+        gap: 2rem;
     }
 
     .topTasks,
@@ -44,23 +63,20 @@
         gap: 1rem;
         width: 100%;
         justify-content: space-between;
+        height: 122px;
     }
 
     .toDoContainer,
     .midContent,
     .bottomBarTasks {
-        width: calc(50% - -10.5rem);
         box-sizing: border-box;
-    }
-
-    .midSection {
-        align-items: stretch;
     }
 
     .midContent {
         flex-direction: row;
         padding: 1rem;
         gap: 1rem;
+
     }
 
     .midContentLeft {
@@ -73,7 +89,8 @@
     }
 
     p {
-        font-size: 32px;
+        font-size: 47px;
+        font-weight: 600;
     }
 
     .toDoImg,
