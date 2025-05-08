@@ -95,6 +95,8 @@ function toggleDropdownCategory() {
 }
 
 window.addEventListener('mousedown', function (event) {
+    const modal = document.getElementById('addTaskModal');
+    if (!modal || modal.classList.contains('dNone')) return;
     setTimeout(() => {
         const wrappers = document.querySelectorAll('.customSelectWrapper');
         const contactListContainer = document.getElementById('contactListContainer');

@@ -18,6 +18,7 @@ function closeModal() {
     let overlay = document.getElementById('boardOverlay');
     let addTaskModal = document.getElementById('addTaskModal');
     let filledTaskModal = document.getElementById('filledTaskModal');
+    addTaskModal.innerHTML = '';
     overlay.classList.add('dNone');
     addTaskModal.classList.add('dNone');
     filledTaskModal.classList.add('dNone');
@@ -169,14 +170,14 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                     <h4 class="taskTitleModal">${title}</h4>
                                     <p class="taskDescriptionModal">${description}</p>
                                     <div class="dueContainerModal">
-                                        <div class="dueInfo"><p>Due date:</p><span>${date}</span></div>
-                                        <div class="dueInfo"><p>Priority:</p><span class="priorityContainer">${priority}<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
+                                        <div class="dueInfo"><p class="titleLine marginDate">Due date:</p><span>${date}</span></div>
+                                        <div class="dueInfo"><p class="titleLine marginPriority">Priority:</p><span class="priorityContainer">${priority}<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
                                     </div>
                                     <div id="assignedContainerModal" class="assignedContainerModal">
-                                        <p>Assigned to:</p>
+                                        <p class="titleLine">Assigned to:</p>
                                     </div>
                                     <div id="subtaskContainerModal" class="subtaskContainerModal">
-                                        <p>Subtasks</p>
+                                        <p class="titleLine">Subtasks</p>
                                     </div>
                                     <div class="subtaskContainerModal">
                                         <ul id="subtaskModalList"></ul>

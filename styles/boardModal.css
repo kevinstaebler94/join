@@ -44,6 +44,7 @@
     padding: 0.1em 0.85em;
     font-weight: 400;
     margin-bottom: 1.5em;
+    display: flex;
 }
 
 .userStoryModal {
@@ -55,7 +56,7 @@
 }
 
 .taskTitleModal {
-    font-size: 1.3rem;
+    font-size: 3.5rem;
     font-weight: 700;
     color: #2A3647;
     margin-bottom: 0.75em;
@@ -63,11 +64,22 @@
 }
 
 .taskDescriptionModal {
-    color: #A8A8A8;
     font-size: 1.2rem;
     font-weight: 300;      
     margin-bottom: 1.5em;
     overflow-wrap: break-word;
+}
+
+.marginDate {
+    margin-right: 1rem;
+}
+
+.marginPriority {
+    margin-right: 2rem;
+}
+
+.titleLine {
+    color: #2A3647;
 }
 
 .subtasksContainerModal {
