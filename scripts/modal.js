@@ -6,7 +6,7 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
-function openFilledTaskModal(taskId, category, title, description, date, priority, column,subtaskObj, encodedContacts) {
+function openFilledTaskModal(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
     overlay.classList.remove('dNone');
@@ -86,10 +86,8 @@ function getAddTaskStructure() {
                                         </div>
                                     </label>
                                     <label onfocusin="toggleDropdownName()" class="directionColumn customSelectWrapper">Assigned to
-                                        <div id="customDropdownName" class="customDropdown"
-                                            >
+                                        <div id="customDropdownName" class="customDropdown">
                                             <div class="dropdownHeader">
-                                                
                                                 <span id="selectedName"><input onfocus="this.select()" oninput="filterContacts(this.value)" id="assignedInput" class="assignedInput" value="Assigned to"></span>
                                                 <img id="dropdownIconName" class="dropdownIcon"
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
@@ -202,7 +200,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                             </div>
                         </div>
                         
-                        <div class="addTaskContent editTaskContent">
+                        <div class="addTaskContent editTaskContent modalScrollbar">
                             <div class="leftContainer">
                                 <form class="leftAddTaskForm">
                                     <label class="directionColumn">
@@ -276,9 +274,14 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                     </label>
                                     <ul id="subtaskListEdit" class="subtaskListEdit"></ul>
                                 </form>
-                                <button onclick="changeTasks('${taskId}', '${column}', '${category}')">OK</button>
+                                
                             </div>
+                            
                         </div>
+                        <span class="submitBtn checkBtn hoverBtn changeBtn" onclick="changeTasks('${taskId}', '${column}', '${category}')">Ok
+                                    <img class="submitIcons" src="./assets/img/createIcon.svg" alt="">
+                        </span>
+                        
                     </div>`;
     selectPriority(priority);
     getContactsEdit(contacts);
@@ -312,8 +315,8 @@ async function getSubtasksModal(subtasks, taskId) {
     entries.forEach(([subtaskId, subtask]) => {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
         let isChecked = subtask.done ? 'checked' : '';
-        subtaskContainer.innerHTML += `<div class="assignedToModal"><input type="checkbox" ${isChecked}
-        onchange="handleCheckbox(this)" data-task-id="${taskId}" data-subtask-id="${subtaskId}"><p>${subtask.subtask}</p></div>`;
+        subtaskContainer.innerHTML += `<label class="assignedToModal customCheckbox"><input type="checkbox" ${isChecked}
+        onchange="handleCheckbox(this)" data-task-id="${taskId}" data-subtask-id="${subtaskId}"><span class="icon"></span><p>${subtask.subtask}</p></label>`;
     });
 }
 
@@ -371,7 +374,7 @@ function addNewSubtask() {
                                         </span>
                                     </div>
                                 </li>`;
-    subtasksArr[0].push({subtask: inputValue.value, done: false});
+    subtasksArr[0].push({ subtask: inputValue.value, done: false });
     inputValue.value = '';
     subtaskInput.blur();
     setTimeout(() => {

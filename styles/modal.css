@@ -33,3 +33,45 @@
     transform: translate(-50%, -50%);
     z-index: 6;
 }
+
+.mainEditContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalScrollbar {
+    overflow-y: scroll;
+    flex: 1;
+    margin: 0 !important;
+}
+
+.changeBtn {
+    width: 60px;
+    position: relative;
+    left: 340px;
+    cursor: pointer;
+}
+
+
+
+/* .modalScrollbar {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+.modalScrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modalScrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+}
+
+.modalScrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+} */

@@ -277,7 +277,7 @@ function renderFilteredContacts(filter = '') {
     dropdownListName.innerHTML = '';
     filteredContacts.forEach(contact => {
         let isChecked = assignedArr.includes(contact.name) ? 'checked' : '';
-        dropdownListName.innerHTML += `<label>
+        dropdownListName.innerHTML += `<label class="customCheckbox">
                                             <li id="listName${contact.name}" class="listElement">
                                                 <p>${contact.name}</p>
                                                 <input onclick="checkAssignedContact(this)" 
@@ -287,6 +287,7 @@ function renderFilteredContacts(filter = '') {
                                                     name="selectedNames" 
                                                     data-name="${contact.name}" 
                                                     ${isChecked}>
+                                                    <span class="icon"></span>
                                             </li>
                                         </label>`;
     });

@@ -150,9 +150,11 @@ function convertNameToInitial(contactData) {
 }
 
 async function handleCheckbox(checkbox) {
-  let list = document.querySelectorAll('.assignedToModal input[type="checkbox"]')
+  let list = document.querySelectorAll('.assignedToModal input[type="checkbox"]');
+  let label = checkbox.closest('label');
+  let currentSubtask = label?.querySelector('p')?.textContent.trim();
   let taskId = checkbox.dataset.taskId;
-  let currentSubtask = checkbox.nextElementSibling?.textContent.trim();
+  // let currentSubtask = checkbox.nextElementSibling?.textContent.trim();
   let done = checkbox.checked
   let subtaskId = checkbox.dataset.subtaskId;
   let checkboxArr = Array.from(list);

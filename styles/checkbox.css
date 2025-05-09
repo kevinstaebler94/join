@@ -1,0 +1,32 @@
+.customCheckbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+  user-select: none;
+}
+
+.customCheckbox input[type="checkbox"] {
+  display: none;
+}
+
+.customCheckbox .icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-image: url('../assets/img/unchecked.svg');
+  background-size: cover;
+  transition: background-image 0.2s ease;
+}
+
+.customCheckbox .icon:hover {
+  background-image: url('../assets/img/uncheckedHover.svg');
+}
+
+.customCheckbox input[type="checkbox"]:checked + .icon {
+  background-image: url('../assets/img/checked.svg');
+}
+
+.customCheckbox input[type="checkbox"]:checked + .icon:Hover {
+  background-image: url('../assets/img/checkedHover.svg');
+}
