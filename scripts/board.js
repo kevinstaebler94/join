@@ -190,12 +190,13 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
 
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
   let initial = initials.map(init => `<span id="assignedUser" class="assignedUser">${init}</span>`);
-  let shortenedDescription = shortenText(taskComponents.description, 45);
+  let shortenedTitle = shortenText(taskComponents.title, 60);
+  let shortenedDescription = shortenText(taskComponents.description, 35);
 
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
-      <h4 class="taskTitle">${taskComponents.title}</h4>
+      <h4 class="taskTitle">${shortenedTitle}</h4>
       <p class="taskDescription">${shortenedDescription}</p>
       ${progressBarHTML}
       <div class="assignedToContainer">
