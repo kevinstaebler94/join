@@ -130,7 +130,7 @@
 
               <div
                 id="done"
-                class="a column dropZone"
+                class="column dropZone"
                 ondrop="dropHandler(event)"
                 ondragover="dragoverHandler(event)"
               ></div>
@@ -163,7 +163,44 @@
                   />
                 </div>
                 <div
-                  id="inProgress"
+                  id="toDoMobile"
+                  class="column dropZone"
+                  ondrop="dropHandler(event)"
+                  ondragover="dragoverHandler(event)"
+                ></div>
+                <div class="taskButtonContainerMobile marginTop25">
+                  <span>In progress</span>
+                  <img
+                    onclick="openAddTaskModal()"
+                    src="./assets/img/plusIconDarkBlue.svg"
+                    alt=""
+                  />
+                </div>
+                <div
+                  id="inProgressMobile"
+                  class="column dropZone"
+                  ondrop="dropHandler(event)"
+                  ondragover="dragoverHandler(event)"
+                ></div>
+                <div class="taskButtonContainerMobile marginTop25">
+                  <span>Await feedback</span>
+                  <img
+                    onclick="openAddTaskModal()"
+                    src="./assets/img/plusIconDarkBlue.svg"
+                    alt=""
+                  />
+                </div>
+                <div
+                  id="awaitFeedbackMobile"
+                  class="column dropZone"
+                  ondrop="dropHandler(event)"
+                  ondragover="dragoverHandler(event)"
+                ></div>
+                <div class="taskButtonContainerMobile marginTop25">
+                  <span>Done</span>
+                </div>
+                <div
+                  id="doneMobile"
                   class="column dropZone"
                   ondrop="dropHandler(event)"
                   ondragover="dragoverHandler(event)"
