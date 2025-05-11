@@ -13,6 +13,10 @@
   margin-top: 2.5em;
 }
 
+.padding {
+  padding: 1.5em 0.85em 0.85em 0.85em;
+}
+
 .h2Mobile {
   font-size: 5rem;
 }
@@ -74,3 +78,7 @@
   filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg)
     brightness(95%) contrast(86%);
 }
+
+
+
+
