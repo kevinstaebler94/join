@@ -10,7 +10,7 @@
 
 .filledTaskModal {
     width: 500px;
-    height: 715px;
+    height: 740px;
     border-radius: 24px;
     background-color: #FFFFFF;
     padding: 1.25em;
@@ -56,7 +56,7 @@
 }
 
 .taskTitleModal {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: #2A3647;
     margin-bottom: 0.75em;
@@ -65,21 +65,19 @@
 
 .taskDescriptionModal {
     font-size: 1.2rem;
-    font-weight: 300;      
+    font-weight: 300;
     margin-bottom: 1.5em;
     overflow-wrap: break-word;
 }
 
-.marginDate {
-    margin-right: 1rem;
-}
-
-.marginPriority {
-    margin-right: 2rem;
-}
-
 .titleLine {
     color: #2A3647;
+    font-size: 18px;
+    width: 120px;
+}
+
+.mBottom {
+    margin-bottom: 12px;
 }
 
 .subtasksContainerModal {
@@ -104,33 +102,52 @@
     font-weight: 500;
 }
 
-/* .assignedToContainerModal {
+/* .assignedContainerModal {
+   
+} */
+
+.assignedToContainerModal {
     display: flex;
     justify-content: space-between;
     align-items: center;
-} */
+}
 
-/* .assignedUser {
+*/ .assignedUser {
     border-radius: 50%;
     padding: 0.5em 0.4em;
     position: relative;
     color: white;
     font-size: 0.9rem;
-} */
+}
 
-/* .assignedUserModal:nth-child(1) {
+.assignedContactModal {
+    border-radius: 50%;
+    padding: 0.5em;
+    position: relative;
+    color: white;
+    background-color: #0038ff;
+    font-size: 0.8rem;
+    width: 2.5em;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.assignedUserModal:nth-child(1) {
     background-color: chartreuse;
 }
 
 .assignedUserModal:nth-child(2) {
     background-color: rgb(51, 0, 255);
     left: -0.75em;
-} */
+}
 
-/* .assignedUserModal:nth-child(3) {
+.assignedUserModal:nth-child(3) {
     background-color: rgb(255, 68, 0);
     left: -1.5em;
-} */
+}
 
 .taskPrioLowModal,
 .taskPrioUrgentModal {
@@ -141,17 +158,11 @@
     width: 2rem;
 }
 
-.dueContainerModal {
-    display: flex;
-    flex-direction: column;
-    margin: 16px 0;
-    gap: 8px;
-}
-
-.dueInfo {
+.infoContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 12px;
 }
 
 .priorityContainer {
@@ -175,4 +186,48 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 0 0 12px 24px;
+}
+
+.subtaskContainerModal {
+    margin-bottom: 48px;
+}
+
+.modalBtnContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+}
+
+.modalBtn {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.modalBtn:hover {
+    color: #29ABE2;
+}
+
+.deleteBtnWrapper .defaultBtn {
+    display: inline-flex;
+}
+
+.deleteBtnWrapper .hoverBtn {
+    display: none;
+}
+
+.deleteBtnWrapper:hover .defaultBtn {
+    display: none;
+}
+
+.deleteBtnWrapper:hover .hoverBtn {
+    display: inline-flex;
+}
+
+.overflowScroll {
+    max-height: 118px;
+    overflow-y: auto;
 }

@@ -165,23 +165,30 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                         <img onclick="closeModal()" class="closeIconTask" src="./assets/img/closeIcon.svg" alt="">
                                     </div>
                                 </div>
+                                <div class="taskMainContent">
                                     <h4 class="taskTitleModal">${title}</h4>
                                     <p class="taskDescriptionModal">${description}</p>
-                                    <div class="dueContainerModal">
-                                        <div class="dueInfo"><p class="titleLine marginDate">Due date:</p><span>${date}</span></div>
-                                        <div class="dueInfo"><p class="titleLine marginPriority">Priority:</p><span class="priorityContainer">${priority}<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
-                                    </div>
-                                    <div id="assignedContainerModal" class="assignedContainerModal">
-                                        <p class="titleLine">Assigned to:</p>
-                                    </div>
-                                    <div id="subtaskContainerModal" class="subtaskContainerModal">
-                                        <p class="titleLine">Subtasks</p>
-                                    </div>
+                                    <div class="infoContainer"><p class="titleLine marginDate">Due date:</p><span>${date}</span></div>
+                                    <div class="infoContainer"><p class="titleLine marginPriority">Priority:</p><span class="priorityContainer">${priority}<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
+                                    <p class="titleLine mBottom">Assigned to:</p>
+                                    <div id="assignedContainerModal" class="assignedContainerModal overflowScroll"></div>
+                                    <p class="titleLine mBottom">Subtasks</p>
+                                    <div id="subtaskContainerModal" class="subtaskContainerModal overflowScroll"></div>
                                     <div class="subtaskContainerModal">
-                                        <ul id="subtaskModalList"></ul>
-                                        <button onclick="deleteTask('${loggedInUser}', '${taskId}')">Delete</button>
-                                        <span>|</span>
-                                        <button onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${column}', '${subtaskObj}', '${encodedContacts}')">Edit</button>
+                                        <ul id="subtaskModalList" class="subtaskModalList"></ul>
+                                        <div class="modalBtnContainer">
+                                            <span class="modalBtn deleteBtnWrapper" onclick="deleteTask('${loggedInUser}', '${taskId}')">
+                                                <img class="defaultBtn" src="./assets/img/delete.svg" alt="Delete">
+                                                <img class="hoverBtn" src="./assets/img/deleteHover.svg" alt="Delete Hover">
+                                                Delete
+                                            </span>
+                                            <span>|</span>
+                                            <span class="modalBtn deleteBtnWrapper" onclick="openTaskEdit('${taskId}', '${category}', '${title}', '${description}', '${date}', '${priority}', '${column}', '${subtaskObj}', '${encodedContacts}')">
+                                                <img class="defaultBtn" src="./assets/img/edit.svg">
+                                                <img class="hoverBtn" src="./assets/img/editHover.svg">
+                                                Edit
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>`;
