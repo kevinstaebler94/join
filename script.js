@@ -7,15 +7,20 @@ async function init() {
         return;
     } if (window.location.href.includes("summary.html")) {
         getSummary();
+        highlightActiveSidebarLink();
         return;
     } if (window.location.href.includes("board.html")) {
         getBoard();
+        highlightActiveSidebarLink();
         return;
     } if (window.location.href.includes("contacts.html")) {
         getContacts();
+        highlightActiveSidebarLink();
     } else {
         includeHTML();
+        highlightActiveSidebarLink();
     }
+
 }
 
 function getLogin() {

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./mobile/mobileSummary.css">
     <link rel="stylesheet" href="./mobile/mobileSidebar.css">
     <link rel="stylesheet" href="./mobile/mobileHeader.css">
+    <link rel="stylesheet" href="./styles/start_animation_overlay.css">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
@@ -22,11 +23,13 @@
     <script src="./scripts/header.js"></script>
     <script src="./scripts/summary.js"></script>
     <script src="./scripts/db.js"></script>
+    <script src="./scripts/sidebar.js"></script>
 
     <title>Summary</title>
 </head>
 
 <body onload="init()">
+    <div class="startAnimationOverlay"></div>
     <div class="main">
         <div w3-include-html="./assets/templates/sidebar.html"></div>
         <div class="content">
