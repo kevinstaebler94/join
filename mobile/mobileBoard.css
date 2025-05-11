@@ -1,3 +1,76 @@
-@media(max-width:1023px) {
-  
+.boardHeaderContentMobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4em;
+}
+
+.sideMargin4 {
+  margin: 0 4em;
+}
+
+.marginTop25 {
+  margin-top: 2.5em;
+}
+
+.h2Mobile {
+  font-size: 5rem;
+}
+
+.addTaskButtonMobile {
+  border: none;
+  background: transparent;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background-color: #2a3647;
+  color: white;
+  padding: 0.5em 0.5em;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  transition: background-color 125ms ease-in-out;
+}
+
+.taskSearchMobile {
+  display: flex;
+  align-items: center;
+}
+
+.taskInputfieldMobile {
+  height: 4.5rem;
+  width: 100%;
+  border-radius: 10px;
+  padding: 0 1em;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #d1d1d1;
+  border: 1px solid #bcbcbc;
+}
+
+.taskButtonContainerMobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.taskButtonContainerMobile span {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #42526e;
+}
+
+.taskButtonContainerMobile img {
+  cursor: pointer;
+  transition: filter 125ms ease-in-out;
+  height: 2.75 em;
+}
+
+.taskButtonContainerMobile img:hover {
+  filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg)
+    brightness(95%) contrast(86%);
 }
