@@ -33,6 +33,7 @@ function getSummary() {
     greetingByName();
     showUrgentDate();
     getAllCounter();
+    loadGreeting();
 }
 
 function getAllCounter() {
@@ -55,7 +56,7 @@ function getContacts() {
 }
 
 async function getLoggedInUser() {
-    let userData = await getData('/users');
+    let userData = await getData('/users/');
     for (let key in userData) {
         if (userData.hasOwnProperty(key)) {
             if (userData[key].login == true) {
@@ -77,9 +78,15 @@ async function logoutUser() {
     let login = userData.login;
     let tasks = userData.tasks;
     let contacts = userData.contacts;
+    let greeting = userData.greeting;
+    let greetingTrue = userData.greeting.greeting
+    greetingTrue = true;
     login = false;
-    await changeUsers(userId, email, password, name, login, tasks, contacts);
+    await changeUsers(userId, greeting, email, password, name, login, tasks, contacts);
+    await changeElement(greetingTrue);
+    console.log(userData.greeting.greeting);
     window.location.href = "login.html";
+    
 }
 
 async function showUserInitials() {

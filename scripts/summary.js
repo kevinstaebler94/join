@@ -182,3 +182,15 @@ async function getUrgentTasksCounter() {
 
     document.getElementById("urgentTasksCounter").textContent = urgentCount;
 }
+
+async function loadGreeting() {
+    let greeting = await getData('/users/' + loggedInUser + '/greeting/greeting');
+    let greetingContainer = document.getElementById('greetingContainer');
+    if (greeting) {
+        greetingContainer.classList.remove('dNone');
+    } else {
+        greetingContainer.classList.add('dNone');
+    }
+    greeting = false;
+    changeElement(greeting);
+}

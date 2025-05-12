@@ -57,18 +57,29 @@ function pushUsers() {
         name: name.value,
         email: email.value.trim(),
         password: password.value.trim(),
-        login: false
+        login: false,
+        greeting: {greeting: true}
     });
     putData(path, userData, userId);
 }
 
-async function changeUsers(userId, email, password, name, login, tasks, contacts) {
+async function changeElement(greeting) {
+    let path = '/users/' + loggedInUser;
+    let userId = 'greeting';
+    let userData = ({
+        greeting: greeting
+    });
+    await putData(path, userData, userId);
+}
+
+async function changeUsers(userId, greeting, email, password, name, login, tasks, contacts) {
     let path = '/users';
     let userData = ({
         name: name,
         email: email,
         password: password,
         login: login,
+        greeting: greeting,
         tasks: tasks,
         contacts: contacts
     });

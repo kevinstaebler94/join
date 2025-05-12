@@ -29,7 +29,7 @@
 </head>
 
 <body onload="init()">
-    <div class="startAnimationOverlay"></div>
+    <div id="greetingContainer" class="startAnimationOverlay dNone">Test</div>
     <div class="main">
         <div w3-include-html="./assets/templates/sidebar.html"></div>
         <div class="content">
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="greetingContainer">
+                    <div  class="greetingContainer">
                         <span class="timeOfDay" id="timeOfDay">good morning,</span>
                         <br>
                         <span class="userName" id="userName">..name..</span>
