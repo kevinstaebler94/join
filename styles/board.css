@@ -355,6 +355,18 @@ main {
   body {
     font-size: 12px;
   }
+  .filledTask {
+    max-height: 275px;
+  }
+  .subtasksContainer {
+    margin-bottom: 1em;
+  }
+}
+
+@media (max-width: 1110px) {
+  .subtasksContainer {
+    margin-bottom: 0.5em;
+  }
 }
 
 @media (max-width: 1023px) {
@@ -367,12 +379,20 @@ main {
     display: none;
   }
   .boardMobile {
-    display: block;
+    display: block; 
     overflow: auto;
   }
   .filledTask {
-    max-width: 500px;
+    max-width: 400px;
     width: 100%;
     height: 350px;
+    margin: 0 1em;
+  }
+  .column {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .taskDescription {
+    margin-bottom: 0.5em;
   }
 }
