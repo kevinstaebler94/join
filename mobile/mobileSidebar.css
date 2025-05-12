@@ -60,7 +60,7 @@
         border-radius: 16px;
     }
 
-    .navbar a.active {
+    .hoverContainer.active {
         background-color: black;
     }
 }

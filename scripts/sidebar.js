@@ -1,16 +1,19 @@
 function highlightActiveSidebarLink() {
-    console.log('funktion wurde aufgrufen');
     if (window.innerWidth > 1023) return;
 
-    let pathname = window.location.pathname.split("/").pop();
-    let navLinks = document.querySelectorAll('.navbar a');
+    let currentPage = window.location.pathname.split("/").pop();
+    let pageIds = ['summary', 'add_task', 'board', 'contacts'];
 
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === pathname) {
-            link.classList.add('active');
+    pageIds.forEach(page => {
+        let link = document.getElementById(`${page}_icon`);
+        if (!link) return;
+
+        let hoverBox = link.closest('.hoverContainer');
+        if (currentPage === `${page}.html`) {
+            hoverBox.classList.add('active');
         } else {
-            link.classList.remove('active');
+            hoverBox.classList.remove('active');
         }
     });
+    console.log('funktion wurde aufgrufen');
 }

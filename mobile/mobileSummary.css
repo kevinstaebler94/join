@@ -43,11 +43,50 @@
     .timeOfDay {
         font-size: 2.2rem;
     }
+
+    .userName {
+        font-size: 2.8rem;
+    }
+}
+
+@media(max-width: 900px) {
+    .summaryHeadline span {
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 56px;
+    }
+
+    span {
+        line-height: 1rem;
+    }
+
+    .overviewSection {
+        width: 510px;
+        gap: 2rem;
+    }
+
+    .topTasks,
+    .midSection,
+    .bottomBar {
+        height: 140px;
+    }
+}
+
+@media (max-width: 850px) {
+    h1 {
+        font-size: 47px;
+    }
 }
 
 @media (max-width: 800px) {
     .greetingContainer {
         display: none;
+    }
+
+    h1 {
+        font-size: 47px;
     }
 }
 
