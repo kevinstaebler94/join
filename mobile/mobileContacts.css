@@ -1,0 +1,25 @@
+@media(max-width: 800px) {
+    .contactsOverview {
+        display: none;
+    }
+
+    .contactListContainer {
+        width: 100%;
+    }
+
+    .letterDividerLine {
+        width: 500px;
+    }
+
+    .addContactButton {
+        display: none;
+    }
+
+    .addContactMobileButton {
+        height: 56px;
+        width: 56px;
+        cursor: pointer;
+        display: flex;
+        z-index: 3;
+    }
+}

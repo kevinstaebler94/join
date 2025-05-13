@@ -133,6 +133,9 @@ h3 {
     opacity: 15%;
 }
 
+.addContactMobileButton {
+    display: none;
+}
 
 .contactCard {
     display: flex;

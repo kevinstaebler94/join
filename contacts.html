@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./styles/contacts.css">
     <link rel="stylesheet" href="./styles/contactsModal.css">
     <link rel="stylesheet" href="./mobile/mobileSidebar.css">
+    <link rel="stylesheet" href="./mobile/mobileContacts.css">
     <!-- <link rel="stylesheet" href="./mobile/mobileHeader.css"> -->
     <!-- <link rel="stylesheet" href="./mobile/mobileSidebar.css"> -->
     <script src="./script.js"></script>
@@ -38,11 +39,17 @@
                     <div id="succesfullyCreatedOverlayImg" class="succesfullyCreatedOverlayImg"><img
                             src="./assets/img/contactSuccesfullyCreatedOverlay.svg" alt=""></div>
                     <div class="contactListContainer">
-                        <button onclick="openContactsModal()" class="addContactButton">Add new contact <img
-                                src="./assets/img/addPerson.svg" alt=""></button>
+                        <button onclick="openContactsModal()" class="addContactButton">
+                            <span>Add new contact</span>
+                            <img src="./assets/img/addPerson.svg" alt=""></button>
                         <div class="contactList" id="contactList">
+
+                        </div>
+                        <div class="addContactMobileButton">
+                            <img src="./assets/img/addContactMobile.svg" alt="">
                         </div>
                     </div>
+
                     <div class="contactsOverview">
                         <div class="contactsHeadline">
                             <h1>Contacts</h1>
