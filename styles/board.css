@@ -257,7 +257,7 @@ main {
 
 .subtasksContainer {
   display: flex;
-  gap: 0.5em;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5em;
 }
@@ -343,23 +343,31 @@ main {
   }
 }
 
-@media (max-width: 1500px) {
-  html,
-  body {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 1250px) {
+@media (max-width: 1545px) {
   html,
   body {
     font-size: 12px;
   }
+  .subtaskInfo {
+    font-size: 1.1rem;
+  }
+  .progressBarContainer {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1250px) {
   .filledTask {
     max-height: 275px;
   }
   .subtasksContainer {
     margin-bottom: 1em;
+  }
+  .taskCategory {
+    margin-bottom: 0.75em;
+  }
+  .taskDescription {
+    margin-bottom: 0.5em;
   }
 }
 
@@ -369,30 +377,4 @@ main {
   }
 }
 
-@media (max-width: 1023px) {
-  html,
-  body {
-    font-size: 18px;
-  }
 
-  .boardDesktop {
-    display: none;
-  }
-  .boardMobile {
-    display: block; 
-    overflow: auto;
-  }
-  .filledTask {
-    max-width: 400px;
-    width: 100%;
-    height: 350px;
-    margin: 0 1em;
-  }
-  .column {
-    flex-direction: row;
-    overflow-x: auto;
-  }
-  .taskDescription {
-    margin-bottom: 0.5em;
-  }
-}

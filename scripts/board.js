@@ -209,22 +209,14 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
       <div class="progressBarContainer">
         <div id="progressBar${taskComponents.id}" class="progressBar progressBarCurrentWith"></div>  
       </div>
-      <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">${isChecked}/${subtaskData.length}</span>
+      <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">${isChecked}/${subtaskData.length} Subtasks</span>
     </div>
   `
     : "";
 }
 
-function getFilledTaskHTML(
-  taskComponents,
-  serializedSubtasks,
-  serializedContacts,
-  initials,
-  progressBarHTML
-) {
-  let initial = initials.map(
-    (init) => `<span id="assignedUser" class="assignedUser">${init}</span>`
-  );
+function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
+  let initial = initials.map((init) => `<span id="assignedUser" class="assignedUser">${init}</span>`);
   let shortenedTitle = shortenText(taskComponents.title, 60);
   let shortenedDescription = shortenText(taskComponents.description, 35);
 
