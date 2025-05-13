@@ -233,6 +233,65 @@ h1 {
     height: 90px;
 }
 
+.subtaskWidth {
+    width: 100%;
+}
+
+.subtaskListElement {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    padding: 2px 16px;
+    border-radius: 8px;
+    min-height: 20px;
+}
+
+.subtaskListElement:hover {
+    cursor: pointer;
+    background-color: #F0F0F0;
+    min-height: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.liMarker {
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    background: #000;
+}
+
+.liText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.editIcons {
+    cursor: pointer;
+    width: 14px;
+}
+
+.editIcons:hover {
+    width: 15px;
+}
+
+.newSubtaskListElement {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #29ABE2 ;
+}
+
+.newSubtaskInput {
+    border: none;
+}
+
 .plusIcon {
     width: 16px;
     position: relative;

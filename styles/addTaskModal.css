@@ -1,5 +1,6 @@
 .mainContent {
     width: 850px;
+    margin: 48px 0;
 }
 
 .dFlex {
@@ -49,9 +50,13 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-height: 600px;
-    margin: 48px 0;
+    max-height: 450px;
+    padding: 48px 0;
     overflow-y: auto;
+}
+
+.addTaskContent::-webkit-scrollbar {
+  display: none;
 }
 
 .leftContainer {

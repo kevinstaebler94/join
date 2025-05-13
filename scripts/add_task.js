@@ -75,36 +75,81 @@ function toggleDropdownCategory() {
     dropdownIcon.classList.toggle('rotate');
 }
 
+// window.addEventListener('mousedown', function (event) {
+//     const modal = document.getElementById('addTaskModal');
+//     if (!modal || modal.classList.contains('dNone')) return;
+//     setTimeout(() => {
+//         const wrappers = document.querySelectorAll('.customSelectWrapper');
+//         const contactListContainer = document.getElementById('contactListContainer');
+//         const assignedInput = document.getElementById('assignedInput');
+//         const clickInsideContactList = contactListContainer.contains(event.target);
+//         const clickInsideAssignedInput = assignedInput.contains(event.target);
+//         let clickInsideAnyWrapper = false;
+//         wrappers.forEach(wrapper => {
+//             if (wrapper.contains(event.target)) {
+//                 clickInsideAnyWrapper = true;
+//             }
+//         });
+//         if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
+//             document.getElementById('dropdownListName').classList.add('dNone');
+//             document.getElementById('dropdownIconName').classList.remove('rotate');
+//             document.getElementById('customDropdownName').classList.remove('activeBorder');
+//             document.getElementById('customDropdownCategory').classList.remove('activeBorder');
+//             document.getElementById('dropdownListCategory').classList.add('dNone');
+//             document.getElementById('dropdownIconCategory').classList.remove('rotate');
+//             contactListContainer.classList.add('dNone');
+//             isOpen = false;
+//             if (assignedInput.value == '') {
+//                 assignedInput.value = 'Assigned to';
+//             }
+//         }
+//     }, 30);
+// });
+
 window.addEventListener('mousedown', function (event) {
     const modal = document.getElementById('addTaskModal');
-    if (!modal || modal.classList.contains('dNone')) return;
+
+    // Wenn Modal existiert und geschlossen ist → abbrechen
+    if (modal && modal.classList.contains('dNone')) return;
+
     setTimeout(() => {
         const wrappers = document.querySelectorAll('.customSelectWrapper');
         const contactListContainer = document.getElementById('contactListContainer');
         const assignedInput = document.getElementById('assignedInput');
-        const clickInsideContactList = contactListContainer.contains(event.target);
-        const clickInsideAssignedInput = assignedInput.contains(event.target);
+
+        // Wenn keine Dropdowns auf der Seite vorhanden → abbrechen
+        if (!wrappers.length && !contactListContainer && !assignedInput) return;
+
         let clickInsideAnyWrapper = false;
         wrappers.forEach(wrapper => {
             if (wrapper.contains(event.target)) {
                 clickInsideAnyWrapper = true;
             }
         });
+
+        const clickInsideContactList = contactListContainer?.contains(event.target) ?? false;
+        const clickInsideAssignedInput = assignedInput?.contains(event.target) ?? false;
+
         if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
-            document.getElementById('dropdownListName').classList.add('dNone');
-            document.getElementById('dropdownIconName').classList.remove('rotate');
-            document.getElementById('customDropdownName').classList.remove('activeBorder');
-            document.getElementById('customDropdownCategory').classList.remove('activeBorder');
-            document.getElementById('dropdownListCategory').classList.add('dNone');
-            document.getElementById('dropdownIconCategory').classList.remove('rotate');
-            contactListContainer.classList.add('dNone');
-            isOpen = false;
-            if (assignedInput.value == '') {
+            document.getElementById('dropdownListName')?.classList.add('dNone');
+            document.getElementById('dropdownIconName')?.classList.remove('rotate');
+            document.getElementById('customDropdownName')?.classList.remove('activeBorder');
+            document.getElementById('customDropdownCategory')?.classList.remove('activeBorder');
+            document.getElementById('dropdownListCategory')?.classList.add('dNone');
+            document.getElementById('dropdownIconCategory')?.classList.remove('rotate');
+            contactListContainer?.classList.add('dNone');
+
+            if (typeof isOpen !== 'undefined') {
+                isOpen = false;
+            }
+
+            if (assignedInput && assignedInput.value === '') {
                 assignedInput.value = 'Assigned to';
             }
         }
     }, 30);
 });
+
 
 function selectPriority(priority) {
     let urgentBtn = document.getElementById('priorityUrgentBtn');
@@ -193,16 +238,99 @@ function getSubtask() {
     let subtaskInput = document.getElementById('subtaskInput');
     let subtaskList = document.getElementById('subtaskList');
     let subtaskObj = { subtask: subtaskInput.value, done: false };
+    let subtaskIndex = subtasksArr.length;
     if (!subtaskInput.value) {
         subtaskInput.classList.add('required');
         return;
     } if (subtaskInput.value.length > 0) {
         subtaskInput.classList.remove('required');
-        subtaskList.innerHTML += `<li>${subtaskInput.value}</li>`;
+        subtaskList.innerHTML += `<li id="subtaskElement${subtaskIndex}">
+    <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
+        <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
+            <p class="liMarker"></p>
+            <p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${subtaskInput.value}</p>
+        </span>
+        <span id="editIconContainer" class="iconContainer dNone">
+            <img onclick="getEditSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/edit.svg" alt="">
+            <span class="iconDivider">|</span>
+            <img onclick="deleteSubtask(${subtaskIndex})" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
+        </span>
+    </div>
+</li>`;
         subtasksArr.push(subtaskObj);
         subtaskInput.value = '';
     }
 
+}
+
+function getEditSubtask(subtaskIndex) {
+    let currentSubtask = subtasksArr[subtaskIndex];
+    let subtaskElement = document.getElementById('subtaskElement' + subtaskIndex);
+    subtaskElement.innerHTML = `<div class="newSubtaskListElement">
+            <input id="editSubtaskInput${subtaskIndex}" class="newSubtaskInput" value="${currentSubtask.subtask}">
+            <span class="iconContainer">
+                <img onclick="deleteSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/delete.svg" alt="">
+                <span class="iconDivider">|</span>
+                <img onclick="editSubtask(${subtaskIndex})" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
+            </span>
+        </div>`;
+}
+
+function editSubtask(subtaskIndex) {
+    let input = document.getElementById('editSubtaskInput' + subtaskIndex);
+    let newValue = input.value.trim();
+    if (!newValue) return;
+    subtasksArr[subtaskIndex].subtask = newValue;
+    let subtaskElement = document.getElementById('subtaskElement' + subtaskIndex);
+    subtaskElement.innerHTML = `
+        <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
+            <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
+                <p class="liMarker"></p>
+                <p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${newValue}</p>
+            </span>
+            <span id="editIconContainer" class="iconContainer dNone">
+                <img onclick="getEditSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/edit.svg" alt="">
+                <span class="iconDivider">|</span>
+                <img onclick="deleteSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/delete.svg" alt="">
+            </span>
+        </div>`;
+}
+
+function deleteSubtask(subtaskIndex) {
+    subtasksArr.splice(subtaskIndex, 1);
+    renderSubtasks();
+}
+
+function renderSubtasks() {
+    const subtaskList = document.getElementById('subtaskList');
+    subtaskList.innerHTML = '';
+    subtasksArr.forEach((subtaskObj, subtaskIndex) => {
+        subtaskList.innerHTML += `
+            <li id="subtaskElement${subtaskIndex}">
+                <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
+                    <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
+                        <p class="liMarker"></p>
+                        <p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${subtaskObj.subtask}</p>
+                    </span>
+                    <span id="editIconContainer" class="iconContainer dNone">
+                        <img onclick="getEditSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/edit.svg" alt="">
+                        <span class="iconDivider">|</span>
+                        <img onclick="deleteSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/delete.svg" alt="">
+                    </span>
+                </div>
+            </li>`;
+    });
+}
+
+
+function showEditIcons(element) {
+    let iconContainer = element.querySelector('.iconContainer');
+    iconContainer.classList.remove('dNone');
+}
+
+function hideEditIcons(element) {
+    let iconContainer = element.querySelector('.iconContainer');
+    iconContainer.classList.add('dNone');
 }
 
 function checkValidation() {
