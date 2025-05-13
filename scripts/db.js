@@ -79,7 +79,7 @@ async function changeUsers(userId, greeting, email, password, name, login, tasks
         email: email,
         password: password,
         login: login,
-        greeting: greeting,
+        greeting: {greeting: greeting},
         tasks: tasks,
         contacts: contacts
     });

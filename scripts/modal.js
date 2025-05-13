@@ -74,7 +74,7 @@ function getAddTaskStructure() {
                                                     src="./assets/img/prioUrgentWhite.svg" alt=""></span>
                                             <span onclick="selectPriority('medium')" id="priorityMediumBtn"
                                                 class="priorityBtn priorityMediumBtn hoverBtn">Medium<img
-                                                    id="mediumIcon" class="priorityIconMedium"
+                                                    id="mediumIcon" class="priorityIcon"
                                                     src="./assets/img/prioMedium.svg" alt=""><img id="mediumIconWhite"
                                                     class="priorityIconWhite dNone"
                                                     src="./assets/img/prioMediumWhite.svg" alt=""></span>
@@ -157,6 +157,9 @@ function getFilledStructure(taskId, category, title, description, date, priority
     let filledTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(subtaskObj));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
+    let capitalizedPriority = priority.charAt(0).toUpperCase() + priority.slice(1);
+    console.log(capitalizedPriority);
+    
     filledTaskModal.innerHTML = `<img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
                                 <div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
@@ -169,10 +172,10 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                     <h4 class="taskTitleModal">${title}</h4>
                                     <p class="taskDescriptionModal">${description}</p>
                                     <div class="infoContainer"><p class="titleLine marginDate">Due date:</p><span>${date}</span></div>
-                                    <div class="infoContainer"><p class="titleLine marginPriority">Priority:</p><span class="priorityContainer">${priority}<img src="/assets/img/prioMedium.svg" alt="" class="taskPrioMediumModal"></span></div>
+                                    <div class="infoContainer"><p class="titleLine marginPriority">Priority:</p><span class="priorityContainer">${capitalizedPriority}<img src="/assets/img/prio${capitalizedPriority}.svg" alt="" class="taskPrioModal"></span></div>
                                     <p class="titleLine mBottom">Assigned to:</p>
                                     <div id="assignedContainerModal" class="assignedContainerModal overflowScroll"></div>
-                                    <p class="titleLine mBottom">Subtasks</p>
+                                    <p class="titleLine marginTopBottom">Subtasks</p>
                                     <div id="subtaskContainerModal" class="subtaskContainerModal overflowScroll"></div>
                                     <div class="subtaskContainerModal">
                                         <ul id="subtaskModalList" class="subtaskModalList"></ul>
@@ -338,7 +341,7 @@ function getSubtaskEdit(subtasks, encodedSubtasks) {
         let subtaskList = document.getElementById('subtaskListEdit');
         subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
                                     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
-                                        <span onclick="getEditSubtask('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${subtaskIndex}">${currentSubtask.subtask}</p></span>
+                                        <span onclick="getEditSubtask('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${subtaskIndex}" class="subtaskWith">${currentSubtask.subtask}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
                                             <img onclick="getEditSubtask('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="editIcons"  src="./assets/img/edit.svg" alt="">
                                             <span class="iconDivider">|</span>
@@ -415,7 +418,7 @@ function getEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
                                     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
                                         <input id="editSubtaskInput" value="${subtaskId}">
                                         <span  id="editIconContainer" class="iconContainer dNone">
-                                            <img class="editIcons" onclick="deleteSubtask('${subtaskId}')" src="./assets/img/delete.svg" alt="">
+                                            <img class="editIcons" onclick="deleteSubtask('${subtaskId}', '${subtaskIndex}', '${encodedSubtasks}')" src="./assets/img/delete.svg" alt="">
                                             <span class="iconDivider">|</span>
                                             <img onclick="editSubtask('${subtaskIndex}', '${encodedSubtasks}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
                                         </span>

@@ -50,31 +50,11 @@ function toggleDropdownName() {
 
         getContact();
         assignedInput.focus();
+        assignedInput.value = '';
     } else {
         assignedInput.blur();
     }
 }
-
-// NO LONGER NEEDED???
-
-// function toggleDropdownNameEdit(taskId, encodedContacts) {
-
-//     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
-//     console.log(taskId);
-
-//     toggleOpen();
-//     let customDropdownName = document.getElementById('customDropdownName');
-//     let dropdown = document.getElementById('dropdownListName');
-//     let dropdownIcon = document.getElementById('dropdownIconName');
-//     let listContainer = document.getElementById('contactListContainer');
-//     customDropdownName.classList.add('activeBorder');
-//     dropdown.classList.toggle('dNone');
-//     dropdownIcon.classList.toggle('rotate');
-//     listContainer.classList.toggle('dNone');
-//     if (isOpen) {
-//         getContactEdit(taskId, contacts);
-//     }
-// }
 
 function closeDropdownName() { //check if needed
     let customDropdownName = document.getElementById('customDropdownName');
@@ -197,13 +177,31 @@ function selectCategory(myCategory) {
     toggleDropdownCategory();
 }
 
+function initSubtaskInputListener() {
+    const subtaskInput = document.getElementById('subtaskInput');
+    if (!subtaskInput) return;
+    subtaskInput.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            getSubtask();
+        }
+    });
+}
+
+
 function getSubtask() {
     let subtaskInput = document.getElementById('subtaskInput');
     let subtaskList = document.getElementById('subtaskList');
-    let subtaskObj = { subtask: subtaskInput.value, done: false }
-    subtaskList.innerHTML += `<li>${subtaskInput.value}</li>`;
-    subtasksArr.push(subtaskObj);
-    subtaskInput.value = '';
+    let subtaskObj = { subtask: subtaskInput.value, done: false };
+    if (!subtaskInput.value) {
+        subtaskInput.classList.add('required');
+        return;
+    } if (subtaskInput.value.length > 0) {
+        subtaskInput.classList.remove('required');
+        subtaskList.innerHTML += `<li>${subtaskInput.value}</li>`;
+        subtasksArr.push(subtaskObj);
+        subtaskInput.value = '';
+    }
+
 }
 
 function checkValidation() {
@@ -297,25 +295,6 @@ function filterContacts(value) {
     renderFilteredContacts(value);
 }
 
-// NO LONGER NEEDED???
-
-// async function getContactEdit(taskId, assignedContacts) {
-//     let contacts = await getData("/users/" +loggedInUser + "/contacts");
-//     let dropdownListName = document.getElementById('dropdownListName');    
-//     dropdownListName.innerHTML = '';
-//     pushAssignedContacts(assignedContacts);
-//     for (let key in contacts) {
-//         let isChecked = assignedArr.includes(contacts[key].name) ? 'checked' : '';
-//         if (contacts.hasOwnProperty(key)) {
-//             contactArr.push(contacts[key])
-//         }
-//         dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
-//                                         <p id="${contacts[key].name}">${contacts[key].name}</p>
-//                                         <input onclick="checkAssignedContact(this)" id="${contacts[key].name}" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}" ${isChecked}>
-//                                     </li></label>`;
-//     }
-// }
-
 function pushAssignedContacts(assignedContacts) {
     assignedContacts.forEach(assignedContact => {
         assignedArr.push(assignedContact);
@@ -341,25 +320,6 @@ function checkAssignedContact(checkboxElement) {
     });
 }
 
-// NO LONGER NEEDED???
-
-// function checkAssignedContactEdit(checkboxElement) {
-//     let assignedContainer = document.getElementById('assignedContainer');
-//     let checkedName = checkboxElement.dataset.name;
-//     let index = assignedArr.indexOf(checkedName);
-//     if (checkboxElement.checked) {
-//         assignedArr.push(checkedName);
-//     } else {
-//         if (index > -1) {
-//             assignedArr.splice(index, 1);
-//         }
-//     } 
-//     assignedContainer.innerHTML = '';
-//     assignedArr.forEach(contact => {
-//         assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
-//     });
-// }
-
 function getInitials(name) {
     return name
         .split(" ")
@@ -367,3 +327,7 @@ function getInitials(name) {
         .join("")
         .toUpperCase();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    initSubtaskInputListener();
+});

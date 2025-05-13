@@ -117,8 +117,19 @@ let contacts = [
         name: 'Lea Hoffmann',
         email: 'lea.hoffmann@example.com',
         phone: '+49 175 1122334'
+    },
+    {
+        name: 'Julian Becker',
+        email: 'julian.becker@example.com',
+        phone: '+49 163 7788990'
+    },
+    {
+        name: 'Nina Schröder',
+        email: 'nina.schroeder@example.com',
+        phone: '+49 159 3344556'
     }
 ];
+
 
 async function getGuestUserData() {
     let userId = 'guestMail';
@@ -126,7 +137,8 @@ async function getGuestUserData() {
     let password = 'password';
     let name = 'Guest User';
     let login = true;
-    await changeUsers(userId, email, password, name, login);
+    let greeting = true;
+    await changeUsers(userId, greeting, email, password, name, login);
     await getGuestUserTasks(userId);
     await getGuestUserContacts(userId);
     window.location.href = "summary.html";

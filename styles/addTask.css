@@ -226,7 +226,7 @@ h1 {
 }
 
 .required {
-    border: solid 1px #FF8190;
+    border: solid 1px #FF8190 !important;
 }
 
 .textArea {
@@ -283,6 +283,10 @@ h1 {
 
 .assignedInput {
     border: none;
+}
+
+.assignedInput:focus {
+    outline: none;
 }
 
 .dropdownList {
