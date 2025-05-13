@@ -1,0 +1,112 @@
+@media (max-width: 1200px) {
+    .mainContent {
+        margin: 0 48px;
+    }
+}
+
+@media (max-width: 850px) {
+    .dividingLine {
+        display: none;
+    }
+
+    .addTaskContent {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .mainContent {
+        width: auto;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 120px;
+    }
+
+    .submitSection {
+        position: fixed;
+        width: 100%;
+        padding: 24px;
+        bottom: 80px;
+        z-index: 10;
+        background-color: #F6F7F8;
+        justify-content: flex-end;
+    }
+
+    main {
+        height: unset;
+        overflow: unset;
+    }
+
+    #mobileInfo {
+        width: 100%;
+    }
+
+    .infoText {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .directionColumn {
+        margin-bottom: 24px;
+    }
+
+    h1 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 440px) {
+    .inputFields {
+        width: 300px;
+    }
+
+    .dropdownHeader {
+        width: 300px;
+    }
+
+    .customDropdown {
+        width: 300px;
+    }
+
+    .priorityBtn {
+        width: 90px;
+        font-size: 12px;
+    }
+
+    .dateIcon {
+        left: 272px;
+    }
+
+    .plusIcon {
+        left: 272px;
+    }
+}
+
+@media (max-width: 380px) {
+    .inputFields {
+        width: 280px;
+    }
+
+    .dropdownHeader {
+        width: 280px;
+    }
+
+    .customDropdown {
+        width: 280px;
+    }
+
+    .priorityBtn {
+        width: 80px;
+        font-size: 12px;
+    }
+
+    .dateIcon {
+        left: 252px;
+    }
+
+    .plusIcon {
+        left: 252px;
+    }
+}

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./mobile/mobileHeader.css">
     <link rel="stylesheet" href="./mobile/mobileSidebar.css">
+    <link rel="stylesheet" href="./mobile/mobileAddTask.css">
     <link rel="stylesheet" href="./styles/checkbox.css">
     <script src="./script.js"></script>
     <script src="./scripts/add_task.js"></script>
@@ -19,6 +20,7 @@
     <script src="./scripts/db.js"></script>
     <script src="./scripts/login.js"></script>
     <script src="./scripts/sidebar.js"></script>
+    <script src="./scripts/mobileAddTask.js"></script>
     <title>Add Task</title>
 </head>
 
@@ -33,7 +35,7 @@
                     <img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
                     <div class="mainContent">
                         <h1>Add Task</h1>
-                        <div class="addTaskContent">
+                        <div id="addTaskContent" class="addTaskContent">
                             <div class="leftContainer">
                                 <form class="leftAddTaskForm">
                                     <label class="directionColumn">
@@ -138,8 +140,9 @@
 
                                 </form>
                             </div>
+                            <span id="mobileInfo"></span>
                         </div>
-                        <div class="submitSection">
+                        <div id="submitSection" class="submitSection">
                             <div class="infoText">
                                 <p>
                                 <p class="fontRed">*</p>This field is required</p>
