@@ -2,6 +2,7 @@ let contactArr = [];
 let assignedArr = [];
 let prioBtn = 'medium';
 let subtasksArr = [];
+let newSubtaskArr = [];
 let currentTaskId = 0;
 let contacts;
 let isOpen = false;

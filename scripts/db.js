@@ -140,7 +140,7 @@ function changeTasks(taskId, column, category) {
     let description = document.getElementById('taskDescriptionEdit');
     let date = document.getElementById('dateInputEdit');
     let contacts = assignedArr;
-    let subTask = subtasksArr[0];
+    let subTask = newSubtaskArr[0];
     let time = getTimeStamp();
     let newTaskId = title.value + time;
     let userData = ({
@@ -156,6 +156,7 @@ function changeTasks(taskId, column, category) {
     });
     putData(path, userData, newTaskId);
     deleteTask(loggedInUser, taskId);
+    newSubtaskArr = [];
 }
 
 async function pushContacts(loggedInUser) {

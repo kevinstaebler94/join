@@ -159,7 +159,7 @@ function getFilledStructure(taskId, category, title, description, date, priority
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
     let capitalizedPriority = priority.charAt(0).toUpperCase() + priority.slice(1);
     console.log(capitalizedPriority);
-    
+
     filledTaskModal.innerHTML = `<img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
                                 <div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
@@ -299,6 +299,8 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
     selectPriority(priority);
     getContactsEdit(contacts);
     getSubtaskEdit(subtasks, encodedSubtasks);
+    console.log(subtasks.subtask);
+    
 }
 
 function handleFocusOut() {
@@ -335,11 +337,14 @@ async function getSubtasksModal(subtasks, taskId) {
 
 function getSubtaskEdit(subtasks, encodedSubtasks) {
     subtasksArr.push(subtasks.subtask);
-    for (let subtaskIndex = 0; subtaskIndex < subtasksArr[0].length; subtaskIndex++) {
-        let sub = subtasksArr[0];
-        let currentSubtask = sub[subtaskIndex];
-        let subtaskList = document.getElementById('subtaskListEdit');
-        subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
+    if (!subtasksArr[0]) {
+        return;
+    } else {
+        for (let subtaskIndex = 0; subtaskIndex < subtasksArr[0].length; subtaskIndex++) {
+            let sub = subtasksArr[0];
+            let currentSubtask = sub[subtaskIndex];
+            let subtaskList = document.getElementById('subtaskListEdit');
+            subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
                                     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
                                         <span onclick="getEditSubtask('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${subtaskIndex}" class="subtaskWith">${currentSubtask.subtask}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
@@ -349,9 +354,9 @@ function getSubtaskEdit(subtasks, encodedSubtasks) {
                                         </span>
                                     </div>
                                 </li>`;
-    };
-
-
+        };
+        subtasksArr = [];
+    }
 }
 
 function showEditIcons(element) {
@@ -387,7 +392,7 @@ function addNewSubtask() {
                                         </span>
                                     </div>
                                 </li>`;
-    subtasksArr[0].push({ subtask: inputValue.value, done: false });
+    subtasksArr.push({ subtask: inputValue.value, done: false });
     inputValue.value = '';
     subtaskInput.blur();
     setTimeout(() => {
@@ -445,11 +450,13 @@ function serializeObj(subtasks) {
 function deleteSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let subtaskListEdit = document.getElementById('subtaskListEdit');
+    subtasksArr.push(subtasks.subtask)
+    newSubtaskArr.push(subtasks.subtask);
     subtasksArr[0].splice(subtaskIndex, 1);
     subtasks.subtask = subtasksArr[0];
-    subtasksArr = [];
     subtaskListEdit.innerHTML = '';
     getSubtaskEdit(subtasks, serializeObj(subtasks));
+    subtasksArr = [];
 }
 
 function cancelValue() {
