@@ -28,12 +28,14 @@ function getLogin() {
 }
 
 function getSummary() {
+    loadGreeting();
     includeHTML();
+    updateLoginGreeting();
+    loginGreetingByName();
     updateGreeting();
     greetingByName();
     showUrgentDate();
     getAllCounter();
-    loadGreeting();
 }
 
 function getAllCounter() {
@@ -86,7 +88,7 @@ async function logoutUser() {
     await changeElement(greetingTrue);
     console.log(userData.greeting.greeting);
     window.location.href = "login.html";
-    
+
 }
 
 async function showUserInitials() {

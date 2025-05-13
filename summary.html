@@ -24,12 +24,18 @@
     <script src="./scripts/summary.js"></script>
     <script src="./scripts/db.js"></script>
     <script src="./scripts/sidebar.js"></script>
+    <script src="./scripts/mobileSummary.js"></script>
 
     <title>Summary</title>
 </head>
 
 <body onload="init()">
-    <div id="greetingContainer" class="startAnimationOverlay dNone">Test</div>
+    <div id="greetingContainer" class="startSummaryAnimationOverlay dNone">
+        <span class="timeOfDay" id="loginTimeOfDay">good
+            morning,</span>
+        <br>
+        <span class="userName" id="loginUserName">..name..</span>
+    </div>
     <div class="main">
         <div w3-include-html="./assets/templates/sidebar.html"></div>
         <div class="content">
@@ -145,7 +151,7 @@
                             </div>
                         </div>
                     </div>
-                    <div  class="greetingContainer">
+                    <div class="greetingContainer">
                         <span class="timeOfDay" id="timeOfDay">good morning,</span>
                         <br>
                         <span class="userName" id="userName">..name..</span>
