@@ -8,7 +8,7 @@ async function loginGreetingByName() {
 }
 
 function updateLoginGreeting() {
-    let hour = new Date().getHours(); // Holt die aktuelle Stunde
+    let hour = new Date().getHours();
     let greeting;
 
     if (hour >= 5 && hour < 10) {

@@ -184,8 +184,9 @@ async function getUrgentTasksCounter() {
 }
 
 async function loadGreeting() {
+    if (window.innerWidth > 800) return;
     let greeting = await getData('/users/' + loggedInUser + '/greeting/greeting');
-    let greetingContainer = document.getElementById('greetingContainer');
+    let greetingContainer = document.getElementById('loginGreetingContainer');
     if (greeting) {
         greetingContainer.classList.remove('dNone');
     } else {

@@ -6,7 +6,11 @@ async function init() {
         getLogin();
         return;
     } if (window.location.href.includes("summary.html")) {
-        getSummary();
+        if (window.innerWidth <= 800) {
+            showSummaryLoginOverlay();
+        } else {
+            getSummary();
+        }
         highlightActiveSidebarLink();
         return;
     } if (window.location.href.includes("board.html")) {
@@ -28,10 +32,9 @@ function getLogin() {
 }
 
 function getSummary() {
+    document.getElementById('summaryMain').classList.remove('dNone');
     loadGreeting();
     includeHTML();
-    updateLoginGreeting();
-    loginGreetingByName();
     updateGreeting();
     greetingByName();
     showUrgentDate();
@@ -110,4 +113,15 @@ function getInitials(name) {
         .map(word => word[0])
         .join("")
         .toUpperCase();
+}
+
+function showSummaryLoginOverlay() {
+    let overlay = document.getElementById('loginGreetingContainer');
+    overlay.classList.remove('dNone');
+    updateLoginGreeting();
+    loginGreetingByName();
+    setTimeout(() => {
+        document.getElementById('summaryMain').classList.remove('dNone');
+        getSummary();
+    }, 1400);
 }
