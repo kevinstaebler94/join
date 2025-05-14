@@ -230,7 +230,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    animation: fadeOut 3000ms 3000ms forwards;
+    animation: fadeOut 1000ms 1000ms forwards;
 }
 
 @keyframes fadeOut {

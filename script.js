@@ -6,14 +6,15 @@ async function init() {
         getLogin();
         return;
     } if (window.location.href.includes("summary.html")) {
-        // if (window.innerWidth <= 800) {
-        //     getSummary();
+        if (window.innerWidth <= 800) {
+            includeHTML();
+            await loadGreeting();     
+        getSummary();
         //     // showSummaryLoginOverlay();
-        // } else {
-        //     getSummary();
-        // }
+        } else {
+         getSummary();
+        }
         includeHTML();
-        await loadGreeting();
         getSummary();
         highlightActiveSidebarLink();
         return;
