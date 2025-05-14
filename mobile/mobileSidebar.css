@@ -61,6 +61,7 @@
     }
 
     .hoverContainer.active {
-        background-color: black;
+        background-color: #091931;
+
     }
 }

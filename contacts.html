@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./styles/contacts.css">
     <link rel="stylesheet" href="./styles/contactsModal.css">
     <link rel="stylesheet" href="./mobile/mobileSidebar.css">
+    <link rel="stylesheet" href="./mobile/mobileHeader.css">
     <link rel="stylesheet" href="./mobile/mobileContacts.css">
     <!-- <link rel="stylesheet" href="./mobile/mobileHeader.css"> -->
     <!-- <link rel="stylesheet" href="./mobile/mobileSidebar.css"> -->
@@ -42,12 +43,14 @@
                         <button onclick="openContactsModal()" class="addContactButton">
                             <span>Add new contact</span>
                             <img src="./assets/img/addPerson.svg" alt=""></button>
-                        <div class="contactList" id="contactList">
+                        <div class="mobileListContainer">
+                            <div class="contactList" id="contactList"></div>
+                            <button class="addContactMobileButton" onclick="openContactsModal()">
+                                <img src="./assets/img/addContactMobile.svg" alt="">
+                            </button>
 
                         </div>
-                        <div class="addContactMobileButton">
-                            <img src="./assets/img/addContactMobile.svg" alt="">
-                        </div>
+
                     </div>
 
                     <div class="contactsOverview">

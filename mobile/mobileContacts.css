@@ -1,3 +1,18 @@
+@media(max-width: 1190px) {
+    .contactList {
+        padding-left: 36px;
+        padding-right: 36px;
+    }
+
+    .mainContent {
+        gap: 24px;
+    }
+
+    .contactList::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 @media(max-width: 800px) {
     .contactsOverview {
         display: none;
@@ -20,6 +35,32 @@
         width: 56px;
         cursor: pointer;
         display: flex;
-        z-index: 3;
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        z-index: 99;
+    }
+
+    .mobileListContainer {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 560px) {
+    .letterDividerLine {
+        padding-right: 12px;
+        width: 350px;
+    }
+
+    .mobileListContainer {
+        display: flex;
+        flex-direction: column;
     }
 }
