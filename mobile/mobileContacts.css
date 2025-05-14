@@ -11,6 +11,57 @@
     .contactList::-webkit-scrollbar {
         display: none;
     }
+
+    .headlineSection {
+        padding-left: 28px;
+        padding-right: 0px;
+    }
+
+    .modalMainContent {
+        width: 95%;
+    }
+
+    .modalIconContainer {
+        width: 150px;
+    }
+}
+
+@media(max-width: 1045px) {
+    .contactsModalIcon {
+        height: 100px;
+        width: 100px;
+    }
+
+    .modalIconContainer {
+        width: 120px;
+    }
+}
+
+@media(max-width: 1014px) {
+    .modalMainContent {
+        width: 95%;
+        height: 82%;
+        top: 46%;
+        flex-direction: column;
+        justify-content: center;
+
+        padding-right: 0;
+    }
+
+    .headlineSection {
+        width: 100%;
+        align-items: center;
+    }
+
+    .contactsModalImage {
+        display: none;
+    }
+
+    .contentSection {
+        flex-direction: column;
+    }
+
+
 }
 
 @media(max-width: 800px) {
