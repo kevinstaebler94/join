@@ -25,24 +25,25 @@
     <script src="./scripts/db.js"></script>
     <script src="./scripts/sidebar.js"></script>
     <script src="./scripts/mobileSummary.js"></script>
+    <script src="./scripts/guestUser.js"></script>
 
     <title>Summary</title>
 </head>
 
 <body onload="init()">
-    <div id="loginGreetingContainer" class="startSummaryAnimationOverlay dNone">
-        <span class="timeOfDay" id="loginTimeOfDay">good
-            morning,</span>
-        <br>
-        <span class="userName" id="loginUserName"></span>
-    </div>
+
     <div id="summaryMain" class="main dNone">
         <div w3-include-html="./assets/templates/sidebar.html"></div>
+
         <div class="content">
 
             <div class="mainContent">
                 <div class="templateHTML" w3-include-html="./assets/templates/header.html"></div>
-
+                <div id="loginGreetingContainer" class="startSummaryAnimationOverlay ">
+                    <span class="timeOfDay" id="loginTimeOfDay"></span>
+                    <br>
+                    <span class="userName" id="loginUserName"></span>
+                </div>
                 <div class="mainContainer">
                     <div class="mainContentWrapper">
                         <div class="summaryHeadline">

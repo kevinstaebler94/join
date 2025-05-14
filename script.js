@@ -6,11 +6,15 @@ async function init() {
         getLogin();
         return;
     } if (window.location.href.includes("summary.html")) {
-        if (window.innerWidth <= 800) {
-            showSummaryLoginOverlay();
-        } else {
-            getSummary();
-        }
+        // if (window.innerWidth <= 800) {
+        //     getSummary();
+        //     // showSummaryLoginOverlay();
+        // } else {
+        //     getSummary();
+        // }
+        includeHTML();
+        await loadGreeting();
+        getSummary();
         highlightActiveSidebarLink();
         return;
     } if (window.location.href.includes("board.html")) {
@@ -31,10 +35,8 @@ function getLogin() {
     initLogin();
 }
 
-function getSummary() {
+async function getSummary() {
     document.getElementById('summaryMain').classList.remove('dNone');
-    loadGreeting();
-    includeHTML();
     updateGreeting();
     greetingByName();
     showUrgentDate();
@@ -115,13 +117,21 @@ function getInitials(name) {
         .toUpperCase();
 }
 
-function showSummaryLoginOverlay() {
-    let overlay = document.getElementById('loginGreetingContainer');
-    overlay.classList.remove('dNone');
-    updateLoginGreeting();
-    loginGreetingByName();
-    setTimeout(() => {
-        document.getElementById('summaryMain').classList.remove('dNone');
-        getSummary();
-    }, 1400);
-}
+// async function showSummaryLoginOverlay() {
+//     let overlay = document.getElementById('loginGreetingContainer');
+//     let greeting = await getData('/users/' + loggedInUser + '/greeting/greeting');
+//     if (!greeting) {
+//         console.log(greeting);
+        
+//         return;
+//     }
+    
+//     overlay.classList.remove('dNone');
+//     updateLoginGreeting();
+//     loginGreetingByName();
+//     setTimeout(() => {
+//         overlay.classList.add('dNone');
+//         document.getElementById('summaryMain').classList.remove('dNone');
+//         getSummary();
+//     }, 1400);
+// }

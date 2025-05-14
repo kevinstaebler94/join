@@ -50,7 +50,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-height: 450px;
+    max-height: 605px;
     padding: 48px 0;
     overflow-y: auto;
 }
@@ -440,11 +440,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-right: 48px;
 }
 
-.subtaskListEdit {
-    gap: 8px;
-    display: flex;
-    flex-direction: column;
-    margin: -10px 0 16px 0;
+.subtaskWidth {
     width: 100%;
 }
 
@@ -455,6 +451,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 2px 16px;
     border-radius: 8px;
     min-height: 20px;
+    max-width: 345px;
 }
 
 .subtaskListElement:hover {
@@ -463,19 +460,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     min-height: 20px;
 }
 
-.subtaskWith {
-    max-width: 250px;
-}
-
 ul {
     list-style: none;
     padding: 0;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .liMarker {
     border-radius: 50%;
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
     background: #000;
 }
 
@@ -484,6 +481,27 @@ ul {
     justify-content: center;
     align-items: center;
     gap: 8px;
+}
+
+.editIcons {
+    cursor: pointer;
+    width: 14px;
+}
+
+.editIcons:hover {
+    width: 15px;
+}
+
+.newSubtaskListElement {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #29ABE2 ;
+}
+
+.newSubtaskInput {
+    border: none;
 }
 
 .iconContainer {

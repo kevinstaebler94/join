@@ -188,10 +188,13 @@ async function loadGreeting() {
     let greeting = await getData('/users/' + loggedInUser + '/greeting/greeting');
     let greetingContainer = document.getElementById('loginGreetingContainer');
     if (greeting) {
+        updateLoginGreeting();
+        loginGreetingByName();
         greetingContainer.classList.remove('dNone');
     } else {
         greetingContainer.classList.add('dNone');
     }
     greeting = false;
     changeElement(greeting);
+
 }
