@@ -299,8 +299,6 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
     selectPriority(priority);
     getContactsEdit(contacts);
     getSubtaskEdit(subtasks, encodedSubtasks);
-    console.log(subtasks.subtask);
-    
 }
 
 function handleFocusOut() {
@@ -337,6 +335,7 @@ async function getSubtasksModal(subtasks, taskId) {
 
 function getSubtaskEdit(subtasks, encodedSubtasks) {
     subtasksArr.push(subtasks.subtask);
+    newSubtaskArr.push(subtasks.subtask);
     if (!subtasksArr[0]) {
         return;
     } else {
@@ -382,19 +381,23 @@ function getAddNewSubtask() {
 function addNewSubtaskModal() {
     let subtaskListEdit = document.getElementById('subtaskListEdit');
     let inputValue = document.getElementById('subtaskInput');
+    let subtaskObj = { done: false, subtask: inputValue.value };
+    let subtaskIndex = newSubtaskArr[0].push(subtaskObj) - 1;
+    let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskObj));
     subtaskListEdit.innerHTML += `<li id="subtaskElement${inputValue.value}">
                                     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
                                         <span onclick="getEditSubtaskModal('${inputValue.value}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${inputValue.value}">${inputValue.value}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
                                             <img onclick="getEditSubtaskModal('${inputValue.value}')" class="editIcons"  src="./assets/img/edit.svg" alt="">
                                             <span class="iconDivider">|</span>
-                                            <img onclick="deleteSubtaskModal('${inputValue.value}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
+                                            <img onclick="deleteSubtaskModal('${subtaskObj.subtask}', '${subtaskIndex}', '${serializedSubtasks}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
                                         </span>
                                     </div>
                                 </li>`;
-    subtasksArr.push({ subtask: inputValue.value, done: false });
+
     inputValue.value = '';
     subtaskInput.blur();
+
     setTimeout(() => {
         resetSubtaskIcons();
     }, 50);
@@ -450,11 +453,26 @@ function serializeObj(subtasks) {
 function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let subtaskListEdit = document.getElementById('subtaskListEdit');
-    subtasksArr.push(subtasks.subtask)
-    newSubtaskArr.push(subtasks.subtask);
+    checkAddedSubtask(subtaskId, subtaskIndex, encodedSubtasks);
+    // subtasksArr.push(subtasks.subtask);
+    // newSubtaskArr.push(subtasks.subtask);
+    // subtasksArr[0].splice(subtaskIndex, 1);
+    // subtasks.subtask = subtasksArr[0];
+    // subtaskListEdit.innerHTML = '';
+    // getSubtaskEdit(subtasks, serializeObj(subtasks));
+    // subtasksArr = [];
+}
+
+function checkAddedSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
+    console.log(subtaskId);
+    console.log(subtaskIndex);
+    console.log(encodedSubtasks);
+    let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
+    let subtaskListEdit = document.getElementById('subtaskListEdit');
+    subtasksArr.push(subtasks);
+    newSubtaskArr.push(subtasks);
     subtasksArr[0].splice(subtaskIndex, 1);
-    newSubtaskArr[0].splice(subtaskIndex, 1);
-    subtasks.subtask = subtasksArr[0];
+    subtasks = subtasksArr[0];
     subtaskListEdit.innerHTML = '';
     getSubtaskEdit(subtasks, serializeObj(subtasks));
     subtasksArr = [];
@@ -517,13 +535,13 @@ function checkAssignedContactEdit(checkboxElement) {
 function initSubtaskInputListener() {
     const subtaskInput = document.getElementById('subtaskInput');
     if (!subtaskInput) return;
-    subtaskInput.addEventListener('keyup', function(event) {
+    subtaskInput.addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
             getSubtask();
         }
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initSubtaskInputListener();
 });
