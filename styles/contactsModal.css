@@ -1,3 +1,7 @@
+.modalMobileCloseButtonWrapper {
+    display: none;
+}
+
 .headlineSection {
     display: flex;
     justify-content: center;

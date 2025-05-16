@@ -18,6 +18,9 @@ function getContactsModalStructure() {
     <div class="modalMainContent" id="modalContent">
         <div class="headlineSection">
             <img class="contactsModalImage" src="./assets/img/joinLogoSidebar.svg" alt="">
+            <div class="modalMobileCloseButtonWrapper">
+            <button class="modalMobileCloseButton" onclick="closeContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
+            </div>
             <div class="headlineContainer">
                 <h1>Add contact</h1>
                 <h2>Tasks are better with a team!</h2>

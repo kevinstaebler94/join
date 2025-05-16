@@ -37,15 +37,26 @@
     }
 }
 
-@media(max-width: 1014px) {
+@media(max-width: 1023px) {
+    .modalMobileCloseButtonWrapper {
+        position: absolute;
+        display: flex;
+        padding-bottom: 280px;
+        padding-left: 450px;
+    }
+
     .modalMainContent {
-        width: 95%;
+        width: 550px;
         height: 82%;
         top: 46%;
         flex-direction: column;
         justify-content: center;
 
         padding-right: 0;
+    }
+
+    .modalIconContainer {
+        width: 145px;
     }
 
     .headlineSection {
@@ -57,11 +68,34 @@
         display: none;
     }
 
-    .contentSection {
-        flex-direction: column;
+    .contactsModalIcon {
+        height: 145px;
+        width: 145px;
+        border-radius: 73px;
     }
 
+    .modalIconContainer {
+        position: absolute;
+        padding-bottom: 500px;
+    }
 
+    .contentSection {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modalContentContainer {
+        padding-top: 110px;
+    }
+
+    .modalCloseButtonWrapper {
+        display: none;
+    }
+
+    .inputFieldContainer {
+        gap: 18px;
+    }
 }
 
 @media(max-width: 800px) {
@@ -95,7 +129,7 @@
         justify-content: center;
         align-items: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        z-index: 99;
+        z-index: 2;
     }
 
     .mobileListContainer {
