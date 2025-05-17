@@ -227,7 +227,8 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
       <p class="taskDescription">${shortenedDescription}</p>
       ${progressBarHTML}
       <div class="assignedToContainer">
-        <div class="assignedUsers">
+        <div class="
+        ">
           ${initial}
         </div>
         <img src="/assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">

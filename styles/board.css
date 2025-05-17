@@ -358,7 +358,7 @@ main {
 
 @media (max-width: 1250px) {
   .filledTask {
-    max-height: 275px;
+    max-height: 325px;
   }
   .subtasksContainer {
     margin-bottom: 1em;
@@ -373,9 +373,9 @@ main {
     font-size: 0.8rem;
   }
   .assignedUser {
-    font-size: 0.9rem;
-    width: 2em;
-    height: 2em;
+    font-size: 1rem;
+    width: 1.5em;
+    height: 1.5em;
     padding: 0;
   }
  
