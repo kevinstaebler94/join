@@ -51,7 +51,6 @@
         top: 46%;
         flex-direction: column;
         justify-content: center;
-
         padding-right: 0;
     }
 
@@ -59,9 +58,13 @@
         width: 145px;
     }
 
+    .headlineContainer {
+        gap: 8px;
+    }
+
     .headlineSection {
         width: 100%;
-        align-items: center;
+        gap: 8px;
     }
 
     .contactsModalImage {
@@ -96,6 +99,19 @@
     .inputFieldContainer {
         gap: 18px;
     }
+
+    .buttonsContainer {
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    .modalCancelButton {
+        display: none;
+    }
+
+    .modalCreateButton span {
+        cursor: pointer;
+    }
 }
 
 @media(max-width: 800px) {
@@ -105,6 +121,13 @@
 
     .contactListContainer {
         width: 100%;
+    }
+
+    .mobileListContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .letterDividerLine {
@@ -138,14 +161,69 @@
     }
 }
 
+@media(max-width: 600px) {
+    .headlineContainer h1 {
+        font-size: 47px;
+    }
+
+    .headlineContainer h2 {
+        font-size: 20px;
+    }
+
+    .headlineContainer {
+        height: 94px;
+    }
+
+    .modalMainContent {
+        width: 450px;
+    }
+
+    .modalMobileCloseButtonWrapper {
+        padding-left: 370px;
+    }
+}
+
 @media(max-width: 560px) {
     .letterDividerLine {
         padding-right: 12px;
         width: 350px;
     }
 
-    .mobileListContainer {
-        display: flex;
-        flex-direction: column;
+    .inputFields {
+        width: 364px;
+        height: 41px;
+    }
+
+    .inputIcon {
+        right: 4rem;
+        top: 0.55rem;
+    }
+
+    .buttonsContainer {
+        padding-bottom: 100px;
+    }
+
+    .modalContentContainer {
+        gap: 0;
+    }
+}
+
+@media(max-width: 500px) {
+    .modalMainContent {
+        width: 396px;
+    }
+
+    .modalMobileCloseButtonWrapper {
+        padding-left: 315px;
+    }
+
+    .contactsModalIcon {
+        height: 120px;
+        width: 120px;
+        border-radius: 60px;
+    }
+
+    .modalIconContainer {
+        padding-bottom: 490px;
     }
 }
