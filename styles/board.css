@@ -361,6 +361,9 @@ main {
   .filledTask {
     max-height: 325px;
   }
+  .blankTask {
+    margin-bottom: 0;
+  }
   .subtasksContainer {
     margin-bottom: 1em;
   }
@@ -378,7 +381,6 @@ main {
     width: 1.5em;
     height: 1.5em;
   }
- 
 }
 
 @media (max-width: 1110px) {

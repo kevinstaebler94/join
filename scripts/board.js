@@ -108,7 +108,7 @@ async function dropHandler(ev) {
     if (task) {
       task.column = newColumn;
       await putData(`/users/${loggedInUser}/tasks/`, task, task.id);
-      let updatedTasks = await getData(`/users/${loggedInUser}/tasks`);
+      // let updatedTasks = await getData(`/users/${loggedInUser}/tasks`);
       renderTasks();
     }
   }
@@ -216,7 +216,8 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
 }
 
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
-  let initial = initials.map((init) => `<span id="assignedUser" class="assignedUser">${init}</span>`);
+  let compInitials = initials.slice(0, 3);
+  let initial = compInitials.map((init) => `<span id="assignedUser" class="assignedUser">${init}</span>`);
   let shortenedTitle = shortenText(taskComponents.title, 40);
   let shortenedDescription = shortenText(taskComponents.description, 25);
 
