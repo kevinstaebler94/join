@@ -1,8 +1,14 @@
+.boardMobile {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 6em;
+}
+
 .boardHeaderContentMobile {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+  margin: 3em 0;
 }
 
 .marginTop25 {
@@ -96,6 +102,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin: 0 0.75em;
   }
 
   .blankTask {
@@ -121,6 +128,12 @@
 @media (max-width: 500px) {
   .taskButtonContainerMobile span {
     font-size: 1.75rem;
+  }
+
+  .filledTask {
+    max-width: 250px;
+    width: 100%;
+    max-height: 300px;
   }
 }
 
