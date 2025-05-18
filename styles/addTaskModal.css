@@ -579,3 +579,26 @@ ul {
     transform: translate(-50%);
     z-index: 6;
 }
+
+@media (max-width: 460px) {
+    .inputFields {
+        width: 235px;
+    }
+
+    .priorityBtn {
+        width: 70px;
+        height: 30px;
+    }
+
+    .rightAddTaskForm {
+        width: 235px;
+    }
+
+    .directionColumn {
+        width: 100%;
+    }
+
+    .customDropdown {
+        width: auto;
+    }
+}

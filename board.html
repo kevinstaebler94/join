@@ -49,7 +49,7 @@
                 <img onclick="filterTasks()" class="searchIcon" id="searchIcon" src="/assets/img/search.svg" alt="" />
               </div>
               <div class="addTaskContainer">
-                <button onclick="openAddTaskModal()" class="addTaskButton">
+                <button onclick="handleAddTask()" class="addTaskButton">
                   Add task<img src="./assets/img/plusIconWhite.svg" alt="" />
                 </button>
               </div>
@@ -58,15 +58,15 @@
           <div class="taskButtonsWrapper">
             <div class="taskButtonContainer">
               <span>To do</span>
-              <img onclick="openAddTaskModal()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+              <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
             </div>
             <div class="taskButtonContainer">
               <span>In progress</span>
-              <img onclick="openAddTaskModal()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+              <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
             </div>
             <div class="taskButtonContainer">
               <span>Await feedback</span>
-              <img onclick="openAddTaskModal()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+              <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
             </div>
             <div class="taskButtonContainer">
               <span>Done</span>
@@ -91,7 +91,7 @@
         <section class="boardContentWrapperMobile boardMobile">
           <div class="boardHeaderContentMobile">
             <h2 class="h2Mobile">Board</h2>
-            <button onclick="openAddTaskModal()" class="addTaskButtonMobile">
+            <button onclick="handleAddTask()" class="addTaskButtonMobile">
               <img src="./assets/img/plusIconWhite.svg" alt="" />
             </button>
           </div>
@@ -105,19 +105,19 @@
             <div class="columnWrapperMobile">
               <div class="taskButtonContainerMobile marginTop25">
                 <span>To do</span>
-                <img onclick="openAddTaskModal()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+                <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
               </div>
               <div id="toDoMobile" class="column dropZone" ondrop="dropHandler(event)"
                 ondragover="dragoverHandler(event)"></div>
               <div class="taskButtonContainerMobile marginTop25">
                 <span>In progress</span>
-                <img onclick="openAddTaskModal()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+                <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
               </div>
               <div id="inProgressMobile" class="column dropZone" ondrop="dropHandler(event)"
                 ondragover="dragoverHandler(event)"></div>
               <div class="taskButtonContainerMobile marginTop25">
                 <span>Await feedback</span>
-                <img onclick="openAddTaskModal()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+                <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
               </div>
               <div id="awaitFeedbackMobile" class="column dropZone" ondrop="dropHandler(event)"
                 ondragover="dragoverHandler(event)"></div>

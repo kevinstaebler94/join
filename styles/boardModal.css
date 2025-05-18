@@ -234,3 +234,23 @@
     max-height: 118px;
     overflow-y: auto;
 }
+
+@media (max-width: 630px) {
+    .filledTaskModal {
+        width: 400px;
+    }
+}
+
+@media (max-width: 460px) {
+    .filledTaskModal {
+        width: 300px;
+    }
+
+    .taskTitleModal {
+        font-size: 24px;
+    }
+
+    .taskMainContent {
+        font-size: 12px;
+    }
+}

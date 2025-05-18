@@ -12,6 +12,7 @@ function openFilledTaskModal(taskId, category, title, description, date, priorit
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
     getFilledStructure(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts);
+
 }
 
 function closeModal() {
@@ -151,7 +152,7 @@ function getAddTaskStructure() {
                             </div>
                         </div>
                     </div>`;
-    selectPriority('medium')
+    selectPriority('medium');
 }
 
 function getFilledStructure(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts) {
@@ -198,9 +199,11 @@ function getFilledStructure(taskId, category, title, description, date, priority
                             </div>`;
     getContactsModal(contacts);
     getSubtasksModal(subtasks, taskId);
+
 }
 
 function openTaskEdit(taskId, category, title, description, date, priority, column, encodedSubtasks, encodedContacts) {
+    console.log("openTaskEdit aufgerufen");
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
@@ -281,7 +284,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
 
                                     <label id="subtaskLabel" class="directionColumn" onfocusin="getAddNewSubtask()" onfocusout="handleFocusOut()">
                                         Subtasks
-                                        <input id="subtaskInput" class="inputFields" type="text" placeholder="Add new subtask">
+                                        <input id="subtaskInputModal" class="inputFields" type="text" placeholder="Add new subtask">
                                         <span id="inputIconContainer">
                                             <img id="plusIcon" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                         </span>
@@ -387,7 +390,7 @@ function getAddNewSubtask() {
 
 function addNewSubtaskModal() {
     let subtaskListEdit = document.getElementById('subtaskListEdit');
-    let inputValue = document.getElementById('subtaskInput');
+    let inputValue = document.getElementById('subtaskInputModal');
     let subtaskObj = { done: false, subtask: inputValue.value };
     let subtaskIndex = newSubtaskArr[0].push(subtaskObj) - 1;
     let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskObj));
@@ -403,7 +406,7 @@ function addNewSubtaskModal() {
                                 </li>`;
     addedSubtask = true;
     inputValue.value = '';
-    subtaskInput.blur();
+    inputValue.blur();
 
     setTimeout(() => {
         resetSubtaskIcons();
@@ -423,7 +426,7 @@ function resetSubtaskIcons() {
     plusIcon.alt = 'plus-icon';
     inputIconContainer.appendChild(plusIcon);
     inputIconContainer.classList.remove('inputIconContainer');
-    document.getElementById('subtaskInput').blur();
+    document.getElementById('subtaskInputModal').blur();
 }
 
 function getEditSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
@@ -476,7 +479,7 @@ function deleteEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtaskListElement = document.getElementById('subtaskListElement' + subtaskIndex);
     newSubtaskArr[0].splice(subtaskIndex, 1);
     console.log(newSubtaskArr);
-    
+
     subtaskListElement.innerHTML = '';
 }
 
@@ -507,16 +510,17 @@ function checkAssignedContactEdit(checkboxElement) {
     });
 }
 
-function initSubtaskInputListener() {
-    const subtaskInput = document.getElementById('subtaskInput');
-    if (!subtaskInput) return;
-    subtaskInput.addEventListener('keyup', function (event) {
-        if (event.key === 'Enter') {
-            getSubtask();
-        }
-    });
-}
+document.addEventListener('keyup', function (event) {
+    const input = document.getElementById('subtaskInput');
+    const inputModal = document.getElementById('subtaskInputModal');
 
-document.addEventListener('DOMContentLoaded', function () {
-    initSubtaskInputListener();
+    if (event.key === 'Enter') {
+        if (input && event.target === input) {
+            console.log('Enter gedrückt im normalen Input');
+            getSubtask();
+        } else if (inputModal && event.target === inputModal) {
+            console.log('Enter gedrückt im Modal-Input');
+            addNewSubtaskModal();
+        }
+    }
 });

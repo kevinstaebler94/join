@@ -252,5 +252,13 @@ function shortenText(text, maxLen) {
   return text.length > maxLen ? text.slice(0, maxLen) + "..." : text;
 }
 
-
+function handleAddTask() {
+    if (window.innerWidth <= 1023) {
+        // Weiterleitung zur Seite bei kleinerem Display
+        window.location.href = 'add_task.html'; // Pfad ggf. anpassen
+    } else {
+        // Modal öffnen bei größeren Displays
+        openAddTaskModal();
+    }
+}
 
