@@ -6,6 +6,7 @@ let newSubtaskArr = [];
 let currentTaskId = 0;
 let contacts;
 let isOpen = false;
+let addedSubtask = false;
 let colors = [
     "#9327ff", // lila
     "#1fd7c1", // grün
