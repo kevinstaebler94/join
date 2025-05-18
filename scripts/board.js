@@ -117,7 +117,7 @@ async function dropHandler(ev) {
 
 async function filterTasks() {
   let tasks = await getData(`/users/${loggedInUser}/tasks`);
-  let input = document.getElementById("taskInputfield").value.toLowerCase();
+  let input = document.getElementById('taskInputfield').value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
 
   if (!input.trim()) {
@@ -157,13 +157,13 @@ async function renderFilteredTasks(filtered) {
 }
 
 async function handleTaskInput() {
-  const input = document.getElementById("taskInputfield").value.trim();
+  const input = document.getElementById('taskInputfield').value.trim();
 
   if (!input.length) {
     renderTasks();
     return;
   }
-  filterTasks();
+  await filterTasks();
 }
 
 function convertNameToInitial(contactData) {
