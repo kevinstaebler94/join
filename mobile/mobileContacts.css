@@ -227,3 +227,32 @@
         padding-bottom: 490px;
     }
 }
+
+@media(max-width: 420px) {
+    .letterDividerLine {
+        width: 300px;
+    }
+
+    .contactCard {
+        gap: 10px;
+        padding-right: 0;
+    }
+
+    .contactDetails strong {
+        font-size: 14px;
+    }
+
+    .contactDetails span {
+        font-size: 10px;
+    }
+
+    .addContactMobileButton {
+        height: 30px;
+        width: 25px;
+    }
+
+    .addContactMobileButton img {
+        height: 48px;
+        width: 48px;
+    }
+}

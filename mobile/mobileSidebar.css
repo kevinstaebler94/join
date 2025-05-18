@@ -35,7 +35,6 @@
         padding-left: 0;
         padding-top: 8px;
         padding-bottom: 8px;
-        gap: 10px;
     }
 
     .upper-container {
@@ -60,8 +59,23 @@
         border-radius: 16px;
     }
 
+    .hoverContainer:hover {
+        background-color: #091931;
+    }
+
     .hoverContainer.active {
         background-color: #091931;
+
+    }
+}
+
+@media(max-width: 380px) {
+    .nav-icons {
+        width: 24px;
+    }
+
+    .hoverContainer span {
+        font-size: 14px;
 
     }
 }
