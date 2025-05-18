@@ -222,7 +222,9 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
   let shortenedDescription = shortenText(taskComponents.description, 25);
 
   return `
-    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)" ontouchstart="touchStartHandler(event, '${taskComponents.id}')" 
+    ontouchmove="touchMoveHandler(event, '${taskComponents.id}')" 
+    ontouchend="touchEndHandler(event, '${taskComponents.id}')">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
       <h4 class="taskTitle">${shortenedTitle}</h4>
       <p class="taskDescription">${shortenedDescription}</p>
@@ -250,3 +252,36 @@ async function initProgressBar(tasksData) {
 function shortenText(text, maxLen) {
   return text.length > maxLen ? text.slice(0, maxLen) + "..." : text;
 }
+
+function touchStartHandler(e, id) {
+  let el = document.getElementById(id);
+  let touch = e.changedTouches[0];
+  el.style.position = "absolute";
+  el.style.zIndex = 999;
+  el.style.top = touch.pageY + "px";
+  el.style.left = touch.pageX + "px";
+}
+
+function touchMoveHandler(e, id) {
+  let el = document.getElementById(id);
+  let touch = e.changedTouches[0];
+  el.style.top = touch.pageY + "px";
+  el.style.left = touch.pageX + "px";
+}
+
+function touchEndHandler(e, id) {
+  let touch = e.changedTouches[0];
+  let dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+  let dropZone = dropTarget?.closest(".dropZone");
+  if (dropZone) {
+    document.getElementById(id).style.position = "static";
+    dropHandler({
+      preventDefault: () => {},
+      dataTransfer: {
+        getData: (key) => key === "text" ? id : dropZone.id
+      },
+      target: dropTarget
+    });
+  }
+}
+
