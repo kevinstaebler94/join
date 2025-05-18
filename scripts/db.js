@@ -156,7 +156,7 @@ function changeTasks(taskId, column, category) {
     });
     putData(path, userData, newTaskId);
     deleteTask(loggedInUser, taskId);
-    newSubtaskArr = [];
+    newSubtaskArr = [];    
 }
 
 async function pushContacts(loggedInUser) {

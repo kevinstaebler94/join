@@ -22,6 +22,7 @@ function closeModal() {
     overlay.classList.add('dNone');
     addTaskModal.classList.add('dNone');
     filledTaskModal.classList.add('dNone');
+    newSubtaskArr = [];
 }
 
 function getAddTaskStructure() {
@@ -336,14 +337,23 @@ async function getSubtasksModal(subtasks, taskId) {
 function getSubtaskEdit(subtasks, encodedSubtasks) {
     subtasksArr.push(subtasks.subtask);
     newSubtaskArr.push(subtasks.subtask);
+    console.log(newSubtaskArr[0]);
+    
     if (!subtasksArr[0]) {
         return;
     } else {
-        for (let subtaskIndex = 0; subtaskIndex < subtasksArr[0].length; subtaskIndex++) {
-            let sub = subtasksArr[0];
-            let currentSubtask = sub[subtaskIndex];
-            let subtaskList = document.getElementById('subtaskListEdit');
-            subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
+        renderSubtasksEdit(subtasks, encodedSubtasks);
+    };
+    subtasksArr = [];
+}
+
+
+function renderSubtasksEdit(subtasks, encodedSubtasks) {
+    for (let subtaskIndex = 0; subtaskIndex < subtasksArr[0].length; subtaskIndex++) {
+        let sub = subtasksArr[0];
+        let currentSubtask = sub[subtaskIndex];
+        let subtaskList = document.getElementById('subtaskListEdit');
+        subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
                                     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
                                         <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${subtaskIndex}" class="subtaskWith">${currentSubtask.subtask}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
@@ -353,8 +363,6 @@ function getSubtaskEdit(subtasks, encodedSubtasks) {
                                         </span>
                                     </div>
                                 </li>`;
-        };
-        subtasksArr = [];
     }
 }
 
@@ -453,26 +461,11 @@ function serializeObj(subtasks) {
 function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let subtaskListEdit = document.getElementById('subtaskListEdit');
-    checkAddedSubtask(subtaskId, subtaskIndex, encodedSubtasks);
-    // subtasksArr.push(subtasks.subtask);
-    // newSubtaskArr.push(subtasks.subtask);
-    // subtasksArr[0].splice(subtaskIndex, 1);
-    // subtasks.subtask = subtasksArr[0];
-    // subtaskListEdit.innerHTML = '';
-    // getSubtaskEdit(subtasks, serializeObj(subtasks));
-    // subtasksArr = [];
-}
-
-function checkAddedSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
-    console.log(subtaskId);
-    console.log(subtaskIndex);
-    console.log(encodedSubtasks);
-    let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
-    let subtaskListEdit = document.getElementById('subtaskListEdit');
-    subtasksArr.push(subtasks);
-    newSubtaskArr.push(subtasks);
+    subtasksArr.push(subtasks.subtask);
+    newSubtaskArr.push(subtasks.subtask);
     subtasksArr[0].splice(subtaskIndex, 1);
-    subtasks = subtasksArr[0];
+    newSubtaskArr[0].splice(subtaskIndex, 1);
+    subtasks.subtask = subtasksArr[0];
     subtaskListEdit.innerHTML = '';
     getSubtaskEdit(subtasks, serializeObj(subtasks));
     subtasksArr = [];
@@ -486,33 +479,6 @@ function cancelValue() {
         resetSubtaskIcons();
     }, 50);
 }
-
-// FALSE FUNCTION???
-// function toggleDropdownNameEdit() {
-//     let customDropdownName = document.getElementById('customDropdownNameEdit');
-//     let dropdown = document.getElementById('dropdownListName');
-//     let dropdownIcon = document.getElementById('dropdownIconNameEdit');
-//     customDropdownName.classList.add('activeBorder');
-//     dropdown.classList.toggle('dNone');
-//     dropdownIcon.classList.toggle('rotate');
-//     getContactEdit();
-// }
-
-// FALSE FUNCTION???
-// async function getContactEdit() {
-//     let contacts = await getData("/contacts");
-//     let dropdownListName = document.getElementById('dropdownListName');
-//     dropdownListName.innerHTML = '';
-//     for (let key in contacts) {
-//         if (contacts.hasOwnProperty(key)) {
-//             contactArr.push(contacts[key])
-//         }
-//         dropdownListName.innerHTML += `<label><li id="listName${contacts[key].name}" class="listElement">
-//                                         <p id="${contacts[key].name}">${contacts[key].name}</p>
-//                                         <input onclick="checkAssignedContactEdit(this)" id="checkboxEdit" type="checkbox" class="checkbox" name="selectedNames" data-name="${contacts[key].name}">
-//                                     </li></label>`;
-//     }
-// }
 
 function checkAssignedContactEdit(checkboxElement) {
     let assignedContainer = document.getElementById('assignedContainerEdit');
