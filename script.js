@@ -7,26 +7,29 @@ async function init() {
         return;
     } if (window.location.href.includes("summary.html")) {
         if (window.innerWidth <= 800) {
-            includeHTML();
+            await includeHTML();
             await loadGreeting();     
         getSummary();
         //     // showSummaryLoginOverlay();
         } else {
          getSummary();
         }
-        includeHTML();
+        await includeHTML();
         getSummary();
         highlightActiveSidebarLink();
         return;
     } if (window.location.href.includes("board.html")) {
+        await includeHTML();
         getBoard();
         highlightActiveSidebarLink();
         return;
     } if (window.location.href.includes("contacts.html")) {
+        await includeHTML();
         getContacts();
         highlightActiveSidebarLink();
+        return;
     } else {
-        includeHTML();
+        await includeHTML();
         highlightActiveSidebarLink();
     }
 
