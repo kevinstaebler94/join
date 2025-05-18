@@ -1,7 +1,22 @@
+@media(max-width: 1220px) {
+    .userNameContainer h2 {
+        font-size: 40px;
+    }
+
+    .contactsHeadline {
+        gap: 24px;
+    }
+
+    .contactsHeadline h1 {
+        font-size: 56px;
+    }
+}
+
 @media(max-width: 1190px) {
-    .contactList {
-        padding-left: 36px;
-        padding-right: 36px;
+    .userIconContainer {
+        font-size: 30px;
+        height: 110px;
+        width: 110px;
     }
 
     .mainContent {
@@ -26,6 +41,64 @@
     }
 }
 
+@media(max-width: 1140px) {
+    .userNameContainer h2 {
+        font-size: 36px;
+    }
+
+    .userIconContainer {
+        font-size: 30px;
+        height: 110px;
+        width: 110px;
+    }
+
+    .contactsHeadline {
+        gap: 20px;
+    }
+
+    .contactsHeadline h1 {
+        font-size: 48px;
+    }
+
+    .contactsNameContainer {
+        gap: 48px;
+    }
+
+    .contactListContainer {
+        width: 430px;
+    }
+
+    .contactList {
+        padding-right: 34px;
+    }
+
+    .addContactButton {
+        margin-right: 32px;
+    }
+}
+
+@media(max-width: 1080px) {
+    .contactsNameContainer {
+        gap: 40px;
+    }
+
+    .userNameContainer h2 {
+        font-size: 30px;
+    }
+
+    .contactsHeadline {
+        gap: 18px;
+    }
+
+    .contactsHeadline h1 {
+        font-size: 42px;
+    }
+
+    .contactsHeadline span {
+        font-size: 14px;
+    }
+}
+
 @media(max-width: 1045px) {
     .contactsModalIcon {
         height: 100px;
@@ -34,6 +107,10 @@
 
     .modalIconContainer {
         width: 120px;
+    }
+
+    .contactsNameContainer {
+        gap: 28px;
     }
 }
 
@@ -56,6 +133,22 @@
 
     .modalIconContainer {
         width: 145px;
+    }
+
+    .contactsHeadline {
+        gap: 30px;
+    }
+
+    .contactsHeadline h1 {
+        font-size: 60px;
+    }
+
+    .contactsHeadline span {
+        font-size: 20px;
+    }
+
+    .contactsNameContainer h2 {
+        font-size: 47px;
     }
 
     .headlineContainer {
@@ -111,6 +204,60 @@
 
     .modalCreateButton span {
         cursor: pointer;
+    }
+}
+
+@media(max-width: 950px) {
+    .contactsHeadline {
+        gap: 24px;
+    }
+
+    .contactsHeadline h1 {
+        font-size: 56px;
+    }
+
+    .contactsHeadline span {
+        font-size: 16px;
+    }
+
+    .contactsNameContainer h2 {
+        font-size: 40px;
+    }
+}
+
+@media(max-width: 890px) {
+    .contactsHeadline {
+        gap: 20px;
+    }
+
+    .contactsHeadline h1 {
+        font-size: 48px;
+    }
+
+    .contactsHeadline span {
+        font-size: 14px;
+    }
+
+    .contactsNameContainer h2 {
+        font-size: 36px;
+    }
+}
+
+@media(max-width: 840px) {
+    .contactsHeadline {
+        gap: 18px;
+    }
+
+    .contactsHeadline h1 {
+        font-size: 42px;
+    }
+
+    .contactsHeadline span {
+        font-size: 14px;
+    }
+
+    .contactsNameContainer h2 {
+        font-size: 30px;
     }
 }
 
