@@ -28,6 +28,9 @@
 </head>
 
 <body onload="init()">
+  <div id="orientationOverlay" class="orientationOverlay dNone">
+    <p>Bitte drehe dein Gerät ins Hochformat für eine optimale Darstellung.</p>
+  </div>
   <div class="contentWrapper">
     <aside>
       <div w3-include-html="./assets/templates/sidebar.html"></div>
@@ -97,7 +100,7 @@
           </div>
           <div class="taskSearchMobile">
             <input id="taskInputfield" class="taskInputfieldMobile" type="text" placeholder="Find task"
-            oninput="handleTaskInput()" />
+              oninput="handleTaskInput()" />
             <img class="verticalLine" src="/assets/img/verticalLine.svg" alt="" />
             <img onclick="filterTasks()" class="searchIcon" id="searchIcon" src="/assets/img/search.svg" alt="" />
           </div>

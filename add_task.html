@@ -25,6 +25,10 @@
 </head>
 
 <body onload="init()">
+    <div id="orientationOverlay" class="orientationOverlay dNone">
+        <p>Bitte drehe dein Gerät ins Hochformat für eine optimale Darstellung.</p>
+    </div>
+
     <div class="dFlex">
         <div w3-include-html="./assets/templates/sidebar.html"></div>
         <div class="includeHeader">
@@ -66,7 +70,7 @@
                             <span class="dividingLine"></span>
                             <div class="rightContainer">
                                 <form class="rightAddTaskForm" autocomplete="off">
-                                    <label class="directionColumn maxWidth">Priority
+                                    <span class="directionColumn maxWidth">Priority
                                         <div class="btnContainer flexOne">
                                             <span onclick="selectPriority('urgent')" id="priorityUrgentBtn"
                                                 class="priorityBtn hoverBtn">Urgent<img id="urgentIcon"
@@ -85,7 +89,7 @@
                                                     class="priorityIconWhite dNone" src="./assets/img/prioLowWhite.svg"
                                                     alt=""></span>
                                         </div>
-                                    </label>
+                                    </span>
                                     <label onfocusin="toggleDropdownName()"
                                         class="directionColumn customSelectWrapper">Assigned to
                                         <div id="customDropdownName" class="customDropdown">
@@ -107,7 +111,7 @@
                                     </div>
                                     <div id="assignedContainer" class="assignedContainer"></div>
 
-                                    <label class="directionColumn customSelectWrapper">
+                                    <span class="directionColumn customSelectWrapper">
                                         <div class="dFlex">
                                             <p>Category</p>
                                             <p class="fontRed">*</p>
@@ -129,7 +133,7 @@
                                                     Story</li>
                                             </ul>
                                         </div>
-                                    </label>
+                                    </span>
                                     <label class="directionColumn">Subtasks
                                         <input id="subtaskInput" class="inputFields" type="text"
                                             placeholder="Add new subtask">

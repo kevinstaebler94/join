@@ -139,3 +139,19 @@ function getInitials(name) {
 //         getSummary();
 //     }, 1400);
 // }
+
+function checkOrientation() {
+    const isLandscape = window.innerWidth > window.innerHeight;
+    const overlay = document.getElementById('orientationOverlay');
+
+    if (isLandscape && window.innerWidth <= 1024) {
+        overlay.classList.remove('dNone'); // z. B. Anzeige einer Warnung
+    } else {
+        overlay.classList.add('dNone');
+    }
+}
+
+window.addEventListener('resize', checkOrientation);
+window.addEventListener('orientationchange', checkOrientation);
+document.addEventListener('DOMContentLoaded', checkOrientation);
+

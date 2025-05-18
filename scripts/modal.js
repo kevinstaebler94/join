@@ -38,7 +38,7 @@ function getAddTaskStructure() {
                         
                         <div class="addTaskContent">
                             <div class="leftContainer">
-                                <form class="leftAddTaskForm">
+                                <form name="leftTaskForm" class="leftAddTaskForm">
                                     <label class="directionColumn">
                                         <div class="dFlex">
                                             <p>Title</p>
@@ -66,7 +66,7 @@ function getAddTaskStructure() {
                             </div>
                             <span class="dividingLine"></span>
                             <div class="rightContainer">
-                                <form class="rightAddTaskForm" action="">
+                                <form name="rightTaskForm" class="rightAddTaskForm" action="">
                                     <label class="directionColumn maxWidth">Priority
                                         <div class="btnContainer flexOne">
                                             <span onclick="selectPriority('urgent')" id="priorityUrgentBtn"
@@ -216,7 +216,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                         
                         <div class="addTaskContent editTaskContent modalScrollbar">
                             <div class="leftContainer">
-                                <form class="leftAddTaskForm">
+                                <form name="leftTaskForm" class="leftAddTaskForm">
                                     <label class="directionColumn">
                                         <div class="dFlex">
                                             <p>Title</p>
@@ -240,7 +240,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                             </div>
                             <span class="dividingLine"></span>
                             <div class="rightContainer">
-                                <form class="rightAddTaskForm" action="">
+                                <form name="rightTaskForm" class="rightAddTaskForm" action="">
                                     <label class="directionColumn maxWidth">Priority
                                         <div class="btnContainer flexOne">
                                             <span onclick="selectPriority('urgent')" id="priorityUrgentBtn"
