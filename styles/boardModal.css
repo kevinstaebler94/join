@@ -121,13 +121,13 @@
     justify-content: space-between;
     align-items: center;
 }
-
+/* 
 .assignedUser {
     border-radius: 50%;
     padding: 16px;
     position: relative;
     color: white;
-}
+} */
 
 .assignedContactModal {
     border-radius: 50%;
