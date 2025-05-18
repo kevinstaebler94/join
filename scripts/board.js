@@ -157,7 +157,7 @@ async function renderFilteredTasks(filtered) {
 }
 
 async function handleTaskInput() {
-  const input = document.getElementById('taskInputfield').value.trim();
+  const input = document.getElementById(id).value.trim();
 
   if (!input.length) {
     renderTasks();

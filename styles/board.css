@@ -339,7 +339,6 @@ main {
 
 .dropZone {
   min-height: 150px; 
-  padding: 16px;
   position: relative;
   z-index: 0;
 }
