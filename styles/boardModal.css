@@ -112,6 +112,10 @@
     font-weight: 500;
 }
 
+.subtaskText {
+    width: 380px;
+}
+
 .assignedToContainerModal {
     display: flex;
     justify-content: space-between;
@@ -239,6 +243,10 @@
     .filledTaskModal {
         width: 400px;
     }
+
+    .subtaskText {
+    width: 280px;
+}
 }
 
 @media (max-width: 460px) {
@@ -253,4 +261,16 @@
     .taskMainContent {
         font-size: 12px;
     }
+
+    .subtaskWidth {
+        width: 125px;
+    }
+
+    .assignedToModal {
+        margin: 6px 12px;
+    }
+
+    .subtaskText {
+    width: 190px;
+}
 }

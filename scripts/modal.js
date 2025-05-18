@@ -333,7 +333,7 @@ async function getSubtasksModal(subtasks, taskId) {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
         let isChecked = subtask.done ? 'checked' : '';
         subtaskContainer.innerHTML += `<label class="assignedToModal customCheckbox"><input type="checkbox" ${isChecked}
-        onchange="handleCheckbox(this)" data-task-id="${taskId}" data-subtask-id="${subtaskId}"><span class="icon"></span><p>${subtask.subtask}</p></label>`;
+        onchange="handleCheckbox(this)" data-task-id="${taskId}" data-subtask-id="${subtaskId}"><span class="icon"></span><p class="subtaskText">${subtask.subtask}</p></label>`;
     });
 }
 
@@ -357,7 +357,7 @@ function renderSubtasksEdit(subtasks, encodedSubtasks) {
         let subtaskList = document.getElementById('subtaskListEdit');
         subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
                                     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
-                                        <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${subtaskIndex}" class="subtaskWith">${currentSubtask.subtask}</p></span>
+                                        <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${currentSubtask.subtask}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
                                             <img onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="editIcons"  src="./assets/img/edit.svg" alt="">
                                             <span class="iconDivider">|</span>
