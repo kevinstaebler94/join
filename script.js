@@ -151,6 +151,6 @@ function checkOrientation() {
 }
 
 // window.addEventListener('resize', checkOrientation);
-window.addEventListener('orientationchange', checkOrientation);
-document.addEventListener('DOMContentLoaded', checkOrientation);
+// window.addEventListener('orientationchange', checkOrientation);
+// document.addEventListener('DOMContentLoaded', checkOrientation);
 

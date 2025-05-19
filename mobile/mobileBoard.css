@@ -85,9 +85,9 @@
   body {
     font-size: 18px;
   }
-  h3 {
+  /* h3 {
     display: flex!important;
-  }
+  } */
 
   .boardDesktop {
     display: none;
