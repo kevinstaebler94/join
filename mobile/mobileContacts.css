@@ -3,7 +3,7 @@
         font-size: 40px;
     }
 
-    .contactsHeadline {
+    .mobileHeadlineWrapper {
         gap: 24px;
     }
 
@@ -52,11 +52,11 @@
         width: 110px;
     }
 
-    .contactsHeadline {
+    .mobileHeadlineWrapper {
         gap: 20px;
     }
 
-    .contactsHeadline h1 {
+    .mobileHeadlineWrapper h1 {
         font-size: 48px;
     }
 
@@ -86,15 +86,15 @@
         font-size: 30px;
     }
 
-    .contactsHeadline {
+    .mobileHeadlineWrapper {
         gap: 18px;
     }
 
-    .contactsHeadline h1 {
+    .mobileHeadlineWrapper h1 {
         font-size: 42px;
     }
 
-    .contactsHeadline span {
+    .mobileHeadlineWrapper span {
         font-size: 14px;
     }
 }
@@ -135,15 +135,15 @@
         width: 145px;
     }
 
-    .contactsHeadline {
+    .mobileHeadlineWrapper {
         gap: 30px;
     }
 
-    .contactsHeadline h1 {
+    .mobileHeadlineWrapper h1 {
         font-size: 60px;
     }
 
-    .contactsHeadline span {
+    .mobileHeadlineWrapper span {
         font-size: 20px;
     }
 
@@ -208,15 +208,15 @@
 }
 
 @media(max-width: 950px) {
-    .contactsHeadline {
+    .mobileHeadlineWrapper {
         gap: 24px;
     }
 
-    .contactsHeadline h1 {
+    .mobileHeadlineWrapper h1 {
         font-size: 56px;
     }
 
-    .contactsHeadline span {
+    .mobileHeadlineWrapper span {
         font-size: 16px;
     }
 
@@ -226,15 +226,15 @@
 }
 
 @media(max-width: 890px) {
-    .contactsHeadline {
+    .mobileHeadlineWrapper {
         gap: 20px;
     }
 
-    .contactsHeadline h1 {
+    .mobileHeadlineWrapper h1 {
         font-size: 48px;
     }
 
-    .contactsHeadline span {
+    .mobileHeadlineWrapper span {
         font-size: 14px;
     }
 
@@ -244,15 +244,15 @@
 }
 
 @media(max-width: 840px) {
-    .contactsHeadline {
+    .mobileHeadlineWrapper {
         gap: 18px;
     }
 
-    .contactsHeadline h1 {
+    .mobileHeadlineWrapper h1 {
         font-size: 42px;
     }
 
-    .contactsHeadline span {
+    .mobileHeadlineWrapper span {
         font-size: 14px;
     }
 
@@ -262,7 +262,47 @@
 }
 
 @media(max-width: 800px) {
+    .mainContent {
+        justify-content: center;
+    }
+
     .contactsOverview {
+        display: none;
+    }
+
+    .mobileVisible {
+        display: flex !important;
+    }
+
+    .contactsHeadline {
+        justify-content: space-between;
+    }
+
+    .mobileHeadlineWrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobileBackArrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        width: 32px;
+        border-radius: 15px;
+        border: none;
+        background-color: #F6F7F8;
+        cursor: pointer;
+    }
+
+    .blueMobileUnderline {
+        display: flex;
+        width: 90px;
+        height: 3px;
+        background-color: #29ABE2;
+    }
+
+    .blueDivider {
         display: none;
     }
 

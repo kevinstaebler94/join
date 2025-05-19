@@ -54,7 +54,7 @@ function createContactCard(contact, contactId) {
 
     card.innerHTML = `
         <div class="contactIcon" style="background-color: ${bgColor}">${initials}</div>
-        <div class="contactDetails" onclick="openContactById">
+        <div class="contactDetails" onclick="openContactById()">
             <strong>${contact.name}</strong>
             <span class="email">${contact.email}</span>
         </div>
@@ -64,6 +64,9 @@ function createContactCard(contact, contactId) {
         await openContactById(contactId);
         addContactCardBgToggle(card);
         showContactDetailsToggle(card);
+        if (window.innerWidth <= 800) {
+            openContactMobile(contactId);
+        }
     };
 
     return card;
@@ -94,7 +97,6 @@ async function openContactById(contactId) {
     <span onclick="deleteContact('${contactId}')">Delete</span>`;
 
     currentContactId = adjustEmail(contact.email);
-
 }
 
 function getInitials(name) {
@@ -147,4 +149,16 @@ function showSuccessOverlayImg() {
     setTimeout(() => {
         successOverlayImg.classList.remove('show');
     }, 2000);
+}
+
+function openContactMobile(contactId) {
+    if (window.innerWidth > 800) return;
+    document.getElementById('contactListContainer').classList.add('dNone');
+    document.getElementById('contactsOverview').classList.remove('dNone');
+    document.getElementById('contactsOverview').classList.add('mobileVisible');
+    openContactById(contactId);
+}
+
+function closeContactDetailOverlay() {
+
 }

@@ -8,16 +8,15 @@ async function init() {
     } if (window.location.href.includes("summary.html")) {
         if (window.innerWidth <= 800) {
             await includeHTML();
-            await loadGreeting();     
-        getSummary();
-        //     // showSummaryLoginOverlay();
+            await loadGreeting();
+            getSummary();
+            //     // showSummaryLoginOverlay();
         } else {
-         getSummary();
+            await includeHTML();
+            getSummary();
+            highlightActiveSidebarLink();
+            return;
         }
-        await includeHTML();
-        getSummary();
-        highlightActiveSidebarLink();
-        return;
     } if (window.location.href.includes("board.html")) {
         await includeHTML();
         getBoard();
@@ -126,10 +125,10 @@ function getInitials(name) {
 //     let greeting = await getData('/users/' + loggedInUser + '/greeting/greeting');
 //     if (!greeting) {
 //         console.log(greeting);
-        
+
 //         return;
 //     }
-    
+
 //     overlay.classList.remove('dNone');
 //     updateLoginGreeting();
 //     loginGreetingByName();

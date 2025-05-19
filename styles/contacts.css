@@ -190,15 +190,27 @@ h3 {
 
 .contactsHeadline {
     display: flex;
+    padding-top: 64px;
+}
+
+.mobileHeadlineWrapper {
+    display: flex;
     align-items: center;
     gap: 30px;
-    padding-top: 64px;
 }
 
 .blueDivider {
     width: 3px;
     height: 59px;
     background-color: #29ABE2;
+}
+
+.blueMobileUnderline {
+    display: none;
+}
+
+.mobileBackArrow {
+    display: none;
 }
 
 .contactsBody {

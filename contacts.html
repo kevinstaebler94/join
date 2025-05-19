@@ -42,7 +42,7 @@
                 <div class="mainContent">
                     <div id="succesfullyCreatedOverlayImg" class="succesfullyCreatedOverlayImg"><img
                             src="./assets/img/contactSuccesfullyCreatedOverlay.svg" alt=""></div>
-                    <div class="contactListContainer">
+                    <div class="contactListContainer" id="contactListContainer">
                         <button onclick="openContactsModal()" class="addContactButton">
                             <span>Add new contact</span>
                             <img src="./assets/img/addPerson.svg" alt=""></button>
@@ -56,11 +56,15 @@
 
                     </div>
 
-                    <div class="contactsOverview">
+                    <div class="contactsOverview" id="contactsOverview">
                         <div class="contactsHeadline">
-                            <h1>Contacts</h1>
-                            <div class="blueDivider"></div>
-                            <span>Better with a team</span>
+                            <div class="mobileHeadlineWrapper">
+                                <h1>Contacts</h1>
+                                <div class="blueDivider"></div>
+                                <span>Better with a team</span>
+                                <p class="blueMobileUnderline"></p>
+                            </div>
+                            <button class="mobileBackArrow"><img src="./assets/img/backArrow.svg" alt=""></button>
                         </div>
                         <div class="contactsBody" id="showContactDetails">
                             <div class="contactsNameContainer">
