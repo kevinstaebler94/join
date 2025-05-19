@@ -382,11 +382,6 @@ main {
   .subtaskInfo {
     font-size: 0.8rem;
   }
-  .assignedUser {
-    font-size: 1rem;
-    width: 1.5em;
-    height: 1.5em;
-  }
 }
 
 @media (max-width: 1110px) {
