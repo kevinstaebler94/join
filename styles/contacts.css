@@ -94,7 +94,7 @@ h3 {
     overflow-y: auto;
     padding-left: 46px;
     padding-right: 54px;
-    min-height: 0;
+    height: 100%;
 }
 
 .contactList::-webkit-scrollbar {
