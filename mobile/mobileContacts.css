@@ -74,6 +74,7 @@
 
     .contactList {
         padding-right: 34px;
+        margin-bottom: 80px;
     }
 
     .addContactButton {
@@ -122,8 +123,8 @@
     .modalMobileCloseButtonWrapper {
         position: absolute;
         display: flex;
-        padding-bottom: 280px;
-        padding-left: 450px;
+        top: 35px;
+        bottom: 35px;
     }
 
     .modalMainContent {

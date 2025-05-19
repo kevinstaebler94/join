@@ -6,8 +6,8 @@
 // let tasks = {};
 // let contacts = {};
 
-const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
-// const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
+// const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
 // const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 async function getData(path = '') {
@@ -58,7 +58,7 @@ function pushUsers() {
         email: email.value.trim(),
         password: password.value.trim(),
         login: false,
-        greeting: {greeting: true}
+        greeting: { greeting: true }
     });
     putData(path, userData, userId);
 }
@@ -79,7 +79,7 @@ async function changeUsers(userId, greeting, email, password, name, login, tasks
         email: email,
         password: password,
         login: login,
-        greeting: {greeting: greeting},
+        greeting: { greeting: greeting },
         tasks: tasks,
         contacts: contacts
     });
@@ -156,7 +156,7 @@ function changeTasks(taskId, column, category) {
     });
     putData(path, userData, newTaskId);
     deleteTask(loggedInUser, taskId);
-    newSubtaskArr = [];    
+    newSubtaskArr = [];
 }
 
 async function pushContacts(loggedInUser) {
@@ -181,16 +181,13 @@ async function pushContacts(loggedInUser) {
         console.log("saved:", userData);
         clearInputFields();
         closeContactsModal();
-        window.location.reload();
+        await renderContacts();
+        currentContactId = contactId;
+        await openContactById(currentContactId);
+        showSuccessOverlayImg();
     } catch (error) {
         console.error("error while saving:", error);
     }
-
-    clearInputFields();
-    await renderContacts();
-    currentContactId = adjustEmail(contactEmail.value);
-    await openContactById(currentContactId);
-    showSuccessOverlayImg();
 }
 
 async function pushGuestContacts(contactObj, guestUser) {

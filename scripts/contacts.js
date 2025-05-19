@@ -148,7 +148,7 @@ function showSuccessOverlayImg() {
     successOverlayImg.classList.add('show');
     setTimeout(() => {
         successOverlayImg.classList.remove('show');
-    }, 2000);
+    }, 800);
 }
 
 function openContactMobile(contactId) {
