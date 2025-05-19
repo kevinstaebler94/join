@@ -1,3 +1,7 @@
+.mobileListContainer {
+    height: 100%;
+}
+
 @media(max-width: 1220px) {
     .userNameContainer h2 {
         font-size: 40px;
@@ -345,7 +349,6 @@
     .mobileListContainer {
         display: flex;
         flex-direction: column;
-        height: 100%;
     }
 }
 
