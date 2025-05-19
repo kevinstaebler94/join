@@ -152,7 +152,6 @@ function showSuccessOverlayImg() {
 }
 
 function openContactMobile(contactId) {
-    if (window.innerWidth > 800) return;
     document.getElementById('contactListContainer').classList.add('dNone');
     document.getElementById('contactsOverview').classList.remove('dNone');
     document.getElementById('contactsOverview').classList.add('mobileVisible');
