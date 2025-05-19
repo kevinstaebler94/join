@@ -21,7 +21,8 @@ async function renderTasks() {
   );
   let taskArr = Object.values(tasks || {});
 
-  taskArr.forEach((task) => {
+  taskArr.forEach(task => {
+
     const targetId = getColumnId(task.column);
     const target = document.getElementById(targetId);
     if (!target) return
@@ -56,11 +57,12 @@ function getTaskComponents(task) {
   };
 }
 
-function filledTaskTemplate(taskComponents, task) {
+function filledTaskTemplate(taskComponents) {
+
   let subtaskData = taskComponents.subtask ? taskComponents.subtask : [];
   let isChecked = subtaskData.filter((st) => st.done === true).length;
   let contactData = taskComponents.contact ? taskComponents.contact : [];
-  let serializedSubtasks = encodeURIComponent(JSON.stringify(task));
+  let serializedSubtasks = encodeURIComponent(JSON.stringify(taskComponents));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initials = convertNameToInitial(contactData);
   let progressBarHTML = getProgressBarHTML(
@@ -143,6 +145,11 @@ async function renderFilteredTasks(filtered) {
 
   for (const task of filtered) {
     let taskData = await getData(`/users/${loggedInUser}/tasks/${task.id}`);
+
+    let capitalizedPrio = taskData.prio.charAt(0).toUpperCase() + taskData.prio.slice(1);
+    taskData.capitalizedPrio = capitalizedPrio;
+    console.log(taskData);
+
     const targetId = task.column;
     const target = document.getElementById(targetId);
     target.innerHTML += filledTaskTemplate(taskData);
@@ -253,12 +260,12 @@ function shortenText(text, maxLen) {
 }
 
 function handleAddTask() {
-    if (window.innerWidth <= 1023) {
-        // Weiterleitung zur Seite bei kleinerem Display
-        window.location.href = 'add_task.html'; // Pfad ggf. anpassen
-    } else {
-        // Modal öffnen bei größeren Displays
-        openAddTaskModal();
-    }
+  if (window.innerWidth <= 1023) {
+    // Weiterleitung zur Seite bei kleinerem Display
+    window.location.href = 'add_task.html'; // Pfad ggf. anpassen
+  } else {
+    // Modal öffnen bei größeren Displays
+    openAddTaskModal();
+  }
 }
 
