@@ -7,6 +7,8 @@ let colors = [
     "#6e52ff", // gelb
 ];
 
+let activeContactCard = null;
+
 async function renderContacts() {
     console.log("renderContacts wurde aufgerufen");
     let container = document.getElementById("contactList");
@@ -122,13 +124,15 @@ function getColorFromName(name) {
 }
 
 function addContactCardBgToggle(cardElement) {
-    let allCards = document.querySelectorAll('.contactCard');
-
-    if (cardElement.classList.contains('active')) {
+    if (activeContactCard === cardElement) {
         cardElement.classList.remove('active');
+        activeContactCard = null;
     } else {
-        allCards.forEach(card => card.classList.remove('active'));
+        if (activeContactCard) {
+            activeContactCard.classList.remove('active');
+        }
         cardElement.classList.add('active');
+        activeContactCard = cardElement;
     }
 }
 
@@ -158,6 +162,13 @@ function openContactMobile(contactId) {
     openContactById(contactId);
 }
 
-function closeContactDetailOverlay() {
+function showContactList() {
+    document.getElementById('contactsOverview').classList.remove('mobileVisible');
+    document.getElementById('contactListContainer').classList.remove('dNone');
+
+    if (activeContactCard) {
+        activeContactCard.classList.remove('active');
+        activeContactCard = null;
+    }
 
 }
