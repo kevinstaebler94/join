@@ -359,6 +359,43 @@
         display: flex;
         flex-direction: column;
     }
+
+    .mobileBurgerMenu {
+        width: 116px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        background-color: white;
+        position: relative;
+        bottom: -130px;
+        right: -410px;
+        transition: all 0.3s ease-in-out;
+        z-index: 9;
+        opacity: 1;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        padding: 8px;
+    }
+
+    .mobileBurgerEditButton {
+        display: flex;
+        gap: 8px;
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .mobileBurgerDeleteButton {
+        display: flex;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .mobileBurgerDeleteButton:hover {
+        cursor: pointer;
+    }
 }
 
 @media(max-width: 600px) {

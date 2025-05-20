@@ -97,6 +97,26 @@
                                 <span>Phone</span>
                                 <p id="userPhoneNumber">number</p>
                             </div>
+                            <button class="addContactMobileButton" onclick="openMobileBurgerMenu()">
+                                <img src="./assets/img/openContactsBM.svg" alt="">
+                            </button>
+                            <div id="mobileBurgerMenu" class="mobileBurgerMenu">
+                                <div class="mobileBurgerEditButton" onclick="openEditContactsModal()">
+                                    <div class="userNameEditIconContainer">
+                                        <img class="defaultIcon" src="./assets/img/edit.svg" alt="">
+                                        <img class="hoverIcon" src="./assets/img/editHover.svg" alt="">
+                                    </div>
+                                    <span>Edit</span>
+                                </div>
+                                <div id="userNameDeleteContainer" class="mobileBurgerDeleteButton"
+                                    onclick="deleteContact('${contactId}')">
+                                    <div class="userNameDeleteIconContainer">
+                                        <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
+                                        <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
+                                    </div>
+                                    <span>Delete</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

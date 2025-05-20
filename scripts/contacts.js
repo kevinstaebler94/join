@@ -170,5 +170,9 @@ function showContactList() {
         activeContactCard.classList.remove('active');
         activeContactCard = null;
     }
+}
 
+function openMobileBurgerMenu() {
+    let menu = document.getElementById("mobileBurgerMenu");
+    menu.classList.toggle("show");
 }
