@@ -16,6 +16,8 @@ let colors = [
     "#6e52ff", // gelb
 ];
 
+let initialColor = {};
+
 window.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         document.getElementById('dropdownListName').classList.add('dNone');
@@ -227,7 +229,7 @@ function selectCategory(myCategory) {
 function initSubtaskInputListener() {
     const subtaskInput = document.getElementById('subtaskInput');
     if (!subtaskInput) return;
-    subtaskInput.addEventListener('keyup', function(event) {
+    subtaskInput.addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
             getSubtask();
         }
@@ -392,6 +394,7 @@ async function getContact() {
     for (let key in contacts) {
         if (contacts.hasOwnProperty(key)) {
             contactArr.push(contacts[key]);
+            color = getColorFromName(contacts[key].name);
         }
     }
     renderFilteredContacts();
@@ -407,7 +410,10 @@ function renderFilteredContacts(filter = '') {
         let isChecked = assignedArr.includes(contact.name) ? 'checked' : '';
         dropdownListName.innerHTML += `<label class="customCheckbox">
                                             <li id="listName${contact.name}" class="listElement">
-                                                <p>${contact.name}</p>
+                                                <div class="nameContainer">
+                                                    <span id="initalContainer${contact.name}" class="initalIcon">${getInitials(contact.name)}</span>
+                                                    <p>${contact.name}</p>
+                                                </div>
                                                 <input onclick="checkAssignedContact(this)" 
                                                     id="${contact.name}" 
                                                     type="checkbox" 
@@ -418,6 +424,7 @@ function renderFilteredContacts(filter = '') {
                                                     <span class="icon"></span>
                                             </li>
                                         </label>`;
+        styleInitalName(contact.name, contact.name + contact.email);
     });
 }
 
@@ -436,17 +443,20 @@ function checkAssignedContact(checkboxElement) {
     let assignedContainer = document.getElementById('assignedContainer');
     let checkedName = checkboxElement.dataset.name;
     let index = assignedArr.indexOf(checkedName);
-
+    let listElement = document.getElementById('listName' + checkboxElement.dataset.name);
     if (checkboxElement.checked) {
         assignedArr.push(checkedName);
+        listElement.classList.add('checked');
     } else {
         if (index > -1) {
             assignedArr.splice(index, 1);
+            listElement.classList.remove('checked');
         }
     }
     assignedContainer.innerHTML = '';
     assignedArr.forEach(contact => {
-        assignedContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
+        assignedContainer.innerHTML += `<p id="contactAssignedInitial${contact}" class="contactInitial">${getInitials(contact)}</p>`;
+        getContactInitialColor(contact);
     });
 }
 
@@ -458,6 +468,29 @@ function getInitials(name) {
         .toUpperCase();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initSubtaskInputListener();
 });
+
+function getColorFromName(name) {
+    let sum = 0;
+    for (let i = 0; i < name.length; i++) {
+        sum += name.charCodeAt(i) + (i + 1);
+    }
+    let index = sum % colors.length;
+    return colors[index];
+}
+
+function styleInitalName(contact, contactMail) {
+    let initalContainer = document.getElementById('initalContainer' + contact);
+    let color = getColorFromName(contactMail);
+    initalContainer.style.backgroundColor = color;
+    initialColor[contact] = color;
+
+}
+
+function getContactInitialColor(contact) {
+    let contactAssignedInitial = document.getElementById('contactAssignedInitial' + contact);
+    contactAssignedInitial.style.backgroundColor = initialColor[contact];
+
+}
