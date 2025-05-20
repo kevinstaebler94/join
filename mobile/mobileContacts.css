@@ -316,8 +316,6 @@
     }
 
     .mobileListContainer {
-        display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -446,5 +444,17 @@
     .addContactMobileButton img {
         height: 48px;
         width: 48px;
+    }
+}
+
+@media(max-width: 380px) {
+    .contactsNameContainer {
+        gap: 20px;
+    }
+
+    .userIconContainer {
+        height: 80px;
+        width: 80px;
+        border-radius: 70px;
     }
 }

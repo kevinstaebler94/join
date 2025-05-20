@@ -195,7 +195,6 @@ h3 {
 
 .mobileHeadlineWrapper {
     display: flex;
-    align-items: center;
     gap: 30px;
 }
 
@@ -426,4 +425,10 @@ h3 {
 .succesfullyCreatedOverlayImg.show {
     opacity: 1;
     transform: translateX(-250px);
+}
+
+@media(min-width: 801px) {
+    .mobileHeadlineWrapper {
+        align-items: center;
+    }
 }
