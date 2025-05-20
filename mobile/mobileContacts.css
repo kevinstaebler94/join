@@ -121,10 +121,20 @@
 
 @media(max-width: 1023px) {
     .modalMobileCloseButtonWrapper {
-        position: absolute;
         display: flex;
-        top: 35px;
-        bottom: 35px;
+        position: relative;
+        top: -55px;
+        left: 470px;
+    }
+
+    .modalMobileCloseButton {
+        background-color: #2A3647;
+        border: none;
+        cursor: pointer;
+    }
+
+    .modalMobileCloseButton img {
+        transform: rotate(45deg);
     }
 
     .modalMainContent {
@@ -352,6 +362,11 @@
 }
 
 @media(max-width: 600px) {
+    .modalMobileCloseButtonWrapper {
+        left: 370px;
+        top: -70px;
+    }
+
     .headlineContainer h1 {
         font-size: 47px;
     }
@@ -367,13 +382,14 @@
     .modalMainContent {
         width: 450px;
     }
-
-    .modalMobileCloseButtonWrapper {
-        padding-left: 370px;
-    }
 }
 
 @media(max-width: 560px) {
+    .modalMobileCloseButtonWrapper {
+        left: 370px;
+        top: -75px;
+    }
+
     .letterDividerLine {
         padding-right: 12px;
         width: 350px;
@@ -399,12 +415,13 @@
 }
 
 @media(max-width: 500px) {
-    .modalMainContent {
-        width: 396px;
+    .modalMobileCloseButtonWrapper {
+        left: 320px;
+        top: -75px;
     }
 
-    .modalMobileCloseButtonWrapper {
-        padding-left: 315px;
+    .modalMainContent {
+        width: 396px;
     }
 
     .contactsModalIcon {
@@ -419,31 +436,25 @@
 }
 
 @media(max-width: 420px) {
-    .letterDividerLine {
-        width: 300px;
+    .modalMobileCloseButtonWrapper {
+        left: 280px;
     }
 
-    .contactCard {
-        gap: 10px;
-        padding-right: 0;
+    .modalMainContent {
+        width: 350px;
     }
 
-    .contactDetails strong {
-        font-size: 14px;
+    .headlineSection {
+        padding-left: 18px;
     }
 
-    .contactDetails span {
-        font-size: 10px;
+
+    .inputFields {
+        width: 320px;
     }
 
-    .addContactMobileButton {
-        height: 30px;
-        width: 25px;
-    }
-
-    .addContactMobileButton img {
-        height: 48px;
-        width: 48px;
+    .modalContentContainer {
+        width: 410px;
     }
 }
 
@@ -456,5 +467,27 @@
         height: 80px;
         width: 80px;
         border-radius: 70px;
+    }
+
+    .inputFields {
+        width: 320px;
+    }
+
+    .modalContentContainer {
+        width: 410px;
+    }
+}
+
+@media(max-width: 370px) {
+    .modalMobileCloseButtonWrapper {
+        left: 250px;
+    }
+
+    .modalMainContent {
+        width: 310px;
+    }
+
+    .inputFields {
+        width: 300px;
     }
 }
