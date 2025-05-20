@@ -174,7 +174,7 @@ function getFilledStructure(taskId, category, title, description, date, priority
                                     <h4 class="taskTitleModal">${title}</h4>
                                     <p class="taskDescriptionModal">${description}</p>
                                     <div class="infoContainer"><p class="titleLine marginDate">Due date:</p><span>${date}</span></div>
-                                    <div class="infoContainer"><p class="titleLine marginPriority">Priority:</p><span class="priorityContainer">${capitalizedPriority}<img src="/assets/img/prio${capitalizedPriority}.svg" alt="" class="taskPrioModal"></span></div>
+                                    <div class="infoContainer"><p class="titleLine marginPriority">Priority:</p><span class="priorityContainer">${capitalizedPriority}<img src="./assets/img/prio${capitalizedPriority}.svg" alt="" class="taskPrioModal"></span></div>
                                     <p class="titleLine mBottom">Assigned to:</p>
                                     <div id="assignedContainerModal" class="assignedContainerModal overflowScroll"></div>
                                     <p class="titleLine marginTopBottom">Subtasks</p>

@@ -240,7 +240,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
         ">
           ${initial}
         </div>
-        <img src="/assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
+        <img src="./assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
       </div>
     </div>
   `;
