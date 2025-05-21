@@ -277,6 +277,10 @@
 }
 
 @media(max-width: 800px) {
+    .mobileBurgerMenu {
+        display: flex !important;
+    }
+
     .mainContent {
         justify-content: center;
     }
@@ -370,14 +374,19 @@
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         background-color: white;
-        position: relative;
-        bottom: -130px;
-        right: -410px;
+        position: fixed;
+        bottom: 90px;
+        right: -240px;
         transition: all 0.3s ease-in-out;
         z-index: 9;
         opacity: 1;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         padding: 8px;
+    }
+
+    .mobileBurgerMenu.show {
+        opacity: 1;
+        transform: translateX(-250px);
     }
 
     .mobileBurgerEditButton {

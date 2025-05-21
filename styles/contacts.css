@@ -364,7 +364,7 @@ h3 {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
-    z-index: 2;
+    z-index: 9;
 }
 
 .modalMainContent {
@@ -374,7 +374,7 @@ h3 {
     height: 600px;
     width: 1148px;
     padding-right: 20px;
-    z-index: 3;
+    z-index: 10;
     display: flex;
     border-radius: 30px;
     overflow: hidden;

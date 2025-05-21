@@ -174,5 +174,6 @@ function showContactList() {
 
 function openMobileBurgerMenu() {
     let menu = document.getElementById("mobileBurgerMenu");
+    menu.classList.toggle('dNone');
     menu.classList.toggle("show");
 }
