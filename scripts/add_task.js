@@ -424,7 +424,7 @@ function renderFilteredContacts(filter = '') {
                                                     <span class="icon"></span>
                                             </li>
                                         </label>`;
-        styleInitalName(contact.name, contact.name + contact.email);
+        styleInitalName(contact.name);
     });
 }
 
@@ -481,9 +481,9 @@ function getColorFromName(name) {
     return colors[index];
 }
 
-function styleInitalName(contact, contactMail) {
+function styleInitalName(contact) {
     let initalContainer = document.getElementById('initalContainer' + contact);
-    let color = getColorFromName(contactMail);
+    let color = getColorFromName(contact);
     initalContainer.style.backgroundColor = color;
     initialColor[contact] = color;
 
@@ -492,5 +492,4 @@ function styleInitalName(contact, contactMail) {
 function getContactInitialColor(contact) {
     let contactAssignedInitial = document.getElementById('contactAssignedInitial' + contact);
     contactAssignedInitial.style.backgroundColor = initialColor[contact];
-
 }

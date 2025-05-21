@@ -28,6 +28,13 @@ async function renderTasks() {
     if (!target) return
     let taskComponents = getTaskComponents(task);
     target.innerHTML += filledTaskTemplate(taskComponents, task);
+    task.contact.forEach(contact => {
+    let initial = getInitials(contact);
+    styleInitalName(contact, initial);
+    // getContactInitialColor(initial, contact);
+});
+
+    
   });
 
   columns.forEach((id) => {
@@ -212,11 +219,13 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
 }
 
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
+  
   let compInitials = initials.slice(0, 3);
-  let initial = compInitials.map((init) => `<span id="assignedUser" class="assignedUser">${init}</span>`);
+  let initial = compInitials.map((init) => `<span id="assignedUser${init}" class="assignedUser">${init}</span>`);
   let shortenedTitle = shortenText(taskComponents.title, 40);
   let shortenedDescription = shortenText(taskComponents.description, 25);
-
+  
+  
   return `
     <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
@@ -232,6 +241,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
       </div>
     </div>
   `;
+  
 }
 
 async function initProgressBar(tasksData) {
@@ -257,3 +267,14 @@ function handleAddTask() {
   }
 }
 
+function styleInitalName(contact, initial) {
+    let initalContainer = document.getElementById('assignedUser' + initial);
+    let color = getColorFromName(contact);
+    initalContainer.style.backgroundColor = color;
+    initialColor[contact] = color;
+}
+
+// function getContactInitialColor(initial, contact) {
+//     let contactAssignedInitial = document.getElementById('assignedUser' + initial);
+//     contactAssignedInitial.style.backgroundColor = initialColor[contact];
+// }

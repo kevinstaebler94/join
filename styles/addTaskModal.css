@@ -56,7 +56,7 @@ h1 {
 }
 
 .addTaskContent::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .leftContainer {
@@ -469,6 +469,13 @@ ul {
     width: 100%;
 }
 
+.nameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
 .liMarker {
     border-radius: 50%;
     width: 6px;
@@ -497,7 +504,7 @@ ul {
     display: flex;
     justify-content: space-between;
     padding: 8px;
-    border-bottom: 1px solid #29ABE2 ;
+    border-bottom: 1px solid #29ABE2;
 }
 
 .newSubtaskInput {
@@ -545,7 +552,7 @@ ul {
 .ddListName {
     max-height: 197px;
     overflow-y: scroll;
-    scrollbar-color: rgba(0,0,0,0.3) transparent;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
 /* Chrome, Edge, Safari */
@@ -559,9 +566,10 @@ ul {
 }
 
 .ddListName::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
-    border: 2px solid transparent; /* Padding für Abstand */
+    border: 2px solid transparent;
+    /* Padding für Abstand */
     background-clip: content-box;
 }
 
