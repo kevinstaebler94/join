@@ -11,23 +11,23 @@ function signUpTemplate() {
         <hr class="hr">
         <form onsubmit="signUp(event)"; return false">
           <div class="inputWrapper">
-            <input id="name" class="inputfield" type="text" placeholder="Name" oninput="toggleSignUpButton()">
-            <img class="inputIcon" src="./assets/img/person.svg" alt="">
+            <input id="name" class="inputfieldSignUp" type="text" placeholder="Name" oninput="toggleSignUpButton()">
+            <img class="inputIconSignUp" src="./assets/img/person.svg" alt="">
             <span class="hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
-            <input id="email" class="inputfield" type="text" placeholder="Email" oninput="toggleSignUpButton()">
-            <img class="inputIcon" src="./assets/img/mail.svg" alt="">
+            <input id="email" class="inputfieldSignUp" type="text" placeholder="Email" oninput="toggleSignUpButton()">
+            <img class="inputIconSignUp" src="./assets/img/mail.svg" alt="">
             <span id="errorMsgEmail" class="errorMsgEmail hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
-            <input id="password" class="inputfield password" type="password" placeholder="Password" oninput="toggleSignUpButton()">
-            <img onclick="togglePasswordVisibility('password')" class="inputIcon passwordIcon" src="./assets/img/lock.svg" alt="">
+            <input id="password" class="inputfieldSignUp password" type="password" placeholder="Password" oninput="toggleSignUpButton()">
+            <img onclick="togglePasswordVisibility('password')" class="inputIconSignUp passwordIcon" src="./assets/img/lock.svg" alt="">
             <span class="hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
-            <input id="confirmedPassword" class="inputfield password" type="password" placeholder="Confirm Password" oninput="toggleSignUpButton()">
-            <img onclick="togglePasswordVisibility('confirmedPassword')" class="inputIcon passwordIcon" src="./assets/img/lock.svg" alt="">
+            <input id="confirmedPassword" class="inputfieldSignUp password" type="password" placeholder="Confirm Password" oninput="toggleSignUpButton()">
+            <img onclick="togglePasswordVisibility('confirmedPassword')" class="inputIconSignUp passwordIcon" src="./assets/img/lock.svg" alt="">
             <span id="errorMsgPassword" class="errorMsgPassword hide">Your passwords don't match. Please try again.</span>
           </div>
           <div class="checkPrivacyPolicy">

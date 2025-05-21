@@ -53,7 +53,7 @@ form {
   flex-direction: column;
 }
 
-.inputIcon {
+.inputIconLogin {
   height: 1rem;
   position: absolute;
   right: 4rem;
@@ -61,7 +61,7 @@ form {
   z-index: 2;
 }
 
-.inputfield {
+.inputfieldLogin {
   width: 75%;
   margin: 0.7em auto;
   border-radius: 10px;
@@ -209,8 +209,46 @@ form {
   text-decoration: none;
 }
 
+.signUpHeroContainerMobile {
+  display: none;
+}
 
+@media (max-width: 700px) {
+  header {
+    display: none;
+  }
 
+  .buttonWrapper {
+    flex-direction: column;
+  }
 
+  .signUpHeroContainerMobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 5em;
+  }
+}
 
+@media (max-width: 550px) {
+  .contentLogin {
+    max-width: 95%;
+  }
+}
 
+@media (max-width: 475px) {
+  .inputfieldLogin {
+    width: 95%;
+  }
+
+  .inputIconLogin {
+    right: 1em;
+  }
+}
+
+@media (max-width: 375px) {
+  .signUpHeroContainerMobile {
+    gap: 0;
+  }
+}

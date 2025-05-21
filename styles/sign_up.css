@@ -62,7 +62,7 @@ form {
   left: 1.75em;
 }
 
-.inputIcon {
+.inputIconSignUp {
   height: 1rem;
   position: absolute;
   right: 4rem;
@@ -74,7 +74,7 @@ form {
   cursor: pointer;
 }
 
-.inputfield {
+.inputfieldSignUp {
   width: 75%;
   margin: 0.7em auto;
   border-radius: 10px;
@@ -173,18 +173,8 @@ form {
   height: 100%;
 }
 
-@media(max-height:1000px) {
-  .contentSignUp {
-    max-height: none;
-    height: fit-content;
-    margin: -2vh auto;
-  }
-}
-
-@media(max-height:800px) {
-  .contentSignUp {
-    margin: -2vh auto;
-  }
+.hightlight {
+  color: #28ABE2;
 }
 
 .checkbox {
@@ -235,3 +225,47 @@ form {
   color: red;
 }
 
+@media(max-height:1000px) {
+  .contentSignUp {
+    max-height: none;
+    height: fit-content;
+    margin: -2vh auto;
+  }
+}
+
+@media(max-height:800px) {
+  .contentSignUp {
+    margin: -2vh auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .contentSignUp {
+    max-width: 95%;
+    max-height: 665px;
+  }
+}
+
+@media (max-width: 475px) {
+  .inputfieldSignUp {
+    width: 95%;
+  }
+
+  .inputIconSignUp {
+    right: 1em;
+  }
+}
+
+@media (max-width: 400px) {
+  .returnArrow {
+    left: 0;
+  }
+
+  .checkbox {
+    width: 10%;
+  }
+
+  .checkPrivacyPolicy span {
+    font-size: 0.8rem;
+  }
+}

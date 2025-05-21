@@ -15,13 +15,13 @@ function loginTemplate() {
         <hr class="hr">
         <form onsubmit="login(event); return false">
           <div class="inputWrapper">
-            <input id="emailLogin" class="inputfield" type="email" value="${savedEmail}" placeholder="Email" oninput="toggleLoginButton()">
-            <img class="inputIcon" src="./assets/img/mail.svg" alt="">
+            <input id="emailLogin" class="inputfieldLogin" type="email" value="${savedEmail}" placeholder="Email" oninput="toggleLoginButton()">
+            <img class="inputIconLogin" src="./assets/img/mail.svg" alt="">
             <span class="hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
-            <input id="passwordLogin" class="inputfield" type="password" value="${savedPassword}" placeholder="Password" oninput="toggleLoginButton()">
-            <img onclick="togglePasswordVisibility('passwordLogin')" id="passwordIcon" class="inputIcon passwordIcon" src="./assets/img/lock.svg" alt="">
+            <input id="passwordLogin" class="inputfieldLogin" type="password" value="${savedPassword}" placeholder="Password" oninput="toggleLoginButton()">
+            <img onclick="togglePasswordVisibility('passwordLogin')" id="passwordIcon" class="inputIconLogin passwordIcon" src="./assets/img/lock.svg" alt="">
             <span id="errorMsgLogin" class="errorMsgPassword hide">Check your email and password. Please try again.</span>
           </div>
           <div class="buttonWrapper">
@@ -30,6 +30,9 @@ function loginTemplate() {
           </div>
         </form>
       </div>
+      <div class="signUpHeroContainerMobile">
+      <span class="signUpText">Not a Join user?</span>
+      <button onclick="updateContent('signUp')" class="button signUpButton">Sign up</button></div>
     </main>
     <footer class="legalLinks">
       <span class="privacyPolicy">Privacy Policy</span>
