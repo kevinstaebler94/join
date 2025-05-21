@@ -85,9 +85,6 @@
   body {
     font-size: 18px;
   }
-  /* h3 {
-    display: flex!important;
-  } */
 
   .boardDesktop {
     display: none;
@@ -122,20 +119,6 @@
     overflow-x: auto;
     padding: 1.5em 0 0.85em 0;
   }
-
-  /* .taskSearchMobile {
-    flex-direction: column;
-  } */
-
-  /* .verticalLine {
-    left: 270px;
-    bottom: 48px;
-  }
-
-  .searchIcon {
-    left: 300px;
-    bottom: 88px;
-  } */
 }
 
 @media (max-width: 500px) {

@@ -47,9 +47,9 @@
             <div class="taskActionWrapper">
               <div class="taskSearch">
                 <input id="taskInputfield" class="taskInputfield" type="text" placeholder="Find task"
-                  oninput="handleTaskInput()" />
+                  oninput="handleTaskInput('taskInputfield')" />
                 <img class="verticalLine" src="./assets/img/verticalLine.svg" alt="" />
-                <img onclick="filterTasks()" class="searchIcon" id="searchIcon" src="./assets/img/search.svg" alt="" />
+                <img onclick="filterTasks('taskInputfield')" class="searchIcon" src="./assets/img/search.svg" alt="" />
               </div>
               <div class="addTaskContainer">
                 <button onclick="handleAddTask()" class="addTaskButton">
@@ -99,10 +99,10 @@
             </button>
           </div>
           <div class="taskSearchMobile">
-            <input id="taskInputfield" class="taskInputfieldMobile" type="text" placeholder="Find task"
-              oninput="handleTaskInput()" />
+            <input id="taskInputfieldMobile" class="taskInputfieldMobile" type="text" placeholder="Find task"
+              oninput="handleTaskInput('taskInputfieldMobile')" />
             <img class="verticalLine" src="./assets/img/verticalLine.svg" alt="" />
-            <img onclick="filterTasks()" class="searchIcon" id="searchIcon" src="./assets/img/search.svg" alt="" />
+            <img onclick="filterTasks('taskInputfieldMobile')" class="searchIcon" src="./assets/img/search.svg" alt="" />
           </div>
           <div class="boardContentMobile">
             <div class="columnWrapperMobile">

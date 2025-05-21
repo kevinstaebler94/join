@@ -111,15 +111,14 @@ async function dropHandler(ev) {
     if (task) {
       task.column = newColumn;
       await putData(`/users/${loggedInUser}/tasks/`, task, task.id);
-      // let updatedTasks = await getData(`/users/${loggedInUser}/tasks`);
       renderTasks();
     }
   }
 }
 
-async function filterTasks() {
+async function filterTasks(id) {
   let tasks = await getData(`/users/${loggedInUser}/tasks`);
-  let input = document.getElementById('taskInputfield').value.toLowerCase();
+  let input = document.getElementById(id).value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
 
   if (!input.trim()) {
@@ -133,44 +132,34 @@ async function filterTasks() {
 }
 
 async function renderFilteredTasks(filtered) {
+  const isMobile = window.innerWidth <= 768;
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
-  columns.forEach((id) => (document.getElementById(id).innerHTML = ""));
+  const columnIds = columns.map(col => isMobile ? col + "Mobile" : col);
+  columnIds.forEach(id => document.getElementById(id).innerHTML = "");
 
-  if (filtered.length === 0) {
-    columns.forEach(
-      (id) => (document.getElementById(id).innerHTML = blankTask(id))
-    );
-    return;
-  }
+  if (!filtered.length) return columnIds.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
 
   for (const task of filtered) {
-    let taskData = await getData(`/users/${loggedInUser}/tasks/${task.id}`);
-
-    let capitalizedPrio = taskData.prio.charAt(0).toUpperCase() + taskData.prio.slice(1);
-    taskData.capitalizedPrio = capitalizedPrio;
-    console.log(taskData);
-
-    const targetId = task.column;
+    task.capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1);
+    const targetId = isMobile ? task.column + "Mobile" : task.column;
     const target = document.getElementById(targetId);
-    target.innerHTML += filledTaskTemplate(taskData);
+    if (target) target.innerHTML += filledTaskTemplate(task);
   }
 
-  columns.forEach((id) => {
-    const column = document.getElementById(id);
-    if (!column.innerHTML.trim()) {
-      column.innerHTML = blankTask(id);
-    }
+  columnIds.forEach(id => {
+    const col = document.getElementById(id);
+    if (col && !col.innerHTML.trim()) col.innerHTML = blankTask(id);
   });
 }
 
-async function handleTaskInput() {
-  const input = document.getElementById('taskInputfield').value.trim();
+async function handleTaskInput(id) {
+  const input = document.getElementById(id).value.trim();
 
   if (!input.length) {
     renderTasks();
     return;
   }
-  await filterTasks();
+  await filterTasks(id);
 }
 
 function convertNameToInitial(contactData) {
@@ -189,7 +178,6 @@ async function handleCheckbox(checkbox) {
   let label = checkbox.closest("label");
   let currentSubtask = label?.querySelector("p")?.textContent.trim();
   let taskId = checkbox.dataset.taskId;
-  // let currentSubtask = checkbox.nextElementSibling?.textContent.trim();
   let done = checkbox.checked;
   let subtaskId = checkbox.dataset.subtaskId;
   let checkboxArr = Array.from(list);
