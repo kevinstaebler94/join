@@ -314,15 +314,16 @@ function handleFocusOut() {
 async function getContactsModal(contacts) {
     contacts.forEach(contact => {
         let contactContainer = document.getElementById('assignedContainerModal');
-        contactContainer.innerHTML += `<div class="assignedToModal"><span class="assignedContactModal">${getInitials(contact)}</span><p>${contact}</p></div>`;
+        contactContainer.innerHTML += `<div class="assignedToModal"><span id="contactInitialContainer${contact}" class="assignedContactModal">${getInitials(contact)}</span><p>${contact}</p></div>`;
+        getContactInitialColorModal(contact);
     });
 }
 
 function getContactsEdit(contacts) {
     contacts.forEach(contact => {
         let assignetContainer = document.getElementById('assignedContainer');
-
-        assignetContainer.innerHTML += `<p class="contactInitial">${getInitials(contact)}</p>`;
+        assignetContainer.innerHTML += `<p id="contactInitialContainer${contact}" class="contactInitial">${getInitials(contact)}</p>`;
+        getContactInitialColorEdit(contact);
     });
 }
 
@@ -524,3 +525,13 @@ document.addEventListener('keyup', function (event) {
         }
     }
 });
+
+function getContactInitialColorModal(contact) {
+    let contactInitialContainer = document.getElementById('contactInitialContainer' + contact);
+    contactInitialContainer.style.backgroundColor = initialColor[contact];
+}
+
+function getContactInitialColorEdit(contact) {
+    let contactInitialContainer = document.getElementById('contactInitialContainer' + contact);
+    contactInitialContainer.style.backgroundColor = initialColor[contact];
+}

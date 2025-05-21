@@ -292,6 +292,10 @@ ul {
     border: none;
 }
 
+.newSubtaskInput:focus {
+    outline: none;
+}
+
 .plusIcon {
     width: 16px;
     position: relative;

@@ -30,8 +30,7 @@ async function renderTasks() {
     target.innerHTML += filledTaskTemplate(taskComponents, task);
     task.contact.forEach(contact => {
     let initial = getInitials(contact);
-    styleInitalName(contact, initial);
-    // getContactInitialColor(initial, contact);
+    styleInitalNameBoard(contact, initial);
 });
 
     
@@ -267,7 +266,7 @@ function handleAddTask() {
   }
 }
 
-function styleInitalName(contact, initial) {
+function styleInitalNameBoard(contact, initial) {
     let initalContainer = document.getElementById('assignedUser' + initial);
     let color = getColorFromName(contact);
     initalContainer.style.backgroundColor = color;
