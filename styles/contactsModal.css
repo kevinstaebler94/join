@@ -251,10 +251,6 @@ input::placeholder {
     border: 1px solid red;
 }
 
-.dNone {
-    display: none;
-}
-
 .modalSafeButton {
     display: flex;
     justify-content: center;

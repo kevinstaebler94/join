@@ -52,7 +52,7 @@ function createContactCard(contact, contactId) {
     card.classList.add("contactCard");
     card.dataset.contactId = contactId;
     let initials = getInitials(contact.name);
-    let bgColor = getColorFromName(contact.name + contact.email);
+    let bgColor = getColorFromName(contact.name);
 
     card.innerHTML = `
         <div class="contactIcon" style="background-color: ${bgColor}">${initials}</div>
@@ -149,10 +149,12 @@ function showContactDetailsToggle(cardElement) {
 function showSuccessOverlayImg() {
     let successOverlayImg = document.getElementById('succesfullyCreatedOverlayImg');
 
+    successOverlayImg.classList.remove('dNone');
     successOverlayImg.classList.add('show');
     setTimeout(() => {
         successOverlayImg.classList.remove('show');
     }, 800);
+    successOverlayImg.classList.add('dNone');
 }
 
 function openContactMobile(contactId) {

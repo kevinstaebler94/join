@@ -119,6 +119,10 @@
     .mainContentWrapper {
         padding-right: 0;
     }
+
+    .midContent:hover {
+        transform: scale(1.03);
+    }
 }
 
 @media(max-width: 530px) {
@@ -278,6 +282,18 @@
 
     .bottomBarTasks {
         padding: 0;
+    }
+
+    .toDoContainer:hover {
+        transform: scale(1.04);
+    }
+
+    .midContent:hover {
+        transform: scale(1.02);
+    }
+
+    .bottomBarTasks:hover {
+        transform: scale(1.04);
     }
 }
 

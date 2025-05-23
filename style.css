@@ -1,25 +1,21 @@
 @font-face {
-    font-family: "Inter";
-    src: url("assets/fonts/inter.woff2") format('woff2');
-    font-display: swap;
-  }
+  font-family: "Inter";
+  src: url("assets/fonts/inter.woff2") format('woff2');
+  font-display: swap;
+}
 
 * {
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Inter";
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
 }
 
 .maxWidth {
-    max-width: 1920px;
+  max-width: 1920px;
 }
 
 .dFlex {
-    display: flex;
-}
-
-.dNone {
-    display: none !important;
+  display: flex;
 }
 
 .orientationOverlay {
@@ -28,7 +24,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0, 0, 0, 0.9);
   color: white;
   display: flex;
   justify-content: center;
