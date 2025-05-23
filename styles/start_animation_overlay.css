@@ -56,6 +56,22 @@
   }
 }
 
+@keyframes moveLogoSmall {
+  0% {
+    width: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  100% {
+    width: 40px;
+    top: 0.75em;
+    left: 1.5em;
+    transform: translate(0, 0);
+  }
+}
+
 @media (max-width: 700px) {
   .startAnimationOverlay {
     background-color: #2A3647;
@@ -67,6 +83,7 @@
 
   .logoWhite {
     display: flex;
+    animation: moveLogoSmall 1s forwards;
   }
   
 }

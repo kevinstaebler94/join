@@ -24,7 +24,7 @@ function loginTemplate() {
             <img onclick="togglePasswordVisibility('passwordLogin')" id="passwordIcon" class="inputIconLogin passwordIcon" src="./assets/img/lock.svg" alt="">
             <span id="errorMsgLogin" class="errorMsgPassword hide">Check your email and password. Please try again.</span>
           </div>
-          <div class="buttonWrapper">
+          <div class="buttonWrapperLogin">
             <button disabled  type="submit" id="loginButton" class="button loginButton">Log in</button>
             <a class="button guestLoginButton" onclick="getGuestUserData()">Guest Log in</a>
           </div>

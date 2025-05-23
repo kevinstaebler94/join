@@ -34,7 +34,7 @@ function signUpTemplate() {
             <input id="checkbox" class="checkbox" type="checkbox" onchange="toggleSignUpButton()">
             <span>I accept the <span class="hightlight">Privacy Policy</span> </span>
           </div>
-          <div class="buttonWrapper">
+          <div class="buttonWrapperSignUp">
             <button disabled id="signUpButton" class="button signUpButton">Sign up</button>
           </div>
         </form>

@@ -365,7 +365,7 @@ main {
 
 @media (max-width: 1250px) {
   .filledTask {
-    max-height: 325px;
+    max-height: 350px;
   }
   .blankTask {
     margin-bottom: 0;
