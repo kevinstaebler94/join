@@ -11,9 +11,10 @@ let colors = [
     "#9327ff", // lila
     "#1fd7c1", // grün
     "#fc71ff", // pink
-    "#6e52ff", // blau
-    "#ff7a02", // orange
-    "#6e52ff", // gelb
+    "#00bee8", // blau
+    "#ffbb2b", // orange
+    "#ffe62b", // gelb
+    "#ff4646" // rot
 ];
 
 let initialColor = {};
