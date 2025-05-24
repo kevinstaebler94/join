@@ -28,6 +28,7 @@ async function renderTasks() {
     if (!target) return
     let taskComponents = getTaskComponents(task);
     target.innerHTML += filledTaskTemplate(taskComponents, task);
+    if (!task.contact) return;
     task.contact.forEach(contact => {
     let initial = getInitials(contact);
     styleInitalNameBoard(contact, initial);
@@ -189,6 +190,7 @@ async function handleTaskInput(id) {
 }
 
 function convertNameToInitial(contactData) {
+  
   return contactData.map((name) =>
     name
       .split(" ")
