@@ -1,3 +1,6 @@
+let touchedTask = null;
+let touchedColumn = null;
+
 async function initBoard() {
   await includeHTML();
   await getLoggedInUser();
@@ -94,6 +97,10 @@ function dragstartHandler(ev) {
   ev.dataTransfer.setData("column", ev.target.closest(".dropZone").id);
 }
 
+function touchstartHandler(e) {
+  touchedTask = e.target.closest(".filledTask");
+}
+
 function dragoverHandler(ev) {
   ev.preventDefault();
 }
@@ -114,6 +121,25 @@ async function dropHandler(ev) {
       renderTasks();
     }
   }
+}
+
+async function touchendHandler(e) {
+  const touch = e.changedTouches[0];
+  const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+  const dropZone = elementBelow?.closest(".dropZone");
+
+  if (touchedTask && dropZone) {
+    const taskId = touchedTask.id;
+    const newColumn = dropZone.id;
+    let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
+    if (task) {
+      task.column = newColumn;
+      await putData(`/users/${loggedInUser}/tasks/`, task, task.id);
+      await renderTasks();
+    }
+  }
+
+  touchedTask = null;
 }
 
 async function filterTasks(id) {
@@ -272,4 +298,7 @@ function styleInitalNameBoard(contact, initial) {
 //     contactAssignedInitial.style.backgroundColor = initialColor[contact];
 // }
 
-
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.addEventListener("touchstart", touchstartHandler, false);
+  document.body.addEventListener("touchend", touchendHandler, false);
+});
