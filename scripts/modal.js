@@ -340,14 +340,13 @@ async function getSubtasksModal(subtasks, taskId) {
 
 function getSubtaskEdit(subtasks, encodedSubtasks) {
     subtasksArr.push(subtasks.subtask);
-    newSubtaskArr = subtasksArr;
-    console.log(newSubtaskArr);
     if (!subtasksArr[0]) {
         return;
     } else {
         renderSubtasksEdit(subtasks, encodedSubtasks);
     };
-    subtasksArr = [];
+    console.log(subtasksArr[0]);
+    
 }
 
 
@@ -357,12 +356,20 @@ function renderSubtasksEdit(subtasks, encodedSubtasks) {
         let currentSubtask = sub[subtaskIndex];
         let subtaskList = document.getElementById('subtaskListEdit');
         subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
-                                    <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
-                                        <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${currentSubtask.subtask}</p></span>
+                                    <div id="subtaskContainer${currentSubtask.subtask}" class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
+                                        <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${currentSubtask.subtask}" class="subtaskWidth">${currentSubtask.subtask}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
                                             <img onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="editIcons"  src="./assets/img/edit.svg" alt="">
                                             <span class="iconDivider">|</span>
                                             <img onclick="deleteSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
+                                        </span>
+                                    </div>
+                                    <div id="subtaskEditContainer${currentSubtask.subtask}" class="newSubtaskListElement dNone">
+                                        <input id="editSubtaskInput${currentSubtask.subtask}" class="newSubtaskInput" value="${currentSubtask.subtask}">
+                                        <span  id="editIconContainer" class="iconContainer">
+                                            <img class="editIcons" onclick="deleteSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" src="./assets/img/delete.svg" alt="">
+                                            <span class="iconDivider">|</span>
+                                            <img onclick="editSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
                                         </span>
                                     </div>
                                 </li>`;
@@ -393,22 +400,30 @@ function addNewSubtaskModal() {
     let subtaskListEdit = document.getElementById('subtaskListEdit');
     let inputValue = document.getElementById('subtaskInputModal');
     let subtaskObj = { done: false, subtask: inputValue.value };
-    let subtaskIndex = newSubtaskArr[0].push(subtaskObj) - 1;
+    let subtaskIndex = subtasksArr[0].push(subtaskObj) - 1;
+    console.log(subtaskIndex);
     let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskObj));
-    subtaskListEdit.innerHTML += `<li id="subtaskListElement${subtaskIndex}" id="subtaskElement${inputValue.value}">
-                                    <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
+    subtaskListEdit.innerHTML += `<li id="subtaskElement${inputValue.value}">
+                                    <div id="subtaskContainer${inputValue.value}" class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
                                         <span onclick="getEditSubtaskModal('${inputValue.value}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${inputValue.value}">${inputValue.value}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
                                             <img onclick="getEditSubtaskModal('${inputValue.value}')" class="editIcons"  src="./assets/img/edit.svg" alt="">
                                             <span class="iconDivider">|</span>
-                                            <img onclick="deleteEditSubtask('${subtaskObj.subtask}', '${subtaskIndex}', '${serializedSubtasks}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
+                                            <img onclick="deleteEditSubtask('${subtaskObj.subtask}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
+                                        </span>
+                                    </div>
+                                    <div id="subtaskEditContainer${inputValue.value}" class="newSubtaskListElement dNone">
+                                        <input id="editSubtaskInput${inputValue.value}" class="newSubtaskInput" value="${inputValue.value}">
+                                        <span  id="editIconContainer" class="iconContainer">
+                                            <img class="editIcons" onclick="deleteSubtaskModal('${inputValue.value}')" src="./assets/img/delete.svg" alt="">
+                                            <span class="iconDivider">|</span>
+                                            <img onclick="editSubtaskModal('${inputValue.value}', '${subtaskIndex}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
                                         </span>
                                     </div>
                                 </li>`;
     addedSubtask = true;
     inputValue.value = '';
     inputValue.blur();
-
     setTimeout(() => {
         resetSubtaskIcons();
     }, 50);
@@ -431,33 +446,24 @@ function resetSubtaskIcons() {
 }
 
 function getEditSubtaskModal(subtaskId) {
-    let subtaskValue = document.getElementById('subtaskValue' + subtaskId);
-    subtaskValue.innerHTML = subtaskId;
+    console.log(document.getElementById('subtaskContainer' + subtaskId));
+    let subtaskContainer = document.getElementById('subtaskContainer' + subtaskId);
+    let subtaskEditContainer = document.getElementById('subtaskEditContainer' + subtaskId);
+    subtaskContainer.classList.add('dNone');
+    subtaskEditContainer.classList.remove('dNone');
 }
 
-// function getEditSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
-//     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
-//     let subtaskElement = document.getElementById('subtaskElement' + subtaskId);
-//     subtaskElement.innerHTML = `<li id="subtaskElement${subtaskId}">
-//                                     <div class="newSubtaskListElement">
-//                                         <input id="editSubtaskInput" class="newSubtaskInput" value="${subtaskId}">
-//                                         <span  id="editIconContainer" class="iconContainer">
-//                                             <img class="editIcons" onclick="deleteSubtaskModal('${subtaskId}', '${subtaskIndex}', '${encodedSubtasks}')" src="./assets/img/delete.svg" alt="">
-//                                             <span class="iconDivider">|</span>
-//                                             <img onclick="editSubtaskModal('${subtaskIndex}', '${encodedSubtasks}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
-//                                         </span>
-//                                     </div>
-//                                 </li>`
-// }
-
-function editSubtaskModal(subtaskIndex, encodedSubtasks) {
-    let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
-    let subtaskList = document.getElementById('subtaskListEdit');
-    let editSubtaskInput = document.getElementById('editSubtaskInput');
-    subtasks.subtask[subtaskIndex] = { done: false, subtask: editSubtaskInput.value };
-    subtasksArr = [];
-    subtaskList.innerHTML = '';
-    getSubtaskEdit(subtasks, serializeObj(subtasks));
+function editSubtaskModal(subtaskId, subtaskIndex) {
+    let subtaskContainer = document.getElementById('subtaskContainer' + subtaskId);
+    let subtaskEditContainer = document.getElementById('subtaskEditContainer' + subtaskId);
+    let subtaskValue = document.getElementById('subtaskValue' + subtaskId);
+    let editSubtaskInput = document.getElementById('editSubtaskInput' + subtaskId);
+    subtasksArr[0][subtaskIndex].subtask = editSubtaskInput.value;
+    console.log(subtasksArr[0]);
+    
+    subtaskValue.innerHTML = editSubtaskInput.value;
+    subtaskContainer.classList.remove('dNone');
+    subtaskEditContainer.classList.add('dNone');
 }
 
 function serializeObj(subtasks) {
@@ -485,7 +491,6 @@ function deleteEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtaskListElement = document.getElementById('subtaskListElement' + subtaskIndex);
     newSubtaskArr[0].splice(subtaskIndex, 1);
     console.log(newSubtaskArr);
-
     subtaskListElement.innerHTML = '';
 }
 
