@@ -103,14 +103,10 @@ async function fillEditContactsForm() {
 }
 
 async function updateContacts() {
-    console.log("updateContacts wurde aufgerufen");
-
     let isValid = await validateEditContactInput();
     if (!isValid) return;
-
     let emailValid = await validateEditEmailFormat(originalContactEmail);
     if (!emailValid) return;
-
     let name = document.getElementById('contactNameEdit').value.trim();
     let email = document.getElementById('contactEmailEdit').value.trim();
     let phone = document.getElementById('contactPhoneEdit').value.trim();
@@ -120,30 +116,24 @@ async function updateContacts() {
         email: email,
         phone: phone
     };
-
     try {
         await putData('/users/' + loggedInUser + '/contacts', updatedContact, newContactId);
         if (newContactId !== originalContactId) {
             console.log("Will delete old contact:", originalContactId);
             await deleteContact(originalContactId);
         }
-
         currentContactId = newContactId;
         await renderContacts();
         await openContactById(currentContactId);
-
         let allCards = document.querySelectorAll('.contactCard');
         allCards.forEach(card => card.classList.remove('active'));
-
         let updatedCard = Array.from(allCards).find(
             c => c.dataset.contactId === currentContactId
         );
-
         if (updatedCard) {
             addContactCardBgToggle(updatedCard);
             showContactDetailsToggle(updatedCard);
         }
-
         closeEditContactsModal();
     } catch (error) {
         console.error('Error while updating contact:', error);
@@ -152,22 +142,21 @@ async function updateContacts() {
 
 async function validateEditContactInput() {
     let inputs = getEditContactInputs();
-    let values = {
+    let values = getEditContactValues(inputs);
+    resetContactInputErrors(inputs);
+    if (checkEmptyFields(inputs, values)) return false;
+    let existingContacts = await getData('/users/' + loggedInUser + '/contacts' + originalContactId) || {};
+    if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
+    return true;
+}
+
+function getEditContactValues(inputs) {
+    return {
         name: inputs.nameInput.value.trim().toLowerCase(),
         email: inputs.emailInput.value.trim().toLowerCase(),
         phone: inputs.phoneInput.value.trim()
     };
-
-    resetContactInputErrors(inputs);
-
-    if (checkEmptyFields(inputs, values)) return false;
-
-    let existingContacts = await getData('/users/' + loggedInUser + '/contacts' + originalContactId) || {};
-    if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
-
-    return true;
 }
-
 
 function getEditContactInputs() {
     return {
@@ -187,7 +176,6 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
     for (let key in existingContacts) {
         if (key === originalContactId) continue;
         let contact = existingContacts[key];
-
         if (contact.name?.trim().toLowerCase() === values.name && values.name !== original.name?.trim().toLowerCase()) {
             inputs.nameInput.classList.add('error');
             document.getElementById('namePlaceholderError').innerHTML = "Name already used.";
@@ -195,7 +183,6 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
             hideErrorMessages('namePlaceholderError', inputs.nameInput.id);
             hasError = true;
         }
-
         if (contact.email?.trim().toLowerCase() === values.email && values.email !== original.email?.trim().toLowerCase()) {
             inputs.emailInput.classList.add('error');
             document.getElementById('emailPlaceholderError').innerHTML = "E-Mail already used.";
@@ -203,7 +190,6 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
             hideErrorMessages('emailPlaceholderError', inputs.emailInput.id);
             hasError = true;
         }
-
         if (contact.phone?.trim() === values.phone && values.phone !== original.phone?.trim()) {
             inputs.phoneInput.classList.add('error');
             document.getElementById('phonePlaceholderError').innerHTML = "Phone number already used.";
@@ -212,7 +198,6 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
             hasError = true;
         }
     }
-
     return hasError;
 }
 
@@ -220,13 +205,11 @@ async function validateEditEmailFormat(originalEmail) {
     let email = document.getElementById("contactEmailEdit").value.trim().toLowerCase();
     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let errorMsgEmail = document.getElementById("emailError");
-
     if (!pattern.test(email)) {
         errorMsgEmail.innerText = "Please enter a valid email address.";
         errorMsgEmail.classList.remove("dNone");
         return false;
     }
-
     if (!originalEmail || email !== originalEmail.toLowerCase()) {
         let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
         for (let key in existingContacts) {
@@ -237,7 +220,6 @@ async function validateEditEmailFormat(originalEmail) {
             }
         }
     }
-
     errorMsgEmail.classList.add("dNone");
     return true;
 }
