@@ -430,20 +430,25 @@ function resetSubtaskIcons() {
     document.getElementById('subtaskInputModal').blur();
 }
 
-function getEditSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
-    let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
-    let subtaskElement = document.getElementById('subtaskElement' + subtaskId);
-    subtaskElement.innerHTML = `<li id="subtaskElement${subtaskId}">
-                                    <div class="newSubtaskListElement">
-                                        <input id="editSubtaskInput" class="newSubtaskInput" value="${subtaskId}">
-                                        <span  id="editIconContainer" class="iconContainer">
-                                            <img class="editIcons" onclick="deleteSubtaskModal('${subtaskId}', '${subtaskIndex}', '${encodedSubtasks}')" src="./assets/img/delete.svg" alt="">
-                                            <span class="iconDivider">|</span>
-                                            <img onclick="editSubtaskModal('${subtaskIndex}', '${encodedSubtasks}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
-                                        </span>
-                                    </div>
-                                </li>`
+function getEditSubtaskModal(subtaskId) {
+    let subtaskValue = document.getElementById('subtaskValue' + subtaskId);
+    subtaskValue.innerHTML = subtaskId;
 }
+
+// function getEditSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
+//     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
+//     let subtaskElement = document.getElementById('subtaskElement' + subtaskId);
+//     subtaskElement.innerHTML = `<li id="subtaskElement${subtaskId}">
+//                                     <div class="newSubtaskListElement">
+//                                         <input id="editSubtaskInput" class="newSubtaskInput" value="${subtaskId}">
+//                                         <span  id="editIconContainer" class="iconContainer">
+//                                             <img class="editIcons" onclick="deleteSubtaskModal('${subtaskId}', '${subtaskIndex}', '${encodedSubtasks}')" src="./assets/img/delete.svg" alt="">
+//                                             <span class="iconDivider">|</span>
+//                                             <img onclick="editSubtaskModal('${subtaskIndex}', '${encodedSubtasks}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
+//                                         </span>
+//                                     </div>
+//                                 </li>`
+// }
 
 function editSubtaskModal(subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));

@@ -35,5 +35,9 @@
 }
 
 .dNone {
-  display: none;
+  display: none !important;
 }
+/* 
+.displayNone {
+  display: none !important;
+} */
