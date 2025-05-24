@@ -15,14 +15,11 @@ function getColumnId(column) {
 async function renderTasks() {
   let tasks = await getData("/users/" + loggedInUser + "/tasks");
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
-
   columns.forEach(
     (id) => (document.getElementById(getColumnId(id)).innerHTML = "")
   );
   let taskArr = Object.values(tasks || {});
-
   taskArr.forEach(task => {
-
     const targetId = getColumnId(task.column);
     const target = document.getElementById(targetId);
     if (!target) return
@@ -31,11 +28,8 @@ async function renderTasks() {
     task.contact.forEach(contact => {
     let initial = getInitials(contact);
     styleInitalNameBoard(contact, initial);
-});
-
-    
+    });
   });
-
   columns.forEach((id) => {
     const column = document.getElementById(getColumnId(id));
     if (!column.innerHTML.trim()) {
@@ -277,3 +271,5 @@ function styleInitalNameBoard(contact, initial) {
 //     let contactAssignedInitial = document.getElementById('assignedUser' + initial);
 //     contactAssignedInitial.style.backgroundColor = initialColor[contact];
 // }
+
+
