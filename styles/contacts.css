@@ -94,11 +94,12 @@ h3 {
     overflow-y: auto;
     padding-left: 46px;
     padding-right: 54px;
+    padding-bottom: 80px;
     height: 100%;
 }
 
 .contactList::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 .contactList::-webkit-scrollbar-track {
