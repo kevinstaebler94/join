@@ -481,6 +481,20 @@
     }
 }
 
+@media(max-width: 460px) {
+    .contactList {
+        padding-left: 32px;
+        padding-right: 24px;
+    }
+}
+
+@media(max-width: 440px) {
+    .contactList {
+        padding-left: 24px;
+        padding-right: 18px;
+    }
+}
+
 @media(max-width: 420px) {
     .modalMobileCloseButtonWrapper {
         left: 280px;
@@ -490,10 +504,19 @@
         width: 350px;
     }
 
+    .contactList {
+        padding-left: 20px;
+        padding-right: 16px;
+    }
+
     .headlineSection {
         padding-left: 18px;
     }
 
+
+    .letterDividerLine {
+        width: 300px;
+    }
 
     .inputFields {
         width: 320px;
@@ -501,6 +524,13 @@
 
     .modalContentContainer {
         width: 410px;
+    }
+}
+
+@media(max-width: 400px) {
+    .contactList {
+        padding-left: 18px;
+        padding-right: 12px;
     }
 }
 
@@ -542,15 +572,18 @@
         width: 300px;
     }
 
-    .letterDividerLine {
-        width: 300px;
-    }
-
     .contactDetails .email {
         font-size: 12px;
     }
 
     .succesfullyCreatedOverlayImg img {
         width: 280px;
+    }
+}
+
+@media(max-width: 350px) {
+    .contactList {
+        padding-left: 10px;
+        padding-right: 0;
     }
 }

@@ -16,22 +16,25 @@ async function renderContacts() {
     container.innerHTML = "";
 
     let data = await getData('/users/' + loggedInUser + '/contacts');
-
-
     if (!data) return;
 
     let entries = Object.entries(data).sort((a, b) => a[1].name.localeCompare(b[1].name));
     let currentLetter = "";
 
     for (let [id, contact] of entries) {
-        let firstLetter = contact.name.charAt(0).toUpperCase();
-        if (firstLetter !== currentLetter) {
-            currentLetter = firstLetter;
-            container.appendChild(createLetterDivider(firstLetter));
-            container.appendChild(createLetterDividerLine());
-        }
+        currentLetter = appendLetterDividerIfNeeded(container, contact.name, currentLetter);
         container.appendChild(createContactCard(contact, id));
     };
+}
+
+function appendLetterDividerIfNeeded(container, name, currentLetter) {
+    let firstLetter = name.charAt(0).toUpperCase();
+    if (firstLetter !== currentLetter) {
+        currentLetter = firstLetter;
+        container.appendChild(createLetterDivider(firstLetter));
+        container.appendChild(createLetterDividerLine());
+    }
+    return currentLetter;
 }
 
 function createLetterDivider(letter) {
@@ -62,25 +65,26 @@ function createContactCard(contact, contactId) {
             <span class="email">${contact.email}</span>
         </div>
     `;
-    card.onclick = async () => {
-        currentContactId = contactId;
-        await openContactById(contactId);
-        addContactCardBgToggle(card);
-        showContactDetailsToggle(card);
-        if (window.innerWidth <= 800) {
-            openContactMobile(contactId);
-        }
-    };
-
+    card.onclick = async () => handleCardClick(card, contactId);
     return card;
+}
+
+async function handleCardClick(card, contactId) {
+    currentContactId = contactId;
+    await openContactById(contactId);
+    addContactCardBgToggle(card);
+    showContactDetailsToggle(card);
+    if (window.innerWidth <= 800) openContactMobile(contactId);
 }
 
 async function openContactById(contactId) {
     let contact = (await getData(`/users/${loggedInUser}/contacts/${contactId}`));
-    let userNameDeleteContainer = document.getElementById('userNameDeleteContainer');
-
-
     if (!contact || !contact.name || !contact.email) return;
+    updateContactDetails(contact)
+    currentContactId = adjustEmail(contact.email);
+}
+
+function updateContactDetails(contact) {
     document.getElementById("userName").innerHTML = contact.name;
     document.getElementById("userEmail").innerHTML = contact.email;
     document.getElementById("userPhoneNumber").innerHTML = contact.phone;
@@ -88,19 +92,18 @@ async function openContactById(contactId) {
     let initials = getInitials(contact.name);
     let color = getColorFromName(contact.name + contact.email);
     let initialsContainer = document.getElementById("contactInitials");
-
     initialsContainer.innerHTML = initials;
     initialsContainer.style.backgroundColor = color;
     initialsContainer.style.color = "white";
-    userNameDeleteContainer.innerHTML = `
-    <div class="userNameDeleteIconContainer">
-    <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
-    <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
-    </div>
-    <span onclick="deleteContact('${contactId}')">Delete</span>`;
 
-    currentContactId = adjustEmail(contact.email);
+    document.getElementById('userNameDeleteContainer').innerHTML = `
+        <div class="userNameDeleteIconContainer">
+            <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
+            <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
+        </div>
+        <span onclick="deleteContact('${adjustEmail(contact.email)}')">Delete</span>`;
 }
+
 
 function getInitials(name) {
     if (!name || typeof name !== 'string') return '';
