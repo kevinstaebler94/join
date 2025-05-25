@@ -2,7 +2,7 @@ let loggedInUser;
 
 async function init() {
     await getLoggedInUser();
-    if (window.location.href.includes("login.html")) {
+    if (window.location.href.includes("index.html")) {
         getLogin();
         return;
     } if (window.location.href.includes("summary.html")) {
@@ -94,13 +94,11 @@ async function logoutUser() {
     login = false;
     await changeUsers(userId, greeting, email, password, name, login, tasks, contacts);
     await changeElement(greetingTrue);
-    console.log(userData.greeting.greeting);
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 
 }
 
 async function showUserInitials() {
-    console.log("showUserInitials wurde aufgerufen");
     let userName = await getData('/users/' + loggedInUser + '/name');
     if (!userName) return;
 
@@ -124,7 +122,6 @@ function getInitials(name) {
 //     let overlay = document.getElementById('loginGreetingContainer');
 //     let greeting = await getData('/users/' + loggedInUser + '/greeting/greeting');
 //     if (!greeting) {
-//         console.log(greeting);
 
 //         return;
 //     }

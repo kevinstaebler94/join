@@ -35,8 +35,8 @@ function loginTemplate() {
       <button onclick="updateContent('signUp')" class="button signUpButton">Sign up</button></div>
     </main>
     <footer class="legalLinks">
-      <span class="privacyPolicy">Privacy Policy</span>
-      <span class="legalNotice">Legal notice</span>
+      <span onclick="window.location.href='./privacyNotLogin.html'" class="privacyPolicy">Privacy Policy</span>
+      <span onclick="window.location.href='./legalNoticeNotLogin.html'" class="legalNotice">Legal notice</span>
     </footer>
   `
 }

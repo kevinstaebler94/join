@@ -1,16 +1,20 @@
 function openAddTaskModal() {
     let overlay = document.getElementById('boardOverlay');
     let addTaskModal = document.getElementById('addTaskModal');
+    let boardHeaderWrapper = document.getElementById('boardHeaderWrapper');
     overlay.classList.remove('dNone');
     addTaskModal.classList.remove('dNone');
+    boardHeaderWrapper.classList.add('minusMarginAddTask');
     getAddTaskStructure();
 }
 
 function openFilledTaskModal(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
+    let boardHeaderWrapper = document.getElementById('boardHeaderWrapper');
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
+    boardHeaderWrapper.classList.add('minusMargin');
     getFilledStructure(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts);
 
 }
@@ -19,10 +23,13 @@ function closeModal() {
     let overlay = document.getElementById('boardOverlay');
     let addTaskModal = document.getElementById('addTaskModal');
     let filledTaskModal = document.getElementById('filledTaskModal');
+    let boardHeaderWrapper = document.getElementById('boardHeaderWrapper');
     addTaskModal.innerHTML = '';
     overlay.classList.add('dNone');
     addTaskModal.classList.add('dNone');
     filledTaskModal.classList.add('dNone');
+    boardHeaderWrapper.classList.remove('minusMargin');
+    boardHeaderWrapper.classList.remove('minusMarginAddTask');
     newSubtaskArr = [];
 }
 
@@ -160,8 +167,6 @@ function getFilledStructure(taskId, category, title, description, date, priority
     let subtasks = JSON.parse(decodeURIComponent(subtaskObj));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
     let capitalizedPriority = priority.charAt(0).toUpperCase() + priority.slice(1);
-    console.log(capitalizedPriority);
-
     filledTaskModal.innerHTML = `<img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
                                 <div id="filledTask1" class="filledTaskModal marginBottom">
                                 <div class="modalTaskHeadSection">
@@ -203,7 +208,6 @@ function getFilledStructure(taskId, category, title, description, date, priority
 }
 
 function openTaskEdit(taskId, category, title, description, date, priority, column, encodedSubtasks, encodedContacts) {
-    console.log("openTaskEdit aufgerufen");
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
@@ -344,8 +348,6 @@ function getSubtaskEdit(subtasks, encodedSubtasks) {
     } else {
         renderSubtasksEdit(subtasks, encodedSubtasks);
     };
-    console.log(subtasksArr[0]);
-    
 }
 
 
@@ -400,7 +402,6 @@ function addNewSubtaskModal() {
     let inputValue = document.getElementById('subtaskInputModal');
     let subtaskObj = { done: false, subtask: inputValue.value };
     let subtaskIndex = subtasksArr[0].push(subtaskObj) - 1;
-    console.log(subtaskIndex);
     let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskObj));
     subtaskListEdit.innerHTML += `<li id="subtaskElement${inputValue.value}">
                                     <div id="subtaskContainer${inputValue.value}" class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
@@ -445,7 +446,6 @@ function resetSubtaskIcons() {
 }
 
 function getEditSubtaskModal(subtaskId) {
-    console.log(document.getElementById('subtaskContainer' + subtaskId));
     let subtaskContainer = document.getElementById('subtaskContainer' + subtaskId);
     let subtaskEditContainer = document.getElementById('subtaskEditContainer' + subtaskId);
     subtaskContainer.classList.add('dNone');
@@ -458,8 +458,6 @@ function editSubtaskModal(subtaskId, subtaskIndex) {
     let subtaskValue = document.getElementById('subtaskValue' + subtaskId);
     let editSubtaskInput = document.getElementById('editSubtaskInput' + subtaskId);
     subtasksArr[0][subtaskIndex].subtask = editSubtaskInput.value;
-    console.log(subtasksArr[0]);
-    
     subtaskValue.innerHTML = editSubtaskInput.value;
     subtaskContainer.classList.remove('dNone');
     subtaskEditContainer.classList.add('dNone');
@@ -484,12 +482,9 @@ function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
 }
 
 function deleteEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
-    console.log(subtasksArr);
-    console.log(newSubtaskArr);
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let subtaskListElement = document.getElementById('subtaskListElement' + subtaskIndex);
     newSubtaskArr[0].splice(subtaskIndex, 1);
-    console.log(newSubtaskArr);
     subtaskListElement.innerHTML = '';
 }
 
@@ -526,10 +521,8 @@ document.addEventListener('keyup', function (event) {
 
     if (event.key === 'Enter') {
         if (input && event.target === input) {
-            console.log('Enter gedrückt im normalen Input');
             getSubtask();
         } else if (inputModal && event.target === inputModal) {
-            console.log('Enter gedrückt im Modal-Input');
             addNewSubtaskModal();
         }
     }

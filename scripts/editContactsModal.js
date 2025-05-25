@@ -98,7 +98,6 @@ async function fillEditContactsForm() {
     document.getElementById("contactPhoneEdit").value = contact.phone;
 
     originalContactId = currentContactId;
-    console.log("originalContactID:", originalContactId);
     originalContactEmail = contact.email;
 }
 
@@ -119,7 +118,6 @@ async function updateContacts() {
     try {
         await putData('/users/' + loggedInUser + '/contacts', updatedContact, newContactId);
         if (newContactId !== originalContactId) {
-            console.log("Will delete old contact:", originalContactId);
             await deleteContact(originalContactId);
         }
         currentContactId = newContactId;

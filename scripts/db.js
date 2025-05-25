@@ -155,7 +155,6 @@ function changeTasks(taskId, column, category) {
         column: column,
         category: category
     });
-    console.log(userData);
     
     putData(path, userData, newTaskId);
     deleteTask(loggedInUser, taskId);
@@ -180,7 +179,6 @@ async function pushContacts(loggedInUser) {
     });
     try {
         await putData(path, userData, contactId);
-        console.log("saved:", userData);
         clearInputFields();
         closeContactsModal();
         await renderContacts();

@@ -46,6 +46,7 @@ nav {
 .navbar a:hover {
     color: #ffffff;
     background-color: #091931;
+    transform: unset;
 }
 
 .loginContainer {
@@ -81,6 +82,7 @@ nav {
 
 .nav-icons {
     width: 30px;
+    overflow: hidden;
 }
 
 .hoverContainer {

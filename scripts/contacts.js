@@ -11,7 +11,6 @@ let colors = [
 let activeContactCard = null;
 
 async function renderContacts() {
-    console.log("renderContacts wurde aufgerufen");
     let container = document.getElementById("contactList");
     container.innerHTML = "";
 

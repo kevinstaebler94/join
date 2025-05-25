@@ -232,6 +232,14 @@
     overflow-y: auto;
 }
 
+.minusMargin {
+    margin-top: -690px;
+}
+
+.minusMarginAddTask {
+    margin-top: -630px;
+}
+
 @media (max-width: 630px) {
     .filledTaskModal {
         width: 400px;

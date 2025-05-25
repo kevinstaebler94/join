@@ -1,9 +1,6 @@
 async function greetingByName() {
-    console.log("greetingByName wurde aufgerufen");
-
     let nameData = await getData('/users/' + loggedInUser + '/name');
     if (!nameData) return;
-
     document.getElementById("userName").textContent = nameData;
 }
 
@@ -81,8 +78,6 @@ async function showUrgentDate() {
 }
 
 async function getToDoTasksCounter() {
-    console.log("getToDoTasksCounter wurde aufgerufen");
-
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
 
@@ -98,8 +93,6 @@ async function getToDoTasksCounter() {
 }
 
 async function getDoneTasksCounter() {
-    console.log("getDoneTasksCounter wurde aufgerufen");
-
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
 
@@ -115,8 +108,6 @@ async function getDoneTasksCounter() {
 }
 
 async function getFeedbackCounter() {
-    console.log("getFeedbackCounter wurde aufgerufen");
-
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
 
@@ -132,8 +123,6 @@ async function getFeedbackCounter() {
 }
 
 async function getInProgressCounter() {
-    console.log("getInProgressCounter wurde aufgerufen");
-
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
 
@@ -167,8 +156,6 @@ async function getInBoardCounter() {
 }
 
 async function getUrgentTasksCounter() {
-    console.log("getToDoTasksCounter wurde aufgerufen");
-
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
 

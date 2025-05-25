@@ -1,6 +1,4 @@
 async function loginGreetingByName() {
-    console.log("greetingByName wurde aufgerufen");
-
     let nameData = await getData('/users/' + loggedInUser + '/name');
     if (!nameData) return;
 

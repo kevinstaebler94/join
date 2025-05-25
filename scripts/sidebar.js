@@ -15,5 +15,4 @@ function highlightActiveSidebarLink() {
             hoverBox.classList.remove('active');
         }
     });
-    console.log('funktion wurde aufgrufen');
 }
