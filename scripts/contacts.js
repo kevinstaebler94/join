@@ -90,7 +90,7 @@ function updateContactDetails(contact) {
     document.getElementById("userPhoneNumber").innerHTML = contact.phone;
 
     let initials = getInitials(contact.name);
-    let color = getColorFromName(contact.name + contact.email);
+    let color = getColorFromName(contact.name);
     let initialsContainer = document.getElementById("contactInitials");
     initialsContainer.innerHTML = initials;
     initialsContainer.style.backgroundColor = color;
@@ -171,11 +171,22 @@ function openContactMobile(contactId) {
 function showContactList() {
     document.getElementById('contactsOverview').classList.remove('mobileVisible');
     document.getElementById('contactListContainer').classList.remove('dNone');
-
     if (activeContactCard) {
         activeContactCard.classList.remove('active');
         activeContactCard = null;
     }
+}
+
+function showContactListWindowsize() {
+    if (window.innerWidth >= 801) {
+        document.getElementById('contactsOverview').classList.remove('mobileVisible');
+        document.getElementById('contactListContainer').classList.remove('dNone');
+        if (activeContactCard) {
+            activeContactCard.classList.remove('active');
+            activeContactCard = null;
+        }
+    }
+
 }
 
 function openMobileBurgerMenu() {
@@ -183,3 +194,9 @@ function openMobileBurgerMenu() {
     menu.classList.toggle('dNone');
     menu.classList.toggle("show");
 }
+
+window.addEventListener('resize', () => {
+    setTimeout(() => {
+        showContactListWindowsize();
+    }, 100);
+});
