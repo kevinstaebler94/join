@@ -1,6 +1,3 @@
-let touchedTask = null;
-let touchedColumn = null;
-
 async function initBoard() {
   await includeHTML();
   await getLoggedInUser();
@@ -28,7 +25,6 @@ async function renderTasks() {
     if (!target) return
     let taskComponents = getTaskComponents(task);
     target.innerHTML += filledTaskTemplate(taskComponents, task);
-    if (!task.contact) return;
     task.contact.forEach(contact => {
     let initial = getInitials(contact);
     styleInitalNameBoard(contact, initial);
@@ -98,10 +94,6 @@ function dragstartHandler(ev) {
   ev.dataTransfer.setData("column", ev.target.closest(".dropZone").id);
 }
 
-function touchstartHandler(e) {
-  touchedTask = e.target.closest(".filledTask");
-}
-
 function dragoverHandler(ev) {
   ev.preventDefault();
 }
@@ -122,25 +114,6 @@ async function dropHandler(ev) {
       renderTasks();
     }
   }
-}
-
-async function touchendHandler(e) {
-  const touch = e.changedTouches[0];
-  const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-  const dropZone = elementBelow?.closest(".dropZone");
-
-  if (touchedTask && dropZone) {
-    const taskId = touchedTask.id;
-    const newColumn = dropZone.id;
-    let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
-    if (task) {
-      task.column = newColumn;
-      await putData(`/users/${loggedInUser}/tasks/`, task, task.id);
-      await renderTasks();
-    }
-  }
-
-  touchedTask = null;
 }
 
 async function filterTasks(id) {
@@ -190,7 +163,6 @@ async function handleTaskInput(id) {
 }
 
 function convertNameToInitial(contactData) {
-  
   return contactData.map((name) =>
     name
       .split(" ")
@@ -280,10 +252,8 @@ function shortenText(text, maxLen) {
 
 function handleAddTask() {
   if (window.innerWidth <= 1023) {
-    // Weiterleitung zur Seite bei kleinerem Display
-    window.location.href = 'add_task.html'; // Pfad ggf. anpassen
+    window.location.href = 'add_task.html'; 
   } else {
-    // Modal öffnen bei größeren Displays
     openAddTaskModal();
   }
 }
@@ -295,12 +265,6 @@ function styleInitalNameBoard(contact, initial) {
     initialColor[contact] = color;
 }
 
-// function getContactInitialColor(initial, contact) {
-//     let contactAssignedInitial = document.getElementById('assignedUser' + initial);
-//     contactAssignedInitial.style.backgroundColor = initialColor[contact];
-// }
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.addEventListener("touchstart", touchstartHandler, false);
-  document.body.addEventListener("touchend", touchendHandler, false);
+document.addEventListener("touchstart", function(e) {
+  console.log(e.touches[0].clientX, e.touches[0].clientY);
 });
