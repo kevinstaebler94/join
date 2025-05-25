@@ -153,12 +153,12 @@ function showContactDetailsToggle(cardElement) {
 function showSuccessOverlayImg() {
     let successOverlayImg = document.getElementById('succesfullyCreatedOverlayImg');
 
-    successOverlayImg.classList.remove('dNone');
+    successOverlayImg.classList.remove('displayNone');
     successOverlayImg.classList.add('show');
     setTimeout(() => {
         successOverlayImg.classList.remove('show');
     }, 800);
-    successOverlayImg.classList.add('dNone');
+    successOverlayImg.classList.add('displayNone');
 }
 
 function openContactMobile(contactId) {

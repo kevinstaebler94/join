@@ -238,7 +238,6 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                     </label>
                                 </form>
                             </div>
-                            <span class="dividingLine"></span>
                             <div class="rightContainer">
                                 <form name="rightTaskForm" class="rightAddTaskForm" action="">
                                     <label class="directionColumn maxWidth">Priority

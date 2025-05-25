@@ -37,7 +37,7 @@
 .dNone {
   display: none !important;
 }
-/* 
+
 .displayNone {
-  display: none !important;
-} */
+  display: none;
+}

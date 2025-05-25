@@ -358,7 +358,9 @@ function checkValidation() {
 }
 
 function showAddedBoardImg() {
+    let overlay = document.getElementById('overlayBoardImg');
     let addedBoardImg = document.getElementById('addedBoardImg');
+    overlay.classList.remove('dNone');
     addedBoardImg.classList.remove('dNone');
     setTimeout(() => {
         window.location.href = "./board.html";;

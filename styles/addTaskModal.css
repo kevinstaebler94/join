@@ -218,7 +218,7 @@ h1 {
 }
 
 .inputFields {
-    width: 345px;
+    width: 404px;
     height: 32px;
     border: solid 1px #D1D1D1;
     border-radius: 8px;
@@ -240,7 +240,7 @@ h1 {
 .plusIcon {
     width: 16px;
     position: relative;
-    left: 320px;
+    left: 374px;
     bottom: 27px;
     cursor: pointer;
 }
@@ -266,7 +266,7 @@ h1 {
 
 .customDropdown {
     position: relative;
-    width: 345px;
+    width: 404px;
     border: 1px solid #D1D1D1;
     border-radius: 8px;
     cursor: pointer;
@@ -429,7 +429,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .dateIcon {
     width: 16px;
     position: relative;
-    left: 320px;
+    left: 374px;
     bottom: 27px;
     cursor: pointer;
 }
@@ -449,6 +449,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100%;
     height: 100%;
     font-size: 12px;
+    overflow: auto;
 }
 
 .editHeadSection {
@@ -606,6 +607,41 @@ ul {
     left: 50%;
     transform: translate(-50%);
     z-index: 6;
+}
+
+@media (max-width: 630px) {
+    .inputFields {
+        width: 304px;
+    }
+
+    .customDropdownName {
+        width: 304px;
+    }
+
+    .plusIcon {
+        left: 275px;
+    }
+
+    .dateIcon {
+        left: 275px;
+    }
+
+    .priorityBtn {
+        width: 70px;
+        height: 30px;
+    }
+
+    .rightAddTaskForm {
+        width: 235px;
+    }
+
+    .directionColumn {
+        width: 100%;
+    }
+
+    .customDropdown {
+        width: auto;
+    }
 }
 
 @media (max-width: 460px) {
