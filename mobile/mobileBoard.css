@@ -80,6 +80,10 @@
     brightness(95%) contrast(86%);
 }
 
+.moveToOverlayWrapper {
+  display: none;
+}
+
 @media (max-width: 1023px) {
   html,
   body {
