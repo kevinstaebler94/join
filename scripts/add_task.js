@@ -8,28 +8,16 @@ let contacts;
 let isOpen = false;
 let addedSubtask = false;
 let colors = [
-    "#9327ff", // lila
-    "#1fd7c1", // grün
-    "#fc71ff", // pink
-    "#00bee8", // blau
-    "#ffbb2b", // orange
-    "#ffe62b", // gelb
-    "#ff4646" // rot
+    "#9327ff",
+    "#1fd7c1",
+    "#fc71ff",
+    "#00bee8",
+    "#ffbb2b",
+    "#ffe62b",
+    "#ff4646"
 ];
 
 let initialColor = {};
-
-window.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-        document.getElementById('dropdownListName').classList.add('dNone');
-        document.getElementById('dropdownIconName').classList.remove('rotate');
-        document.getElementById('customDropdownName').classList.remove('activeBorder');
-        document.getElementById('contactListContainer').classList.add('dNone');
-        document.getElementById('customDropdownCategory').classList.remove('activeBorder');
-        document.getElementById('dropdownListCategory').classList.add('dNone');
-        document.getElementById('dropdownIconCategory').classList.remove('rotate');
-    }
-});
 
 function checkCheckbox(nameIndex) {
     let myCheckbox = document.getElementById(`checkbox${nameIndex}`);
@@ -38,6 +26,16 @@ function checkCheckbox(nameIndex) {
 
 function toggleOpen() {
     isOpen = !isOpen;
+}
+
+function checkIsOpen(assignedInput) {
+    if (isOpen) {
+        getContact();
+        assignedInput.focus();
+        assignedInput.value = '';
+    } else {
+        assignedInput.blur();
+    }
 }
 
 function toggleDropdownName() {
@@ -51,17 +49,10 @@ function toggleDropdownName() {
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
     listContainer.classList.toggle('dNone');
-    if (isOpen) {
-
-        getContact();
-        assignedInput.focus();
-        assignedInput.value = '';
-    } else {
-        assignedInput.blur();
-    }
+    checkIsOpen(assignedInput);
 }
 
-function closeDropdownName() { //check if needed
+function closeDropdownName() {
     let customDropdownName = document.getElementById('customDropdownName');
     let dropdown = document.getElementById('dropdownListName');
     let dropdownIcon = document.getElementById('dropdownIconName');
@@ -78,82 +69,6 @@ function toggleDropdownCategory() {
     dropdown.classList.toggle('dNone');
     dropdownIcon.classList.toggle('rotate');
 }
-
-// window.addEventListener('mousedown', function (event) {
-//     const modal = document.getElementById('addTaskModal');
-//     if (!modal || modal.classList.contains('dNone')) return;
-//     setTimeout(() => {
-//         const wrappers = document.querySelectorAll('.customSelectWrapper');
-//         const contactListContainer = document.getElementById('contactListContainer');
-//         const assignedInput = document.getElementById('assignedInput');
-//         const clickInsideContactList = contactListContainer.contains(event.target);
-//         const clickInsideAssignedInput = assignedInput.contains(event.target);
-//         let clickInsideAnyWrapper = false;
-//         wrappers.forEach(wrapper => {
-//             if (wrapper.contains(event.target)) {
-//                 clickInsideAnyWrapper = true;
-//             }
-//         });
-//         if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
-//             document.getElementById('dropdownListName').classList.add('dNone');
-//             document.getElementById('dropdownIconName').classList.remove('rotate');
-//             document.getElementById('customDropdownName').classList.remove('activeBorder');
-//             document.getElementById('customDropdownCategory').classList.remove('activeBorder');
-//             document.getElementById('dropdownListCategory').classList.add('dNone');
-//             document.getElementById('dropdownIconCategory').classList.remove('rotate');
-//             contactListContainer.classList.add('dNone');
-//             isOpen = false;
-//             if (assignedInput.value == '') {
-//                 assignedInput.value = 'Assigned to';
-//             }
-//         }
-//     }, 30);
-// });
-
-window.addEventListener('mousedown', function (event) {
-    const modal = document.getElementById('addTaskModal');
-
-    // Wenn Modal existiert und geschlossen ist → abbrechen
-    if (modal && modal.classList.contains('dNone')) return;
-
-    setTimeout(() => {
-        const wrappers = document.querySelectorAll('.customSelectWrapper');
-        const contactListContainer = document.getElementById('contactListContainer');
-        const assignedInput = document.getElementById('assignedInput');
-
-        // Wenn keine Dropdowns auf der Seite vorhanden → abbrechen
-        if (!wrappers.length && !contactListContainer && !assignedInput) return;
-
-        let clickInsideAnyWrapper = false;
-        wrappers.forEach(wrapper => {
-            if (wrapper.contains(event.target)) {
-                clickInsideAnyWrapper = true;
-            }
-        });
-
-        const clickInsideContactList = contactListContainer?.contains(event.target) ?? false;
-        const clickInsideAssignedInput = assignedInput?.contains(event.target) ?? false;
-
-        if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
-            document.getElementById('dropdownListName')?.classList.add('dNone');
-            document.getElementById('dropdownIconName')?.classList.remove('rotate');
-            document.getElementById('customDropdownName')?.classList.remove('activeBorder');
-            document.getElementById('customDropdownCategory')?.classList.remove('activeBorder');
-            document.getElementById('dropdownListCategory')?.classList.add('dNone');
-            document.getElementById('dropdownIconCategory')?.classList.remove('rotate');
-            contactListContainer?.classList.add('dNone');
-
-            if (typeof isOpen !== 'undefined') {
-                isOpen = false;
-            }
-
-            if (assignedInput && assignedInput.value === '') {
-                assignedInput.value = 'Assigned to';
-            }
-        }
-    }, 30);
-});
-
 
 function selectPriority(priority) {
     let urgentBtn = document.getElementById('priorityUrgentBtn');
@@ -237,95 +152,10 @@ function initSubtaskInputListener() {
     });
 }
 
-
-function getSubtask() {
-    let subtaskInput = document.getElementById('subtaskInput');
-    let subtaskList = document.getElementById('subtaskList');
-    let subtaskObj = { subtask: subtaskInput.value, done: false };
-    let subtaskIndex = subtasksArr.length;
-    if (!subtaskInput.value) {
-        subtaskInput.classList.add('required');
-        return;
-    } if (subtaskInput.value.length > 0) {
-        subtaskInput.classList.remove('required');
-        subtaskList.innerHTML += `<li id="subtaskElement${subtaskIndex}">
-    <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
-        <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
-            <p class="liMarker"></p>
-            <p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${subtaskInput.value}</p>
-        </span>
-        <span id="editIconContainer" class="iconContainer dNone">
-            <img onclick="getEditSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/edit.svg" alt="">
-            <span class="iconDivider">|</span>
-            <img onclick="deleteSubtask(${subtaskIndex})" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
-        </span>
-    </div>
-</li>`;
-        subtasksArr.push(subtaskObj);
-        subtaskInput.value = '';
-    }
-
-}
-
-function getEditSubtask(subtaskIndex) {
-    let currentSubtask = subtasksArr[subtaskIndex];
-    let subtaskElement = document.getElementById('subtaskElement' + subtaskIndex);
-    subtaskElement.innerHTML = `<div class="newSubtaskListElement">
-            <input id="editSubtaskInput${subtaskIndex}" class="newSubtaskInput" value="${currentSubtask.subtask}">
-            <span class="iconContainer">
-                <img onclick="deleteSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/delete.svg" alt="">
-                <span class="iconDivider">|</span>
-                <img onclick="editSubtask(${subtaskIndex})" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
-            </span>
-        </div>`;
-}
-
-function editSubtask(subtaskIndex) {
-    let input = document.getElementById('editSubtaskInput' + subtaskIndex);
-    let newValue = input.value.trim();
-    if (!newValue) return;
-    subtasksArr[subtaskIndex].subtask = newValue;
-    let subtaskElement = document.getElementById('subtaskElement' + subtaskIndex);
-    subtaskElement.innerHTML = `
-        <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
-            <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
-                <p class="liMarker"></p>
-                <p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${newValue}</p>
-            </span>
-            <span id="editIconContainer" class="iconContainer dNone">
-                <img onclick="getEditSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/edit.svg" alt="">
-                <span class="iconDivider">|</span>
-                <img onclick="deleteSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/delete.svg" alt="">
-            </span>
-        </div>`;
-}
-
 function deleteSubtask(subtaskIndex) {
     subtasksArr.splice(subtaskIndex, 1);
     renderSubtasks();
 }
-
-function renderSubtasks() {
-    const subtaskList = document.getElementById('subtaskList');
-    subtaskList.innerHTML = '';
-    subtasksArr.forEach((subtaskObj, subtaskIndex) => {
-        subtaskList.innerHTML += `
-            <li id="subtaskElement${subtaskIndex}">
-                <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
-                    <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
-                        <p class="liMarker"></p>
-                        <p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${subtaskObj.subtask}</p>
-                    </span>
-                    <span id="editIconContainer" class="iconContainer dNone">
-                        <img onclick="getEditSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/edit.svg" alt="">
-                        <span class="iconDivider">|</span>
-                        <img onclick="deleteSubtask(${subtaskIndex})" class="editIcons" src="./assets/img/delete.svg" alt="">
-                    </span>
-                </div>
-            </li>`;
-    });
-}
-
 
 function showEditIcons(element) {
     let iconContainer = element.querySelector('.iconContainer');
@@ -403,34 +233,6 @@ async function getContact() {
     renderFilteredContacts();
 }
 
-function renderFilteredContacts(filter = '') {
-    const dropdownListName = document.getElementById('dropdownListName');
-    const filteredContacts = contactArr.filter(contact =>
-        contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-    dropdownListName.innerHTML = '';
-    filteredContacts.forEach(contact => {
-        let isChecked = assignedArr.includes(contact.name) ? 'checked' : '';
-        dropdownListName.innerHTML += `<label class="customCheckbox">
-                                            <li id="listName${contact.name}" class="listElement">
-                                                <div class="nameContainer">
-                                                    <span id="initalContainer${contact.name}" class="initalIcon">${getInitials(contact.name)}</span>
-                                                    <p>${contact.name}</p>
-                                                </div>
-                                                <input onclick="checkAssignedContact(this)" 
-                                                    id="${contact.name}" 
-                                                    type="checkbox" 
-                                                    class="checkbox" 
-                                                    name="selectedNames" 
-                                                    data-name="${contact.name}" 
-                                                    ${isChecked}>
-                                                    <span class="icon"></span>
-                                            </li>
-                                        </label>`;
-        styleInitalName(contact.name);
-    });
-}
-
 function filterContacts(value) {
     renderFilteredContacts(value);
 }
@@ -447,6 +249,15 @@ function checkAssignedContact(checkboxElement) {
     let checkedName = checkboxElement.dataset.name;
     let index = assignedArr.indexOf(checkedName);
     let listElement = document.getElementById('listName' + checkboxElement.dataset.name);
+    checkCheckbox(checkboxElement, checkedName, index, listElement);
+    assignedContainer.innerHTML = '';
+    assignedArr.forEach(contact => {
+        assignedContainer.innerHTML += `<p id="contactAssignedInitial${contact}" class="contactInitial">${getInitials(contact)}</p>`;
+        getContactInitialColor(contact);
+    });
+}
+
+function checkCheckbox(checkboxElement, checkedName, index, listElement) {
     if (checkboxElement.checked) {
         assignedArr.push(checkedName);
         listElement.classList.add('checked');
@@ -456,11 +267,6 @@ function checkAssignedContact(checkboxElement) {
             listElement.classList.remove('checked');
         }
     }
-    assignedContainer.innerHTML = '';
-    assignedArr.forEach(contact => {
-        assignedContainer.innerHTML += `<p id="contactAssignedInitial${contact}" class="contactInitial">${getInitials(contact)}</p>`;
-        getContactInitialColor(contact);
-    });
 }
 
 function getInitials(name) {
@@ -471,9 +277,6 @@ function getInitials(name) {
         .toUpperCase();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    initSubtaskInputListener();
-});
 
 function getColorFromName(name) {
     let sum = 0;
@@ -489,10 +292,63 @@ function styleInitalName(contact) {
     let color = getColorFromName(contact);
     initalContainer.style.backgroundColor = color;
     initialColor[contact] = color;
-
 }
 
 function getContactInitialColor(contact) {
     let contactAssignedInitial = document.getElementById('contactAssignedInitial' + contact);
     contactAssignedInitial.style.backgroundColor = initialColor[contact];
 }
+
+function styleDropdown(contactListContainer, assignedInput) {
+    document.getElementById('dropdownListName')?.classList.add('dNone');
+    document.getElementById('dropdownIconName')?.classList.remove('rotate');
+    document.getElementById('customDropdownName')?.classList.remove('activeBorder');
+    document.getElementById('customDropdownCategory')?.classList.remove('activeBorder');
+    document.getElementById('dropdownListCategory')?.classList.add('dNone');
+    document.getElementById('dropdownIconCategory')?.classList.remove('rotate');
+    contactListContainer?.classList.add('dNone');
+    if (typeof isOpen !== 'undefined') {
+        isOpen = false;
+    }
+    if (assignedInput && assignedInput.value === '') {
+        assignedInput.value = 'Assigned to';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    initSubtaskInputListener();
+});
+
+window.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        document.getElementById('dropdownListName').classList.add('dNone');
+        document.getElementById('dropdownIconName').classList.remove('rotate');
+        document.getElementById('customDropdownName').classList.remove('activeBorder');
+        document.getElementById('contactListContainer').classList.add('dNone');
+        document.getElementById('customDropdownCategory').classList.remove('activeBorder');
+        document.getElementById('dropdownListCategory').classList.add('dNone');
+        document.getElementById('dropdownIconCategory').classList.remove('rotate');
+    }
+});
+
+window.addEventListener('mousedown', function (event) {
+    const modal = document.getElementById('addTaskModal');
+    if (modal && modal.classList.contains('dNone')) return;
+    setTimeout(() => {
+        const wrappers = document.querySelectorAll('.customSelectWrapper');
+        const contactListContainer = document.getElementById('contactListContainer');
+        const assignedInput = document.getElementById('assignedInput');
+        const clickInsideContactList = contactListContainer?.contains(event.target) ?? false;
+        const clickInsideAssignedInput = assignedInput?.contains(event.target) ?? false;
+        if (!wrappers.length && !contactListContainer && !assignedInput) return;
+        let clickInsideAnyWrapper = false;
+        wrappers.forEach(wrapper => {
+            if (wrapper.contains(event.target)) {
+                clickInsideAnyWrapper = true;
+            }
+        });
+        if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
+            styleDropdown(contactListContainer, assignedInput);
+        }
+    }, 30);
+});
