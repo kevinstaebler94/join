@@ -199,3 +199,10 @@ window.addEventListener('resize', () => {
         showContactListWindowsize();
     }, 100);
 });
+
+window.onclick = function (event) {
+    let menu = document.getElementById("mobileBurgerMenu");
+    if (menu.classList.contains("show")) {
+        menu.classList.remove("show");
+    }
+};
