@@ -37,7 +37,6 @@ async function renderTasks() {
     }
   });
   await initProgressBar(tasks);
-  enableTouchDragging();
 }
 
 function getTaskComponents(task) {
@@ -266,34 +265,3 @@ function styleInitalNameBoard(contact, initial) {
     initialColor[contact] = color;
 }
 
-function enableTouchDragging() {
-  const tasks = document.querySelectorAll(".filledTask");
-
-  tasks.forEach(task => {
-    task.addEventListener("touchstart", e => {
-      touchedTask = task;
-      task.classList.add("dragging");
-    });
-
-    task.addEventListener("touchend", async e => {
-      const touch = e.changedTouches[0];
-      const target = document.elementFromPoint(touch.clientX, touch.clientY);
-      const dropZone = target?.closest(".dropZone");
-
-      if (dropZone && touchedTask) {
-        const taskId = touchedTask.id;
-        const newColumn = dropZone.id;
-        let taskData = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
-
-        if (taskData) {
-          taskData.column = newColumn;
-          await putData(`/users/${loggedInUser}/tasks/`, taskData, taskId);
-          renderTasks();
-        }
-      }
-
-      task.classList.remove("dragging");
-      touchedTask = null;
-    });
-  });
-}

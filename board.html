@@ -32,6 +32,7 @@
   <div id="orientationOverlay" class="orientationOverlay dNone">
     <p>Please rotate your device to portrait mode to continue browsing.</p>
   </div>
+  </div>
   <div class="contentWrapper">
     <aside>
       <div w3-include-html="./assets/templates/sidebar.html"></div>
@@ -93,6 +94,20 @@
           </div>
         </section>
         <section class="boardContentWrapperMobile boardMobile">
+          <section class="moveToOverlayWrapper">
+            <div class="moveTaskOverlay">
+              <h3 class="moveTo">Move to...</h3>
+              <div class="upperContainer">
+                <div class="taskContainer">To do</div>
+                <div class="taskContainer">In progress</div>
+              </div>
+              <div class="lowerContainer">
+                <div class="taskContainer">Await feedback</div>
+                <div class="taskContainer">Done</div>
+              </div>
+              <button class="returnToBoard">Return to board</button>
+            </div>
+          </section>
           <div class="boardHeaderContentMobile">
             <h2 class="h2Mobile">Board</h2>
             <button onclick="handleAddTask()" class="addTaskButtonMobile">
