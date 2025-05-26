@@ -1,3 +1,7 @@
+/**
+ * Opens the modal for adding a new task.
+ * Shows overlay, task modal, and adjusts header layout.
+ */
 function openAddTaskModal() {
     let overlay = document.getElementById('boardOverlay');
     let addTaskModal = document.getElementById('addTaskModal');
@@ -8,6 +12,18 @@ function openAddTaskModal() {
     getAddTaskStructure();
 }
 
+/**
+ * Opens the modal to display a filled task.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} category - The category of the task.
+ * @param {string} title - The title of the task.
+ * @param {string} description - The task's description.
+ * @param {string} date - The due date of the task.
+ * @param {string} priority - The task's priority (e.g., 'urgent').
+ * @param {string} column - The board column the task is in.
+ * @param {Object} subtaskObj - The object containing all subtasks.
+ * @param {string} encodedContacts - URI-encoded string of contacts.
+ */
 function openFilledTaskModal(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts) {
     let overlay = document.getElementById('boardOverlay');
     let filledTaskModal = document.getElementById('filledTaskModal');
@@ -19,6 +35,10 @@ function openFilledTaskModal(taskId, category, title, description, date, priorit
 
 }
 
+/**
+ * Closes all modals and resets the layout.
+ * Clears modal content and resets subtask arrays.
+ */
 function closeModal() {
     let overlay = document.getElementById('boardOverlay');
     let addTaskModal = document.getElementById('addTaskModal');
@@ -33,12 +53,19 @@ function closeModal() {
     newSubtaskArr = [];
 }
 
+/**
+ * Handles focus-out event with a delay to reset subtask icons.
+ */
 function handleFocusOut() {
     setTimeout(() => {
         resetSubtaskIcons();
     }, 100);
 }
 
+/**
+ * Renders contact elements for the modal.
+ * @param {string[]} contacts - List of contact names.
+ */
 async function getContactsModal(contacts) {
     contacts.forEach(contact => {
         let contactContainer = document.getElementById('assignedContainerModal');
@@ -47,6 +74,10 @@ async function getContactsModal(contacts) {
     });
 }
 
+/**
+ * Renders contact initials in edit mode.
+ * @param {string[]} contacts - List of contact names.
+ */
 function getContactsEdit(contacts) {
     contacts.forEach(contact => {
         let assignetContainer = document.getElementById('assignedContainer');
@@ -55,6 +86,11 @@ function getContactsEdit(contacts) {
     });
 }
 
+/**
+ * Renders subtasks as checkbox elements in modal.
+ * @param {Object} subtasks - The subtask object with ID and status.
+ * @param {string} taskId - ID of the task the subtasks belong to.
+ */
 async function getSubtasksModal(subtasks, taskId) {
     let entries = Object.entries(subtasks?.subtask || {});
     entries.forEach(([subtaskId, subtask]) => {
@@ -65,6 +101,11 @@ async function getSubtasksModal(subtasks, taskId) {
     });
 }
 
+/**
+ * Prepares and renders the subtask edit view.
+ * @param {Object} subtasks - Object containing subtasks.
+ * @param {string} encodedSubtasks - URI-encoded subtask data.
+ */
 function getSubtaskEdit(subtasks, encodedSubtasks) {
     subtasksArr.push(subtasks.subtask);
     if (!subtasksArr[0]) {
@@ -74,16 +115,27 @@ function getSubtaskEdit(subtasks, encodedSubtasks) {
     };
 }
 
+/**
+ * Displays subtask edit icons on hover.
+ * @param {HTMLElement} element - The container element hovered over.
+ */
 function showEditIcons(element) {
     let iconContainer = element.querySelector('.iconContainer');
     iconContainer.classList.remove('dNone');
 }
 
+/**
+ * Hides subtask edit icons on mouse leave.
+ * @param {HTMLElement} element - The container element.
+ */
 function hideEditIcons(element) {
     let iconContainer = element.querySelector('.iconContainer');
     iconContainer.classList.add('dNone');
 }
 
+/**
+ * Prepares the input icons when adding a new subtask.
+ */
 function getAddNewSubtask() {
     let inputIconContainer = document.getElementById('inputIconContainer');
     let plusIcon = document.getElementById('plusIcon');
@@ -94,6 +146,9 @@ function getAddNewSubtask() {
                                     <img onclick="addNewSubtaskModal()" id="doneIcon" class="editIcons" src="./assets/img/done.svg" alt="">`;
 }
 
+/**
+ * Resets the subtask icons to the initial state (plus icon only).
+ */
 function resetSubtaskIcons() {
     const inputIconContainer = document.getElementById('inputIconContainer');
     while (inputIconContainer.firstChild) {
@@ -109,6 +164,10 @@ function resetSubtaskIcons() {
     document.getElementById('subtaskInputModal').blur();
 }
 
+/**
+ * Switches to subtask edit mode for the selected subtask.
+ * @param {string} subtaskId - ID of the subtask to edit.
+ */
 function getEditSubtaskModal(subtaskId) {
     let subtaskContainer = document.getElementById('subtaskContainer' + subtaskId);
     let subtaskEditContainer = document.getElementById('subtaskEditContainer' + subtaskId);
@@ -116,6 +175,11 @@ function getEditSubtaskModal(subtaskId) {
     subtaskEditContainer.classList.remove('dNone');
 }
 
+/**
+ * Saves the edited subtask and returns to display mode.
+ * @param {string} subtaskId - ID of the subtask.
+ * @param {number} subtaskIndex - Index of the subtask in the array.
+ */
 function editSubtaskModal(subtaskId, subtaskIndex) {
     let subtaskContainer = document.getElementById('subtaskContainer' + subtaskId);
     let subtaskEditContainer = document.getElementById('subtaskEditContainer' + subtaskId);
@@ -127,11 +191,22 @@ function editSubtaskModal(subtaskId, subtaskIndex) {
     subtaskEditContainer.classList.add('dNone');
 }
 
+/**
+ * Serializes subtask object to URI-encoded JSON.
+ * @param {Object} subtasks - The subtask object.
+ * @returns {string} - URI-encoded string of subtasks.
+ */
 function serializeObj(subtasks) {
     let serializedSubtasks = encodeURIComponent(JSON.stringify(subtasks));
     return serializedSubtasks;
 }
 
+/**
+ * Deletes a subtask and updates the view.
+ * @param {string} subtaskId - ID of the subtask.
+ * @param {number} subtaskIndex - Index of subtask in the array.
+ * @param {string} encodedSubtasks - Encoded subtask data.
+ */
 function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let subtaskListEdit = document.getElementById('subtaskListEdit');
@@ -145,6 +220,12 @@ function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
     subtasksArr = [];
 }
 
+/**
+ * Deletes a subtask directly from the edit list.
+ * @param {string} subtaskId - ID of the subtask.
+ * @param {number} subtaskIndex - Index of subtask in the array.
+ * @param {string} encodedSubtasks - Encoded subtask data.
+ */
 function deleteEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let subtaskListElement = document.getElementById('subtaskListElement' + subtaskIndex);
@@ -152,6 +233,9 @@ function deleteEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
     subtaskListElement.innerHTML = '';
 }
 
+/**
+ * Cancels subtask input and resets icons after short delay.
+ */
 function cancelValue() {
     let subtaskInput = document.getElementById('subtaskInput');
     subtaskInput.value = '';
@@ -161,6 +245,11 @@ function cancelValue() {
     }, 50);
 }
 
+/**
+ * Handles contact assignment by toggling checkbox state.
+ * Updates and displays currently assigned contacts.
+ * @param {HTMLInputElement} checkboxElement - The clicked checkbox element.
+ */
 function checkAssignedContactEdit(checkboxElement) {
     let assignedContainer = document.getElementById('assignedContainerEdit');
     let checkbox = document.getElementById('checkboxEdit');
@@ -179,16 +268,28 @@ function checkAssignedContactEdit(checkboxElement) {
     });
 }
 
+/**
+ * Sets the background color of contact initials in the modal.
+ * @param {string} contact - The name of the contact.
+ */
 function getContactInitialColorModal(contact) {
     let contactInitialContainer = document.getElementById('contactInitialContainer' + contact);
     contactInitialContainer.style.backgroundColor = initialColor[contact];
 }
 
+/**
+ * Sets the background color of contact initials in the edit view.
+ * @param {string} contact - The name of the contact.
+ */
 function getContactInitialColorEdit(contact) {
     let contactInitialContainer = document.getElementById('contactInitialContainer' + contact);
     contactInitialContainer.style.backgroundColor = initialColor[contact];
 }
 
+/**
+ * Global keyup listener for handling "Enter" key events in inputs.
+ * Adds or confirms subtasks depending on active input.
+ */
 document.addEventListener('keyup', function (event) {
     const input = document.getElementById('subtaskInput');
     const inputModal = document.getElementById('subtaskInputModal');

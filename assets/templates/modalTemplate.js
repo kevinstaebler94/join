@@ -1,3 +1,16 @@
+/**
+ * Renders and initializes the HTML structure for the "Add Task" modal.
+ * 
+ * This function inserts a complete form structure into the DOM element with the ID "addTaskModal".
+ * It includes input fields for title, description, due date, priority selection, assigned contacts,
+ * category dropdown, and subtasks. It also initializes the default priority to "medium".
+ * 
+ * Elements are dynamically created and linked with relevant event listeners and functions,
+ * such as `selectPriority`, `toggleDropdownName`, `toggleDropdownCategory`, `getSubtask`, 
+ * `clearAddTask`, and `checkValidation`.
+ * 
+ * It assumes the corresponding styles and asset paths (e.g., `./assets/img/...`) exist and are properly loaded.
+ */
 function getAddTaskStructure() {
     let addTaskModal = document.getElementById('addTaskModal');
     addTaskModal.innerHTML = `<img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt=""><div class="mainContent">
@@ -127,6 +140,19 @@ function getAddTaskStructure() {
     selectPriority('medium');
 }
 
+/**
+ * Renders a detailed view of a selected task in a modal.
+ *
+ * @param {string} taskId - Unique identifier for the task.
+ * @param {string} category - Task category (e.g., "User Story").
+ * @param {string} title - Task title.
+ * @param {string} description - Task description.
+ * @param {string} date - Due date of the task.
+ * @param {string} priority - Task priority level ("low", "medium", "urgent").
+ * @param {string} column - The board column where the task is located.
+ * @param {string} subtaskObj - Encoded JSON string of subtasks.
+ * @param {string} encodedContacts - Encoded JSON string of assigned contacts.
+ */
 function getFilledStructure(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts) {
     let filledTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(subtaskObj));
@@ -172,6 +198,19 @@ function getFilledStructure(taskId, category, title, description, date, priority
 
 }
 
+/**
+ * Opens a modal with editable form fields to allow a task to be modified.
+ *
+ * @param {string} taskId - Task ID to edit.
+ * @param {string} category - Task category.
+ * @param {string} title - Task title.
+ * @param {string} description - Task description.
+ * @param {string} date - Task due date.
+ * @param {string} priority - Task priority.
+ * @param {string} column - The column the task belongs to.
+ * @param {string} encodedSubtasks - Encoded JSON string of subtasks.
+ * @param {string} encodedContacts - Encoded JSON string of assigned contacts.
+ */
 function openTaskEdit(taskId, category, title, description, date, priority, column, encodedSubtasks, encodedContacts) {
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
@@ -273,6 +312,12 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
     getSubtaskEdit(subtasks, encodedSubtasks);
 }
 
+/**
+ * Renders a list of subtasks for editing, including edit/delete buttons.
+ *
+ * @param {Array} subtasks - Array of subtask objects.
+ * @param {string} encodedSubtasks - Encoded version of the subtask array.
+ */
 function renderSubtasksEdit(subtasks, encodedSubtasks) {
     for (let subtaskIndex = 0; subtaskIndex < subtasksArr[0].length; subtaskIndex++) {
         let sub = subtasksArr[0];
@@ -299,6 +344,9 @@ function renderSubtasksEdit(subtasks, encodedSubtasks) {
     }
 }
 
+/**
+ * Adds a new subtask from input and appends it to the editable subtask list.
+ */
 function addNewSubtaskModal() {
     let subtaskListEdit = document.getElementById('subtaskListEdit');
     let inputValue = document.getElementById('subtaskInputModal');

@@ -1,15 +1,12 @@
-// let users = {
-//     'name' : 'Testname',
-//     'password' : '1234',
-//     'email' : 'Testname@dev.com'
-// };
-// let tasks = {};
-// let contacts = {};
-
 const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
 // const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
 // const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
+/**
+ * Fetches data from Firebase Realtime Database at a given path.
+ * @param {string} path - The relative path in the database.
+ * @returns {Promise<Object|undefined>} - Returns fetched data or undefined on error.
+ */
 async function getData(path = '') {
     try {
         let response = await fetch(BASE_URL + path + '.json');
@@ -22,6 +19,13 @@ async function getData(path = '') {
     }
 }
 
+/**
+ * Uploads (puts) data to Firebase Realtime Database at the specified path and userId.
+ * @param {string} path - The relative path in the database.
+ * @param {Object} users - Data object to upload.
+ * @param {string} userId - Identifier for the data node.
+ * @returns {Promise<Object>} - Returns response data.
+ */
 async function putData(path = '', users, userId) {
     let response = await fetch(`${BASE_URL}${path}/${userId}.json`, {
         method: 'PUT',
@@ -34,6 +38,11 @@ async function putData(path = '', users, userId) {
     return data;
 }
 
+/**
+ * Deletes data at the specified path from Firebase Realtime Database.
+ * @param {string} path - The relative path to delete.
+ * @returns {Promise<Object>} - Returns response data.
+ */
 async function deleteData(path = '') {
     let response = await fetch(`${BASE_URL}${path}.json`, {
         method: 'DELETE',
@@ -47,6 +56,9 @@ async function deleteData(path = '') {
     return data;
 }
 
+/**
+ * Gathers user input and pushes new user data to the database.
+ */
 function pushUsers() {
     let path = '/users';
     let name = document.getElementById('name');
@@ -63,6 +75,10 @@ function pushUsers() {
     putData(path, userData, userId);
 }
 
+/**
+ * Updates a user's greeting element in the database.
+ * @param {Object} greeting - Greeting object to update.
+ */
 async function changeElement(greeting) {
     let path = '/users/' + loggedInUser;
     let userId = 'greeting';
@@ -72,6 +88,17 @@ async function changeElement(greeting) {
     await putData(path, userData, userId);
 }
 
+/**
+ * Updates a user's full data including tasks and contacts.
+ * @param {string} userId - User identifier.
+ * @param {boolean} greeting - Greeting status.
+ * @param {string} email - User email.
+ * @param {string} password - User password.
+ * @param {string} name - User name.
+ * @param {boolean} login - Login status.
+ * @param {Object} tasks - User tasks object.
+ * @param {Object} contacts - User contacts object.
+ */
 async function changeUsers(userId, greeting, email, password, name, login, tasks, contacts) {
     let path = '/users';
     let userData = ({
@@ -86,6 +113,11 @@ async function changeUsers(userId, greeting, email, password, name, login, tasks
     await putData(path, userData, userId);
 }
 
+/**
+ * Pushes a new task for the logged in user.
+ * @param {string} loggedInUser - Current user ID.
+ * @param {Array} contacts - Array of assigned contacts.
+ */
 function pushTasks(loggedInUser, contacts) {
     let path = '/users/' + loggedInUser + '/tasks';
     let title = document.getElementById('titleInput');
@@ -109,6 +141,14 @@ function pushTasks(loggedInUser, contacts) {
     putData(path, userData, taskId);
 }
 
+/**
+ * Pushes or updates a subtask for a specific task of a user.
+ * @param {string} loggedInUser - Current user ID.
+ * @param {string} taskId - Task identifier.
+ * @param {boolean} done - Completion status of the subtask.
+ * @param {string} currentSubtask - Subtask description.
+ * @param {string} subtaskId - Identifier for the subtask.
+ */
 async function pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId) {
     let path = '/users/' + loggedInUser + '/tasks/' + taskId + '/subtask';
     let userData = ({
@@ -118,6 +158,11 @@ async function pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskI
     await putData(path, userData, subtaskId);
 }
 
+/**
+ * Pushes a guest user's task to the database.
+ * @param {Object} taskObj - Task object to push.
+ * @param {string} guestUser - Guest user identifier.
+ */
 async function pushGuestTasks(taskObj, guestUser) {
     let path = '/users/' + guestUser + '/tasks';
     let userData = ({
@@ -134,12 +179,17 @@ async function pushGuestTasks(taskObj, guestUser) {
     await putData(path, userData, userData.id);
 }
 
+/**
+ * Updates a task's details and deletes the old task.
+ * @param {string} taskId - Original task ID.
+ * @param {string} column - Task column (e.g. toDo, doing, done).
+ * @param {string} category - Task category.
+ */
 function changeTasks(taskId, column, category) {
     let path = '/users/' + loggedInUser + '/tasks';
     let title = document.getElementById('titleInputEdit');
     let description = document.getElementById('taskDescriptionEdit');
     let date = document.getElementById('dateInputEdit');
-    // let contacts = assignedArr.length > 0 ? assignedArr : [null]; // oder null, oder ein Platzhalter
     let contacts = assignedArr;
     let subTask = subtasksArr[0];
     let time = getTimeStamp();
@@ -160,6 +210,11 @@ function changeTasks(taskId, column, category) {
     deleteTask(loggedInUser, taskId);
 }
 
+/**
+ * Validates and pushes a new contact for the logged in user.
+ * @param {string} loggedInUser - Current user ID.
+ * @returns {Promise<void|boolean>} - Returns false if email validation fails, otherwise void.
+ */
 async function pushContacts(loggedInUser) {
     let isValid = await validateContactInput();
     if (!isValid) return;
@@ -190,6 +245,11 @@ async function pushContacts(loggedInUser) {
     }
 }
 
+/**
+ * Pushes guest user contacts to the database.
+ * @param {Object} contactObj - Contact object.
+ * @param {string} guestUser - Guest user ID.
+ */
 async function pushGuestContacts(contactObj, guestUser) {
     let path = '/users/' + guestUser + '/contacts';
     let contactId = adjustEmail(contactObj.email);
@@ -201,21 +261,39 @@ async function pushGuestContacts(contactObj, guestUser) {
     await putData(path, userData, contactId);
 }
 
+/**
+ * Deletes a task for the logged in user.
+ * @param {string} loggedInUser - Current user ID.
+ * @param {string} taskId - Task identifier.
+ */
 async function deleteTask(loggedInUser, taskId) {
     let path = '/users/' + loggedInUser + '/tasks/' + taskId;
     deleteData(path);
     closeModal();
 }
 
+/**
+ * Deletes a contact for the logged in user.
+ * @param {string} contactId - Contact identifier.
+ */
 async function deleteContact(contactId) {
     let path = '/users/' + loggedInUser + '/contacts/' + contactId;
     await deleteData(path);
 }
 
+/**
+ * Adjusts email string for use as Firebase key by replacing '.' with '_' and '@' with '-at-'.
+ * @param {string} email - Original email string.
+ * @returns {string} - Adjusted email string.
+ */
 function adjustEmail(email) {
     return email.replace(/\./g, "_").replace(/@/g, "-at-");
 }
 
+/**
+ * Generates a timestamp string in format "-HH:MM:SS".
+ * @returns {string} - Timestamp string.
+ */
 function getTimeStamp() {
     const d = new Date();
     let h = addZero(d.getHours());
@@ -225,6 +303,11 @@ function getTimeStamp() {
     return time;
 }
 
+/**
+ * Adds a leading zero to numbers less than 10.
+ * @param {number} i - Number to format.
+ * @returns {string} - Formatted number as string.
+ */
 function addZero(i) {
     if (i < 10) {
         i = "0" + i;

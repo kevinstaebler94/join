@@ -1,3 +1,15 @@
+/**
+ * Generates the HTML structure for the sign-up page.
+ * 
+ * This template includes:
+ * - A confirmation overlay for successful sign-up
+ * - A form with inputs for name, email, password, and confirmed password
+ * - Validation placeholders and icons for user interaction
+ * - A checkbox to accept the privacy policy
+ * - A submit button that is enabled only when all validations pass
+ * 
+ * @returns {string} - The HTML string for the sign-up template
+ */
 function signUpTemplate() {
   return `
     <div id="signUpOverlay" class="signUpOverlay dNone">

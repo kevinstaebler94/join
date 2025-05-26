@@ -1,3 +1,7 @@
+/**
+ * Initializes the board by loading HTML, fetching the logged-in user,
+ * and rendering tasks.
+ */
 async function initBoard() {
   await includeHTML();
   await getLoggedInUser();
@@ -8,10 +12,18 @@ window.addEventListener("resize", () => {
   renderTasks();
 });
 
+/**
+ * Returns the appropriate column ID depending on screen size.
+ * @param {string} column - The base column name
+ * @returns {string} - Adjusted column ID for desktop or mobile
+ */
 function getColumnId(column) {
   return window.innerWidth <= 1023 ? column + "Mobile" : column;
 }
 
+/**
+ * Renders all tasks from Firebase into the board columns.
+ */
 async function renderTasks() {
   let tasks = await getData("/users/" + loggedInUser + "/tasks");
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
@@ -40,6 +52,11 @@ async function renderTasks() {
   enableTouchDragging();
 }
 
+/**
+ * Extracts structured components from a task object.
+ * @param {Object} task - The task object
+ * @returns {Object} taskComponents - Normalized task data
+ */
 function getTaskComponents(task) {
   const capitalizedPrio =
     task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase();
@@ -58,6 +75,11 @@ function getTaskComponents(task) {
   };
 }
 
+/**
+ * Generates HTML for a task including title, description, progress bar and assigned contacts.
+ * @param {Object} taskComponents - Task data
+ * @returns {string} - HTML string for the task
+ */
 function filledTaskTemplate(taskComponents) {
 
   let subtaskData = taskComponents.subtask ? taskComponents.subtask : [];
@@ -82,6 +104,11 @@ function filledTaskTemplate(taskComponents) {
   return filledTaskHTML;
 }
 
+/**
+ * Generates placeholder HTML when no tasks are available.
+ * @param {string} columnName - The name of the column
+ * @returns {string} - HTML string for blank task
+ */
 function blankTask(columnName) {
   return `
     <div class="blankTask marginBottom">
@@ -90,15 +117,27 @@ function blankTask(columnName) {
   `;
 }
 
+/**
+ * Handles the dragstart event by storing task ID and source column.
+ * @param {DragEvent} ev
+ */
 function dragstartHandler(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
   ev.dataTransfer.setData("column", ev.target.closest(".dropZone").id);
 }
 
+/**
+ * Prevents default behavior to allow drop.
+ * @param {DragEvent} ev
+ */
 function dragoverHandler(ev) {
   ev.preventDefault();
 }
 
+/**
+ * Handles dropping of a task into a new column and updates the database.
+ * @param {DragEvent} ev
+ */
 async function dropHandler(ev) {
   ev.preventDefault();
   const taskId = ev.dataTransfer.getData("text");
@@ -117,6 +156,10 @@ async function dropHandler(ev) {
   }
 }
 
+/**
+ * Filters tasks based on input text and renders the results.
+ * @param {string} id - The input field ID
+ */
 async function filterTasks(id) {
   let tasks = await getData(`/users/${loggedInUser}/tasks`);
   let input = document.getElementById(id).value.toLowerCase();
@@ -132,6 +175,10 @@ async function filterTasks(id) {
   renderFilteredTasks(result);
 }
 
+/**
+ * Renders tasks based on the filter results.
+ * @param {Array} filtered - Array of filtered task objects
+ */
 async function renderFilteredTasks(filtered) {
   const isMobile = window.innerWidth <= 768;
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
@@ -153,6 +200,10 @@ async function renderFilteredTasks(filtered) {
   });
 }
 
+/**
+ * Filters tasks based on input or resets view.
+ * @param {string} id - The input field ID
+ */
 async function handleTaskInput(id) {
   const input = document.getElementById(id).value.trim();
 
@@ -163,6 +214,11 @@ async function handleTaskInput(id) {
   await filterTasks(id);
 }
 
+/**
+ * Converts contact names to initials.
+ * @param {Array} contactData - List of contact names
+ * @returns {Array} - Initials of contacts
+ */
 function convertNameToInitial(contactData) {
   return contactData.map((name) =>
     name
@@ -172,6 +228,10 @@ function convertNameToInitial(contactData) {
   );
 }
 
+/**
+ * Updates subtask checkbox state and re-renders the board.
+ * @param {HTMLInputElement} checkbox
+ */
 async function handleCheckbox(checkbox) {
   let list = document.querySelectorAll(
     '.assignedToModal input[type="checkbox"]'
@@ -189,6 +249,12 @@ async function handleCheckbox(checkbox) {
   showProgressBar(isChecked, checkboxTotal, taskId);
 }
 
+/**
+ * Animates and displays the progress bar of a task.
+ * @param {number} isChecked - Checked subtasks
+ * @param {number} checkboxTotal - Total subtasks
+ * @param {string} taskId - ID of the task
+ */
 async function showProgressBar(isChecked, checkboxTotal, taskId) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
   if (progressBar) {
@@ -199,6 +265,9 @@ async function showProgressBar(isChecked, checkboxTotal, taskId) {
   }
 }
 
+/**
+ * Generates HTML for the progress bar container.
+ */
 function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
   return subtaskData.length > 0
     ? `
@@ -212,6 +281,15 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
     : "";
 }
 
+/**
+ * Generates the HTML markup for a single task on the board.
+ * @param {Object} taskComponents - The core task data including title, description, etc.
+ * @param {string} serializedSubtasks - JSON stringified subtasks
+ * @param {string} serializedContacts - JSON stringified contacts
+ * @param {Array<string>} initials - Array of contact initials
+ * @param {string} progressBarHTML - HTML for the subtask progress bar
+ * @returns {string} - HTML string representing the task
+ */
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
   
   let compInitials = initials.slice(0, 3);
@@ -238,6 +316,10 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
   
 }
 
+/**
+ * Initializes the progress bar for all tasks based on their completed subtasks.
+ * @param {Object} tasksData - Object containing all tasks keyed by their ID
+ */
 async function initProgressBar(tasksData) {
   Object.entries(tasksData).forEach(([taskId, tasksData]) => {
     let subtask = tasksData.subtask || [];
@@ -247,10 +329,20 @@ async function initProgressBar(tasksData) {
   });
 }
 
+/**
+ * Shortens text to a maximum length, appending "..." if necessary.
+ * @param {string} text - The original text
+ * @param {number} maxLen - Maximum allowed length
+ * @returns {string} - Shortened text
+ */
 function shortenText(text, maxLen) {
   return text.length > maxLen ? text.slice(0, maxLen) + "..." : text;
 }
 
+/**
+ * Handles the "Add Task" button depending on screen size.
+ * On mobile, navigates to a new page; on desktop, opens a modal.
+ */
 function handleAddTask() {
   if (window.innerWidth <= 1023) {
     window.location.href = 'add_task.html'; 
@@ -259,6 +351,11 @@ function handleAddTask() {
   }
 }
 
+/**
+ * Styles the background color of user initials on the board.
+ * @param {string} contact - Full name of the contact
+ * @param {string} initial - Initials of the contact
+ */
 function styleInitalNameBoard(contact, initial) {
     let initalContainer = document.getElementById('assignedUser' + initial);
     let color = getColorFromName(contact);
@@ -266,6 +363,10 @@ function styleInitalNameBoard(contact, initial) {
     initialColor[contact] = color;
 }
 
+/**
+ * Enables drag-and-drop support for touch devices.
+ * Detects start and end of touch and updates the task column if dropped into a valid zone.
+ */
 function enableTouchDragging() {
   const tasks = document.querySelectorAll(".filledTask");
 
