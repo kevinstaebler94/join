@@ -304,8 +304,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
       <p class="taskDescription">${shortenedDescription}</p>
       ${progressBarHTML}
       <div class="assignedToContainer">
-        <div class="
-        ">
+        <div class="assignedUserContainer">
           ${initial}
         </div>
         <img src="./assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
@@ -319,7 +318,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
  * Initializes the progress bar for all tasks based on their completed subtasks.
  * @param {Object} tasksData - Object containing all tasks keyed by their ID
  */
-async function initProgressBar(tasksData) {
+function initProgressBar(tasksData) {
   Object.entries(tasksData).forEach(([taskId, tasksData]) => {
     let subtask = tasksData.subtask || [];
     let isChecked = subtask.filter((st) => st.done === true).length;
