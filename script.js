@@ -10,7 +10,6 @@ async function init() {
             await includeHTML();
             await loadGreeting();
             getSummary();
-            //     // showSummaryLoginOverlay();
         } else {
             await includeHTML();
             getSummary();
@@ -31,7 +30,6 @@ async function init() {
         await includeHTML();
         highlightActiveSidebarLink();
     }
-
 }
 
 function getLogin() {
@@ -117,24 +115,6 @@ function getInitials(name) {
         .join("")
         .toUpperCase();
 }
-
-// async function showSummaryLoginOverlay() {
-//     let overlay = document.getElementById('loginGreetingContainer');
-//     let greeting = await getData('/users/' + loggedInUser + '/greeting/greeting');
-//     if (!greeting) {
-
-//         return;
-//     }
-
-//     overlay.classList.remove('dNone');
-//     updateLoginGreeting();
-//     loginGreetingByName();
-//     setTimeout(() => {
-//         overlay.classList.add('dNone');
-//         document.getElementById('summaryMain').classList.remove('dNone');
-//         getSummary();
-//     }, 1400);
-// }
 
 function checkOrientation() {
     const isLandscape = window.innerWidth > window.innerHeight;

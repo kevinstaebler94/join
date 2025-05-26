@@ -1,4 +1,32 @@
-let contactArr = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: add_task.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: add_task.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let contactArr = [];
 let assignedArr = [];
 let prioBtn = 'medium';
 let subtasksArr = [];
@@ -231,10 +259,10 @@ function checkValidation() {
     let selectedCategory = document.getElementById('selectedCategory');
     if (titleInput.value == '') {
         titleInput.classList.add('required');
-        requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
-    } else if (dateInput.value.length < 10) {
+        requiredTitle.innerHTML = `&lt;p class="fontRed requiredFont">This field is required&lt;/p>`;
+    } else if (dateInput.value.length &lt; 10) {
         dateInput.classList.add('required');
-        requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
+        requiredDate.innerHTML = `&lt;p class="fontRed requiredFont">This field is required&lt;/p>`;
     } else if (selectedCategory.innerHTML == 'Select category') {
         titleInput.classList.add('required');
     } else {
@@ -332,7 +360,7 @@ function checkAssignedContact(checkboxElement) {
     checkCurrentCheckbox(checkboxElement, checkedName, index, listElement);
     assignedContainer.innerHTML = '';
     assignedArr.forEach(contact => {
-        assignedContainer.innerHTML += `<p id="contactAssignedInitial${contact}" class="contactInitial">${getInitials(contact)}</p>`;
+        assignedContainer.innerHTML += `&lt;p id="contactAssignedInitial${contact}" class="contactInitial">${getInitials(contact)}&lt;/p>`;
         getContactInitialColor(contact);
     });
 }
@@ -372,7 +400,7 @@ function getInitials(name) {
  */
 function getColorFromName(name) {
     let sum = 0;
-    for (let i = 0; i < name.length; i++) {
+    for (let i = 0; i &lt; name.length; i++) {
         sum += name.charCodeAt(i) + (i + 1);
     }
     let index = sum % colors.length;
@@ -415,7 +443,7 @@ function styleDropdown(contactListContainer, assignedInput) {
     if (typeof isOpen !== 'undefined') {
         isOpen = false;
     }
-    if (assignedInput && assignedInput.value === '') {
+    if (assignedInput &amp;&amp; assignedInput.value === '') {
         assignedInput.value = 'Assigned to';
     }
 }
@@ -438,22 +466,44 @@ window.addEventListener('keydown', function (event) {
 
 window.addEventListener('mousedown', function (event) {
     const modal = document.getElementById('addTaskModal');
-    if (modal && modal.classList.contains('dNone')) return;
+    if (modal &amp;&amp; modal.classList.contains('dNone')) return;
     setTimeout(() => {
         const wrappers = document.querySelectorAll('.customSelectWrapper');
         const contactListContainer = document.getElementById('contactListContainer');
         const assignedInput = document.getElementById('assignedInput');
         const clickInsideContactList = contactListContainer?.contains(event.target) ?? false;
         const clickInsideAssignedInput = assignedInput?.contains(event.target) ?? false;
-        if (!wrappers.length && !contactListContainer && !assignedInput) return;
+        if (!wrappers.length &amp;&amp; !contactListContainer &amp;&amp; !assignedInput) return;
         let clickInsideAnyWrapper = false;
         wrappers.forEach(wrapper => {
             if (wrapper.contains(event.target)) {
                 clickInsideAnyWrapper = true;
             }
         });
-        if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
+        if (!clickInsideAnyWrapper &amp;&amp; !clickInsideContactList &amp;&amp; !clickInsideAssignedInput) {
             styleDropdown(contactListContainer, assignedInput);
         }
     }, 30);
-});
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkAssignedContact">checkAssignedContact</a></li><li><a href="global.html#checkCheckbox">checkCheckbox</a></li><li><a href="global.html#checkCurrentCheckbox">checkCurrentCheckbox</a></li><li><a href="global.html#checkIsOpen">checkIsOpen</a></li><li><a href="global.html#checkValidation">checkValidation</a></li><li><a href="global.html#clearAddTask">clearAddTask</a></li><li><a href="global.html#closeDropdownName">closeDropdownName</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteTaskValues">deleteTaskValues</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#getColorFromName">getColorFromName</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getContactInitialColor">getContactInitialColor</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#hideEditIcons">hideEditIcons</a></li><li><a href="global.html#initSubtaskInputListener">initSubtaskInputListener</a></li><li><a href="global.html#pushAssignedContacts">pushAssignedContacts</a></li><li><a href="global.html#resetPriorityClassList">resetPriorityClassList</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectPriority">selectPriority</a></li><li><a href="global.html#setPriorityClassList">setPriorityClassList</a></li><li><a href="global.html#showAddedBoardImg">showAddedBoardImg</a></li><li><a href="global.html#showEditIcons">showEditIcons</a></li><li><a href="global.html#styleDropdown">styleDropdown</a></li><li><a href="global.html#styleInitalName">styleInitalName</a></li><li><a href="global.html#toggleDropdownCategory">toggleDropdownCategory</a></li><li><a href="global.html#toggleDropdownName">toggleDropdownName</a></li><li><a href="global.html#toggleOpen">toggleOpen</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon May 26 2025 20:33:10 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

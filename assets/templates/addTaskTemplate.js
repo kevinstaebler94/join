@@ -1,3 +1,9 @@
+/**
+ * Renders a filtered list of contacts in the dropdown menu based on a search string.
+ * Also displays their initials and highlights already assigned contacts.
+ * 
+ * @param {string} [filter=''] - Optional search term to filter contact names.
+ */
 function renderFilteredContacts(filter = '') {
     const dropdownListName = document.getElementById('dropdownListName');
     const filteredContacts = contactArr.filter(contact =>
@@ -26,6 +32,10 @@ function renderFilteredContacts(filter = '') {
     });
 }
 
+/**
+ * Adds a new subtask to the subtasks array and updates the DOM list.
+ * Highlights input if empty. Clears input after successful addition.
+ */
 function getSubtask() {
     let subtaskInput = document.getElementById('subtaskInput');
     let subtaskList = document.getElementById('subtaskList');
@@ -55,6 +65,11 @@ function getSubtask() {
 
 }
 
+/**
+ * Converts a subtask into an editable input field so the user can change its value.
+ * 
+ * @param {number} subtaskIndex - Index of the subtask to edit.
+ */
 function getEditSubtask(subtaskIndex) {
     let currentSubtask = subtasksArr[subtaskIndex];
     let subtaskElement = document.getElementById('subtaskElement' + subtaskIndex);
@@ -68,6 +83,12 @@ function getEditSubtask(subtaskIndex) {
         </div>`;
 }
 
+/**
+ * Saves the edited value of a subtask and updates the display in the DOM.
+ * Ignores empty values.
+ * 
+ * @param {number} subtaskIndex - Index of the subtask to update.
+ */
 function editSubtask(subtaskIndex) {
     let input = document.getElementById('editSubtaskInput' + subtaskIndex);
     let newValue = input.value.trim();
@@ -88,6 +109,9 @@ function editSubtask(subtaskIndex) {
         </div>`;
 }
 
+/**
+ * Renders the full list of subtasks from the array to the DOM.
+ */
 function renderSubtasks() {
     const subtaskList = document.getElementById('subtaskList');
     subtaskList.innerHTML = '';
