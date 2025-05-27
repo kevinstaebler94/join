@@ -362,6 +362,10 @@ function styleInitalNameBoard(contact, initial) {
     initialColor[contact] = color;
 }
 
+/**
+ * Checks the current visibility state of the add task modal.
+ * If the modal is visible (not hidden), it triggers the add task handler.
+ */
 function checkWindowSize() {
   const modal = document.getElementById('addTaskModal');
   if (modal && modal.classList.contains('dNone')) return;
