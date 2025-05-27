@@ -1,9 +1,16 @@
+/**
+ * Fetches the logged-in user's name and updates the greeting element.
+ * @async
+ */
 async function greetingByName() {
     let nameData = await getData('/users/' + loggedInUser + '/name');
     if (!nameData) return;
     document.getElementById("userName").textContent = nameData;
 }
 
+/**
+ * Updates the greeting message based on the current time of day.
+ */
 function updateGreeting() {
     let hour = new Date().getHours(); // Holt die aktuelle Stunde
     let greeting;
@@ -44,6 +51,11 @@ function updateGreeting() {
 
 // }
 
+/**
+ * Finds the earliest date of urgent tasks that are due today or later,
+ * formats it, and displays it; shows "No urgent tasks" if none found.
+ * @async
+ */
 async function showUrgentDate() {
     let tasks = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasks) return;
@@ -77,6 +89,10 @@ async function showUrgentDate() {
     }
 }
 
+/**
+ * Counts the number of tasks in the "toDo" column and updates the counter element.
+ * @async
+ */
 async function getToDoTasksCounter() {
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
@@ -92,6 +108,10 @@ async function getToDoTasksCounter() {
     document.getElementById("toDoTasksCounter").textContent = toDoCount;
 }
 
+/**
+ * Counts the number of tasks in the "done" column and updates the counter element.
+ * @async
+ */
 async function getDoneTasksCounter() {
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
@@ -107,6 +127,10 @@ async function getDoneTasksCounter() {
     document.getElementById("doneTasksCounter").textContent = doneCount;
 }
 
+/**
+ * Counts the number of tasks awaiting feedback and updates the counter element.
+ * @async
+ */
 async function getFeedbackCounter() {
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
@@ -122,6 +146,10 @@ async function getFeedbackCounter() {
     document.getElementById("feedbackCounter").textContent = feedbackCount;
 }
 
+/**
+ * Counts the number of tasks currently in progress and updates the counter element.
+ * @async
+ */
 async function getInProgressCounter() {
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
@@ -137,6 +165,10 @@ async function getInProgressCounter() {
     document.getElementById("inProgressCounter").textContent = inProgressCount;
 }
 
+/**
+ * Counts all tasks that are on the board (any column except undefined) and updates the counter.
+ * @async
+ */
 async function getInBoardCounter() {
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
@@ -155,6 +187,10 @@ async function getInBoardCounter() {
     document.getElementById("inBoardCounter").textContent = inBoardCount;
 }
 
+/**
+ * Counts the number of urgent priority tasks and updates the counter element.
+ * @async
+ */
 async function getUrgentTasksCounter() {
     let tasksData = await getData('/users/' + loggedInUser + '/tasks/');
     if (!tasksData) return;
@@ -170,6 +206,11 @@ async function getUrgentTasksCounter() {
     document.getElementById("urgentTasksCounter").textContent = urgentCount;
 }
 
+/**
+ * Loads and displays a personalized greeting if the window width is <= 800px.
+ * Shows or hides the greeting container based on whether greeting data exists.
+ * @async
+ */
 async function loadGreeting() {
     if (window.innerWidth > 800) return;
     let greeting = await getData('/users/' + loggedInUser + '/greeting/greeting');

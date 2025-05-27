@@ -1,3 +1,8 @@
+/**
+ * Opens the contacts modal by displaying the overlay and modal container,
+ * then loads the modal structure and shows the modal content with animation.
+ */
+
 function openContactsModal() {
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('contactsModal');
@@ -12,6 +17,9 @@ function openContactsModal() {
     }, 10);
 }
 
+/**
+ * Builds and injects the HTML structure for the contacts modal.
+ */
 function getContactsModalStructure() {
     let container = document.getElementById('contactsModal');
     container.innerHTML = `
@@ -74,6 +82,10 @@ function getContactsModalStructure() {
     </div>`
 }
 
+/**
+ * Closes the contacts modal by hiding the modal content and then
+ * the overlay and modal container with a delay for animation.
+ */
 function closeContactsModal() {
     let modal = document.getElementById('modalContent');
     let overlay = document.getElementById('modalOverlay');
@@ -89,6 +101,9 @@ function closeContactsModal() {
     }
 }
 
+/**
+ * Clears the input fields in the contacts modal and removes error states.
+ */
 function clearInputFields() {
     document.getElementById('contactName').value = "";
     document.getElementById('contactEmail').value = "";
@@ -107,6 +122,10 @@ function clearInputFields() {
 
 /// Formvalidation ///
 
+/**
+ * Validates the contact input fields for emptiness and duplicates.
+ * @returns {Promise<boolean>} True if inputs are valid, false otherwise.
+ */
 async function validateContactInput() {
     let inputs = getContactInputs();
     let values = {
@@ -122,6 +141,10 @@ async function validateContactInput() {
     return true;
 }
 
+/**
+ * Retrieves references to the contact input fields and their error elements.
+ * @returns {Object} Object containing input and error element references.
+ */
 function getContactInputs() {
     return {
         nameInput: document.getElementById('contactName'),
@@ -133,6 +156,10 @@ function getContactInputs() {
     };
 }
 
+/**
+ * Resets all input error states and placeholder error messages for contact inputs.
+ * @param {Object} inputs - Object containing the input and error elements.
+ */
 function resetContactInputErrors(inputs) {
     [inputs.nameInput, inputs.emailInput, inputs.phoneInput].forEach(input => input.classList.remove('error'));
     [inputs.nameError, inputs.emailError, inputs.phoneError].forEach(el => {
@@ -147,6 +174,12 @@ function resetContactInputErrors(inputs) {
     });
 }
 
+/**
+ * Checks for empty input fields and shows relevant error messages.
+ * @param {Object} inputs - Input elements.
+ * @param {Object} values - Trimmed values of inputs.
+ * @returns {boolean} True if any field is empty, otherwise false.
+ */
 function checkEmptyFields(inputs, values) {
     let hasError = false;
 
@@ -176,6 +209,13 @@ function checkEmptyFields(inputs, values) {
     return hasError;
 }
 
+/**
+ * Checks for duplicate values in the existing contacts and shows error messages.
+ * @param {Object} inputs - Input elements.
+ * @param {Object} values - Trimmed values of inputs.
+ * @param {Object} existingContacts - Existing contacts data.
+ * @returns {boolean} True if duplicates found, otherwise false.
+ */
 function checkDuplicateFields(inputs, values, existingContacts) {
     let hasError = false;
 
@@ -210,6 +250,11 @@ function checkDuplicateFields(inputs, values, existingContacts) {
     return hasError;
 }
 
+/**
+ * Hides error messages after a timeout and removes error styling from inputs.
+ * @param {string} id - The ID of the error message element.
+ * @param {string} inputId - The ID of the input field.
+ */
 function hideErrorMessages(id, inputId) {
     setTimeout(() => {
         let el = document.getElementById(id);
@@ -224,6 +269,10 @@ function hideErrorMessages(id, inputId) {
     }, 3000);
 }
 
+/**
+ * Validates the format of the email input and checks if it is already used.
+ * @returns {Promise<boolean>} True if email format is valid and not duplicate, false otherwise.
+ */
 async function validateAddEmailFormat() {
     let email = document.getElementById("contactEmail").value.trim().toLowerCase();
     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

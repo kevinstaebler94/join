@@ -10,6 +10,11 @@ let colors = [
 
 let activeContactCard = null;
 
+/**
+ * Renders the contact list by fetching user contacts,
+ * sorting them alphabetically, and adding letter dividers.
+ * @async
+ */
 async function renderContacts() {
     let container = document.getElementById("contactList");
     container.innerHTML = "";
@@ -26,6 +31,13 @@ async function renderContacts() {
     };
 }
 
+/**
+ * Appends a letter divider and line if the first letter changes.
+ * @param {HTMLElement} container - Container to append dividers to.
+ * @param {string} name - Contact name to check the first letter.
+ * @param {string} currentLetter - Current letter divider.
+ * @returns {string} Updated current letter.
+ */
 function appendLetterDividerIfNeeded(container, name, currentLetter) {
     let firstLetter = name.charAt(0).toUpperCase();
     if (firstLetter !== currentLetter) {
@@ -36,6 +48,11 @@ function appendLetterDividerIfNeeded(container, name, currentLetter) {
     return currentLetter;
 }
 
+/**
+ * Creates a div element for a letter divider.
+ * @param {string} letter - Letter to display.
+ * @returns {HTMLElement} The letter divider element.
+ */
 function createLetterDivider(letter) {
     let div = document.createElement("div");
     div.classList.add("letterDivider");
@@ -44,12 +61,22 @@ function createLetterDivider(letter) {
 
 }
 
+/**
+ * Creates a div element for the line under a letter divider.
+ * @returns {HTMLElement} The letter divider line element.
+ */
 function createLetterDividerLine() {
     let div = document.createElement("div");
     div.classList.add("letterDividerLine");
     return div
 }
 
+/**
+ * Creates a contact card element with initials and contact info.
+ * @param {Object} contact - Contact data object.
+ * @param {string} contactId - Unique ID of the contact.
+ * @returns {HTMLElement} The contact card element.
+ */
 function createContactCard(contact, contactId) {
     let card = document.createElement("div");
     card.classList.add("contactCard");
@@ -68,6 +95,13 @@ function createContactCard(contact, contactId) {
     return card;
 }
 
+/**
+ * Handles the click event on a contact card:
+ * sets active contact, loads details, toggles UI states.
+ * @param {HTMLElement} card - The clicked contact card element.
+ * @param {string} contactId - The ID of the contact.
+ * @async
+ */
 async function handleCardClick(card, contactId) {
     currentContactId = contactId;
     await openContactById(contactId);
@@ -76,6 +110,11 @@ async function handleCardClick(card, contactId) {
     if (window.innerWidth <= 800) openContactMobile(contactId);
 }
 
+/**
+ * Fetches contact data by ID and updates the contact details view.
+ * @param {string} contactId - The ID of the contact to open.
+ * @async
+ */
 async function openContactById(contactId) {
     let contact = (await getData(`/users/${loggedInUser}/contacts/${contactId}`));
     if (!contact || !contact.name || !contact.email) return;
@@ -83,6 +122,10 @@ async function openContactById(contactId) {
     currentContactId = adjustEmail(contact.email);
 }
 
+/**
+ * Updates the contact details panel with the given contact's info.
+ * @param {Object} contact - Contact data.
+ */
 function updateContactDetails(contact) {
     document.getElementById("userName").innerHTML = contact.name;
     document.getElementById("userEmail").innerHTML = contact.email;
@@ -103,7 +146,11 @@ function updateContactDetails(contact) {
         <span onclick="deleteContact('${adjustEmail(contact.email)}')">Delete</span>`;
 }
 
-
+/**
+ * Extracts initials from a full name string.
+ * @param {string} name - The full name.
+ * @returns {string} Initials in uppercase.
+ */
 function getInitials(name) {
     if (!name || typeof name !== 'string') return '';
     return name
@@ -117,6 +164,11 @@ window.addEventListener("DOMContentLoaded", () => {
     renderContacts();
 });
 
+/**
+ * Generates a consistent color from a name string.
+ * @param {string} name - The name to generate color for.
+ * @returns {string} A hex color code from the colors array.
+ */
 function getColorFromName(name) {
     let sum = 0;
     for (let i = 0; i < name.length; i++) {
@@ -126,6 +178,10 @@ function getColorFromName(name) {
     return colors[index];
 }
 
+/**
+ * Toggles the background highlight of the active contact card.
+ * @param {HTMLElement} cardElement - The contact card element to toggle.
+ */
 function addContactCardBgToggle(cardElement) {
     if (activeContactCard === cardElement) {
         cardElement.classList.remove('active');
@@ -139,6 +195,10 @@ function addContactCardBgToggle(cardElement) {
     }
 }
 
+/**
+ * Toggles visibility of the contact details overview based on active card state.
+ * @param {HTMLElement} cardElement - The contact card element.
+ */
 function showContactDetailsToggle(cardElement) {
     let overview = document.getElementById('showContactDetails');
 
@@ -149,6 +209,9 @@ function showContactDetailsToggle(cardElement) {
     }
 }
 
+/**
+ * Displays a success overlay image with fade-out effect.
+ */
 function showSuccessOverlayImg() {
     let successOverlayImg = document.getElementById('succesfullyCreatedOverlayImg');
 
@@ -160,6 +223,10 @@ function showSuccessOverlayImg() {
     successOverlayImg.classList.add('displayNone');
 }
 
+/**
+ * Shows the contact details view in mobile mode, hides the contact list.
+ * @param {string} contactId - The ID of the contact to open.
+ */
 function openContactMobile(contactId) {
     document.getElementById('contactListContainer').classList.add('dNone');
     document.getElementById('contactsOverview').classList.remove('dNone');
@@ -167,6 +234,9 @@ function openContactMobile(contactId) {
     openContactById(contactId);
 }
 
+/**
+ * Shows the contact list and hides the mobile contact details overview.
+ */
 function showContactList() {
     document.getElementById('contactsOverview').classList.remove('mobileVisible');
     document.getElementById('contactListContainer').classList.remove('dNone');
@@ -176,6 +246,9 @@ function showContactList() {
     }
 }
 
+/**
+ * Handles window resizing to toggle between mobile and desktop views.
+ */
 function showContactListWindowsize() {
     if (window.innerWidth >= 801) {
         document.getElementById('contactsOverview').classList.remove('mobileVisible');
@@ -188,6 +261,9 @@ function showContactListWindowsize() {
 
 }
 
+/**
+ * Toggles the mobile burger menu visibility.
+ */
 function openMobileBurgerMenu() {
     let menu = document.getElementById("mobileBurgerMenu");
     menu.classList.toggle('dNone');

@@ -1,6 +1,9 @@
 let originalContactEmail = null;
 let originalContactId = null;
 
+/**
+ * Opens the modal to edit an existing contact.
+ */
 function openEditContactsModal() {
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('editContactsModal');
@@ -17,6 +20,9 @@ function openEditContactsModal() {
     fillEditContactsForm();
 }
 
+/**
+ * Closes the edit contact modal.
+ */
 function closeEditContactsModal() {
     let modal = document.getElementById('modalContent');
     let overlay = document.getElementById('modalOverlay');
@@ -31,7 +37,9 @@ function closeEditContactsModal() {
         }, 300);
     }
 }
-
+/**
+ * Renders the HTML structure for the edit contact modal.
+ */
 function getEditContactsModalStructure() {
     let container = document.getElementById('editContactsModal');
     container.innerHTML = `
@@ -89,6 +97,9 @@ function getEditContactsModalStructure() {
 
 /// Editation ///
 
+/**
+ * Fills the form in the edit modal with the current contact's data.
+ */
 async function fillEditContactsForm() {
     if (!currentContactId) return;
     let contact = await getData(`/users/${loggedInUser}/contacts/${currentContactId}`);
@@ -101,6 +112,9 @@ async function fillEditContactsForm() {
     originalContactEmail = contact.email;
 }
 
+/**
+ * Validates and updates the edited contact in the database.
+ */
 async function updateContacts() {
     let isValid = await validateEditContactInput();
     if (!isValid) return;
@@ -138,6 +152,10 @@ async function updateContacts() {
     }
 }
 
+/**
+ * Validates all input fields for contact editing.
+ * @returns {Promise<boolean>} True if valid, false otherwise.
+ */
 async function validateEditContactInput() {
     let inputs = getEditContactInputs();
     let values = getEditContactValues(inputs);
@@ -148,6 +166,11 @@ async function validateEditContactInput() {
     return true;
 }
 
+/**
+ * Retrieves values from edit contact input fields.
+ * @param {Object} inputs - Input field elements
+ * @returns {Object} Normalized input values
+ */
 function getEditContactValues(inputs) {
     return {
         name: inputs.nameInput.value.trim().toLowerCase(),
@@ -156,6 +179,10 @@ function getEditContactValues(inputs) {
     };
 }
 
+/**
+ * Retrieves all input and error elements for the edit form.
+ * @returns {Object} Input and error DOM elements
+ */
 function getEditContactInputs() {
     return {
         nameInput: document.getElementById('contactNameEdit'),
@@ -167,6 +194,14 @@ function getEditContactInputs() {
     };
 }
 
+/**
+ * Checks for duplicate values in existing contacts, excluding the original contact.
+ * @param {Object} inputs - Input elements
+ * @param {Object} values - Current values
+ * @param {Object} existingContacts - All contacts from DB
+ * @param {string} originalContactId - ID of the contact before editing
+ * @returns {boolean} True if duplicates are found
+ */
 function checkEditDuplicateFields(inputs, values, existingContacts, originalContactId) {
     let hasError = false;
     let original = existingContacts[originalContactId];
@@ -199,6 +234,11 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
     return hasError;
 }
 
+/**
+ * Validates the email format and checks for duplicates if changed.
+ * @param {string} originalEmail - Email before editing
+ * @returns {Promise<boolean>} True if email is valid and not duplicated
+ */
 async function validateEditEmailFormat(originalEmail) {
     let email = document.getElementById("contactEmailEdit").value.trim().toLowerCase();
     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

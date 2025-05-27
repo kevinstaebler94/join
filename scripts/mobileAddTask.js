@@ -1,3 +1,8 @@
+/**
+ * Adjusts the layout of the submit section and mobile info area
+ * based on the current window width. If the screen width is 
+ * 850px or less, elements are rearranged for mobile view.
+ */
 function checkWindowSize() {
     if (window.innerWidth <= 850) {
         let submitSection = document.getElementById('submitSection');

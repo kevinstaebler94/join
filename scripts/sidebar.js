@@ -1,3 +1,9 @@
+/**
+ * Highlights the active sidebar link based on the current page.
+ * Only applies the highlighting on mobile and tablet viewports (width <= 1023px).
+ *
+ * @function highlightActiveSidebarLink
+ */
 function highlightActiveSidebarLink() {
     if (window.innerWidth > 1023) return;
 

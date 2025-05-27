@@ -130,7 +130,13 @@ let contacts = [
     }
 ];
 
-
+/**
+ * Initializes the guest user account with default credentials, tasks, and contacts.
+ * Updates the user data and redirects to the summary page.
+ * 
+ * @async
+ * @returns {Promise<void>}
+ */
 async function getGuestUserData() {
     let userId = 'guestMail';
     let email = userId;
@@ -144,6 +150,13 @@ async function getGuestUserData() {
     window.location.href = "summary.html";
 }
 
+/**
+ * Transfers all existing tasks to the guest user.
+ * 
+ * @async
+ * @param {string} guestUser - The ID of the guest user.
+ * @returns {Promise<void>}
+ */
 async function getGuestUserTasks(guestUser) {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
         let taskObj = tasks[taskIndex];
@@ -151,6 +164,13 @@ async function getGuestUserTasks(guestUser) {
     }
 }
 
+/**
+ * Transfers all existing contacts to the guest user.
+ * 
+ * @async
+ * @param {string} guestUser - The ID of the guest user.
+ * @returns {Promise<void>}
+ */
 async function getGuestUserContacts(guestUser) {
     for (let contactIndex = 0; contactIndex < contacts.length; contactIndex++) {
         let contactObj = contacts[contactIndex];

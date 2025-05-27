@@ -1,3 +1,9 @@
+/**
+ * Handles the sign-up process after validating all inputs.
+ * Displays an overlay and stores user data in localStorage.
+ * 
+ * @param {Event} event - The form submission event.
+ */
 async function signUp(event) {
   event.preventDefault();
   
@@ -20,6 +26,9 @@ async function signUp(event) {
   }
 }
 
+/**
+ * Enables or disables the sign-up button based on input validation.
+ */
 function toggleSignUpButton() {
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
@@ -32,6 +41,11 @@ function toggleSignUpButton() {
   }  
 }
 
+/**
+ * Checks if both password inputs meet minimum length requirements.
+ * 
+ * @returns {boolean} True if both passwords are valid.
+ */
 function checkPasswordInput() {
   let password = document.getElementById("password").value.trim();
   let confirmedPassword = document.getElementById("confirmedPassword").value.trim();
@@ -39,6 +53,11 @@ function checkPasswordInput() {
   return password.length >= 3 && confirmedPassword.length >= 3;
 }
 
+/**
+ * Toggles the visibility of a password input field.
+ * 
+ * @param {string} id - The ID of the input field.
+ */
 function togglePasswordVisibility(id) {
   let input = document.getElementById(id)
   let icon = input.nextElementSibling;
@@ -52,6 +71,11 @@ function togglePasswordVisibility(id) {
   }
 }
 
+/**
+ * Validates the email format and checks for existing registration.
+ * 
+ * @returns {Promise<boolean>} True if the email is valid and not taken.
+ */
 async function validateEmailFormat() {
   let email = document.getElementById("email").value.trim();
   let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -73,6 +97,11 @@ async function validateEmailFormat() {
   return true;
 }
 
+/**
+ * Checks whether the entered email already exists in the database.
+ * 
+ * @returns {Promise<boolean>} True if the email is already registered.
+ */
 async function emailExists() {
   let email = document.getElementById("email").value.trim();
   let formattedEmail = email.replace(/\./g, "_").replace(/@/g, "-at-");
@@ -84,6 +113,12 @@ async function emailExists() {
   );
 }
 
+/**
+ * Displays an email-related error message.
+ * 
+ * @param {HTMLElement} errorMsgEmail - The error message element.
+ * @param {string} message - The message to display.
+ */
 function showEmailErrorMessage(errorMsgEmail, message) {
   if (!errorMsgEmail) return;
   errorMsgEmail.textContent = message;
@@ -92,12 +127,22 @@ function showEmailErrorMessage(errorMsgEmail, message) {
   document.getElementById("email").classList.add("redBorder");
 }
 
+/**
+ * Hides the email error message.
+ * 
+ * @param {HTMLElement} errorMsgEmail - The error message element.
+ */
 function hideEmailErrorMessage(errorMsgEmail) {
   errorMsgEmail.classList.remove("show");
   errorMsgEmail.classList.add("hide");
   document.getElementById("email").classList.remove("redBorder");
 }
 
+/**
+ * Resets email validation UI after a delay.
+ * 
+ * @param {HTMLElement} errorMsgEmail - The error message element.
+ */
 function removeErrorMessageEmail(errorMsgEmail) {
   document.getElementById("checkbox").checked = false;
   document.getElementById("signUpButton").disabled = true;
@@ -110,6 +155,11 @@ function removeErrorMessageEmail(errorMsgEmail) {
   return
 }
 
+/**
+ * Validates that both password fields match.
+ * 
+ * @returns {boolean} True if passwords match, false otherwise.
+ */
 function validatePasswords() {
   let password = document.getElementById("password");
   let confirmedPassword = document.getElementById("confirmedPassword");
@@ -127,18 +177,39 @@ function validatePasswords() {
   }
 }
 
+/**
+ * Hides the password mismatch error and removes red borders.
+ * 
+ * @param {HTMLElement} password - The password input field.
+ * @param {HTMLElement} confirmedPassword - The confirmation input field.
+ * @param {HTMLElement} errorMsgPassword - The error message element.
+ */
 function hidePasswordErrorMessage(password, confirmedPassword, errorMsgPassword) {
   errorMsgPassword.classList.remove("show");
   password.classList.remove("redBorder");
   confirmedPassword.classList.remove("redBorder");
 }
 
+/**
+ * Displays an error message when passwords don't match.
+ * 
+ * @param {HTMLElement} password - The password input field.
+ * @param {HTMLElement} confirmedPassword - The confirmation input field.
+ * @param {HTMLElement} errorMsgPassword - The error message element.
+ */
 function showPasswordErrorMessage(password, confirmedPassword, errorMsgPassword) {
   errorMsgPassword.classList.add("show");
   password.classList.add("redBorder");
   confirmedPassword.classList.add("redBorder");
 }
 
+/**
+ * Clears the password inputs and hides the error message after a delay.
+ * 
+ * @param {HTMLElement} password - The password input field.
+ * @param {HTMLElement} confirmedPassword - The confirmation input field.
+ * @param {HTMLElement} errorMsgPassword - The error message element.
+ */
 function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
   document.getElementById("checkbox").checked = false;
   document.getElementById("signUpButton").disabled = true;
@@ -155,6 +226,11 @@ function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
   return
 }
 
+/**
+ * Validates all form inputs before submission.
+ * 
+ * @returns {Promise<boolean>} True if all inputs are valid.
+ */
 async function checkInput() {
   let emailFormatValid = await validateEmailFormat();
   let emailTaken = await emailExists();

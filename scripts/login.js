@@ -1,9 +1,18 @@
+/**
+ * Initializes the login section by updating the content 
+ * and clearing any previously registered login credentials.
+ */
 function initLogin() {
   updateContent("login");
   localStorage.removeItem("registeredEmail");
   localStorage.removeItem("registeredPassword");
 }
 
+/**
+ * Updates the DOM content depending on the selected section.
+ * 
+ * @param {string} section - The section to display ('login' or 'signUp').
+ */
 function updateContent(section) {
   let contentWrapper = document.getElementById("contentWrapper");
   contentWrapper.innerHTML = "";
@@ -19,11 +28,23 @@ function updateContent(section) {
   }
 }
 
+/**
+ * Prevents default form submission and triggers login verification.
+ * 
+ * @param {Event} event - The submit event from the login form.
+ */
 function login(event) {
   event.preventDefault();
   verifyLogin();
 }
 
+/**
+ * Verifies user credentials by checking against stored user data.
+ * If valid, redirects to the summary page and updates login status.
+ * Otherwise, shows an error message.
+ * 
+ * @returns {Promise<boolean>} Whether the login was successful.
+ */
 async function verifyLogin() {
   let email = document.getElementById("emailLogin").value.trim();
   let formattedEmail = email.replace(/\./g, "_").replace(/@/g, "-at-");
@@ -59,6 +80,9 @@ async function verifyLogin() {
   }
 }
 
+/**
+ * Enables or disables the login button depending on email and password input validity.
+ */
 function toggleLoginButton() {
   let email = document.getElementById("emailLogin").value.trim();
   let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -74,6 +98,12 @@ function toggleLoginButton() {
   }
 }
 
+/**
+ * Displays an error message when login credentials are incorrect.
+ * 
+ * @param {HTMLElement} error - The DOM element to show the error in.
+ * @returns {boolean} Always returns false.
+ */
 function showLoginErrorMessage(error) {
   error.textContent = "Check your email and password. Please try again.";
   error.classList.remove("hide");
@@ -82,6 +112,12 @@ function showLoginErrorMessage(error) {
   return false;
 }
 
+/**
+ * Hides the login error message and removes visual error indicators.
+ * 
+ * @param {HTMLElement} error - The DOM element to hide the error from.
+ * @returns {boolean} Always returns true.
+ */
 function hideLoginErrorMessage(error) {
   error.classList.add("hide");
   error.classList.remove("show");
@@ -90,6 +126,11 @@ function hideLoginErrorMessage(error) {
   return true;
 }
 
+/**
+ * Toggles the visibility of the password input field.
+ * 
+ * @param {string} id - The ID of the password input element.
+ */
 function togglePasswordVisibility(id) {
   let input = document.getElementById(id)
   let icon = input.nextElementSibling;
