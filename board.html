@@ -95,7 +95,7 @@
           </div>
         </section>
         <section class="boardContentWrapperMobile boardMobile">
-          <section class="moveToOverlayWrapper">
+          <section class="moveToOverlayWrapper displayNone" id="moveToOverlayWrapper">
             <div class="moveTaskOverlay">
               <h3 class="moveTo">Move to...</h3>
               <div class="upperContainer">
@@ -106,7 +106,10 @@
                 <div class="taskContainer">Await feedback</div>
                 <div class="taskContainer">Done</div>
               </div>
-              <button class="returnToBoard">Return to board</button>
+              <div class="buttonContainer">
+                <button onclick="closeTaskOverlay()" class="openTask">Open task</button>
+                <button onclick="returnToBoard()" class="returnToBoard">Return to board</button>
+              </div>
             </div>
           </section>
           <div class="boardHeaderContentMobile">

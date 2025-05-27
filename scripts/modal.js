@@ -26,8 +26,12 @@ function openAddTaskModal() {
  */
 function openFilledTaskModal(taskId, category, title, description, date, priority, column, subtaskObj, encodedContacts) {
     let overlay = document.getElementById('boardOverlay');
+    let mobileTaskOverlay = document.getElementById("moveToOverlayWrapper");
     let filledTaskModal = document.getElementById('filledTaskModal');
     let boardHeaderWrapper = document.getElementById('boardHeaderWrapper');
+    if(window.innerWidth < 1023) {
+        mobileTaskOverlay.classList.remove("displayNone");
+    }
     overlay.classList.remove('dNone');
     filledTaskModal.classList.remove('dNone');
     boardHeaderWrapper.classList.add('minusMargin');
@@ -290,15 +294,3 @@ function getContactInitialColorEdit(contact) {
  * Global keyup listener for handling "Enter" key events in inputs.
  * Adds or confirms subtasks depending on active input.
  */
-document.addEventListener('keyup', function (event) {
-    const input = document.getElementById('subtaskInput');
-    const inputModal = document.getElementById('subtaskInputModal');
-
-    if (event.key === 'Enter') {
-        if (input && event.target === input) {
-            getSubtask();
-        } else if (inputModal && event.target === inputModal) {
-            addNewSubtaskModal();
-        }
-    }
-});

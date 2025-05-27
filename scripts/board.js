@@ -1,3 +1,4 @@
+let taskContainer = [];
 /**
  * Initializes the board by loading HTML, fetching the logged-in user,
  * and rendering tasks.
@@ -34,6 +35,7 @@ async function renderTasks() {
   taskArr.forEach(task => {
     const targetId = getColumnId(task.column);
     const target = document.getElementById(targetId);
+    taskContainer.push(task.id);
     if (!target) return
     let taskComponents = getTaskComponents(task);
     target.innerHTML += filledTaskTemplate(taskComponents, task);
@@ -49,7 +51,7 @@ async function renderTasks() {
       column.innerHTML = blankTask(id);
     }
   });
-  await initProgressBar(tasks);
+  initProgressBar(tasks);
 }
 
 /**
@@ -299,7 +301,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
   
   
   return `
-    <div id="${taskComponents.id}" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+    <div id="${taskComponents.id}" ontouchstart="test('${taskComponents.id}')" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
       <h4 class="taskTitle">${shortenedTitle}</h4>
       <p class="taskDescription">${shortenedDescription}</p>
@@ -373,3 +375,14 @@ function checkWindowSize() {
 }
 
 window.addEventListener('resize', checkWindowSize);
+
+function closeTaskOverlay() {
+  let mobileTaskOverlay = document.getElementById("moveToOverlayWrapper");
+  mobileTaskOverlay.classList.add("displayNone");
+}
+
+function returnToBoard() {
+  closeTaskOverlay();
+  closeModal();
+}
+

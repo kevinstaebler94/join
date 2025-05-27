@@ -80,10 +80,6 @@
     brightness(95%) contrast(86%);
 }
 
-.moveToOverlayWrapper {
-  display: none;
-}
-
 @media (max-width: 1023px) {
   html,
   body {
@@ -150,7 +146,14 @@
     border: 1px solid rgba(61, 61, 61, 0.23);
   }
 
-  .returnToBoard {
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .returnToBoard, .openTask {
     border-radius: 10px;
     border-style: none;
     cursor: pointer;
@@ -163,6 +166,11 @@
   }
 
   .returnToBoard:hover {
+    background-color: #28ABE2;
+    border: 1px solid rgba(61, 61, 61, 0.23);
+  }
+
+  .openTask:hover {
     background-color: #28ABE2;
     border: 1px solid rgba(61, 61, 61, 0.23);
   }
