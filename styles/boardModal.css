@@ -9,7 +9,7 @@
 }
 
 .filledTaskModal {
-    width: 500px;
+    width: 540px;
     max-height: 724px;
     border-radius: 24px;
     background-color: #FFFFFF;
@@ -271,7 +271,7 @@
 
 @media (max-width: 460px) {
     .filledTaskModal {
-        width: 322px;
+        width: 308px;
     }
 
     .taskTitleModal {
@@ -283,7 +283,7 @@
     }
 
     .subtaskWidth {
-        width: 125px;
+        width: 150px;
     }
 
     .assignedToModal {

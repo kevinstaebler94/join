@@ -51,6 +51,7 @@ function closeModal() {
     boardHeaderWrapper.classList.remove('minusMargin');
     boardHeaderWrapper.classList.remove('minusMarginAddTask');
     newSubtaskArr = [];
+    assignedArr = [];
 }
 
 /**
@@ -97,7 +98,7 @@ async function getSubtasksModal(subtasks, taskId) {
         let subtaskContainer = document.getElementById('subtaskContainerModal');
         let isChecked = subtask.done ? 'checked' : '';
         subtaskContainer.innerHTML += `<label class="assignedToModal customCheckbox"><input type="checkbox" ${isChecked}
-        onchange="handleCheckbox(this)" data-task-id="${taskId}" data-subtask-id="${subtaskId}"><span class="icon"></span><p class="subtaskText">${subtask.subtask}</p></label>`;
+        onchange="handleCheckbox(this)" data-task-id="${taskId}" data-subtask-id="${subtaskId}"><span class="iconBlack"></span><p class="subtaskText">${subtask.subtask}</p></label>`;
     });
 }
 

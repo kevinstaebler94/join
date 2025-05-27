@@ -19,6 +19,15 @@
   transition: background-image 0.2s ease;
 }
 
+.customCheckbox .iconBlack {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-image: url('../assets/img/unchecked.svg');
+  background-size: cover;
+  transition: background-image 0.2s ease;
+}
+
 .customCheckbox .icon:hover {
   background-image: url('../assets/img/uncheckedHover.svg');
 }
@@ -29,4 +38,8 @@
 
 .customCheckbox input[type="checkbox"]:checked + .icon:Hover {
   background-image: url('../assets/img/checkedHover.svg');
+}
+
+.customCheckbox input[type="checkbox"]:checked + .iconBlack {
+  background-image: url('../assets/img/checked.svg');
 }

@@ -343,7 +343,7 @@ function shortenText(text, maxLen) {
  * On mobile, navigates to a new page; on desktop, opens a modal.
  */
 function handleAddTask() {
-  if (window.innerWidth <= 1023) {
+  if (window.innerWidth <= 1170) {
     window.location.href = 'add_task.html'; 
   } else {
     openAddTaskModal();
@@ -362,3 +362,10 @@ function styleInitalNameBoard(contact, initial) {
     initialColor[contact] = color;
 }
 
+function checkWindowSize() {
+  const modal = document.getElementById('addTaskModal');
+  if (modal && modal.classList.contains('dNone')) return;
+  handleAddTask();
+}
+
+window.addEventListener('resize', checkWindowSize);
