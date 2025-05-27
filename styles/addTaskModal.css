@@ -55,8 +55,13 @@ h1 {
     overflow-y: auto;
 }
 
-.addTaskContent::-webkit-scrollbar {
-    display: none;
+.addTaskContent::-webkit-scrollbar-track {
+    background: transparent;  /* Unsichtbare Track-Hintergrundfläche */
+}
+
+.addTaskContent::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);  /* Dünner, halbtransparenter Balken */
+    border-radius: 4px;
 }
 
 .leftContainer {
@@ -323,8 +328,8 @@ h1 {
 }
 
 .listElement.checked {
-  background-color: #2A3647;
-  color: #ffffff;
+    background-color: #2A3647;
+    color: #ffffff;
 }
 
 .selectedName {
@@ -459,7 +464,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .subtaskWidth {
-    width: 250px;
+    width: 300px;
 }
 
 .subtaskListElement {
@@ -469,7 +474,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 2px 16px;
     border-radius: 8px;
     min-height: 20px;
-    max-width: 345px;
+    max-width: 400px;
 }
 
 .subtaskListElement:hover {
@@ -542,9 +547,11 @@ ul {
 
 .inputIconContainer {
     position: relative;
-    left: 290px;
+    left: 350px;
     bottom: 27px;
     width: 50px;
+    display: flex;
+    align-items: center;
 }
 
 .editIcons {
@@ -611,7 +618,11 @@ ul {
 
 @media (max-width: 630px) {
     .inputFields {
-        width: 304px;
+        width: 376px;
+    }
+
+    .inputIconContainer {
+        left: 330px;
     }
 
     .customDropdownName {
@@ -619,20 +630,20 @@ ul {
     }
 
     .plusIcon {
-        left: 275px;
+        left: 348px;
     }
 
     .dateIcon {
-        left: 275px;
+        left: 348px;
     }
 
     .priorityBtn {
-        width: 70px;
-        height: 30px;
+        width: 100px;
+        height: 40px;
     }
 
     .rightAddTaskForm {
-        width: 235px;
+        width: 376px;
     }
 
     .directionColumn {
@@ -641,12 +652,16 @@ ul {
 
     .customDropdown {
         width: auto;
+    }
+
+    .subtaskWidth {
+        width: 290px;
     }
 }
 
 @media (max-width: 460px) {
     .inputFields {
-        width: 235px;
+        width: 276px;
     }
 
     .priorityBtn {
@@ -655,7 +670,7 @@ ul {
     }
 
     .rightAddTaskForm {
-        width: 235px;
+        width: 276px;
     }
 
     .directionColumn {
@@ -664,5 +679,13 @@ ul {
 
     .customDropdown {
         width: auto;
+    }
+
+    .plusIcon {
+        left: 248px;
+    }
+
+    .dateIcon {
+        left: 248px;
     }
 }

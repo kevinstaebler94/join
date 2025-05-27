@@ -37,6 +37,7 @@ async function renderTasks() {
     if (!target) return
     let taskComponents = getTaskComponents(task);
     target.innerHTML += filledTaskTemplate(taskComponents, task);
+    if (!task.contact) return;
     task.contact.forEach(contact => {
     let initial = getInitials(contact);
     styleInitalNameBoard(contact, initial);

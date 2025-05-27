@@ -54,13 +54,13 @@
 
 @media (max-width: 630px) {
     .changeBtn {
-        left: 298px;
+        left: 316px;
     }
 }
 
 @media (max-width: 460px) {
     .changeBtn {
-        left: 192px;
+        left: 216px;
     }
 }
 

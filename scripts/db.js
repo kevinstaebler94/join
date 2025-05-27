@@ -1,6 +1,6 @@
-// const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
 // const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
-const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
+// const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 /**
  * Fetches data from Firebase Realtime Database at a given path.
@@ -190,7 +190,8 @@ function changeTasks(taskId, column, category) {
     let title = document.getElementById('titleInputEdit');
     let description = document.getElementById('taskDescriptionEdit');
     let date = document.getElementById('dateInputEdit');
-    let contacts = assignedArr;
+    // let contacts = assignedArr;
+    let contacts = assignedArr.length > 0 ? assignedArr : [null]; // oder null, oder ein Platzhalter
     let subTask = subtasksArr[0];
     let time = getTimeStamp();
     let newTaskId = title.value + time;

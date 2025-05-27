@@ -217,7 +217,6 @@ function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
     subtasks.subtask = subtasksArr[0];
     subtaskListEdit.innerHTML = '';
     getSubtaskEdit(subtasks, serializeObj(subtasks));
-    subtasksArr = [];
 }
 
 /**
