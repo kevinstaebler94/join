@@ -11,6 +11,13 @@ function openContactsModal() {
     container.classList.remove('dNone');
     getContactsModalStructure();
 
+    if (window.innerWidth > 800) {
+        let mainContent = document.querySelector('.mainContent');
+        mainContent.style.gap = '32px';
+    } else {
+        let mainContent = document.querySelector('.mainContent');
+        mainContent.style.gap = '0px';
+    }
     setTimeout(() => {
         const modal = document.getElementById('modalContent');
         modal.classList.add('show');
@@ -90,6 +97,7 @@ function closeContactsModal() {
     let modal = document.getElementById('modalContent');
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('contactsModal');
+    let mainContent = document.querySelector('.mainContent');
 
     if (modal) {
         modal.classList.remove('show');
@@ -97,6 +105,7 @@ function closeContactsModal() {
         setTimeout(() => {
             overlay.classList.add('dNone');
             container.classList.add('dNone');
+            mainContent.style.gap = '64px';
         }, 300);
     }
 }

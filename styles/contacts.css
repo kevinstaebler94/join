@@ -369,9 +369,9 @@ h3 {
 }
 
 .modalMainContent {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    position: absolute;
+    top: 530px;
+    left: 735px;
     height: 600px;
     width: 1148px;
     padding-right: 20px;
