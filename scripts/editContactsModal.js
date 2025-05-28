@@ -48,7 +48,7 @@ function getEditContactsModalStructure() {
     <div class="modalMainContent" id="modalEditContent">
         <div class="headlineSection">
         <div class="modalMobileCloseButtonWrapper">
-        <button class="modalMobileCloseButton" onclick="closeContactsModal()"><img src="./assets/img/plusIconWhite.svg"></button>
+        <button class="modalMobileCloseButton" onclick="closeEditContactsModal()"><img src="./assets/img/plusIconWhite.svg"></button>
         </div>
             <img class="contactsModalImage" src="./assets/img/joinLogoSidebar.svg" alt="">
             <div class="headlineContainer">
