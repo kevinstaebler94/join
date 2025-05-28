@@ -7,13 +7,20 @@ let originalContactId = null;
 function openEditContactsModal() {
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('editContactsModal');
+    let mainContent = document.querySelector('.mainContent');
 
     overlay.classList.remove('dNone');
     container.classList.remove('dNone');
     getEditContactsModalStructure();
 
+    if (window.innerWidth > 800) {
+        mainContent.style.gap = '32px';
+    } else {
+        mainContent.style.gap = '0px';
+    }
+
     setTimeout(() => {
-        let modal = document.getElementById('modalContent');
+        let modal = document.getElementById('modalEditContent');
         modal.classList.add('show');
     }, 10);
 
@@ -24,9 +31,10 @@ function openEditContactsModal() {
  * Closes the edit contact modal.
  */
 function closeEditContactsModal() {
-    let modal = document.getElementById('modalContent');
+    let modal = document.getElementById('modalEditContent');
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('editContactsModal');
+    let mainContent = document.querySelector('.mainContent');
 
     if (modal) {
         modal.classList.remove('show');
@@ -34,6 +42,7 @@ function closeEditContactsModal() {
         setTimeout(() => {
             overlay.classList.add('dNone');
             container.classList.add('dNone');
+            mainContent.style.gap = '64px';
         }, 300);
     }
 }
@@ -43,7 +52,7 @@ function closeEditContactsModal() {
 function getEditContactsModalStructure() {
     let container = document.getElementById('editContactsModal');
     container.innerHTML = `
-    <div class="modalMainContent" id="modalContent">
+    <div class="modalMainContent" id="modalEditContent">
         <div class="headlineSection">
         <div class="modalMobileCloseButtonWrapper">
         <button class="modalMobileCloseButton" onclick="closeContactsModal()"><img src="./assets/img/plusIconWhite.svg"></button>

@@ -5,7 +5,7 @@
 
 function openContactsModal() {
     let overlay = document.getElementById('modalOverlay');
-    let container = document.getElementById('contactsModal');
+    let container = document.getElementById('contactsAddModal');
 
     overlay.classList.remove('dNone');
     container.classList.remove('dNone');
@@ -19,7 +19,7 @@ function openContactsModal() {
         mainContent.style.gap = '0px';
     }
     setTimeout(() => {
-        const modal = document.getElementById('modalContent');
+        const modal = document.getElementById('modalAddContent');
         modal.classList.add('show');
     }, 10);
 }
@@ -28,9 +28,9 @@ function openContactsModal() {
  * Builds and injects the HTML structure for the contacts modal.
  */
 function getContactsModalStructure() {
-    let container = document.getElementById('contactsModal');
+    let container = document.getElementById('contactsAddModal');
     container.innerHTML = `
-    <div class="modalMainContent" id="modalContent">
+    <div class="modalMainContent" id="modalAddContent">
         <div class="headlineSection">
             <img class="contactsModalImage" src="./assets/img/joinLogoSidebar.svg" alt="">
             <div class="modalMobileCloseButtonWrapper">
@@ -94,9 +94,9 @@ function getContactsModalStructure() {
  * the overlay and modal container with a delay for animation.
  */
 function closeContactsModal() {
-    let modal = document.getElementById('modalContent');
+    let modal = document.getElementById('modalAddContent');
     let overlay = document.getElementById('modalOverlay');
-    let container = document.getElementById('contactsModal');
+    let container = document.getElementById('contactsAddModal');
     let mainContent = document.querySelector('.mainContent');
 
     if (modal) {
