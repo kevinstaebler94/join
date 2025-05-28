@@ -1,0 +1,90 @@
+@media(max-width:1023px) {
+    main {
+        height: 100vh;
+    }
+
+    nav {
+        position: fixed;
+        width: 100%;
+        height: 80px;
+        bottom: 0;
+        justify-content: flex-end;
+        flex-direction: row;
+        z-index: 99;
+    }
+
+    .navbar {
+        position: absolute;
+        justify-content: space-around;
+        flex-direction: row;
+        overflow-y: hidden;
+        padding-right: 16px;
+    }
+
+    .navbar a {
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        text-decoration: none;
+        color: #C6C6C6;
+        gap: 8px;
+        width: 100%;
+        height: 45px;
+        padding-left: 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .upper-container {
+        margin-top: 0;
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .legal-container {
+        display: none;
+    }
+
+    .sidebar-logo-img {
+        display: none;
+    }
+
+    .hoverContainer {
+        width: 80px;
+        height: 76px;
+        overflow: hidden;
+        border-radius: 16px;
+    }
+
+    .hoverContainer:hover {
+        background-color: #091931;
+    }
+
+    .hoverContainer.active {
+        background-color: #091931;
+
+    }
+}
+
+@media(max-width: 380px) {
+    .nav-icons {
+        width: 24px;
+    }
+
+    .hoverContainer span {
+        font-size: 14px;
+
+    }
+}
+
+@media(max-width: 360px) {
+    .nav-icons {
+        width: 20px;
+    }
+
+    .hoverContainer span {
+        font-size: 12px;
+
+    }
+}

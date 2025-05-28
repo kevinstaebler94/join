@@ -15,6 +15,11 @@ span {
     color: #29abe2;
 }
 
+
+nav span {
+    color: #C6C6C6;
+}
+
 .backBTN {
     border-radius: 30px;
     border: none;
