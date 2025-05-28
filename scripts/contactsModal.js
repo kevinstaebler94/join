@@ -101,7 +101,6 @@ function closeContactsModal() {
 
     if (modal) {
         modal.classList.remove('show');
-
         setTimeout(() => {
             overlay.classList.add('dNone');
             container.classList.add('dNone');

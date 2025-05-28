@@ -13,12 +13,6 @@ function openEditContactsModal() {
     container.classList.remove('dNone');
     getEditContactsModalStructure();
 
-    if (window.innerWidth > 800) {
-        mainContent.style.gap = '32px';
-    } else {
-        mainContent.style.gap = '0px';
-    }
-
     setTimeout(() => {
         let modal = document.getElementById('modalEditContent');
         modal.classList.add('show');
@@ -42,7 +36,6 @@ function closeEditContactsModal() {
         setTimeout(() => {
             overlay.classList.add('dNone');
             container.classList.add('dNone');
-            mainContent.style.gap = '64px';
         }, 300);
     }
 }
