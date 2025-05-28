@@ -99,12 +99,12 @@
             <div class="moveTaskOverlay">
               <h3 class="moveTo">Move to...</h3>
               <div class="upperContainer">
-                <div class="taskContainer">To do</div>
-                <div class="taskContainer">In progress</div>
+                <div id="toDoOverlay" data-name="toDo" class="taskContainer">To do</div>
+                <div id="inProgressOverlay" data-name="inProgress" class="taskContainer">In progress</div>
               </div>
               <div class="lowerContainer">
-                <div class="taskContainer">Await feedback</div>
-                <div class="taskContainer">Done</div>
+                <div id="awaitFeedbackOverlay" data-name="awaitFeedback" class="taskContainer">Await feedback</div>
+                <div id="doneOverlay" data-name="done" class="taskContainer">Done</div>
               </div>
               <div class="buttonContainer">
                 <button onclick="closeTaskOverlay()" class="openTask">Open task</button>
@@ -130,25 +130,21 @@
                 <span>To do</span>
                 <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
               </div>
-              <div id="toDoMobile" class="column dropZone" ondrop="dropHandler(event)"
-                ondragover="dragoverHandler(event)"></div>
+              <div id="toDoMobile" class="column dropZone"></div>
               <div class="taskButtonContainerMobile marginTop25">
                 <span>In progress</span>
                 <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
               </div>
-              <div id="inProgressMobile" class="column dropZone" ondrop="dropHandler(event)"
-                ondragover="dragoverHandler(event)"></div>
+              <div id="inProgressMobile" class="column dropZone"></div>
               <div class="taskButtonContainerMobile marginTop25">
                 <span>Await feedback</span>
                 <img onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
               </div>
-              <div id="awaitFeedbackMobile" class="column dropZone" ondrop="dropHandler(event)"
-                ondragover="dragoverHandler(event)"></div>
+              <div id="awaitFeedbackMobile" class="column dropZone"></div>
               <div class="taskButtonContainerMobile marginTop25">
                 <span>Done</span>
               </div>
-              <div id="doneMobile" class="column dropZone" ondrop="dropHandler(event)"
-                ondragover="dragoverHandler(event)"></div>
+              <div id="doneMobile" class="column dropZone"></div>
             </div>
           </div>
         </section>

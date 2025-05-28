@@ -19,7 +19,11 @@ window.addEventListener("resize", () => {
  * @returns {string} - Adjusted column ID for desktop or mobile
  */
 function getColumnId(column) {
-  return window.innerWidth <= 1023 ? column + "Mobile" : column;
+  if (window.innerWidth <= 1023) {
+    document.querySelectorAll('[draggable="true"]').forEach(el => el.draggable = false);
+    return column + "Mobile";
+  }
+  return column;
 }
 
 /**
@@ -301,7 +305,8 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
   
   
   return `
-    <div id="${taskComponents.id}" ontouchstart="test('${taskComponents.id}')" onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+    <div data-id="${taskComponents.id}" id="${taskComponents.id}"
+     onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}'), openMobileTaskOverlay('${taskComponents.id}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
       <h4 class="taskTitle">${shortenedTitle}</h4>
       <p class="taskDescription">${shortenedDescription}</p>
@@ -386,3 +391,23 @@ function returnToBoard() {
   closeModal();
 }
 
+// async function openMobileTaskOverlay(taskId) {
+//   let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
+//   let columnTodo = document.getElementById("toDoOverlay");
+//   columnTodo.addEventListener("click", () => {
+//     let currentColumn = task.column;
+//     let newColumn = "toDo";
+    
+//   })
+// }
+
+async function openMobileTaskOverlay(taskId) {
+  let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
+  let column = document.querySelectorAll(".taskContainer")
+  column.forEach(container => {
+    container.addEventListener("click", () => {
+      let column = container.dataset.name;
+      changeColumn(column, taskId);
+    })
+  })
+}

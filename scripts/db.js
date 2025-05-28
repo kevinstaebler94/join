@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
-const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
+const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+//const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
 // const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 /**
@@ -86,6 +86,16 @@ async function changeElement(greeting) {
         greeting: greeting
     });
     await putData(path, userData, userId);
+}
+
+async function changeColumn(column, taskId) {
+    let path = '/users/' + loggedInUser;
+    let userId = 'tasks/' + taskId + '/column';
+    let userData = column;
+    await putData(path, userData, userId);
+    // window.location.reload();
+    await renderTasks();
+    returnToBoard();
 }
 
 /**
