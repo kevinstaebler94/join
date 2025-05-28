@@ -9,6 +9,7 @@ let colors = [
 ];
 
 let activeContactCard = null;
+let isBurgerMenuOpen = false;
 
 /**
  * Renders the contact list by fetching user contacts,
@@ -264,10 +265,11 @@ function showContactListWindowsize() {
 /**
  * Toggles the mobile burger menu visibility.
  */
-function openMobileBurgerMenu() {
-    let menu = document.getElementById("mobileBurgerMenu");
-    menu.classList.toggle('dNone');
+function openMobileBurgerMenu(event) {
+    event.stopPropagation();
+    const menu = document.getElementById("mobileBurgerMenu");
     menu.classList.toggle("show");
+    isBurgerMenuOpen = menu.classList.contains("show");
 }
 
 window.addEventListener('resize', () => {
@@ -276,9 +278,16 @@ window.addEventListener('resize', () => {
     }, 100);
 });
 
-window.onclick = function (event) {
-    let menu = document.getElementById("mobileBurgerMenu");
-    if (menu.classList.contains("show")) {
+document.addEventListener("click", (event) => {
+    const menu = document.getElementById("mobileBurgerMenu");
+    const button = document.getElementById("burgerMenuButton");
+
+    if (
+        isBurgerMenuOpen &&
+        !menu.contains(event.target) &&
+        !button.contains(event.target)
+    ) {
         menu.classList.remove("show");
+        isBurgerMenuOpen = false;
     }
-};
+});

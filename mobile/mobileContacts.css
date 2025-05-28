@@ -277,9 +277,6 @@
 }
 
 @media(max-width: 800px) {
-    .mobileBurgerMenu {
-        display: flex !important;
-    }
 
     .mainContent {
         justify-content: center;
@@ -362,48 +359,6 @@
     .mobileListContainer {
         display: flex;
         flex-direction: column;
-    }
-
-    .mobileBurgerMenu {
-        width: 116px;
-        height: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        background-color: white;
-        position: fixed;
-        bottom: 90px;
-        right: -240px;
-        transition: all 0.3s ease-in-out;
-        z-index: 9;
-        opacity: 1;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        padding: 8px;
-    }
-
-    .mobileBurgerMenu.show {
-        opacity: 1;
-        transform: translateX(-250px);
-    }
-
-    .mobileBurgerEditButton {
-        display: flex;
-        gap: 8px;
-        padding: 8px;
-        cursor: pointer;
-    }
-
-    .mobileBurgerDeleteButton {
-        display: flex;
-        gap: 8px;
-        padding: 8px;
-    }
-
-    .mobileBurgerDeleteButton:hover {
-        cursor: pointer;
     }
 }
 

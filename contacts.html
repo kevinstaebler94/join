@@ -97,10 +97,11 @@
                                 <span>Phone</span>
                                 <p id="userPhoneNumber">number</p>
                             </div>
-                            <button class="addContactMobileButton" onclick="openMobileBurgerMenu()">
+                            <button id="burgerMenuButton" class="addContactMobileButton"
+                                onclick="openMobileBurgerMenu(event)">
                                 <img src="./assets/img/openContactsBM.svg" alt="">
                             </button>
-                            <div id="mobileBurgerMenu" class="mobileBurgerMenu dNone">
+                            <div id="mobileBurgerMenu" class="mobileBurgerMenu">
                                 <div class="mobileBurgerEditButton" onclick="openEditContactsModal()">
                                     <div class="userNameEditIconContainer">
                                         <img class="defaultIcon" src="./assets/img/edit.svg" alt="">
