@@ -145,6 +145,13 @@ function updateContactDetails(contact) {
             <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
         </div>
         <span onclick="deleteContact('${adjustEmail(contact.email)}')">Delete</span>`;
+
+    document.getElementById('userNameMobileDeleteContainer').innerHTML = `
+        <div class="userNameDeleteIconContainer">
+            <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
+            <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
+        </div>
+        <span onclick="deleteContact('${adjustEmail(contact.email)}')">Delete</span>`;
 }
 
 /**
