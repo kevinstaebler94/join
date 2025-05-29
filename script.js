@@ -1,5 +1,9 @@
 let loggedInUser;
 
+/**
+ * Initializes the application by checking the current page and loading appropriate data and elements.
+ * Loads the logged-in user, includes HTML components, and routes to page-specific initializations.
+ */
 async function init() {
     await getLoggedInUser();
     if (window.location.href.includes("index.html")) {
@@ -32,10 +36,16 @@ async function init() {
     }
 }
 
+/**
+ * Initializes the login view.
+ */
 function getLogin() {
     initLogin();
 }
 
+/**
+ * Loads and displays the summary data on the summary page.
+ */
 async function getSummary() {
     document.getElementById('summaryMain').classList.remove('dNone');
     updateGreeting();
@@ -44,6 +54,9 @@ async function getSummary() {
     getAllCounter();
 }
 
+/**
+ * Triggers all summary counters to be updated.
+ */
 function getAllCounter() {
     getToDoTasksCounter();
     getDoneTasksCounter();
@@ -53,16 +66,25 @@ function getAllCounter() {
     getUrgentTasksCounter();
 }
 
+/**
+ * Initializes the board view by loading HTML and initializing the board logic.
+ */
 function getBoard() {
     includeHTML();
     initBoard();
 }
 
+/**
+ * Initializes the contacts view by loading HTML and rendering the contacts.
+ */
 function getContacts() {
     includeHTML();
     renderContacts();
 }
 
+/**
+ * Loads the currently logged-in user from backend data and stores their formatted email.
+ */
 async function getLoggedInUser() {
     let userData = await getData('/users/');
     for (let key in userData) {
@@ -77,6 +99,10 @@ async function getLoggedInUser() {
     showUserInitials();
 }
 
+/**
+ * Logs out the currently logged-in user and resets their login state.
+ * Redirects to the index page after logout.
+ */
 async function logoutUser() {
     let userData = await getData('/users/' + loggedInUser);
     let userId = userData.email.replace(/\./g, "_").replace(/@/g, "-at-");
@@ -96,6 +122,9 @@ async function logoutUser() {
 
 }
 
+/**
+ * Displays the initials of the logged-in user in the user icon container.
+ */
 async function showUserInitials() {
     let userName = await getData('/users/' + loggedInUser + '/name');
     if (!userName) return;
@@ -108,6 +137,11 @@ async function showUserInitials() {
     }
 }
 
+/**
+ * Extracts and returns the uppercase initials from a full name.
+ * @param {string} name - Full name of the user.
+ * @returns {string} Initials of the name.
+ */
 function getInitials(name) {
     return name
         .split(" ")
@@ -116,6 +150,9 @@ function getInitials(name) {
         .toUpperCase();
 }
 
+/**
+ * Checks the screen orientation and displays an overlay if the screen is landscape and narrow.
+ */
 function checkOrientation() {
     const isLandscape = window.innerWidth > window.innerHeight;
     const overlay = document.getElementById('orientationOverlay');
@@ -126,6 +163,36 @@ function checkOrientation() {
         overlay.classList.add('dNone');
     }
 }
+
+/**
+ * Shows or hides the privacy policy based on the selected language button.
+ * @param {string} clickedLanguage - The ID of the clicked language button.
+ */
+function showLanguage(clickedLanguage) {
+    let privacyContainerEnglish = document.getElementById('privacyContainerEnglish');
+    let privacyContainerGerman = document.getElementById('privacyContainerGerman');
+    if (clickedLanguage == 'englishBtn') {
+        privacyContainerEnglish.classList.remove('dNone');
+        privacyContainerGerman.classList.add('dNone');
+    }
+    if (clickedLanguage == 'germanBtn') {
+        privacyContainerEnglish.classList.add('dNone');
+        privacyContainerGerman.classList.remove('dNone');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    let languageBtns = document.querySelectorAll('.languageBtn');
+    languageBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let clickedLanguage = btn.id;
+            let clickedBtn = document.getElementById(clickedLanguage);
+            languageBtns.forEach(b => b.classList.remove('activeLanguage'));
+            clickedBtn.classList.add('activeLanguage');
+            showLanguage(clickedLanguage);
+        });
+    })
+})
 
 window.addEventListener('resize', checkOrientation);
 window.addEventListener('orientationchange', checkOrientation);
