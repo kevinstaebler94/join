@@ -347,6 +347,12 @@ main {
   z-index: 0;
 }
 
+.oneLineText {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 @media (min-width: 1921px) {
   html,
   body {
@@ -381,16 +387,25 @@ main {
     margin-bottom: 0.75em;
   }
   .taskDescription {
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
   }
   .subtaskInfo {
     font-size: 0.8rem;
   }
 }
 
+@media(max-width: 1024px) {
+  .taskTitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
 @media (max-width: 1110px) {
   .subtasksContainer {
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
   }
 }
 

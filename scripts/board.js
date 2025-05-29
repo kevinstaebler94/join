@@ -391,16 +391,6 @@ function returnToBoard() {
   closeModal();
 }
 
-// async function openMobileTaskOverlay(taskId) {
-//   let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
-//   let columnTodo = document.getElementById("toDoOverlay");
-//   columnTodo.addEventListener("click", () => {
-//     let currentColumn = task.column;
-//     let newColumn = "toDo";
-    
-//   })
-// }
-
 async function openMobileTaskOverlay(taskId) {
   let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
   let column = document.querySelectorAll(".taskContainer")
