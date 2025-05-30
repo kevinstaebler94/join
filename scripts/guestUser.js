@@ -138,7 +138,7 @@ let contacts = [
  * @returns {Promise<void>}
  */
 async function getGuestUserData() {
-    let userId = 'guestMail';
+    let userId = 'guestMail' + getTimeStamp();
     let email = userId;
     let password = 'password';
     let name = 'Guest User';
