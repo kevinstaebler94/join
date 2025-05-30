@@ -57,20 +57,20 @@ function getContactsModalStructure() {
                         <input class="inputFields" type="text" placeholder="Name" id="contactName" required>
                         <img class="inputIcon" src="./assets/img/person.svg">
                         <span id="namePlaceholderError" class="errorMsg">Placeholder</span>
+                        <div id="nameError" class="inputError dNone">Fehlertext</div>
                     </div>
-                    <div id="nameError" class="inputError dNone">Fehlertext</div>
                     <div class="inputFieldWrapper">
                         <input class="inputFields" type="email" placeholder="Email" id="contactEmail" required>
                         <img class="inputIcon" src="./assets/img/mail.svg">
                         <span id="emailPlaceholderError" class="errorMsg">Placeholder</span>
+                        <div id="emailError" class="inputError dNone">Fehlertext</div>
                     </div>
-                    <div id="emailError" class="inputError dNone">Fehlertext</div>
                     <div class="inputFieldWrapper">
                         <input class="inputFields" type="text" placeholder="Phone" id="contactPhone" required>
                         <img class="inputIcon" src="./assets/img/phone.svg">
                         <span id="phonePlaceholderError" class="errorMsg">Placeholder</span>
+                        <div id="phoneError" class="inputError dNone">Fehlertext</div>
                     </div>
-                    <div id="phoneError" class="inputError dNone">Fehlertext</div>
                 </div>
                 <div class="buttonsContainer">
                 <button onclick="clearInputFields()" class="modalCancelButton">
@@ -302,5 +302,22 @@ async function validateAddEmailFormat() {
     }
 
     errorMsgEmail.classList.add("dNone");
+    return true;
+}
+
+async function validatePhoneNumberFormat() {
+    let phone = document.getElementById("contactPhone");
+    let pattern = /^\d+$/;
+    let errorMsgPhone = document.getElementById("phoneError");
+    let value = phone.value.trim();
+
+    if (!pattern.test(value)) {
+        errorMsgPhone.innerText = "Please enter a valid phone number (only digits).";
+        errorMsgPhone.classList.remove("dNone");
+        errorMsgPhone.classList.add("error");
+        return false;
+    }
+
+    phoneError.classList.add("dNone");
     return true;
 }

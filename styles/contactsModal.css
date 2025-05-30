@@ -242,9 +242,7 @@ input::placeholder {
 
 .inputError {
     color: red;
-    font-size: 14px;
-    margin-top: -20px;
-    padding-left: 10px;
+    font-size: 0.6rem;
 }
 
 .inputFields.error {

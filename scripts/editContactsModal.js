@@ -71,24 +71,24 @@ function getEditContactsModalStructure() {
                     <div class="inputFieldWrapper">
                         <input class="inputFields" type="text" placeholder="Name" id="contactNameEdit" required>
                         <img class="inputIcon" src="./assets/img/person.svg">
-                        <span id="namePlaceholderError" class="errorMsg">Placeholder</span>
+                        <span id="editNamePlaceholderError" class="errorMsg">Placeholder</span>
+                        <div id="nameErrorEdit" class="inputError dNone">Fehlertext</div>
                     </div>
-                    <div id="nameError" class="inputError dNone">Fehlertext</div>
                     <div class="inputFieldWrapper">
                         <input class="inputFields" type="email" placeholder="Email" id="contactEmailEdit" required>
                         <img class="inputIcon" src="./assets/img/mail.svg">
-                        <span id="emailPlaceholderError" class="errorMsg">Placeholder</span>
+                        <span id="editEmailPlaceholderError" class="errorMsg">Placeholder</span>
+                        <div id="emailErrorEdit" class="inputError dNone">Fehlertext</div>
                     </div>
-                    <div id="emailError" class="inputError dNone">Fehlertext</div>
                     <div class="inputFieldWrapper">
-                        <input class="inputFields" type="text" placeholder="Phone" id="contactPhoneEdit" required>
+                        <input class="inputFields" type="number" placeholder="Phone" id="contactPhoneEdit" required>
                         <img class="inputIcon" src="./assets/img/phone.svg">
-                        <span id="phonePlaceholderError" class="errorMsg">Placeholder</span>
+                        <span id="editPhonePlaceholderError" class="errorMsg">Placeholder</span>
+                        <div id="phoneErrorEdit" class="inputError dNone">Fehlertext</div>
                     </div>
-                    <div id="phoneError" class="inputError dNone">Fehlertext</div>
                 </div>
                 <div class="buttonsContainer">
-                <button onclick="clearInputFields()" class="modalCancelButton">Delete</button>
+                <button onclick="deleteContact('${currentContactId}')" class="modalCancelButton">Delete</button>
                 <button onclick="updateContacts()" class="modalSafeButton" type="button">Save <img src="./assets/img/createIcon.svg"></button>
                 </div>
             </div>
@@ -161,9 +161,9 @@ async function updateContacts() {
 async function validateEditContactInput() {
     let inputs = getEditContactInputs();
     let values = getEditContactValues(inputs);
-    resetContactInputErrors(inputs);
+    resetEditInputErrors(inputs);
     if (checkEmptyFields(inputs, values)) return false;
-    let existingContacts = await getData('/users/' + loggedInUser + '/contacts' + originalContactId) || {};
+    let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
     if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
     return true;
 }
@@ -190,9 +190,9 @@ function getEditContactInputs() {
         nameInput: document.getElementById('contactNameEdit'),
         emailInput: document.getElementById('contactEmailEdit'),
         phoneInput: document.getElementById('contactPhoneEdit'),
-        nameError: document.getElementById('nameError'),
-        emailError: document.getElementById('emailError'),
-        phoneError: document.getElementById('phoneError')
+        nameError: document.getElementById('nameErrorEdit'),
+        emailError: document.getElementById('emailErrorEdit'),
+        phoneError: document.getElementById('phoneErrorEdit')
     };
 }
 
@@ -213,23 +213,23 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
         let contact = existingContacts[key];
         if (contact.name?.trim().toLowerCase() === values.name && values.name !== original.name?.trim().toLowerCase()) {
             inputs.nameInput.classList.add('error');
-            document.getElementById('namePlaceholderError').innerHTML = "Name already used.";
-            document.getElementById('namePlaceholderError').classList.add('visible');
-            hideErrorMessages('namePlaceholderError', inputs.nameInput.id);
+            document.getElementById('editNamePlaceholderError').innerHTML = "Name already used.";
+            document.getElementById('editNamePlaceholderError').classList.add('visible');
+            hideEditErrorMessages('editNamePlaceholderError', inputs.nameInput.id);
             hasError = true;
         }
         if (contact.email?.trim().toLowerCase() === values.email && values.email !== original.email?.trim().toLowerCase()) {
             inputs.emailInput.classList.add('error');
-            document.getElementById('emailPlaceholderError').innerHTML = "E-Mail already used.";
-            document.getElementById('emailPlaceholderError').classList.add('visible');
-            hideErrorMessages('emailPlaceholderError', inputs.emailInput.id);
+            document.getElementById('editEmailPlaceholderError').innerHTML = "E-Mail already used.";
+            document.getElementById('editEmailPlaceholderError').classList.add('visible');
+            hideEditErrorMessages('editEmailPlaceholderError', inputs.emailInput.id);
             hasError = true;
         }
         if (contact.phone?.trim() === values.phone && values.phone !== original.phone?.trim()) {
             inputs.phoneInput.classList.add('error');
-            document.getElementById('phonePlaceholderError').innerHTML = "Phone number already used.";
-            document.getElementById('phonePlaceholderError').classList.add('visible');
-            hideErrorMessages('phonePlaceholderError', inputs.phoneInput.id);
+            document.getElementById('editPhonePlaceholderError').innerHTML = "Phone number already used.";
+            document.getElementById('editPhonePlaceholderError').classList.add('visible');
+            hideEditErrorMessages('editPhonePlaceholderError', inputs.phoneInput.id);
             hasError = true;
         }
     }
@@ -244,7 +244,7 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
 async function validateEditEmailFormat(originalEmail) {
     let email = document.getElementById("contactEmailEdit").value.trim().toLowerCase();
     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    let errorMsgEmail = document.getElementById("emailError");
+    let errorMsgEmail = document.getElementById("emailErrorEdit");
     if (!pattern.test(email)) {
         errorMsgEmail.innerText = "Please enter a valid email address.";
         errorMsgEmail.classList.remove("dNone");
@@ -262,4 +262,32 @@ async function validateEditEmailFormat(originalEmail) {
     }
     errorMsgEmail.classList.add("dNone");
     return true;
+}
+
+function resetEditInputErrors(inputs) {
+    [inputs.nameInput, inputs.emailInput, inputs.phoneInput].forEach(input => input.classList.remove('error'));
+    [inputs.nameError, inputs.emailError, inputs.phoneError].forEach(el => {
+        el.classList.add('dNone');
+        el.innerText = "";
+    });
+
+    ['editNamePlaceholderError', 'editEmailPlaceholderError', 'editPhonePlaceholderError'].forEach(id => {
+        let el = document.getElementById(id);
+        el.classList.remove('visible');
+        el.innerText = "Placeholder";
+    });
+}
+
+function hideEditErrorMessages(id, inputId) {
+    setTimeout(() => {
+        let el = document.getElementById(id);
+        let input = document.getElementById(inputId);
+        if (el) {
+            el.classList.remove('visible');
+            el.innerText = "Placeholder";
+        }
+        if (input) {
+            input.classList.remove('error');
+        }
+    }, 3000);
 }
