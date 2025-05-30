@@ -81,7 +81,7 @@ function getEditContactsModalStructure() {
                         <div id="emailErrorEdit" class="inputError dNone">Fehlertext</div>
                     </div>
                     <div class="inputFieldWrapper">
-                        <input class="inputFields" type="number" placeholder="Phone" id="contactPhoneEdit" required>
+                        <input class="inputFields" type="tel" placeholder="Phone" id="contactPhoneEdit" required>
                         <img class="inputIcon" src="./assets/img/phone.svg">
                         <span id="editPhonePlaceholderError" class="errorMsg">Placeholder</span>
                         <div id="phoneErrorEdit" class="inputError dNone">Fehlertext</div>

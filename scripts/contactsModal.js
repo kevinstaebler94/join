@@ -66,7 +66,7 @@ function getContactsModalStructure() {
                         <div id="emailError" class="inputError dNone">Fehlertext</div>
                     </div>
                     <div class="inputFieldWrapper">
-                        <input class="inputFields" type="text" placeholder="Phone" id="contactPhone" required>
+                        <input class="inputFields" type="tel" placeholder="Phone" id="contactPhone" required>
                         <img class="inputIcon" src="./assets/img/phone.svg">
                         <span id="phonePlaceholderError" class="errorMsg">Placeholder</span>
                         <div id="phoneError" class="inputError dNone">Fehlertext</div>
