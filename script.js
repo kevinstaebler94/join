@@ -113,13 +113,25 @@ async function logoutUser() {
     let tasks = userData.tasks;
     let contacts = userData.contacts;
     let greeting = userData.greeting;
-    let greetingTrue = userData.greeting.greeting
+    let greetingTrue = userData.greeting.greeting;
     greetingTrue = true;
     login = false;
     await changeUsers(userId, greeting, email, password, name, login, tasks, contacts);
     await changeElement(greetingTrue);
+    await checkLogoutUser();
     window.location.href = "index.html";
+    
+}
 
+async function checkLogoutUser() {
+    let userData = await getData('/users/' + loggedInUser);
+    if (userData.name === 'Guest User') {
+        console.log(loggedInUser);
+        deleteUser();
+        return;    
+    } else {
+        return;
+    }
 }
 
 /**

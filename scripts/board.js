@@ -299,6 +299,12 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
   
   let compInitials = initials.slice(0, 3);
+  // if (initials.length > 3) {
+  //   initialLength = initials.length - 3;
+  //   console.log(initialLength);
+    
+  // }
+  
   let initial = compInitials.map((init) => `<span id="assignedUser${init}" class="assignedUser">${init}</span>`);
   let shortenedTitle = shortenText(taskComponents.title, 40);
   let shortenedDescription = shortenText(taskComponents.description, 25);

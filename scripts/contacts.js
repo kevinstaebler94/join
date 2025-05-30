@@ -139,26 +139,26 @@ function updateContactDetails(contact) {
     initialsContainer.style.backgroundColor = color;
     initialsContainer.style.color = "white";
 
-    getDeleteButtonStructure(contact.email);
-    getMobileDeleteButtonStructure(contact.email);
+    getDeleteButtonStructure(contact.email, contact.name);
+    getMobileDeleteButtonStructure(contact.email, contact.name);
 }
 
-function getDeleteButtonStructure(email) {
+function getDeleteButtonStructure(email, name) {
     document.getElementById('userNameDeleteContainer').innerHTML = `
     <div class="userNameDeleteIconContainer">
         <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
         <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
     </div>
-    <span onclick="deleteContact('${adjustEmail(email)}')">Delete</span>`;
+    <span onclick="deleteContact('${adjustEmail(email)}',  '${name}')">Delete</span>`;
 }
 
-function getMobileDeleteButtonStructure(email) {
+function getMobileDeleteButtonStructure(email, name) {
     document.getElementById('userNameMobileDeleteContainer').innerHTML = `
     <div class="userNameDeleteIconContainer">
         <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
         <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
     </div>
-    <span onclick="deleteContact('${adjustEmail(email)}')">Delete</span>`;
+    <span onclick="deleteContact('${adjustEmail(email)}', '${name}')">Delete</span>`;
 }
 
 /**

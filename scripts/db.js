@@ -98,6 +98,13 @@ async function changeColumn(column, taskId) {
     returnToBoard();
 }
 
+async function changeContact(taskId, contactName) {
+    let path = '/users/' + loggedInUser;
+    let userId = '/tasks/' + taskId + '/contact/';
+    let userData = contactName;
+    await putData(path, userData, userId);
+}
+
 /**
  * Updates a user's full data including tasks and contacts.
  * @param {string} userId - User identifier.
@@ -290,8 +297,31 @@ async function deleteTask(loggedInUser, taskId) {
  * Deletes a contact for the logged in user.
  * @param {string} contactId - Contact identifier.
  */
-async function deleteContact(contactId) {
+async function deleteContact(contactId, contactName) {
+    let tasks = await getData("/users/" + loggedInUser + "/tasks");
     let path = '/users/' + loggedInUser + '/contacts/' + contactId;
+    let taskArrDatabase = [];
+    for (let key in tasks) {
+        if (tasks.hasOwnProperty(key)) {
+            let task = tasks[key];
+            if (Array.isArray(task.contact) && task.contact.includes(contactName)) {
+                task.contact = task.contact.filter(id => id !== contactName);
+                changeContact(task.id, task.contact);
+            }
+        }
+
+    }
+    await deleteData(path);
+}
+
+function checkTaskContact(contactId) {
+    let taskContact = contactId;
+    console.log(taskContact);
+
+}
+
+async function deleteUser() {
+    let path = '/users/' + loggedInUser;
     await deleteData(path);
 }
 
