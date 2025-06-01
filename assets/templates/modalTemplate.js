@@ -363,13 +363,13 @@ function addNewSubtaskModal() {
                                         <span  id="editIconContainer" class="iconContainer dNone">
                                             <img onclick="getEditSubtaskModal('${inputValue.value}')" class="editIcons"  src="./assets/img/edit.svg" alt="">
                                             <span class="iconDivider">|</span>
-                                            <img onclick="deleteEditSubtask('${subtaskObj.subtask}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
+                                            <img onclick="deleteNewAddedSubtask('${subtaskIndex}', '${inputValue.value}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
                                         </span>
                                     </div>
                                     <div id="subtaskEditContainer${inputValue.value}" class="newSubtaskListElement dNone">
                                         <input id="editSubtaskInput${inputValue.value}" class="newSubtaskInput" value="${inputValue.value}">
                                         <span  id="editIconContainer" class="iconContainer">
-                                            <img class="editIcons" onclick="deleteSubtaskModal('${inputValue.value}')" src="./assets/img/delete.svg" alt="">
+                                            <img class="editIcons" onclick="deleteNewAddedSubtask('${subtaskIndex}')" src="./assets/img/delete.svg" alt="">
                                             <span class="iconDivider">|</span>
                                             <img onclick="editSubtaskModal('${inputValue.value}', '${subtaskIndex}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
                                         </span>

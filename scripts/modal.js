@@ -226,6 +226,13 @@ function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
     getSubtaskEdit(subtasks, serializeObj(subtasks));
 }
 
+function deleteNewAddedSubtask(subtaskIndex, subtaskId) {
+    let subtaskElement = document.getElementById('subtaskElement' + subtaskId);
+    subtaskElement.innerHTML = '';
+    console.log(subtaskElement);
+    subtasksArr[0].splice(subtaskIndex, 1);
+}
+
 /**
  * Deletes a subtask directly from the edit list.
  * @param {string} subtaskId - ID of the subtask.
@@ -280,7 +287,7 @@ function checkAssignedContactEdit(checkboxElement) {
  */
 function getContactInitialColorModal(contact) {
     let contactInitialContainer = document.getElementById('contactInitialContainer' + contact);
-    contactInitialContainer.style.backgroundColor = initialColor[contact];
+    contactInitialContainer.style.backgroundColor = getColorFromName(contact);
 }
 
 /**
@@ -289,7 +296,7 @@ function getContactInitialColorModal(contact) {
  */
 function getContactInitialColorEdit(contact) {
     let contactInitialContainer = document.getElementById('contactInitialContainer' + contact);
-    contactInitialContainer.style.backgroundColor = initialColor[contact];
+    contactInitialContainer.style.backgroundColor = getColorFromName(contact);
 }
 
 /**

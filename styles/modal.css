@@ -11,11 +11,11 @@
 
 .addTaskModal {
     width: 950px;
-    height: 675px;
+    height: 630px;
     background-color: white;
-    position: relative;
-    top: 50%;
-    left: 50%;
+    position: absolute;
+    top: 450px;
+    left: 724px;
     transform: translate(-50%, -50%);
     border-radius: 24px;
     display: flex;

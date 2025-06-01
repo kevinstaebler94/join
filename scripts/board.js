@@ -50,10 +50,12 @@ async function renderTasks() {
       countArr.push(contact);
       if (task.contact.length > 3) {
         countInitials(countArr, task.id);
+        styleInitalNameBoard(contact, initial, task.id);
       } else {
-        styleInitalNameBoard(contact, initial);
+        styleInitalNameBoard(contact, initial, task.id);
       }
     });
+    countArr = [];
   });
   columns.forEach((id) => {
     const column = document.getElementById(getColumnId(id));
@@ -304,7 +306,7 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
  */
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
   let compInitials = initials.slice(0, 3);
-  let initial = compInitials.map((init) => `<span id="assignedUser${init}" class="assignedUser">${init}</span>`);
+  let initial = compInitials.map((init) => `<span id="assignedUser${init + taskComponents.id}" class="assignedUser">${init}</span>`);
   let shortenedTitle = shortenText(taskComponents.title, 40);
   let shortenedDescription = shortenText(taskComponents.description, 25);
   return `
@@ -372,12 +374,24 @@ function handleAddTask() {
  * @param {string} contact - Full name of the contact
  * @param {string} initial - Initials of the contact
  */
-function styleInitalNameBoard(contact, initial) {
-
-  let initalContainer = document.getElementById('assignedUser' + initial);
+function styleInitalNameBoard(contact, initial, taskId) {
+  let initalContainer = document.getElementById('assignedUser' + initial + taskId);
   let color = getColorFromName(contact);
+  if (!initalContainer) return;
   initalContainer.style.backgroundColor = color;
   initialColor[contact] = color;
+}
+
+function styleInitalHigherThree(contact, initial, taskId) {
+  let initalContainer = document.getElementById('assignedUser' + initial + taskId);
+  let color = getColorFromName(contact);
+  if (!initalContainer) {
+    return;
+  } else {
+    initalContainer.style.backgroundColor = color;
+    initialColor[contact] = color;
+  }
+
 }
 
 /**

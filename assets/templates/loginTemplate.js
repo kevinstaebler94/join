@@ -25,7 +25,7 @@ function loginTemplate() {
             <span id="errorMsgLogin" class="errorMsgPassword hide">Check your email and password. Please try again.</span>
           </div>
           <div class="buttonWrapperLogin">
-            <button id="loginBtn" disabled  type="submit" id="loginButton" class="button loginButton">Log in</button>
+            <button disabled  type="submit" id="loginButton" class="button loginButton">Log in</button>
             <button id="loginGuestBtn" class="button guestLoginButton" onclick="getGuestUserData()">Guest Log in</button>
           </div>
         </form>
