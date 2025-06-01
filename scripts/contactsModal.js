@@ -146,6 +146,7 @@ async function validateContactInput() {
     if (checkEmptyFields(inputs, values)) return false;
     let existingContacts = await getData('/contacts') || {};
     if (checkDuplicateFields(inputs, values, existingContacts)) return false;
+    if (!(await validatePhoneNumberFormat())) return false;
     return true;
 }
 
@@ -318,6 +319,6 @@ async function validatePhoneNumberFormat() {
         return false;
     }
 
-    phoneError.classList.add("dNone");
+    errorMsgPhone.classList.add("dNone");
     return true;
 }

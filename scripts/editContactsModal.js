@@ -165,6 +165,7 @@ async function validateEditContactInput() {
     if (checkEmptyFields(inputs, values)) return false;
     let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
     if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
+    if (!(await validateEditPhoneNumberFormat())) return false;
     return true;
 }
 
@@ -290,4 +291,21 @@ function hideEditErrorMessages(id, inputId) {
             input.classList.remove('error');
         }
     }, 3000);
+}
+
+async function validateEditPhoneNumberFormat() {
+    let phone = document.getElementById("contactPhoneEdit");
+    let pattern = /^\d+$/;
+    let errorMsgPhone = document.getElementById("phoneErrorEdit");
+    let value = phone.value.trim();
+
+    if (!pattern.test(value)) {
+        errorMsgPhone.innerText = "Please enter a valid phone number (only digits).";
+        errorMsgPhone.classList.remove("dNone");
+        phone.classList.add("error");
+        return false;
+    }
+
+    errorMsgPhone.classList.add("dNone");
+    return true;
 }
