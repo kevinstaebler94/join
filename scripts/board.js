@@ -314,7 +314,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
       <h4 class="taskTitle">${shortenedTitle}</h4>
       <p class="taskDescription">${shortenedDescription}</p>
       ${progressBarHTML}
-      <div id="assignedToContainer${taskComponents.id}" class="assignedToContainer">
+      <div id="assignedToContainer${taskComponents.id}" class="assignedToContainer assignedGap">
         <div class="assignedUserContainer">
           ${initial}
           <span id="assignedCounter${taskComponents.id}" class="assignedCounter dNone"></span>

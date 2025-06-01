@@ -87,7 +87,7 @@ function getAddTaskStructure() {
                                             <span id="listElements"></span>
                                         </ul>
                                     </div>
-                                    <div class="assignedContentContainer">
+                                    <div class="assignedContentContainer assignedGap">
                                         <div id="assignedContainer" class="assignedContainer"></div>
                                         <span id="assignedCounter" class="assignedCounter dNone"></span>
                                     </div>
