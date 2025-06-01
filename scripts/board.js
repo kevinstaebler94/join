@@ -32,6 +32,7 @@ function getColumnId(column) {
 async function renderTasks() {
   let tasks = await getData("/users/" + loggedInUser + "/tasks");
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
+  let countArr = [];
   columns.forEach(
     (id) => (document.getElementById(getColumnId(id)).innerHTML = "")
   );
@@ -45,8 +46,13 @@ async function renderTasks() {
     target.innerHTML += filledTaskTemplate(taskComponents, task);
     if (!task.contact) return;
     task.contact.forEach(contact => {
-    let initial = getInitials(contact);
-    styleInitalNameBoard(contact, initial);
+      let initial = getInitials(contact);
+      countArr.push(contact);
+      if (task.contact.length > 3) {
+        countInitials(countArr, task.id);
+      } else {
+        styleInitalNameBoard(contact, initial);
+      }
     });
   });
   columns.forEach((id) => {
@@ -297,19 +303,10 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
  * @returns {string} - HTML string representing the task
  */
 function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
-  
   let compInitials = initials.slice(0, 3);
-  // if (initials.length > 3) {
-  //   initialLength = initials.length - 3;
-  //   console.log(initialLength);
-    
-  // }
-  
   let initial = compInitials.map((init) => `<span id="assignedUser${init}" class="assignedUser">${init}</span>`);
   let shortenedTitle = shortenText(taskComponents.title, 40);
   let shortenedDescription = shortenText(taskComponents.description, 25);
-  
-  
   return `
     <div data-id="${taskComponents.id}" id="${taskComponents.id}"
      onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}'), openMobileTaskOverlay('${taskComponents.id}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
@@ -317,15 +314,22 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
       <h4 class="taskTitle">${shortenedTitle}</h4>
       <p class="taskDescription">${shortenedDescription}</p>
       ${progressBarHTML}
-      <div class="assignedToContainer">
+      <div id="assignedToContainer${taskComponents.id}" class="assignedToContainer">
         <div class="assignedUserContainer">
           ${initial}
+          <span id="assignedCounter${taskComponents.id}" class="assignedCounter dNone"></span>
         </div>
         <img src="./assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
       </div>
     </div>
   `;
-  
+}
+
+function countInitials(contacts, taskId) {
+  let assignedCounter = document.getElementById('assignedCounter' + taskId);
+  let countHigherThree = contacts.length - 3;
+  assignedCounter.classList.remove('dNone');
+  assignedCounter.innerHTML = '+' + countHigherThree;
 }
 
 /**
@@ -357,7 +361,7 @@ function shortenText(text, maxLen) {
  */
 function handleAddTask() {
   if (window.innerWidth <= 1170) {
-    window.location.href = 'add_task.html'; 
+    window.location.href = 'add_task.html';
   } else {
     openAddTaskModal();
   }
@@ -369,10 +373,11 @@ function handleAddTask() {
  * @param {string} initial - Initials of the contact
  */
 function styleInitalNameBoard(contact, initial) {
-    let initalContainer = document.getElementById('assignedUser' + initial);
-    let color = getColorFromName(contact);
-    initalContainer.style.backgroundColor = color;
-    initialColor[contact] = color;
+
+  let initalContainer = document.getElementById('assignedUser' + initial);
+  let color = getColorFromName(contact);
+  initalContainer.style.backgroundColor = color;
+  initialColor[contact] = color;
 }
 
 /**

@@ -84,11 +84,13 @@ async function getContactsModal(contacts) {
  * @param {string[]} contacts - List of contact names.
  */
 function getContactsEdit(contacts) {
-    contacts.forEach(contact => {
+    assignedArr = contacts;
+    contacts.slice(0, 3).forEach(contact => {
         let assignetContainer = document.getElementById('assignedContainer');
         assignetContainer.innerHTML += `<p id="contactInitialContainer${contact}" class="contactInitial">${getInitials(contact)}</p>`;
         getContactInitialColorEdit(contact);
     });
+    countAssignedAmount();
 }
 
 /**

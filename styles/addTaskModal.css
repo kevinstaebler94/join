@@ -338,11 +338,18 @@ h1 {
     background-color: #2A3647;
 }
 
+.assignedContentContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
 .assignedContainer {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    width: 100%;
     gap: 8px;
 }
 

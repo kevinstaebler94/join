@@ -30,6 +30,7 @@ function renderFilteredContacts(filter = '') {
                                         </label>`;
         styleInitalName(contact.name);
     });
+    updateCheckedListElements();
 }
 
 /**

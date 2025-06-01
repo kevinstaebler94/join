@@ -87,8 +87,10 @@ function getAddTaskStructure() {
                                             <span id="listElements"></span>
                                         </ul>
                                     </div>
-                                    <div id="assignedContainer" class="assignedContainer"></div>
-
+                                    <div class="assignedContentContainer">
+                                        <div id="assignedContainer" class="assignedContainer"></div>
+                                        <span id="assignedCounter" class="assignedCounter dNone"></span>
+                                    </div>
                                     <label class="directionColumn customSelectWrapper">
                                         <div class="dFlex">
                                             <p>Category</p>
@@ -287,8 +289,10 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                             <span id="listElements"></span>
                                         </ul>
                                     </div>
-                                    <div id="assignedContainer" class="assignedContainer"></div>
-
+                                    <div class="assignedContentContainer assignedGap">
+                                        <div id="assignedContainer" class="assignedContainer"></div>
+                                        <span id="assignedCounter" class="assignedCounter dNone"></span>
+                                    </div>
                                     <label id="subtaskLabel" class="directionColumn" onfocusin="getAddNewSubtask()" onfocusout="handleFocusOut()">
                                         Subtasks
                                         <input id="subtaskInputModal" class="inputFields" type="text" placeholder="Add new subtask">

@@ -299,6 +299,7 @@ async function getContact() {
         }
     }
     renderFilteredContacts();
+    updateCheckedListElements();
 }
 
 /**
@@ -331,10 +332,23 @@ function checkAssignedContact(checkboxElement) {
     let listElement = document.getElementById('listName' + checkboxElement.dataset.name);
     checkCurrentCheckbox(checkboxElement, checkedName, index, listElement);
     assignedContainer.innerHTML = '';
-    assignedArr.forEach(contact => {
+    assignedArr.slice(0, 3).forEach(contact => {
         assignedContainer.innerHTML += `<p id="contactAssignedInitial${contact}" class="contactInitial">${getInitials(contact)}</p>`;
         getContactInitialColor(contact);
+
     });
+    countAssignedAmount();
+}
+
+function countAssignedAmount() {
+    let assignedCounter = document.getElementById('assignedCounter');
+    let counterHigherThree = assignedArr.length - 3;
+    if (assignedArr.length > 3) {
+        assignedCounter.classList.remove('dNone');
+    } else {
+        assignedCounter.classList.add('dNone');
+    }
+    assignedCounter.innerHTML = '+' + counterHigherThree;
 }
 
 /**
@@ -350,6 +364,18 @@ function checkCurrentCheckbox(checkboxElement, checkedName, index, listElement) 
             listElement.classList.remove('checked');
         }
     }
+}
+
+function updateCheckedListElements() {
+    let listElements = document.querySelectorAll('.listElement');
+    listElements.forEach(listElement => {
+        let checkbox = listElement.querySelector('input[type="checkbox"]');
+        if (checkbox && checkbox.checked) {
+            listElement.classList.add('checked');
+        } else {
+            listElement.classList.remove('checked');
+        }
+    });
 }
 
 /**

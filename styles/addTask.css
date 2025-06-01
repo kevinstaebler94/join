@@ -457,11 +457,18 @@ ul {
     background-color: #2A3647;
 }
 
+.assignedContentContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
 .assignedContainer {
     display: flex;
     flex-direction: row;
     gap: 8px;
-    width: 100%;
 }
 
 .contactInitial {
