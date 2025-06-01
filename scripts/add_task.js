@@ -16,7 +16,6 @@ let colors = [
     "#ffe62b",
     "#ff4646"
 ];
-
 let initialColor = {};
 
 /**

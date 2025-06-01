@@ -28,7 +28,7 @@
 }
 
 h1 {
-    font-size: 60px;
+    font-size: 48px;
     margin-top: 24px;
 }
 
@@ -351,6 +351,10 @@ h1 {
     flex-direction: row;
     justify-content: flex-start;
     gap: 8px;
+}
+
+.assignedGap {
+  gap: 16px !important;
 }
 
 .assignedInput {

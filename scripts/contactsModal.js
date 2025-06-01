@@ -144,7 +144,7 @@ async function validateContactInput() {
 
     resetContactInputErrors(inputs);
     if (checkEmptyFields(inputs, values)) return false;
-    let existingContacts = await getData('/contacts') || {};
+    let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
     if (checkDuplicateFields(inputs, values, existingContacts)) return false;
     if (!(await validatePhoneNumberFormat())) return false;
     return true;
