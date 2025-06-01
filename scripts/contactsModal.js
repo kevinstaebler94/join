@@ -290,6 +290,10 @@ async function validateAddEmailFormat() {
     if (!pattern.test(email)) {
         errorMsgEmail.innerText = "Please enter a valid email address.";
         errorMsgEmail.classList.remove("dNone");
+        setTimeout(() => {
+            errorMsgEmail.classList.add("dNone");
+            errorMsgEmail.innerText = "";
+        }, 3000);
         return false;
     }
 
@@ -298,6 +302,10 @@ async function validateAddEmailFormat() {
         if (existingContacts[key].email.trim().toLowerCase() === email) {
             errorMsgEmail.innerText = "Email is already used.";
             errorMsgEmail.classList.remove("dNone");
+            setTimeout(() => {
+                errorMsgEmail.classList.add("dNone");
+                errorMsgEmail.innerText = "";
+            }, 3000);
             return false;
         }
     }
@@ -316,6 +324,10 @@ async function validatePhoneNumberFormat() {
         errorMsgPhone.innerText = "Please enter a valid phone number (only digits).";
         errorMsgPhone.classList.remove("dNone");
         errorMsgPhone.classList.add("error");
+        setTimeout(() => {
+            errorMsgPhone.classList.add("dNone");
+            errorMsgPhone.innerText = "";
+        }, 3000);
         return false;
     }
 
