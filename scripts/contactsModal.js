@@ -146,8 +146,9 @@ async function validateContactInput() {
     if (checkEmptyFields(inputs, values)) return false;
     let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
     if (checkDuplicateFields(inputs, values, existingContacts)) return false;
-    if (!(await validatePhoneNumberFormat())) return false;
-    return true;
+    let emailValid = await validateAddEmailFormat();
+    let phoneValid = await validatePhoneNumberFormat();
+    return emailValid && phoneValid;
 }
 
 /**
@@ -283,16 +284,19 @@ function hideErrorMessages(id, inputId) {
  * @returns {Promise<boolean>} True if email format is valid and not duplicate, false otherwise.
  */
 async function validateAddEmailFormat() {
-    let email = document.getElementById("contactEmail").value.trim().toLowerCase();
+    let emailInput = document.getElementById("contactEmail");
+    let email = emailInput.value.trim().toLowerCase();
     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let errorMsgEmail = document.getElementById("emailError");
 
     if (!pattern.test(email)) {
+        emailInput.classList.add("error");
         errorMsgEmail.innerText = "Please enter a valid email address.";
         errorMsgEmail.classList.remove("dNone");
         setTimeout(() => {
             errorMsgEmail.classList.add("dNone");
             errorMsgEmail.innerText = "";
+            emailInput.classList.remove("error");
         }, 3000);
         return false;
     }
@@ -300,11 +304,13 @@ async function validateAddEmailFormat() {
     let existingContacts = await getData("/contacts") || {};
     for (let key in existingContacts) {
         if (existingContacts[key].email.trim().toLowerCase() === email) {
+            emailInput.classList.add("error");
             errorMsgEmail.innerText = "Email is already used.";
             errorMsgEmail.classList.remove("dNone");
             setTimeout(() => {
                 errorMsgEmail.classList.add("dNone");
                 errorMsgEmail.innerText = "";
+                emailInput.classList.remove("error");
             }, 3000);
             return false;
         }
@@ -321,12 +327,13 @@ async function validatePhoneNumberFormat() {
     let value = phone.value.trim();
 
     if (!pattern.test(value)) {
+        phone.classList.add("error");
         errorMsgPhone.innerText = "Please enter a valid phone number (only digits).";
         errorMsgPhone.classList.remove("dNone");
-        errorMsgPhone.classList.add("error");
         setTimeout(() => {
             errorMsgPhone.classList.add("dNone");
             errorMsgPhone.innerText = "";
+            phone.classList.remove("error");
         }, 3000);
         return false;
     }
