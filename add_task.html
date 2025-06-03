@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./mobile/mobileSidebar.css">
     <link rel="stylesheet" href="./mobile/mobileAddTask.css">
     <link rel="stylesheet" href="./styles/checkbox.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="./script.js"></script>
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/includeHTML.js"></script>
@@ -23,6 +24,7 @@
     <script src="./scripts/mobileAddTask.js"></script>
     <script src="./assets/templates/addTaskTemplate.js"></script>
     <script src="./assets/templates/modalTemplate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <title>Add Task</title>
 </head>
 
@@ -41,7 +43,7 @@
                     <div id="overlayBoardImg" class="overlay dNone">
                         <img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="">
                     </div>
-                    
+
                     <div class="mainContent">
                         <h1>Add Task</h1>
                         <div id="addTaskContent" class="addTaskContent">
@@ -52,8 +54,8 @@
                                             <p>Title</p>
                                             <p class="fontRed">*</p>
                                         </div>
-                                        <input id="titleInput" class="inputFields" type="text"
-                                            placeholder="Enter a title">
+                                        <input oninput="removeTitleRequired()" id="titleInput" class="inputFields"
+                                            type="text" placeholder="Enter a title">
                                         <span id="requiredTitle"></span>
                                     </label>
                                     <label class="directionColumn">Description
@@ -65,11 +67,19 @@
                                             <p>Due date</p>
                                             <p class="fontRed">*</p>
                                         </div>
-                                        <input class="inputFields" type="text" id="dateInput" placeholder="dd/mm/yyyy"
-                                            oninput="formatDate(this)" maxlength="10">
-                                        <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="">
-                                        <span id="requiredDate" class="requiredDate"></span>
+
+                                        <div class="calendarWrap" id="calendarWrap" data-input>
+                                            <input class="inputFields" type="text" id="dateInput"
+                                                placeholder="dd/mm/yyyy"
+                                                oninput="formatDate(this), removeDateRequired()" onblur="checkDateValidation()" maxlength="10"
+                                                data-input autocomplete="off">
+                                            <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="Open calendar"
+                                                data-toggle>
+                                        </div>
+
+                                        <span id="requiredDate"></span>
                                     </label>
+
                                 </form>
                             </div>
                             <span class="dividingLine"></span>
@@ -134,12 +144,16 @@
                                         <div class="listContainer">
                                             <ul class="dropdownList dNone" id="dropdownListCategory">
                                                 <span class="puffer"></span>
-                                                <li class="listElement" onclick="selectCategory('Technical Task')">
+                                                <li class="listElement"
+                                                    onclick="selectCategory('Technical Task'), removeCategoryRequired()">
                                                     Technical Task</li>
-                                                <li class="listElement" onclick="selectCategory('User Story')">User
+                                                <li class="listElement"
+                                                    onclick="selectCategory('User Story'), removeCategoryRequired()">
+                                                    User
                                                     Story</li>
                                             </ul>
                                         </div>
+                                        <span id="requiredCategory" class="requiredCategory"></span>
                                     </span>
                                     <label class="directionColumn">Subtasks
                                         <input id="subtaskInput" class="inputFields" type="text"

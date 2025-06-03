@@ -78,10 +78,10 @@ h1 {
 .leftAddTaskForm {
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    gap: 12px;
+    gap: 76px;
 }
 
 .dividingLine {
@@ -299,7 +299,7 @@ ul {
     display: flex;
     justify-content: space-between;
     padding: 8px;
-    border-bottom: 1px solid #29ABE2 ;
+    border-bottom: 1px solid #29ABE2;
 }
 
 .newSubtaskInput {
@@ -431,8 +431,8 @@ ul {
 }
 
 .listElement.checked {
-  background-color: #2A3647;
-  color: #ffffff;
+    background-color: #2A3647;
+    color: #ffffff;
 }
 
 .nameContainer {
@@ -543,8 +543,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .dateIcon {
     width: 16px;
     position: relative;
-    left: 320px;
-    bottom: 27px;
+    left: -28px;
+    bottom: -1px;
     cursor: pointer;
 }
 
