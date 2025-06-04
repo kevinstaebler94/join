@@ -56,7 +56,7 @@ main {
 
 h1 {
     font-size: 60px;
-    margin-top: 64px;
+    margin-top: 48px;
 }
 
 .addTaskContent {
@@ -271,6 +271,14 @@ ul {
     padding: 0;
 }
 
+.subtaskListPosition {
+    position: absolute;
+    top: 568px;
+    width: 345px;
+    max-height: 73px;
+    overflow: auto;
+}
+
 .liMarker {
     border-radius: 50%;
     width: 6px;
@@ -337,14 +345,24 @@ ul {
     border-radius: 50%;
 }
 
-.customDropdown {
+.customDropdownName {
     position: relative;
     width: 345px;
     border: 1px solid #D1D1D1;
     border-radius: 8px;
     cursor: pointer;
     background: white;
-    z-index: 2;
+    z-index: 15;
+}
+
+.customDropdownCategory {
+    position: relative;
+    width: 345px;
+    border: 1px solid #D1D1D1;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    z-index: 7;
 }
 
 .activeBorder {
@@ -404,12 +422,34 @@ ul {
     background-clip: content-box;
 }
 
+.subtaskList::-webkit-scrollbar {
+    width: 8px;
+}
 
-.listContainer {
-    position: relative;
-    z-index: 0;
-    top: -14px;
-    width: 100%;
+.subtaskList::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+}
+
+.subtaskList::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+.contactListContainer {
+    position: absolute;
+    z-index: 10;
+    top: 343px;
+    width: 345px;
+}
+
+.categoryListContainer {
+    position: absolute;
+    z-index: 5;
+    top: 470px;
+    width: 345px;
 }
 
 .dropdownList li {
@@ -459,6 +499,7 @@ ul {
 
 .assignedContentContainer {
     width: 100%;
+    height: 8px;
     display: flex;
     justify-content: flex-start;
     align-items: center;

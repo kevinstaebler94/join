@@ -307,13 +307,14 @@ function clearAddTask() {
     let assignedContainer = document.getElementById('assignedContainer');
     let subtaskInput = document.getElementById('subtaskInput');
     let subtaskList = document.getElementById('subtaskList');
-    deleteTaskValues(titleInput, descriptionInput, dateInput, assignedContainer, subtaskInput, subtaskList)
+    let assignedCounter = document.getElementById('assignedCounter');
+    deleteTaskValues(titleInput, descriptionInput, dateInput, assignedContainer, subtaskInput, subtaskList, assignedCounter)
 }
 
 /**
  * Resets values in the add-task form fields and UI.
  */
-function deleteTaskValues(titleInput, descriptionInput, dateInput, assignedContainer, subtaskInput, subtaskList) {
+function deleteTaskValues(titleInput, descriptionInput, dateInput, assignedContainer, subtaskInput, subtaskList, assignedCounter) {
     titleInput.value = '';
     descriptionInput.value = '';
     dateInput.value = '';
@@ -321,6 +322,7 @@ function deleteTaskValues(titleInput, descriptionInput, dateInput, assignedConta
     assignedArr = [];
     subtaskInput.value = '';
     subtaskList.innerHTML = '';
+    assignedCounter.innerHTML = '';
     selectPriority('medium');
     closeDropdownName();
     selectCategory('Select category');

@@ -41,3 +41,7 @@
 .displayNone {
   display: none;
 }
+
+.pAbsolute {
+  position: absolute;
+}

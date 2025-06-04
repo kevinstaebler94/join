@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
-const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
+const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+// const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
 // const BASE_URL = 'https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/'; // URL Kevin
 
 /**
@@ -272,14 +272,17 @@ async function pushContacts(loggedInUser) {
  * @param {string} guestUser - Guest user ID.
  */
 async function pushGuestContacts(contactObj, guestUser) {
-    let isValid = await validateContactInput();
-    if (!isValid) return;
+    
+    // Code didnt run for login
 
-    let emailValid = await validateAddEmailFormat();
-    if (!emailValid) return false;
+    // let isValid = await validateContactInput();
+    // if (!isValid) return;
 
-    let phoneValid = await validatePhoneNumberFormat();
-    if (!phoneValid) return false;
+    // let emailValid = await validateAddEmailFormat();
+    // if (!emailValid) return false;
+
+    // let phoneValid = await validatePhoneNumberFormat();
+    // if (!phoneValid) return false;
 
     let path = '/users/' + guestUser + '/contacts';
     let contactId = adjustEmail(contactObj.email);
@@ -288,17 +291,21 @@ async function pushGuestContacts(contactObj, guestUser) {
         email: contactObj.email,
         phone: contactObj.phone
     });
-    try {
-        await putData(path, userData, contactId);
-        clearInputFields();
-        closeContactsModal();
-        await renderContacts();
-        currentContactId = contactId;
-        await openContactById(currentContactId);
-        showSuccessOverlayImg();
-    } catch (error) {
-        console.error("error while saving:", error);
-    }
+    await putData(path, userData, contactId);
+    
+    // Code didnt run for login
+
+    // try {
+        
+    //     clearInputFields();
+    //     closeContactsModal();
+    //     await renderContacts();
+    //     currentContactId = contactId;
+    //     await openContactById(currentContactId);
+    //     showSuccessOverlayImg();
+    // } catch (error) {
+    //     console.error("error while saving:", error);
+    // }
 }
 
 /**
