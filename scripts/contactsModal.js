@@ -66,7 +66,7 @@ function getContactsModalStructure() {
                         <div id="emailError" class="inputError dNone">Fehlertext</div>
                     </div>
                     <div class="inputFieldWrapper">
-                        <input class="inputFields" type="tel" placeholder="Phone" id="contactPhone" required>
+                        <input class="inputFields" type="tel" placeholder="+49..." id="contactPhone" required>
                         <img class="inputIcon" src="./assets/img/phone.svg">
                         <span id="phonePlaceholderError" class="errorMsg">Placeholder</span>
                         <div id="phoneError" class="inputError dNone">Fehlertext</div>
@@ -322,13 +322,13 @@ async function validateAddEmailFormat() {
 
 async function validatePhoneNumberFormat() {
     let phone = document.getElementById("contactPhone");
-    let pattern = /^\d+$/;
+    let pattern = /^(\+49\s?|0)[1-9][0-9\s\-]{3,}$/;
     let errorMsgPhone = document.getElementById("phoneError");
     let value = phone.value.trim();
 
     if (!pattern.test(value)) {
         phone.classList.add("error");
-        errorMsgPhone.innerText = "Please enter a valid phone number (only digits).";
+        errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
         errorMsgPhone.classList.remove("dNone");
         setTimeout(() => {
             errorMsgPhone.classList.add("dNone");

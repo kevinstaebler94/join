@@ -12,6 +12,13 @@ function openEditContactsModal() {
     overlay.classList.remove('dNone');
     container.classList.remove('dNone');
     getEditContactsModalStructure();
+    if (window.innerWidth > 800) {
+        let mainContent = document.querySelector('.mainContent');
+        mainContent.style.gap = '32px';
+    } else {
+        let mainContent = document.querySelector('.mainContent');
+        mainContent.style.gap = '0px';
+    }
 
     setTimeout(() => {
         let modal = document.getElementById('modalEditContent');
@@ -29,13 +36,12 @@ function closeEditContactsModal() {
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('editContactsModal');
     let mainContent = document.querySelector('.mainContent');
-
     if (modal) {
         modal.classList.remove('show');
-
         setTimeout(() => {
             overlay.classList.add('dNone');
             container.classList.add('dNone');
+            mainContent.style.gap = '64px';
         }, 300);
     }
 }
@@ -81,7 +87,7 @@ function getEditContactsModalStructure() {
                         <div id="emailErrorEdit" class="inputError dNone">Fehlertext</div>
                     </div>
                     <div class="inputFieldWrapper">
-                        <input class="inputFields" type="tel" placeholder="Phone" id="contactPhoneEdit" required>
+                        <input class="inputFields" type="tel" placeholder="+49..." id="contactPhoneEdit" required>
                         <img class="inputIcon" src="./assets/img/phone.svg">
                         <span id="editPhonePlaceholderError" class="errorMsg">Placeholder</span>
                         <div id="phoneErrorEdit" class="inputError dNone">Fehlertext</div>
@@ -165,8 +171,9 @@ async function validateEditContactInput() {
     if (checkEmptyFields(inputs, values)) return false;
     let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
     if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
-    if (!(await validateEditPhoneNumberFormat())) return false;
-    return true;
+    let editEmailValid = await validateEditEmailFormat();
+    let editPhoneValid = await validateEditPhoneNumberFormat();
+    return editEmailValid && editPhoneValid;
 }
 
 /**
@@ -243,20 +250,33 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
  * @returns {Promise<boolean>} True if email is valid and not duplicated
  */
 async function validateEditEmailFormat(originalEmail) {
+    let emailInput = document.getElementById("contactEmailEdit");
     let email = document.getElementById("contactEmailEdit").value.trim().toLowerCase();
     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let errorMsgEmail = document.getElementById("emailErrorEdit");
     if (!pattern.test(email)) {
+        emailInput.classList.add("error");
         errorMsgEmail.innerText = "Please enter a valid email address.";
         errorMsgEmail.classList.remove("dNone");
+        setTimeout(() => {
+            errorMsgEmail.classList.add("dNone");
+            errorMsgEmail.innerText = "";
+            emailInput.classList.remove("error");
+        }, 3000);
         return false;
     }
     if (!originalEmail || email !== originalEmail.toLowerCase()) {
         let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
         for (let key in existingContacts) {
             if (existingContacts[key].email.trim().toLowerCase() === email) {
+                emailInput.classList.add("error");
                 errorMsgEmail.innerText = "Email is already used.";
                 errorMsgEmail.classList.remove("dNone");
+                setTimeout(() => {
+                    errorMsgEmail.classList.add("dNone");
+                    errorMsgEmail.innerText = "";
+                    emailInput.classList.remove("error");
+                }, 3000);
                 return false;
             }
         }
@@ -295,12 +315,12 @@ function hideEditErrorMessages(id, inputId) {
 
 async function validateEditPhoneNumberFormat() {
     let phone = document.getElementById("contactPhoneEdit");
-    let pattern = /^\d+$/;
+    let pattern = /^(\+49\s?|0)[1-9][0-9\s\-]{3,}$/;
     let errorMsgPhone = document.getElementById("phoneErrorEdit");
     let value = phone.value.trim();
 
     if (!pattern.test(value)) {
-        errorMsgPhone.innerText = "Please enter a valid phone number (only digits).";
+        errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
         errorMsgPhone.classList.remove("dNone");
         phone.classList.add("error");
         return false;
