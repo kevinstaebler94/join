@@ -265,9 +265,14 @@ function showContactList() {
  * Handles window resizing to toggle between mobile and desktop views.
  */
 function showContactListWindowsize() {
-    if (window.innerWidth >= 801) {
+    if (window.innerWidth >= 800) {
         document.getElementById('contactsOverview').classList.remove('mobileVisible');
         document.getElementById('contactListContainer').classList.remove('dNone');
+    } else {
+        if (activeContactCard && window.innerWidth < 800) {
+            document.getElementById('contactsOverview').classList.add('mobileVisible');
+            document.getElementById('contactListContainer').classList.add('dNone');
+        }
     }
 }
 

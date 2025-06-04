@@ -5,20 +5,12 @@ let originalContactId = null;
  * Opens the modal to edit an existing contact.
  */
 function openEditContactsModal() {
-    let overlay = document.getElementById('modalOverlay');
-    let container = document.getElementById('editContactsModal');
-    let mainContent = document.querySelector('.mainContent');
+    let overlay = document.getElementById('editContactsModal');
+    let container = document.getElementById('contactsEditModal');
 
     overlay.classList.remove('dNone');
     container.classList.remove('dNone');
     getEditContactsModalStructure();
-    if (window.innerWidth > 800) {
-        let mainContent = document.querySelector('.mainContent');
-        mainContent.style.gap = '32px';
-    } else {
-        let mainContent = document.querySelector('.mainContent');
-        mainContent.style.gap = '0px';
-    }
 
     setTimeout(() => {
         let modal = document.getElementById('modalEditContent');
@@ -33,15 +25,13 @@ function openEditContactsModal() {
  */
 function closeEditContactsModal() {
     let modal = document.getElementById('modalEditContent');
-    let overlay = document.getElementById('modalOverlay');
-    let container = document.getElementById('editContactsModal');
-    let mainContent = document.querySelector('.mainContent');
+    let overlay = document.getElementById('editContactsModal');
+    let container = document.getElementById('contactsEditModal');
     if (modal) {
         modal.classList.remove('show');
         setTimeout(() => {
             overlay.classList.add('dNone');
             container.classList.add('dNone');
-            mainContent.style.gap = '64px';
         }, 300);
     }
 }
@@ -49,7 +39,7 @@ function closeEditContactsModal() {
  * Renders the HTML structure for the edit contact modal.
  */
 function getEditContactsModalStructure() {
-    let container = document.getElementById('editContactsModal');
+    let container = document.getElementById('contactsEditModal');
     container.innerHTML = `
     <div class="modalMainContent" id="modalEditContent">
         <div class="headlineSection">

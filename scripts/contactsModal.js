@@ -10,16 +10,8 @@ function openContactsModal() {
     overlay.classList.remove('dNone');
     container.classList.remove('dNone');
     getContactsModalStructure();
-
-    if (window.innerWidth > 800) {
-        let mainContent = document.querySelector('.mainContent');
-        mainContent.style.gap = '32px';
-    } else {
-        let mainContent = document.querySelector('.mainContent');
-        mainContent.style.gap = '0px';
-    }
     setTimeout(() => {
-        const modal = document.getElementById('modalAddContent');
+        let modal = document.getElementById('modalAddContent');
         modal.classList.add('show');
     }, 10);
 }
@@ -97,14 +89,11 @@ function closeContactsModal() {
     let modal = document.getElementById('modalAddContent');
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('contactsAddModal');
-    let mainContent = document.querySelector('.mainContent');
-
     if (modal) {
         modal.classList.remove('show');
         setTimeout(() => {
             overlay.classList.add('dNone');
             container.classList.add('dNone');
-            mainContent.style.gap = '64px';
         }, 300);
     }
 }

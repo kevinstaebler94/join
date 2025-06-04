@@ -110,6 +110,10 @@ form {
     font-size: 20px;
 }
 
+.inputFields:focus {
+    outline: unset;
+}
+
 input::placeholder {
     opacity: 30%;
 }

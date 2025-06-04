@@ -2,24 +2,6 @@
     height: 100%;
 }
 
-@media(max-width: 1330px) {
-    .modalMainContent {
-        left: 670px;
-    }
-}
-
-@media(max-width: 1270px) {
-    .modalMainContent {
-        left: 635px;
-    }
-}
-
-@media(max-width: 1230px) {
-    .modalMainContent {
-        left: 615px;
-    }
-}
-
 @media(max-width: 1220px) {
     .userNameContainer h2 {
         font-size: 40px;
@@ -31,10 +13,6 @@
 
     .contactsHeadline h1 {
         font-size: 56px;
-    }
-
-    .modalMainContent {
-        left: 590px;
     }
 }
 
@@ -98,36 +76,6 @@
     .addContactButton {
         margin-right: 32px;
     }
-
-    .modalMainContent {
-        left: 570px;
-    }
-}
-
-@media(max-width: 1100px) {
-    .modalMainContent {
-        left: 555px;
-    }
-
-    .contactsModalIcon {
-        height: 100px;
-        width: 100px;
-    }
-
-    .inputFields {
-        width: 364px;
-        height: 41px;
-    }
-
-    .inputIcon {
-        right: 4rem;
-        top: 0.55rem;
-    }
-
-    .modalCloseButtonWrapper {
-        width: 400px;
-        padding-bottom: 40px;
-    }
 }
 
 @media(max-width: 1080px) {
@@ -150,23 +98,16 @@
     .mobileHeadlineWrapper span {
         font-size: 14px;
     }
-
-    .modalMainContent {
-        left: 540px;
-    }
 }
 
 @media(max-width: 1045px) {
+    .contactsModalIcon {
+        height: 100px;
+        width: 100px;
+    }
+
     .modalIconContainer {
         width: 120px;
-    }
-
-    .contactsNameContainer {
-        gap: 28px;
-    }
-
-    .modalMainContent {
-        left: 520px;
     }
 }
 
@@ -175,7 +116,7 @@
         display: flex;
         position: relative;
         top: -25px;
-        left: 470px;
+        left: 88%;
     }
 
     .modalMobileCloseButton {
@@ -293,10 +234,6 @@
     .contactsNameContainer h2 {
         font-size: 40px;
     }
-
-    .modalMainContent {
-        left: 455px;
-    }
 }
 
 @media(max-width: 890px) {
@@ -315,10 +252,6 @@
     .contactsNameContainer h2 {
         font-size: 36px;
     }
-
-    .modalMainContent {
-        left: 440px;
-    }
 }
 
 @media(max-width: 840px) {
@@ -336,10 +269,6 @@
 
     .contactsNameContainer h2 {
         font-size: 30px;
-    }
-
-    .modalMainContent {
-        left: 420px;
     }
 }
 
@@ -430,47 +359,11 @@
         display: flex;
         flex-direction: column;
     }
-
-    .modalMainContent {
-        left: 400px;
-    }
 }
-
-@media(max-width: 770px) {
-    .modalMainContent {
-        left: 385px;
-    }
-}
-
-@media(max-width: 720px) {
-    .modalMainContent {
-        left: 360px;
-    }
-}
-
-@media(max-width: 680px) {
-    .modalMainContent {
-        left: 340px;
-    }
-}
-
-@media(max-width: 645px) {
-    .modalMainContent {
-        left: 320px;
-    }
-}
-
-@media(max-width: 615px) {
-    .modalMainContent {
-        left: 305px;
-    }
-}
-
 
 @media(max-width: 600px) {
     .modalMobileCloseButtonWrapper {
-        left: 365px;
-        top: -40px;
+        top: -43px;
     }
 
     .headlineContainer h1 {
@@ -484,20 +377,17 @@
     .headlineContainer {
         height: 94px;
     }
-
-    .modalMainContent {
-        width: 450px;
-    }
 }
-
-@media(max-width: 565px) {
-    .modalMainContent {
-        left: 285px;
-    }
-}
-
 
 @media(max-width: 560px) {
+    .modalMainContent {
+        width: 95%;
+    }
+
+    .modalMobileCloseButtonWrapper {
+        top: -47px;
+    }
+
     .letterDividerLine {
         padding-right: 12px;
         width: 350px;
@@ -522,23 +412,7 @@
     }
 }
 
-@media(max-width: 530px) {
-    .modalMainContent {
-        left: 265px;
-    }
-}
-
-
 @media(max-width: 500px) {
-    .modalMobileCloseButtonWrapper {
-        left: 320px;
-        top: -40px;
-    }
-
-    .modalMainContent {
-        width: 396px;
-    }
-
     .contactsModalIcon {
         height: 120px;
         width: 120px;
@@ -550,21 +424,10 @@
     }
 }
 
-@media(max-width: 480px) {
-    .modalMainContent {
-        left: 240px;
-    }
-}
-
-
 @media(max-width: 460px) {
     .contactList {
         padding-left: 32px;
         padding-right: 24px;
-    }
-
-    .modalMainContent {
-        left: 230px;
     }
 }
 
@@ -573,27 +436,9 @@
         padding-left: 24px;
         padding-right: 18px;
     }
-
-    .modalMainContent {
-        left: 220px;
-    }
-}
-
-@media(max-width: 430px) {
-    .modalMainContent {
-        left: 215px;
-    }
 }
 
 @media(max-width: 420px) {
-    .modalMobileCloseButtonWrapper {
-        left: 280px;
-    }
-
-    .modalMainContent {
-        width: 350px;
-    }
-
     .contactList {
         padding-left: 20px;
         padding-right: 16px;
@@ -617,26 +462,10 @@
     }
 }
 
-@media(max-width: 410px) {
-    .modalMainContent {
-        left: 205px;
-    }
-}
-
 @media(max-width: 400px) {
     .contactList {
         padding-left: 18px;
         padding-right: 12px;
-    }
-
-    .modalMainContent {
-        left: 200px;
-    }
-}
-
-@media(max-width: 390px) {
-    .modalMainContent {
-        left: 195px;
     }
 }
 
@@ -658,21 +487,9 @@
     .modalContentContainer {
         width: 410px;
     }
-
-    .modalMainContent {
-        left: 188px;
-    }
 }
 
 @media(max-width: 370px) {
-    .modalMobileCloseButtonWrapper {
-        left: 250px;
-    }
-
-    .modalMainContent {
-        width: 310px;
-    }
-
     .contactList {
         padding-right: 14px;
         padding-left: 18px;
@@ -691,28 +508,9 @@
     }
 }
 
-@media(max-width: 355px) {
-    .modalMainContent {
-        left: 175px;
-    }
-}
-
-
 @media(max-width: 350px) {
     .contactList {
         padding-left: 10px;
         padding-right: 0;
-    }
-}
-
-@media(max-width: 340px) {
-    .modalMainContent {
-        left: 168px;
-    }
-}
-
-@media(max-width: 330px) {
-    .modalMainContent {
-        left: 160px;
     }
 }
