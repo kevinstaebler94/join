@@ -259,7 +259,6 @@ async function handleCheckbox(checkbox) {
   let checkboxTotal = checkboxArr.length;
   let isChecked = checkboxArr.filter((cb) => cb.checked === true).length;
   await pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId);
-  await renderTasks();
   showProgressBar(isChecked, checkboxTotal, taskId);
 }
 
