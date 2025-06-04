@@ -268,12 +268,7 @@ function showContactListWindowsize() {
     if (window.innerWidth >= 801) {
         document.getElementById('contactsOverview').classList.remove('mobileVisible');
         document.getElementById('contactListContainer').classList.remove('dNone');
-        if (activeContactCard) {
-            activeContactCard.classList.remove('active');
-            activeContactCard = null;
-        }
     }
-
 }
 
 /**
