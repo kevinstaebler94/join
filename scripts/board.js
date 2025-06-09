@@ -254,6 +254,7 @@ function convertNameToInitial(contactData) {
  * @param {HTMLInputElement} checkbox
  */
 async function handleCheckbox(checkbox) {
+  let subtaskInfo = document.getElementById('subtaskInfo' + checkbox.dataset.taskId);
   let list = document.querySelectorAll(
     '.assignedToModal input[type="checkbox"]'
   );
@@ -265,6 +266,7 @@ async function handleCheckbox(checkbox) {
   let checkboxArr = Array.from(list);
   let checkboxTotal = checkboxArr.length;
   let isChecked = checkboxArr.filter((cb) => cb.checked === true).length;
+  subtaskInfo.innerHTML = `<span id="subtaskInfo${checkbox.dataset.taskId}" class="subtaskInfo">${isChecked}/${checkboxTotal} Subtasks</span>`;
   await pushSubtasks(loggedInUser, taskId, done, currentSubtask, subtaskId);
   showProgressBar(isChecked, checkboxTotal, taskId);
 }
@@ -432,7 +434,3 @@ async function openMobileTaskOverlay(taskId) {
     })
   })
 }
-
-
-
-test 
