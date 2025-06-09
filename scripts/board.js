@@ -9,9 +9,18 @@ async function initBoard() {
   await renderTasks();
 }
 
-window.addEventListener("resize", () => {
-  renderTasks();
+
+
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 1023) {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        window.location.href = 'board.html';
+    }, 500); // nur 1x ausführen nach 200ms
+  }
 });
+
 
 /**
  * Returns the appropriate column ID depending on screen size.
@@ -279,6 +288,8 @@ async function handleCheckbox(checkbox) {
  */
 async function showProgressBar(isChecked, checkboxTotal, taskId) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
+  console.log(progressBar);
+  
   if (progressBar) {
     let progress = (isChecked / checkboxTotal) * 100;
     setTimeout(() => {
@@ -412,7 +423,16 @@ function checkWindowSize() {
   handleAddTask();
 }
 
-window.addEventListener('resize', checkWindowSize);
+// window.addEventListener('resize', checkWindowSize);
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 1170) {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        checkWindowSize()
+    }, 10);
+  }
+});
 
 function closeTaskOverlay() {
   let mobileTaskOverlay = document.getElementById("moveToOverlayWrapper");
