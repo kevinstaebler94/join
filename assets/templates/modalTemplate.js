@@ -285,7 +285,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                     </label>
                                     <label onfocusin="toggleDropdownName()"
                                         class="directionColumn customSelectWrapper dropdownNameLabel">Assigned to
-                                        <div id="customDropdownName" class="customDropdownName">
+                                        <div id="customDropdownName" class="customDropdownNameEdit">
                                             <div class="dropdownHeader">
 
                                                 <span id="selectedName"><input onfocus="this.select()"
@@ -310,7 +310,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                         Subtasks
                                         <input id="subtaskInputModal" class="inputFieldsEdit" type="text" placeholder="Add new subtask">
                                         <span id="inputIconContainer" class="inputIconContainer">
-                                            <img id="plusIcon" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
+                                            <img id="plusIcon" class="plusIconEdit" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                         </span>
                                     </label>
                                     <ul id="subtaskListEdit" class="subtaskListEdit"></ul>

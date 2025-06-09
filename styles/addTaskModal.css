@@ -63,7 +63,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     height: 400px;
-    padding: 24px 0;
+    padding: 24px 8px;
     overflow-y: auto;
 }
 
@@ -91,7 +91,7 @@ h1 {
 }
 
 .leftContainerEdit {
-    position: fixed;
+    position: static;
 }
 
 .rightContainer {
@@ -99,7 +99,7 @@ h1 {
 }
 
 .rightContainerEdit {
-    position: fixed;
+    position: static;
     top: 336px;
 }
 
@@ -130,7 +130,7 @@ h1 {
 
 .rightAddTaskForm {
     height: 100%;
-    width: 404px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -176,7 +176,8 @@ h1 {
 }
 
 .priorityIconMedium {
-    width: 32px;
+    width: 24px;
+    padding-left: 4px;
 }
 
 .urgentIcon {
@@ -278,7 +279,7 @@ h1 {
 }
 
 .inputFieldsEdit {
-    width: 404px;
+    width: 100%;
     height: 32px;
     border: solid 1px #D1D1D1;
     border-radius: 8px;
@@ -305,7 +306,20 @@ h1 {
     cursor: pointer;
 }
 
+.plusIconEdit {
+    width: 16px;
+    position: relative;
+    left: 346px;
+    bottom: 27px;
+    cursor: pointer;
+}
+
 .plusIcon:hover {
+    background-color: #D1D1D1;
+    border-radius: 50%;
+}
+
+.plusIconEdit:hover {
     background-color: #D1D1D1;
     border-radius: 50%;
 }
@@ -325,6 +339,16 @@ h1 {
 }
 
 .customDropdownName {
+    position: relative;
+    width: 100%;
+    border: 1px solid #D1D1D1;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    z-index: 15;
+}
+
+.customDropdownNameEdit {
     position: relative;
     width: 100%;
     border: 1px solid #D1D1D1;
@@ -558,8 +582,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .dateIconEdit {
     width: 16px;
     position: relative;
-    left: -30px;
-    bottom: 26px;
+    left: 344px;
+    bottom: 23px;
     cursor: pointer;
 }
 
@@ -663,14 +687,8 @@ ul {
     height: 16px;
 }
 
-/* .doneIcon:hover {
-    background-color: #D1D1D1;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-} */
-
 .newSubtaskListElement {
+    width: 100%;
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -712,14 +730,6 @@ ul {
     z-index: 100;
     cursor: pointer;
 }
-
-/* .doneIcon {
-    width: 24px;
-}
-
-.doneIcon:hover {
-    width: 22px;
-} */
 
 .iconDivider {
     color: #A8A8A8;
@@ -792,15 +802,7 @@ ul {
         width: 304px;
     }
 
-    .plusIcon {
-        left: 348px;
-    }
-
-    .dateIcon {
-        left: 348px;
-    }
-
-    .dateIconEdit {
+    .plusIconEdit {
         left: 348px;
     }
 
@@ -810,7 +812,7 @@ ul {
     }
 
     .rightAddTaskForm {
-        width: 376px;
+        width: 368px;
     }
 
     .directionColumn {
@@ -832,12 +834,16 @@ ul {
     }
 
     .priorityBtn {
-        width: 70px;
+        width: 75px;
         height: 30px;
     }
 
+    .priorityIconMedium {
+        width: 20px;
+    }
+
     .rightAddTaskForm {
-        width: 265px;
+        width: 256px;
     }
 
     .directionColumn {
@@ -848,15 +854,11 @@ ul {
         width: auto;
     }
 
-    .plusIcon {
-        left: 240px;
-    }
-
-    .dateIcon {
-        left: 240px;
+    .plusIconEdit {
+        left: 232px;
     }
 
     .dateIconEdit {
-        left: 240px;
+        left: 232px;
     }
 }
