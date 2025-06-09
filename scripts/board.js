@@ -433,10 +433,5 @@ async function openMobileTaskOverlay(taskId) {
   })
 }
 
-function updateSubtaskInfo(checkbox) {
-  let taskId = checkbox.dataset.taskId;
-  let checkboxes = document.querySelectorAll(`input[type="checkbox"][data-task-id="${taskId}"]`);
-  let checkedCount = [...checkboxes].filter(cb => cb.checked).length;
-  console.log(Math.round((checkedCount / checkboxes.length) * 100) + "%");
-}
+
 
