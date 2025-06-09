@@ -121,7 +121,8 @@ h1 {
 }
 
 .dividingLine {
-    height: 300px;
+    height: 100%;
+    margin: 0 20px 0 16px;
     display: flex;
     justify-content: center;
     border: 1px solid #D1D1D1;
@@ -138,6 +139,12 @@ h1 {
 }
 
 .btnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnContainerEdit {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -270,6 +277,13 @@ h1 {
     border-radius: 8px;
 }
 
+.inputFieldsEdit {
+    width: 404px;
+    height: 32px;
+    border: solid 1px #D1D1D1;
+    border-radius: 8px;
+}
+
 .inputFields:focus {
     outline: none !important;
     border: solid 1px #29ABE2;
@@ -350,6 +364,22 @@ h1 {
     padding: 0;
     margin: 0;
     left: 0;
+    top: -12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 0;
+}
+
+.dropdownListEdit {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 0;
@@ -377,6 +407,14 @@ h1 {
 }
 
 .dropdownList li {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdownListEdit li {
     padding: 10px;
     cursor: pointer;
     display: flex;
@@ -521,7 +559,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 16px;
     position: relative;
     left: -30px;
-    bottom:-3px;
+    bottom: 26px;
     cursor: pointer;
 }
 

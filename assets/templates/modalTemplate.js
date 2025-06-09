@@ -22,6 +22,7 @@ function getAddTaskStructure() {
                         </div>
                         
                         <div class="addTaskContent">
+                        
                             <div class="leftContainer">
                                 <form name="leftTaskForm" class="leftAddTaskForm">
                                     <label class="directionColumn">
@@ -128,6 +129,7 @@ function getAddTaskStructure() {
                                     </label>
                                 </form>
                             </div>
+                            
                         </div>
                         <div class="submitSection">
                             <div class="infoText">
@@ -224,8 +226,6 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
-    console.log(date);
-    
     editTaskModal.classList.remove('modalHeight');
     editTaskModal.classList.add('modalHeightEdit')
     editTaskModal.innerHTML = `<div class="mainEditContent">
@@ -242,11 +242,11 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                         <div class="dFlex">
                                             <p>Title</p>
                                         </div>
-                                        <input id="titleInputEdit" class="inputFields" type="text"
+                                        <input id="titleInputEdit" class="inputFieldsEdit" type="text"
                                             value="${title}">
                                     </label>
                                     <label class="directionColumn">Description
-                                        <textarea class="inputFields textArea resizeIcon" name="description"
+                                        <textarea class="inputFieldsEdit textArea resizeIcon" name="description"
                                             id="taskDescriptionEdit" >${description}</textarea>
                                     </label>
                                     <label class="directionColumn">
@@ -254,7 +254,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                         <div class="dFlex">
                                             <p>Due date</p>
                                         </div>
-                                        <input class="inputFields" type="text" id="dateInputEdit" value="${date}"
+                                        <input class="inputFieldsEdit" type="text" id="dateInputEdit" value="${date}"
                                             oninput="formatDate(this)" maxlength="10" data-input>
                                         <img class="dateIconEdit" src="./assets/img/dateIcon.svg" alt="">
                                         </div>
@@ -264,7 +264,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                             <div class="rightContainerEdit">
                                 <form name="rightTaskForm" class="rightAddTaskForm" action="">
                                     <label class="directionColumn maxWidth">Priority
-                                        <div class="btnContainer flexOne">
+                                        <div class="btnContainerEdit flexOne">
                                             <span onclick="selectPriority('urgent')" id="priorityUrgentBtn"
                                                 class="priorityBtn hoverBtn">Urgent<img id="urgentIcon"
                                                     class="priorityIcon" src="./assets/img/prioUrgent.svg" alt=""><img
@@ -297,7 +297,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                         </div>
                                     </label>
                                     <div id="contactListContainer" class="editListContainer dNone">
-                                        <ul class="dropdownList ddListName dNone" id="dropdownListName">
+                                        <ul class="dropdownListEdit ddListName dNone" id="dropdownListName">
                                             <span class="puffer"></span>
                                             <span id="listElements"></span>
                                         </ul>
@@ -308,16 +308,14 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                     </div>
                                     <label id="subtaskLabel" class="directionColumn" onfocusin="getAddNewSubtask()" onfocusout="handleFocusOut()">
                                         Subtasks
-                                        <input id="subtaskInputModal" class="inputFields" type="text" placeholder="Add new subtask">
+                                        <input id="subtaskInputModal" class="inputFieldsEdit" type="text" placeholder="Add new subtask">
                                         <span id="inputIconContainer" class="inputIconContainer">
                                             <img id="plusIcon" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                         </span>
                                     </label>
                                     <ul id="subtaskListEdit" class="subtaskListEdit"></ul>
-                                </form>
-                                
+                                </form> 
                             </div>
-                            
                         </div>
                         <span class="submitBtn checkBtn hoverBtn changeBtn" onclick="changeTasks('${taskId}', '${column}', '${category}')">Ok
                                     <img class="submitIcons" src="./assets/img/createIcon.svg" alt="">
