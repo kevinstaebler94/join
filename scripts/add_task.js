@@ -256,7 +256,7 @@ function checkDateValidation() {
             // requiredDate.classList.remove('requiredDate');
             requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
         }
-    }, 10);
+    }, 100);
 }
 
 function removeTitleRequired() {
@@ -528,6 +528,8 @@ window.addEventListener('mousedown', function (event) {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('addTaskModal');
+    if (modal && modal.classList.contains('dNone')) return;
     flatpickr("#calendarWrap", {
         wrap: true,
         dateFormat: "d/m/Y",
@@ -536,11 +538,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    flatpickr("#calendarWrap", {
-        wrap: true,
-        dateFormat: "d/m/Y",
-        allowInput: true,
-        minDate: "today",
-    });
-});
+function initFlatpickrInModal() {
+    const calendarWrapper = document.querySelector("#calendarWrap");
+    if (calendarWrapper && !calendarWrapper._flatpickr) {
+        flatpickr(calendarWrapper, {
+            wrap: true,
+            dateFormat: "d/m/Y",
+            allowInput: true,
+            minDate: "today"
+        });
+    }
+}

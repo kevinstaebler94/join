@@ -10,6 +10,7 @@ function openAddTaskModal() {
     addTaskModal.classList.remove('dNone');
     boardHeaderWrapper.classList.add('minusMarginAddTask');
     getAddTaskStructure();
+    initFlatpickrInModal();
 }
 
 /**
@@ -147,6 +148,7 @@ function getAddNewSubtask() {
     let inputIconContainer = document.getElementById('inputIconContainer');
     let plusIcon = document.getElementById('plusIcon');
     inputIconContainer.classList.add('inputIconContainer');
+    inputIconContainer.classList.add('pRelative');
     plusIcon.classList.remove('plusIcon');
     inputIconContainer.innerHTML = `<img onclick="cancelValue()" id="plusIcon" class="editIcons" src="./assets/img/cancel.svg" alt="plus-icon">
                                     <span class="iconDivider">|</span>

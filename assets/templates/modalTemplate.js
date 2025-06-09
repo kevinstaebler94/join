@@ -42,10 +42,17 @@ function getAddTaskStructure() {
                                             <p>Due date</p>
                                             <p class="fontRed">*</p>
                                         </div>
-                                        <input class="inputFields" type="text" id="dateInput" placeholder="dd/mm/yyyy"
-                                            oninput="formatDate(this)" maxlength="10">
-                                        <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="">
-                                        <span id="requiredDate" class="requiredDate"></span>
+
+                                        <div class="calendarWrap" id="calendarWrap" data-input>
+                                            <input class="inputFields" type="text" id="dateInput"
+                                                placeholder="dd/mm/yyyy"
+                                                oninput="formatDate(this), removeDateRequired()" onblur="checkDateValidation()" maxlength="10"
+                                                data-input autocomplete="off">
+                                            <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="Open calendar"
+                                                data-toggle>
+                                        </div>
+
+                                        <span id="requiredDate"></span>
                                     </label>
                                 </form>
                             </div>
@@ -73,7 +80,7 @@ function getAddTaskStructure() {
                                         </div>
                                     </label>
                                     <label onfocusin="toggleDropdownName()" class="directionColumn customSelectWrapper">Assigned to
-                                        <div id="customDropdownName" class="customDropdown">
+                                        <div id="customDropdownName" class="customDropdownName">
                                             <div class="dropdownHeader">
                                                 <span id="selectedName"><input onfocus="this.select()" oninput="filterContacts(this.value)" id="assignedInput" class="assignedInput" value="Assigned to"></span>
                                                 <img id="dropdownIconName" class="dropdownIcon"
@@ -81,7 +88,7 @@ function getAddTaskStructure() {
                                             </div>
                                         </div>
                                     </label>
-                                    <div id="contactListContainer" class="listContainer dNone">
+                                    <div id="contactListContainer" class="contactListContainer dNone">
                                         <ul class="dropdownList ddListName dNone" id="dropdownListName">
                                             <span class="puffer"></span>
                                             <span id="listElements"></span>
@@ -96,7 +103,7 @@ function getAddTaskStructure() {
                                             <p>Category</p>
                                             <p class="fontRed">*</p>
                                         </div>
-                                        <div id="customDropdownCategory" class="customDropdown"
+                                        <div id="customDropdownCategory" class="customDropdownCategory"
                                             onclick="toggleDropdownCategory()">
                                             <div class="dropdownHeader">
                                                 <span id="selectedCategory">Select category</span>
@@ -104,7 +111,7 @@ function getAddTaskStructure() {
                                                     src="./assets/img/dropDownIcon.svg" alt="dropdown-icon">
                                             </div>
                                         </div>
-                                        <div id="dropdownListCategory" class="listContainer dNone">
+                                        <div id="dropdownListCategory" class="categoryListContainer dNone">
                                             <ul class="dropdownList"> 
                                                 <span class="puffer"></span>
                                                 <li class="listElement" onclick="selectCategory('Technical Task')">
@@ -244,7 +251,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                         </div>
                                         <input class="inputFields" type="text" id="dateInputEdit" value="${date}"
                                             oninput="formatDate(this)" maxlength="10">
-                                        <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="">
+                                        <img class="dateIconEdit" src="./assets/img/dateIcon.svg" alt="">
                                     </label>
                                 </form>
                             </div>
@@ -271,8 +278,8 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                         </div>
                                     </label>
                                     <label onfocusin="toggleDropdownName()"
-                                        class="directionColumn customSelectWrapper">Assigned to
-                                        <div id="customDropdownName" class="customDropdown">
+                                        class="directionColumn customSelectWrapper dropdownNameLabel">Assigned to
+                                        <div id="customDropdownName" class="customDropdownName">
                                             <div class="dropdownHeader">
 
                                                 <span id="selectedName"><input onfocus="this.select()"
@@ -283,7 +290,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                             </div>
                                         </div>
                                     </label>
-                                    <div id="contactListContainer" class="listContainer dNone">
+                                    <div id="contactListContainer" class="editListContainer dNone">
                                         <ul class="dropdownList ddListName dNone" id="dropdownListName">
                                             <span class="puffer"></span>
                                             <span id="listElements"></span>
@@ -296,7 +303,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                     <label id="subtaskLabel" class="directionColumn" onfocusin="getAddNewSubtask()" onfocusout="handleFocusOut()">
                                         Subtasks
                                         <input id="subtaskInputModal" class="inputFields" type="text" placeholder="Add new subtask">
-                                        <span id="inputIconContainer">
+                                        <span id="inputIconContainer" class="inputIconContainer">
                                             <img id="plusIcon" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                         </span>
                                     </label>
