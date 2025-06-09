@@ -95,7 +95,6 @@ function getTaskComponents(task) {
  * @returns {string} - HTML string for the task
  */
 function filledTaskTemplate(taskComponents) {
-
   let subtaskData = taskComponents.subtask ? taskComponents.subtask : [];
   let isChecked = subtaskData.filter((st) => st.done === true).length;
   let contactData = taskComponents.contact ? taskComponents.contact : [];
@@ -434,5 +433,10 @@ async function openMobileTaskOverlay(taskId) {
   })
 }
 
-
+function updateSubtaskInfo(checkbox) {
+  let taskId = checkbox.dataset.taskId;
+  let checkboxes = document.querySelectorAll(`input[type="checkbox"][data-task-id="${taskId}"]`);
+  let checkedCount = [...checkboxes].filter(cb => cb.checked).length;
+  console.log(Math.round((checkedCount / checkboxes.length) * 100) + "%");
+}
 
