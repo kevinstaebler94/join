@@ -1,4 +1,5 @@
 let taskContainer = [];
+let resizeTimeout;
 /**
  * Initializes the board by loading HTML, fetching the logged-in user,
  * and rendering tasks.
@@ -9,16 +10,20 @@ async function initBoard() {
   await renderTasks();
 }
 
-
-
-let resizeTimeout;
 window.addEventListener('resize', () => {
+  if (window.innerWidth <= 1170) {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      checkWindowSize()
+    }, 10);
+  }
   if (window.innerWidth <= 1023) {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-        window.location.href = './board.html';
-    }, 500); // nur 1x ausführen nach 200ms
-  }
+      window.location.href = './board.html';
+    }, 500); 
+  } 
+
 });
 
 
@@ -289,7 +294,7 @@ async function handleCheckbox(checkbox) {
 async function showProgressBar(isChecked, checkboxTotal, taskId) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
   console.log(progressBar);
-  
+
   if (progressBar) {
     let progress = (isChecked / checkboxTotal) * 100;
     setTimeout(() => {
@@ -419,18 +424,14 @@ function styleInitalHigherThree(contact, initial, taskId) {
  */
 function checkWindowSize() {
   const modal = document.getElementById('addTaskModal');
-  if (modal && modal.classList.contains('dNone')) return;
+  if (modal && modal.classList.contains('dNone')) {
+    renderTasks();
+    return;
+  } 
   handleAddTask();
 }
 
-window.addEventListener('resize', () => {
-  if (window.innerWidth <= 1170) {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-        checkWindowSize()
-    }, 10);
-  }
-});
+
 
 function closeTaskOverlay() {
   let mobileTaskOverlay = document.getElementById("moveToOverlayWrapper");
