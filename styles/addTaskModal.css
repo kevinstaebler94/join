@@ -4,6 +4,17 @@
     margin: 48px 0;
 }
 
+.imgOverlay {
+    position: fixed;
+    height: auto !important;
+    min-height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 30;
+}
+
 .dFlex {
     display: flex;
 }
@@ -509,8 +520,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .dateIconEdit {
     width: 16px;
     position: relative;
-    left: 374px;
-    bottom: 26px;
+    left: -30px;
+    bottom:-3px;
     cursor: pointer;
 }
 
@@ -544,7 +555,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subtaskList {
     position: absolute;
-    top: 466px;
+    top: 496px;
     max-height: 64px;
     overflow: auto;
     width: 404px;
@@ -608,8 +619,18 @@ ul {
 }
 
 .editIcons:hover {
-    width: 15px;
+    background-color: #D1D1D1;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
 }
+
+/* .doneIcon:hover {
+    background-color: #D1D1D1;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+} */
 
 .newSubtaskListElement {
     background-color: white;
@@ -642,6 +663,10 @@ ul {
     display: flex;
     align-items: center;
 }
+.iconSize {
+    width: 16px;
+    height: 16px;
+}
 
 .editIcons {
     width: 16px;
@@ -650,17 +675,13 @@ ul {
     cursor: pointer;
 }
 
-.doneIcon {
+/* .doneIcon {
     width: 24px;
-}
-
-.editIcons:hover {
-    width: 15px;
 }
 
 .doneIcon:hover {
     width: 22px;
-}
+} */
 
 .iconDivider {
     color: #A8A8A8;
@@ -714,7 +735,7 @@ ul {
 
 #addedBoardImg {
     position: absolute;
-    top: 250px;
+    top: 50%;
     left: 50%;
     transform: translate(-50%);
     z-index: 6;

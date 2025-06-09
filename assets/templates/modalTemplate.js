@@ -224,6 +224,8 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
+    console.log(date);
+    
     editTaskModal.classList.remove('modalHeight');
     editTaskModal.classList.add('modalHeightEdit')
     editTaskModal.innerHTML = `<div class="mainEditContent">
@@ -248,12 +250,14 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                             id="taskDescriptionEdit" >${description}</textarea>
                                     </label>
                                     <label class="directionColumn">
+                                    <div class="calendarWrap" id="calendarWrap" data-input>
                                         <div class="dFlex">
                                             <p>Due date</p>
                                         </div>
                                         <input class="inputFields" type="text" id="dateInputEdit" value="${date}"
-                                            oninput="formatDate(this)" maxlength="10">
+                                            oninput="formatDate(this)" maxlength="10" data-input>
                                         <img class="dateIconEdit" src="./assets/img/dateIcon.svg" alt="">
+                                        </div>
                                     </label>
                                 </form>
                             </div>
@@ -323,6 +327,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
     selectPriority(priority);
     getContactsEdit(contacts);
     getSubtaskEdit(subtasks, encodedSubtasks);
+    initFlatpickrInModal();
 }
 
 /**
@@ -340,17 +345,17 @@ function renderSubtasksEdit(subtasks, encodedSubtasks) {
                                     <div id="subtaskContainer${currentSubtask.subtask}" class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
                                         <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${currentSubtask.subtask}" class="subtaskWidth">${currentSubtask.subtask}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
-                                            <img onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="editIcons"  src="./assets/img/edit.svg" alt="">
+                                            <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="editIcons"><img class="iconSize" src="./assets/img/edit.svg" alt=""></span>
                                             <span class="iconDivider">|</span>
-                                            <img onclick="deleteSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
+                                            <span onclick="deleteSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="editIcons"><img class="iconSize" id="deleteIcon" src="./assets/img/delete.svg" alt=""></span>
                                         </span>
                                     </div>
                                     <div id="subtaskEditContainer${currentSubtask.subtask}" class="newSubtaskListElement dNone">
                                         <input id="editSubtaskInput${currentSubtask.subtask}" class="newSubtaskInput" value="${currentSubtask.subtask}">
                                         <span  id="editIconContainer" class="iconContainer">
-                                            <img class="editIcons" onclick="deleteSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" src="./assets/img/delete.svg" alt="">
+                                            <span class="editIcons" onclick="deleteSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')"><img class="iconSize" src="./assets/img/delete.svg" alt=""></span>
                                             <span class="iconDivider">|</span>
-                                            <img onclick="editSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
+                                            <span onclick="editSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}')" class="editIcons doneIcon"><img class="iconSize" src="./assets/img/done.svg" alt=""></span>
                                         </span>
                                     </div>
                                 </li>`;
@@ -364,23 +369,29 @@ function addNewSubtaskModal() {
     let subtaskListEdit = document.getElementById('subtaskListEdit');
     let inputValue = document.getElementById('subtaskInputModal');
     let subtaskObj = { done: false, subtask: inputValue.value };
-    let subtaskIndex = subtasksArr[0].push(subtaskObj) - 1;
+    let subtaskIndex;
     let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskObj));
+    if (inputValue.value == '') {
+        return;
+    }
+    subtaskIndex = subtasksArr[0].push(subtaskObj) - 1;
     subtaskListEdit.innerHTML += `<li id="subtaskElement${inputValue.value}">
                                     <div id="subtaskContainer${inputValue.value}" class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
                                         <span onclick="getEditSubtaskModal('${inputValue.value}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${inputValue.value}">${inputValue.value}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
-                                            <img onclick="getEditSubtaskModal('${inputValue.value}')" class="editIcons"  src="./assets/img/edit.svg" alt="">
+                                            <span onclick="getEditSubtaskModal('${inputValue.value}')" class="editIcons"><img src="./assets/img/edit.svg" alt="" class="iconSize"></span>
                                             <span class="iconDivider">|</span>
-                                            <img onclick="deleteNewAddedSubtask('${subtaskIndex}', '${inputValue.value}')" id="deleteIcon" class="editIcons" src="./assets/img/delete.svg" alt="">
+                                            <span onclick="deleteNewAddedSubtask('${subtaskIndex}', '${inputValue.value}')" class="editIcons"><img id="deleteIcon"  src="./assets/img/delete.svg" alt="" class="iconSize"></span>
                                         </span>
                                     </div>
                                     <div id="subtaskEditContainer${inputValue.value}" class="newSubtaskListElement dNone">
                                         <input id="editSubtaskInput${inputValue.value}" class="newSubtaskInput" value="${inputValue.value}">
                                         <span  id="editIconContainer" class="iconContainer">
-                                            <img class="editIcons" onclick="deleteNewAddedSubtask('${subtaskIndex}')" src="./assets/img/delete.svg" alt="">
+                                        <span onclick="deleteNewAddedSubtask('${subtaskIndex}')" class="editIcons"><img src="./assets/img/delete.svg" alt="" class="iconSize"></span>
+                                            
                                             <span class="iconDivider">|</span>
-                                            <img onclick="editSubtaskModal('${inputValue.value}', '${subtaskIndex}')" class="editIcons doneIcon" src="./assets/img/done.svg" alt="">
+                                            <span onclick="editSubtaskModal('${inputValue.value}', '${subtaskIndex}')" class="editIcons doneIcon"><img src="./assets/img/done.svg" alt="" class="iconSize"></span>
+                                            
                                         </span>
                                     </div>
                                 </li>`;

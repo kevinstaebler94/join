@@ -4,7 +4,7 @@ let tasks = [
         id: 'task-001',
         title: 'Als Nutzer möchte ich mich registrieren können',
         description: 'Ein Registrierungsformular mit Validierung implementieren, damit neue Nutzer ein Konto erstellen können.',
-        date: '2025/04/15',
+        date: '15/06/2025',
         prio: 'medium',
         contact: ['Anna Schmidt', 'Max Müller'],
         subtask: [
@@ -19,7 +19,7 @@ let tasks = [
         id: 'task-002',
         title: 'Als Admin möchte ich alle Nutzer sehen',
         description: 'Eine Übersicht aller registrierten Nutzer im Admin-Panel anzeigen lassen.',
-        date: '2025/04/16',
+        date: '16/06/2025',
         prio: 'medium',
         contact: ['Lukas Weber'],
         subtask: [
@@ -34,7 +34,7 @@ let tasks = [
         id: 'task-003',
         title: 'Als Nutzer möchte ich die Landingpage auf dem Handy sehen',
         description: 'Die Landingpage für mobile Geräte optimieren.',
-        date: '2025/04/18',
+        date: '18/06/2025',
         prio: 'medium',
         contact: ['Clara Meier', 'Ben Fischer'],
         subtask: [
@@ -49,7 +49,7 @@ let tasks = [
         id: 'task-004',
         title: 'Als Entwickler möchte ich einen sauberen Branch-Workflow nutzen',
         description: 'Dokumentation zum Git-Workflow für das Team bereitstellen und Prozesse vereinheitlichen.',
-        date: '2025/04/20',
+        date: '20/06/2025',
         prio: 'low',
         contact: ['Marie Jung'],
         subtask: [
@@ -64,7 +64,7 @@ let tasks = [
         id: 'task-005',
         title: 'Bug: Registrierung schlägt fehl bei ungültiger E-Mail',
         description: 'Fehlerhafte Validierung im Backend bei ungültiger E-Mail-Adresse beheben.',
-        date: '2025/04/21',
+        date: '21/06/2025',
         prio: 'urgent',
         contact: ['Tobias König'],
         subtask: [

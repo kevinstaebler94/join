@@ -152,9 +152,9 @@ function getAddNewSubtask() {
     inputIconContainer.classList.add('inputIconContainer');
     inputIconContainer.classList.add('pRelative');
     plusIcon.classList.remove('plusIcon');
-    inputIconContainer.innerHTML = `<img onclick="cancelValue()" id="plusIcon" class="editIcons" src="./assets/img/cancel.svg" alt="plus-icon">
+    inputIconContainer.innerHTML = `<span onclick="cancelValue()" class="editIcons"><img  id="plusIcon" class="iconSize" src="./assets/img/cancel.svg" alt="plus-icon"></span>
                                     <span class="iconDivider">|</span>
-                                    <img onclick="addNewSubtaskModal()" id="doneIcon" class="editIcons" src="./assets/img/done.svg" alt="">`;
+                                    <span onclick="addNewSubtaskModal()" class="editIcons"><img  id="doneIcon" class="iconSize" src="./assets/img/done.svg" alt=""></span>`;
 }
 
 /**
@@ -254,7 +254,7 @@ function deleteEditSubtask(subtaskId, subtaskIndex, encodedSubtasks) {
  * Cancels subtask input and resets icons after short delay.
  */
 function cancelValue() {
-    let subtaskInput = document.getElementById('subtaskInput');
+    let subtaskInput = document.getElementById('subtaskInputModal');
     subtaskInput.value = '';
     subtaskInput.blur();
     setTimeout(() => {
