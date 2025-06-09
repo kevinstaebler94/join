@@ -16,7 +16,7 @@ window.addEventListener('resize', () => {
   if (window.innerWidth <= 1023) {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-        window.location.href = 'board.html';
+        window.location.href = './board.html';
     }, 500); // nur 1x ausführen nach 200ms
   }
 });
@@ -422,8 +422,6 @@ function checkWindowSize() {
   if (modal && modal.classList.contains('dNone')) return;
   handleAddTask();
 }
-
-// window.addEventListener('resize', checkWindowSize);
 
 window.addEventListener('resize', () => {
   if (window.innerWidth <= 1170) {
