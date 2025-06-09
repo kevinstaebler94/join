@@ -140,12 +140,19 @@ function dragstartHandler(ev) {
   ev.dataTransfer.setData("column", ev.target.closest(".dropZone").id);
 }
 
+function dragendHandler() {
+  document.querySelectorAll('.dropZone').forEach(zone => zone.classList.remove('highlight'));
+}
+
 /**
  * Prevents default behavior to allow drop.
  * @param {DragEvent} ev
  */
 function dragoverHandler(ev) {
   ev.preventDefault();
+  document.querySelectorAll('.dropZone').forEach(zone => zone.classList.remove('highlight'));
+  const currentZone = ev.target.closest('.dropZone');
+  if (currentZone) currentZone.classList.add('highlight');
 }
 
 /**
@@ -168,6 +175,7 @@ async function dropHandler(ev) {
       renderTasks();
     }
   }
+  document.querySelectorAll('.dropZone').forEach(zone => zone.classList.remove('highlight'));
 }
 
 /**
@@ -310,7 +318,7 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
   let shortenedDescription = shortenText(taskComponents.description, 25);
   return `
     <div data-id="${taskComponents.id}" id="${taskComponents.id}"
-     onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}'), openMobileTaskOverlay('${taskComponents.id}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)">
+     onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}'), openMobileTaskOverlay('${taskComponents.id}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)" ondragend="dragendHandler(event)">
       <h3 class="taskCategory userStory">${taskComponents.category}</h3>
       <h4 class="taskTitle">${shortenedTitle}</h4>
       <p class="taskDescription">${shortenedDescription}</p>
@@ -425,3 +433,6 @@ async function openMobileTaskOverlay(taskId) {
     })
   })
 }
+
+
+
