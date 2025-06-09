@@ -224,6 +224,8 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
     let editTaskModal = document.getElementById('filledTaskModal');
     let subtasks = JSON.parse(decodeURIComponent(encodedSubtasks));
     let contacts = JSON.parse(decodeURIComponent(encodedContacts));
+    editTaskModal.classList.remove('modalHeight');
+    editTaskModal.classList.add('modalHeightEdit')
     editTaskModal.innerHTML = `<div class="mainEditContent">
                         <div class="editHeadSection">
                             <div class="closeIconContainer">
@@ -232,8 +234,8 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                         </div>
                         
                         <div class="addTaskContent editTaskContent modalScrollbar">
-                            <div class="leftContainer">
-                                <form name="leftTaskForm" class="leftAddTaskForm">
+                            <div class="leftContainerEdit">
+                                <form name="leftTaskForm" class="leftAddTaskFormEdit">
                                     <label class="directionColumn">
                                         <div class="dFlex">
                                             <p>Title</p>
@@ -255,7 +257,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                     </label>
                                 </form>
                             </div>
-                            <div class="rightContainer">
+                            <div class="rightContainerEdit">
                                 <form name="rightTaskForm" class="rightAddTaskForm" action="">
                                     <label class="directionColumn maxWidth">Priority
                                         <div class="btnContainer flexOne">

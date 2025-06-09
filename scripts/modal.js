@@ -30,7 +30,7 @@ function openFilledTaskModal(taskId, category, title, description, date, priorit
     let mobileTaskOverlay = document.getElementById("moveToOverlayWrapper");
     let filledTaskModal = document.getElementById('filledTaskModal');
     let boardHeaderWrapper = document.getElementById('boardHeaderWrapper');
-    if(window.innerWidth < 1023) {
+    if (window.innerWidth < 1023) {
         mobileTaskOverlay.classList.remove("displayNone");
     }
     overlay.classList.remove('dNone');
@@ -53,6 +53,8 @@ function closeModal() {
     overlay.classList.add('dNone');
     addTaskModal.classList.add('dNone');
     filledTaskModal.classList.add('dNone');
+    filledTaskModal.classList.remove('modalHeightEdit');
+    filledTaskModal.classList.add('modalHeight');
     boardHeaderWrapper.classList.remove('minusMargin');
     boardHeaderWrapper.classList.remove('minusMarginAddTask');
     newSubtaskArr = [];

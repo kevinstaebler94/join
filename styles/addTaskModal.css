@@ -56,6 +56,14 @@ h1 {
     overflow-y: auto;
 }
 
+.addTaskContentEdit {
+    display: flex;
+    justify-content: space-between;
+    height: 400px;
+    padding: 48px 0;
+    overflow-y: auto;
+}
+
 .addTaskContent::-webkit-scrollbar-track {
     background: transparent;
     /* Unsichtbare Track-Hintergrundfläche */
@@ -68,15 +76,32 @@ h1 {
 }
 
 .leftContainer {
+    height: 100%;
+}
+
+.leftContainerEdit {
     position: fixed;
 }
 
 .rightContainer {
+    height: 100%;
+}
+
+.rightContainerEdit {
     position: fixed;
     top: 336px;
 }
 
 .leftAddTaskForm {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 34px;
+}
+
+.leftAddTaskFormEdit {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
