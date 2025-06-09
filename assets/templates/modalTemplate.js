@@ -235,7 +235,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                             </div>
                         </div>
                         
-                        <div class="addTaskContent editTaskContent modalScrollbar">
+                        <div class="addTaskContentEdit editTaskContent modalScrollbar">
                             <div class="leftContainerEdit">
                                 <form name="leftTaskForm" class="leftAddTaskFormEdit">
                                     <label class="directionColumn">
