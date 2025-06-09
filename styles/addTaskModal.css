@@ -301,7 +301,7 @@ h1 {
 .plusIcon {
     width: 16px;
     position: relative;
-    left: 374px;
+    left: 346px;
     bottom: 27px;
     cursor: pointer;
 }
@@ -612,7 +612,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .subtaskWidth {
-    width: 300px;
+    width: 100%;
 }
 
 .subtaskList {
@@ -713,7 +713,7 @@ ul {
 }
 
 .inputIconContainer {
-    left: 360px;
+    left: 330px;
     bottom: 27px;
     width: 50px;
     display: flex;
