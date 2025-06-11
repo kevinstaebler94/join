@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./mobile/mobileHeader.css">
     <link rel="stylesheet" href="./mobile/mobileSidebar.css">
-    <link rel="stylesheet" href="./mobile/mobileAddTask.css">
     <link rel="stylesheet" href="./styles/checkbox.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="./mobile/mobileAddTask.css">
     <script src="./script.js"></script>
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/includeHTML.js"></script>
@@ -56,7 +56,7 @@
                                         </div>
                                         <input oninput="removeTitleRequired()" id="titleInput" class="inputFields"
                                             type="text" placeholder="Enter a title">
-                                        <span id="requiredTitle"></span>
+                                        <span id="requiredTitle" class="requiredContainer"></span>
                                     </label>
                                     <label class="directionColumn">Description
                                         <textarea class="inputFields textArea resizeIcon" name="description"
@@ -77,7 +77,7 @@
                                                 data-toggle>
                                         </div>
 
-                                        <span id="requiredDate"></span>
+                                        <span id="requiredDate" class="requiredContainer"></span>
                                     </label>
 
                                 </form>
@@ -153,7 +153,7 @@
                                                     Story</li>
                                             </ul>
                                         </div>
-                                        <span id="requiredCategory" class="requiredCategory"></span>
+                                        <span id="requiredCategory" class="requiredCategory requiredContainer"></span>
                                     </span>
                                     <label class="directionColumn">Subtasks
                                         <input id="subtaskInput" class="inputFields" type="text"

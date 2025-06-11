@@ -13,7 +13,11 @@
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 3;
+    z-index: 20;
+}
+
+p {
+    font-size: 18px;
 }
 
 main {
@@ -52,6 +56,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    font-size: 18px;
 }
 
 h1 {
@@ -79,13 +84,13 @@ h1 {
     height: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     gap: 76px;
 }
 
 .dividingLine {
-    height: 100%;
+    height: 110%;
     display: flex;
     justify-content: center;
     border: 1px solid #D1D1D1;
@@ -226,10 +231,10 @@ h1 {
 
 .inputFields {
     width: 345px;
-    height: 32px;
+    height: 38px;
     border: solid 1px #D1D1D1;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 18px;
     padding-left: 8px;
 }
 
@@ -279,13 +284,6 @@ ul {
     overflow: auto;
 }
 
-.liMarker {
-    border-radius: 50%;
-    width: 6px;
-    height: 6px;
-    background: #000;
-}
-
 .liText {
     display: flex;
     justify-content: center;
@@ -319,10 +317,10 @@ ul {
 }
 
 .plusIcon {
-    width: 16px;
+    width: 24px;
     position: relative;
-    left: 320px;
-    bottom: 27px;
+    left: 314px;
+    bottom: 34px;
     cursor: pointer;
 }
 
@@ -332,7 +330,7 @@ ul {
 }
 
 .dropdownIcon {
-    width: 16px;
+    width: 24px;
     cursor: pointer;
 }
 
@@ -378,7 +376,7 @@ ul {
 
 .assignedInput {
     border: none;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .assignedInput:focus {
@@ -441,14 +439,14 @@ ul {
 .contactListContainer {
     position: absolute;
     z-index: 10;
-    top: 343px;
+    top: 336px;
     width: 345px;
 }
 
 .categoryListContainer {
     position: absolute;
     z-index: 5;
-    top: 470px;
+    top: 446px;
     width: 345px;
 }
 
@@ -558,8 +556,12 @@ label {
     color: #FF8190;
 }
 
+.requiredContainer {
+    height: 20px;
+}
+
 .requiredFont {
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .templateHTML {
@@ -582,10 +584,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .dateIcon {
-    width: 16px;
+    width: 24px;
     position: relative;
-    left: -28px;
-    bottom: -1px;
+    left: -36px;
+    bottom: -4px;
     cursor: pointer;
 }
 

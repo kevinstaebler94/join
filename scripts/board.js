@@ -293,8 +293,6 @@ async function handleCheckbox(checkbox) {
  */
 async function showProgressBar(isChecked, checkboxTotal, taskId) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
-  console.log(progressBar);
-
   if (progressBar) {
     let progress = (isChecked / checkboxTotal) * 100;
     setTimeout(() => {

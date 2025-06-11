@@ -308,7 +308,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                                     </div>
                                     <label id="subtaskLabel" class="directionColumn" onfocusin="getAddNewSubtask()" onfocusout="handleFocusOut()">
                                         Subtasks
-                                        <input id="subtaskInputModal" class="inputFieldsEdit" type="text" placeholder="Add new subtask">
+                                        <input onkeydown="checkEnterToAdd(event)" id="subtaskInputModal" class="inputFieldsEdit" type="text" placeholder="Add new subtask">
                                         <span id="inputIconContainer" class="inputIconContainer">
                                             <img id="plusIcon" class="plusIconEdit" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                         </span>
@@ -369,6 +369,9 @@ function addNewSubtaskModal() {
     let subtaskObj = { done: false, subtask: inputValue.value };
     let subtaskIndex;
     let serializedSubtasks = encodeURIComponent(JSON.stringify(subtaskObj));
+    if (inputValue.value.startsWith(' ')) {
+        inputValue.value = inputValue.value.trimStart();
+    }
     if (inputValue.value == '') {
         return;
     }

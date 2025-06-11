@@ -293,8 +293,8 @@ function showAddedBoardImg() {
     overlay.classList.remove('dNone');
     addedBoardImg.classList.remove('dNone');
     setTimeout(() => {
-        window.location.href = "./board.html";;
-    }, 3000);
+        window.location.href = "./board.html";
+    }, 2000);
 }
 
 /**
@@ -308,7 +308,23 @@ function clearAddTask() {
     let subtaskInput = document.getElementById('subtaskInput');
     let subtaskList = document.getElementById('subtaskList');
     let assignedCounter = document.getElementById('assignedCounter');
-    deleteTaskValues(titleInput, descriptionInput, dateInput, assignedContainer, subtaskInput, subtaskList, assignedCounter)
+    deleteTaskValues(titleInput, descriptionInput, dateInput, assignedContainer, subtaskInput, subtaskList, assignedCounter);
+    clearRequired();
+}
+
+function clearRequired() {
+    let titleInput = document.getElementById('titleInput');
+    let requiredTitle = document.getElementById('requiredTitle');
+    let dateInput = document.getElementById('dateInput');
+    let requiredDate = document.getElementById('requiredDate');
+    let categoryInput = document.getElementById('customDropdownCategory');
+    let requiredCategory = document.getElementById('requiredCategory');
+    titleInput.classList.remove('required');
+    requiredTitle.innerHTML = '';
+    dateInput.classList.remove('required');
+    requiredDate.innerHTML = '';
+    categoryInput.classList.remove('required');
+    requiredCategory.innerHTML = '';
 }
 
 /**

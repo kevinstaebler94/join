@@ -325,7 +325,7 @@ h1 {
 }
 
 .dropdownIcon {
-    width: 16px;
+    width: 20px;
     cursor: pointer;
 }
 
@@ -713,11 +713,12 @@ ul {
 }
 
 .inputIconContainer {
-    left: 330px;
+    left: 340px;
     bottom: 27px;
     width: 50px;
     display: flex;
     align-items: center;
+    gap: 4px;
 }
 .iconSize {
     width: 16px;
@@ -836,7 +837,7 @@ ul {
     }
 
     .subtaskWidth {
-        width: 290px;
+        width: 280px;
     }
 }
 

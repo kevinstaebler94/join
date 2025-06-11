@@ -158,11 +158,15 @@ async function validateEditContactInput() {
     let inputs = getEditContactInputs();
     let values = getEditContactValues(inputs);
     resetEditInputErrors(inputs);
-    if (checkEmptyEditFields(inputs, values)) return false;
+
     let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
-    if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
+
     let editEmailValid = await validateEditEmailFormat();
+
+
     let editPhoneValid = await validateEditPhoneNumberFormat();
+    if (checkEmptyEditFields(inputs, values)) return false;
+    if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
     return editEmailValid && editPhoneValid;
 }
 
@@ -244,6 +248,9 @@ async function validateEditEmailFormat(originalEmail) {
     let email = document.getElementById("contactEmailEdit").value.trim().toLowerCase();
     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let errorMsgEmail = document.getElementById("emailErrorEdit");
+    if (emailInput.value == '') {
+        return;
+    }
     if (!pattern.test(email)) {
         emailInput.classList.add("error");
         errorMsgEmail.innerText = "Please enter a valid email address.";
@@ -257,6 +264,10 @@ async function validateEditEmailFormat(originalEmail) {
     }
     if (!originalEmail || email !== originalEmail.toLowerCase()) {
         let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
+        if (emailInput.value == email) {
+            return true;
+        }
+        
         for (let key in existingContacts) {
             if (existingContacts[key].email.trim().toLowerCase() === email) {
                 emailInput.classList.add("error");
@@ -308,14 +319,22 @@ async function validateEditPhoneNumberFormat() {
     let pattern = /^(\+49\s?|0)[1-9][0-9\s\-]{3,}$/;
     let errorMsgPhone = document.getElementById("phoneErrorEdit");
     let value = phone.value.trim();
-
-    if (!pattern.test(value)) {
-        errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
-        errorMsgPhone.classList.remove("dNone");
-        phone.classList.add("error");
-        return false;
+    if (phone.value == '') {
+        return;
     }
-
+   
+        if (!pattern.test(value)) {
+            errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
+            errorMsgPhone.classList.remove("dNone");
+            phone.classList.add("error");
+            setTimeout(() => {
+            errorMsgPhone.classList.add("dNone");
+            errorMsgPhone.innerText = "";
+            phone.classList.remove("error");
+        }, 3000);
+            return false;
+        }
+    
     errorMsgPhone.classList.add("dNone");
     return true;
 }

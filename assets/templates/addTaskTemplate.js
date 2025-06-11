@@ -42,6 +42,11 @@ function getSubtask() {
     let subtaskList = document.getElementById('subtaskList');
     let subtaskObj = { subtask: subtaskInput.value, done: false };
     let subtaskIndex = subtasksArr.length;
+
+
+  if (subtaskInput.value.startsWith(' ')) {
+    subtaskInput.value = subtaskInput.value.trimStart();
+  }
     if (!subtaskInput.value) {
         subtaskInput.classList.add('required');
         return;
@@ -50,7 +55,7 @@ function getSubtask() {
         subtaskList.innerHTML += `<li id="subtaskElement${subtaskIndex}">
     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
         <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
-            <p class="liMarker"></p>
+            <p class="liMarker">•</p>
             <p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${subtaskInput.value}</p>
         </span>
         <span id="editIconContainer" class="iconContainer dNone">

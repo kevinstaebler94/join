@@ -167,7 +167,7 @@ function resetSubtaskIcons() {
     }
     const plusIcon = document.createElement('img');
     plusIcon.id = 'plusIcon';
-    plusIcon.className = 'plusIcon';
+    plusIcon.className = 'plusIconEdit';
     plusIcon.src = './assets/img/plusIcon.svg';
     plusIcon.alt = 'plus-icon';
     inputIconContainer.appendChild(plusIcon);
@@ -307,3 +307,9 @@ function getContactInitialColorEdit(contact) {
  * Global keyup listener for handling "Enter" key events in inputs.
  * Adds or confirms subtasks depending on active input.
  */
+function checkEnterToAdd(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    addNewSubtaskModal();
+  }
+}

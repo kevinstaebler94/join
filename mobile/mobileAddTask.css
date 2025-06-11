@@ -5,6 +5,10 @@
 }
 
 @media (max-width: 850px) {
+    .rightAddTaskForm {
+        padding-bottom: 48px;
+    }
+
     .dividingLine {
         display: none;
     }
@@ -12,6 +16,7 @@
     .addTaskContent {
         flex-direction: column;
         height: auto;
+        align-items: flex-start;
     }
 
     .mainContent {
@@ -55,9 +60,29 @@
     h1 {
         width: 100%;
     }
+
+    .subtaskListPosition {
+        top: 1088px;
+        width: 345px;
+    }
+
+    .contactListContainer {
+        top: 868px;
+        width: 345px;
+    }
+
+    .categoryListContainer {
+        top: 990px;
+        width: 345px;
+    }
 }
 
 @media (max-width: 440px) {
+
+    .rightAddTaskForm {
+        padding-bottom: 48px;
+    }
+
     .inputFields {
         width: 300px;
     }
@@ -66,7 +91,11 @@
         width: 300px;
     }
 
-    .customDropdown {
+    .customDropdownName {
+        width: 300px;
+    }
+
+    .customDropdownCategory {
         width: 300px;
     }
 
@@ -76,25 +105,58 @@
     }
 
     .dateIcon {
-        left: 272px;
+        left: -40px;
     }
 
     .plusIcon {
         left: 272px;
     }
+
+    .subtaskListPosition {
+        top: 1088px;
+        width: 300px;
+    }
+
+    .contactListContainer {
+        width: 300px;
+    }
+
+    .categoryListContainer {
+        width: 300px;
+    }
 }
 
 @media (max-width: 380px) {
+    .leftAddTaskForm {
+        align-items: center;
+    }
+
+    .rightAddTaskForm {
+        padding-bottom: 48px;
+    }
+
+    .calendarWrap {
+        width: 260px;
+    }
+
+    .addTaskContent {
+        align-items: center;
+    }
+
     .inputFields {
-        width: 280px;
+        width: 260px;
     }
 
     .dropdownHeader {
-        width: 280px;
+        width: 260px;
     }
 
-    .customDropdown {
-        width: 280px;
+    .customDropdownName {
+        width: 260px;
+    }
+
+    .customDropdownCategory {
+        width: 260px;
     }
 
     .priorityBtn {
@@ -103,10 +165,34 @@
     }
 
     .dateIcon {
-        left: 252px;
+        left: 228px;
+        bottom: 29px;
+    }
+
+    .flatpickr-calendar {
+        left: 22px;
+        width: 260px;
     }
 
     .plusIcon {
-        left: 252px;
+        left: 228px;
+    }
+
+    .assignedInput {
+        width: 214px;
+    }
+
+    .contactListContainer {
+        top: 896px;
+        width: 260px;
+    }
+
+    .categoryListContainer {
+        top: 1016px;
+        width: 260px;
+    }
+
+    .subtaskListPosition {
+        width: 260px;
     }
 }
