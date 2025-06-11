@@ -246,7 +246,7 @@ input::placeholder {
 
 .inputError {
     color: red;
-    font-size: 0.6rem;
+    font-size: 1rem;
 }
 
 .inputFields.error {
@@ -276,7 +276,7 @@ input::placeholder {
 }
 
 .errorMsg {
-    font-size: 0.6rem;
+    font-size: 1rem;
     padding: 0;
     color: red;
     visibility: hidden;

@@ -158,7 +158,7 @@ async function validateEditContactInput() {
     let inputs = getEditContactInputs();
     let values = getEditContactValues(inputs);
     resetEditInputErrors(inputs);
-    if (checkEmptyFields(inputs, values)) return false;
+    if (checkEmptyEditFields(inputs, values)) return false;
     let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
     if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
     let editEmailValid = await validateEditEmailFormat();
@@ -318,4 +318,33 @@ async function validateEditPhoneNumberFormat() {
 
     errorMsgPhone.classList.add("dNone");
     return true;
+}
+
+function checkEmptyEditFields(inputs, values) {
+    let hasError = false;
+
+    if (!values.name) {
+        inputs.nameInput.classList.add('error');
+        document.getElementById('editNamePlaceholderError').innerHTML = "Please enter a name.";
+        document.getElementById('editNamePlaceholderError').classList.add('visible');
+        hideEditErrorMessages('editNamePlaceholderError', 'contactNameEdit');
+        hasError = true;
+    }
+
+    if (!values.email) {
+        inputs.emailInput.classList.add('error');
+        document.getElementById('editEmailPlaceholderError').innerHTML = "Please enter an e-mail adress.";
+        document.getElementById('editEmailPlaceholderError').classList.add('visible');
+        hideEditErrorMessages('editEmailPlaceholderError', 'contactEmailEdit');
+        hasError = true;
+    }
+
+    if (!values.phone) {
+        inputs.phoneInput.classList.add('error');
+        document.getElementById('editPhonePlaceholderError').innerHTML = "Please enter a phone number.";
+        document.getElementById('editPhonePlaceholderError').classList.add('visible');
+        hideEditErrorMessages('editPhonePlaceholderError', 'contactPhoneEdit');
+        hasError = true;
+    }
+    return hasError;
 }
