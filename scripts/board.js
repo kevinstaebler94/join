@@ -205,8 +205,10 @@ async function filterTasks(id) {
     return;
   }
   let result = tasksArr.filter((task) =>
-    task.title.toLowerCase().includes(input)
+    task.title.toLowerCase().includes(input) ||
+    task.description?.toLowerCase().includes(input)
   );
+
   renderFilteredTasks(result);
 }
 
@@ -214,15 +216,15 @@ async function filterTasks(id) {
  * Renders tasks based on the filter results.
  * @param {Array} filtered - Array of filtered task objects
  */
-async function renderFilteredTasks(filtered) {
+async function renderFilteredTasks(result) {
   const isMobile = window.innerWidth <= 768;
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
   const columnIds = columns.map(col => isMobile ? col + "Mobile" : col);
   columnIds.forEach(id => document.getElementById(id).innerHTML = "");
 
-  if (!filtered.length) return columnIds.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
+  if (!result.length) return columnIds.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
 
-  for (const task of filtered) {
+  for (const task of result) {
     task.capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1);
     const targetId = isMobile ? task.column + "Mobile" : task.column;
     const target = document.getElementById(targetId);
