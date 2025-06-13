@@ -228,9 +228,9 @@ async function renderFilteredTasks(filtered, filteredTask) {
   const columnIds = columns.map(col => isMobile ? col + "Mobile" : col);
   columnIds.forEach(id => document.getElementById(id).innerHTML = "");
 
-  if (!result.length) return columnIds.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
+  if (!filtered.length) return columnIds.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
 
-  for (const task of result) {
+  for (const task of filtered) {
     task.capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1);
     const targetId = isMobile ? task.column + "Mobile" : task.column;
     const target = document.getElementById(targetId);
