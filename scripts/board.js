@@ -21,8 +21,8 @@ window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       window.location.href = './board.html';
-    }, 500); 
-  } 
+    }, 500);
+  }
 
 });
 
@@ -48,14 +48,19 @@ async function renderTasks() {
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
   let countArr = [];
   columns.forEach(
-    (id) => (document.getElementById(getColumnId(id)).innerHTML = "")
+    (id) => {
+      (document.getElementById(getColumnId(id)).innerHTML = "")
+    }
+
   );
+
+
   let taskArr = Object.values(tasks || {});
   taskArr.forEach(task => {
     const targetId = getColumnId(task.column);
     const target = document.getElementById(targetId);
     taskContainer.push(task.id);
-    if (!target) return
+    if (!target) return;
     let taskComponents = getTaskComponents(task);
     target.innerHTML += filledTaskTemplate(taskComponents, task);
     if (!task.contact) return;
@@ -207,14 +212,16 @@ async function filterTasks(id) {
   let result = tasksArr.filter((task) =>
     task.title.toLowerCase().includes(input)
   );
-  renderFilteredTasks(result);
+  renderFilteredTasks(result, tasks);
 }
 
 /**
  * Renders tasks based on the filter results.
  * @param {Array} filtered - Array of filtered task objects
  */
-async function renderFilteredTasks(filtered) {
+async function renderFilteredTasks(filtered, filteredTask) {
+
+
   const isMobile = window.innerWidth <= 768;
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
   const columnIds = columns.map(col => isMobile ? col + "Mobile" : col);
@@ -227,12 +234,28 @@ async function renderFilteredTasks(filtered) {
     const targetId = isMobile ? task.column + "Mobile" : task.column;
     const target = document.getElementById(targetId);
     if (target) target.innerHTML += filledTaskTemplate(task);
+    getInitialStyle(task, task.contact);
   }
 
   columnIds.forEach(id => {
     const col = document.getElementById(id);
     if (col && !col.innerHTML.trim()) col.innerHTML = blankTask(id);
   });
+
+  initProgressBar(filteredTask);
+}
+
+function getInitialStyle(task, contacts) {
+  let contact;
+  let initial;
+  let taskId = task.id;
+  if (contacts) {
+    contacts.forEach(element => {
+      contact = element;
+      initial = getInitials(contact);
+      styleInitalNameBoard(contact, initial, taskId);
+    });
+  }
 }
 
 /**
@@ -425,7 +448,7 @@ function checkWindowSize() {
   if (modal && modal.classList.contains('dNone')) {
     renderTasks();
     return;
-  } 
+  }
   handleAddTask();
 }
 
