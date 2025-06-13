@@ -2,6 +2,8 @@
     height: 100%;
 }
 
+/* responsivness width */
+
 @media(max-width: 1220px) {
     .userNameContainer h2 {
         font-size: 40px;
@@ -513,5 +515,110 @@
     .contactList {
         padding-left: 10px;
         padding-right: 0;
+    }
+}
+
+/* responsivness height */
+
+
+@media(max-height: 940px) {
+    .headlineContainer {
+        height: 105px;
+    }
+
+    .modalMobileCloseButtonWrapper {
+        top: -30px;
+    }
+
+    .modalIconContainer {
+        padding-bottom: 480px;
+    }
+
+    .buttonsContainer {
+        padding-bottom: 70px;
+    }
+}
+
+@media(max-height: 850px) {
+    .modalMobileCloseButtonWrapper {
+        top: -20px;
+    }
+
+    .headlineSection {
+        gap: 0px;
+    }
+
+    .modalContentContainer {
+        padding-top: 90px;
+    }
+
+    .modalIconContainer {
+        padding-bottom: 440px;
+    }
+
+    .buttonsContainer {
+        padding-bottom: 50px;
+    }
+}
+
+@media(max-height: 750px) {
+    .inputFieldContainer {
+        gap: 3px;
+    }
+
+    .modalIconContainer {
+        padding-bottom: 370px;
+    }
+
+    .modalContentContainer {
+        padding-top: 65px;
+    }
+
+    .buttonsContainer {
+        padding-top: 14px;
+        padding-bottom: 40px;
+    }
+}
+
+@media(max-height: 670px) {
+    .modalMainContent {
+        top: 40%
+    }
+
+    .headlineContainer {
+        height: 110px;
+    }
+
+    .headlineSection {
+        gap: 3px;
+    }
+
+    .modalMobileCloseButtonWrapper {
+        top: -10px;
+    }
+
+    .inputFieldContainer {
+        gap: 0px;
+    }
+
+    .inputFields {
+        height: 37px;
+    }
+
+    .buttonsContainer {
+        padding-top: 12px;
+    }
+
+    .modalContentContainer {
+        padding-top: 75px;
+    }
+
+    .buttonsContainer {
+        padding-bottom: 22px;
+        padding-top: 0px;
+    }
+
+    .modalIconContainer {
+        padding-bottom: 323px;
     }
 }

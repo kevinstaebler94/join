@@ -210,7 +210,8 @@ async function filterTasks(id) {
     return;
   }
   let result = tasksArr.filter((task) =>
-    task.title.toLowerCase().includes(input)
+    task.title.toLowerCase().includes(input) ||
+    task.description?.toLowerCase().includes(input)
   );
   renderFilteredTasks(result, tasks);
 }
@@ -227,9 +228,9 @@ async function renderFilteredTasks(filtered, filteredTask) {
   const columnIds = columns.map(col => isMobile ? col + "Mobile" : col);
   columnIds.forEach(id => document.getElementById(id).innerHTML = "");
 
-  if (!filtered.length) return columnIds.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
+  if (!result.length) return columnIds.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
 
-  for (const task of filtered) {
+  for (const task of result) {
     task.capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1);
     const targetId = isMobile ? task.column + "Mobile" : task.column;
     const target = document.getElementById(targetId);
