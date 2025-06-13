@@ -146,6 +146,7 @@ async function getGuestUserData() {
     let greeting = true;
     let loginBtn = document.getElementById('loginGuestBtn');
     loginBtn.disabled = true;
+    loggedInUser = userId;
     await changeUsers(userId, greeting, email, password, name, login);
     await getGuestUserTasks(userId);
     await getGuestUserContacts(userId);

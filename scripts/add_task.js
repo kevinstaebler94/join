@@ -443,6 +443,9 @@ function updateCheckedListElements() {
  * @returns {string} - Uppercase initials.
  */
 function getInitials(name) {
+    if (!name) {
+        return;
+    }
     return name
         .split(" ")
         .map(word => word[0])
@@ -457,6 +460,9 @@ function getInitials(name) {
  */
 function getColorFromName(name) {
     let sum = 0;
+    if (!name) {
+        return;
+    }
     for (let i = 0; i < name.length; i++) {
         sum += name.charCodeAt(i) + (i + 1);
     }

@@ -35,6 +35,7 @@ function updateContent(section) {
  */
 function login(event) {
   event.preventDefault();
+
   verifyLogin();
 }
 
@@ -49,10 +50,10 @@ async function verifyLogin() {
   let email = document.getElementById("emailLogin").value.trim();
   let formattedEmail = email.replace(/\./g, "_").replace(/@/g, "-at-");
   let password = document.getElementById("passwordLogin").value.trim();
-  let userData = await getData("/users")
+  let userData = await getData("/users/" + formattedEmail)
   let error = document.getElementById("errorMsgLogin");
   let login;
-
+  loggedInUser = formattedEmail;
   if (!userData) {
     document.getElementById("passwordLogin").value = "";
     showLoginErrorMessage(error);
