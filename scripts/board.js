@@ -10,22 +10,20 @@ async function initBoard() {
   await renderTasks();
 }
 
-window.addEventListener('resize', () => {
+window.addEventListener("resize", () => {
   if (window.innerWidth <= 1170) {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-      checkWindowSize()
+      checkWindowSize();
     }, 10);
   }
   if (window.innerWidth <= 1023) {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-      window.location.href = './board.html';
+      window.location.href = "./board.html";
     }, 500);
   }
-
 });
-
 
 /**
  * Returns the appropriate column ID depending on screen size.
@@ -34,7 +32,9 @@ window.addEventListener('resize', () => {
  */
 function getColumnId(column) {
   if (window.innerWidth <= 1023) {
-    document.querySelectorAll('[draggable="true"]').forEach(el => el.draggable = false);
+    document
+      .querySelectorAll('[draggable="true"]')
+      .forEach((el) => (el.draggable = false));
     return column + "Mobile";
   }
   return column;
@@ -47,16 +47,12 @@ async function renderTasks() {
   let tasks = await getData("/users/" + loggedInUser + "/tasks");
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
   let countArr = [];
-  columns.forEach(
-    (id) => {
-      (document.getElementById(getColumnId(id)).innerHTML = "")
-    }
-
-  );
-
+  columns.forEach((id) => {
+    document.getElementById(getColumnId(id)).innerHTML = "";
+  });
 
   let taskArr = Object.values(tasks || {});
-  taskArr.forEach(task => {
+  taskArr.forEach((task) => {
     const targetId = getColumnId(task.column);
     const target = document.getElementById(targetId);
     taskContainer.push(task.id);
@@ -64,7 +60,7 @@ async function renderTasks() {
     let taskComponents = getTaskComponents(task);
     target.innerHTML += filledTaskTemplate(taskComponents, task);
     if (!task.contact) return;
-    task.contact.forEach(contact => {
+    task.contact.forEach((contact) => {
       let initial = getInitials(contact);
       countArr.push(contact);
       if (task.contact.length > 3) {
@@ -91,10 +87,11 @@ async function renderTasks() {
  * @returns {Object} taskComponents - Normalized task data
  */
 function getTaskComponents(task) {
+  const prio = task?.prio || "";
   const capitalizedPrio =
-    task.prio.charAt(0).toUpperCase() + task.prio.slice(1).toLowerCase();
+    prio.charAt(0).toUpperCase() + prio.slice(1).toLowerCase();
 
-  return taskComponents = {
+  return (taskComponents = {
     category: task.category,
     title: task.title,
     description: task.description,
@@ -105,7 +102,7 @@ function getTaskComponents(task) {
     capitalizedPrio: capitalizedPrio,
     contact: task.contact,
     column: task.column,
-  };
+  });
 }
 
 /**
@@ -159,7 +156,9 @@ function dragstartHandler(ev) {
 }
 
 function dragendHandler() {
-  document.querySelectorAll('.dropZone').forEach(zone => zone.classList.remove('highlight'));
+  document
+    .querySelectorAll(".dropZone")
+    .forEach((zone) => zone.classList.remove("highlight"));
 }
 
 /**
@@ -168,9 +167,11 @@ function dragendHandler() {
  */
 function dragoverHandler(ev) {
   ev.preventDefault();
-  document.querySelectorAll('.dropZone').forEach(zone => zone.classList.remove('highlight'));
-  const currentZone = ev.target.closest('.dropZone');
-  if (currentZone) currentZone.classList.add('highlight');
+  document
+    .querySelectorAll(".dropZone")
+    .forEach((zone) => zone.classList.remove("highlight"));
+  const currentZone = ev.target.closest(".dropZone");
+  if (currentZone) currentZone.classList.add("highlight");
 }
 
 /**
@@ -193,7 +194,9 @@ async function dropHandler(ev) {
       renderTasks();
     }
   }
-  document.querySelectorAll('.dropZone').forEach(zone => zone.classList.remove('highlight'));
+  document
+    .querySelectorAll(".dropZone")
+    .forEach((zone) => zone.classList.remove("highlight"));
 }
 
 /**
@@ -209,9 +212,10 @@ async function filterTasks(id) {
     renderTasks();
     return;
   }
-  let result = tasksArr.filter((task) =>
-    task.title.toLowerCase().includes(input) ||
-    task.description?.toLowerCase().includes(input)
+  let result = tasksArr.filter(
+    (task) =>
+      task.title.toLowerCase().includes(input) ||
+      task.description?.toLowerCase().includes(input)
   );
   renderFilteredTasks(result, tasks);
 }
@@ -221,24 +225,26 @@ async function filterTasks(id) {
  * @param {Array} filtered - Array of filtered task objects
  */
 async function renderFilteredTasks(filtered, filteredTask) {
-
-
   const isMobile = window.innerWidth <= 768;
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
-  const columnIds = columns.map(col => isMobile ? col + "Mobile" : col);
-  columnIds.forEach(id => document.getElementById(id).innerHTML = "");
+  const columnIds = columns.map((col) => (isMobile ? col + "Mobile" : col));
+  columnIds.forEach((id) => (document.getElementById(id).innerHTML = ""));
 
-  if (!filtered.length) return columnIds.forEach(id => document.getElementById(id).innerHTML = blankTask(id));
+  if (!filtered.length)
+    return columnIds.forEach(
+      (id) => (document.getElementById(id).innerHTML = blankTask(id))
+    );
 
   for (const task of filtered) {
-    task.capitalizedPrio = task.prio.charAt(0).toUpperCase() + task.prio.slice(1);
+    const prio = task?.prio || "";
+    task.capitalizedPrio = prio.charAt(0).toUpperCase() + prio.slice(1);
     const targetId = isMobile ? task.column + "Mobile" : task.column;
     const target = document.getElementById(targetId);
     if (target) target.innerHTML += filledTaskTemplate(task);
     getInitialStyle(task, task.contact);
   }
 
-  columnIds.forEach(id => {
+  columnIds.forEach((id) => {
     const col = document.getElementById(id);
     if (col && !col.innerHTML.trim()) col.innerHTML = blankTask(id);
   });
@@ -251,7 +257,7 @@ function getInitialStyle(task, contacts) {
   let initial;
   let taskId = task.id;
   if (contacts) {
-    contacts.forEach(element => {
+    contacts.forEach((element) => {
       contact = element;
       initial = getInitials(contact);
       styleInitalNameBoard(contact, initial, taskId);
@@ -292,7 +298,9 @@ function convertNameToInitial(contactData) {
  * @param {HTMLInputElement} checkbox
  */
 async function handleCheckbox(checkbox) {
-  let subtaskInfo = document.getElementById('subtaskInfo' + checkbox.dataset.taskId);
+  let subtaskInfo = document.getElementById(
+    "subtaskInfo" + checkbox.dataset.taskId
+  );
   let list = document.querySelectorAll(
     '.assignedToModal input[type="checkbox"]'
   );
@@ -350,9 +358,20 @@ function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
  * @param {string} progressBarHTML - HTML for the subtask progress bar
  * @returns {string} - HTML string representing the task
  */
-function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML) {
+function getFilledTaskHTML(
+  taskComponents,
+  serializedSubtasks,
+  serializedContacts,
+  initials,
+  progressBarHTML
+) {
   let compInitials = initials.slice(0, 3);
-  let initial = compInitials.map((init) => `<span id="assignedUser${init + taskComponents.id}" class="assignedUser">${init}</span>`);
+  let initial = compInitials.map(
+    (init) =>
+      `<span id="assignedUser${
+        init + taskComponents.id
+      }" class="assignedUser">${init}</span>`
+  );
   let shortenedTitle = shortenText(taskComponents.title, 40);
   let shortenedDescription = shortenText(taskComponents.description, 25);
   return `
@@ -374,10 +393,10 @@ function getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContact
 }
 
 function countInitials(contacts, taskId) {
-  let assignedCounter = document.getElementById('assignedCounter' + taskId);
+  let assignedCounter = document.getElementById("assignedCounter" + taskId);
   let countHigherThree = contacts.length - 3;
-  assignedCounter.classList.remove('dNone');
-  assignedCounter.innerHTML = '+' + countHigherThree;
+  assignedCounter.classList.remove("dNone");
+  assignedCounter.innerHTML = "+" + countHigherThree;
 }
 
 /**
@@ -400,7 +419,7 @@ function initProgressBar(tasksData) {
  * @returns {string} - Shortened text
  */
 function shortenText(text, maxLen) {
-  return text.length > maxLen ? text.slice(0, maxLen) + "..." : text;
+  return text?.length > maxLen ? text.slice(0, maxLen) + "..." : text;
 }
 
 /**
@@ -409,7 +428,7 @@ function shortenText(text, maxLen) {
  */
 function handleAddTask() {
   if (window.innerWidth <= 1170) {
-    window.location.href = 'add_task.html';
+    window.location.href = "add_task.html";
   } else {
     openAddTaskModal();
   }
@@ -421,7 +440,9 @@ function handleAddTask() {
  * @param {string} initial - Initials of the contact
  */
 function styleInitalNameBoard(contact, initial, taskId) {
-  let initalContainer = document.getElementById('assignedUser' + initial + taskId);
+  let initalContainer = document.getElementById(
+    "assignedUser" + initial + taskId
+  );
   let color = getColorFromName(contact);
   if (!initalContainer) return;
   initalContainer.style.backgroundColor = color;
@@ -429,7 +450,9 @@ function styleInitalNameBoard(contact, initial, taskId) {
 }
 
 function styleInitalHigherThree(contact, initial, taskId) {
-  let initalContainer = document.getElementById('assignedUser' + initial + taskId);
+  let initalContainer = document.getElementById(
+    "assignedUser" + initial + taskId
+  );
   let color = getColorFromName(contact);
   if (!initalContainer) {
     return;
@@ -437,7 +460,6 @@ function styleInitalHigherThree(contact, initial, taskId) {
     initalContainer.style.backgroundColor = color;
     initialColor[contact] = color;
   }
-
 }
 
 /**
@@ -445,15 +467,13 @@ function styleInitalHigherThree(contact, initial, taskId) {
  * If the modal is visible (not hidden), it triggers the add task handler.
  */
 function checkWindowSize() {
-  const modal = document.getElementById('addTaskModal');
-  if (modal && modal.classList.contains('dNone')) {
+  const modal = document.getElementById("addTaskModal");
+  if (modal && modal.classList.contains("dNone")) {
     renderTasks();
     return;
   }
   handleAddTask();
 }
-
-
 
 function closeTaskOverlay() {
   let mobileTaskOverlay = document.getElementById("moveToOverlayWrapper");
@@ -467,11 +487,11 @@ function returnToBoard() {
 
 async function openMobileTaskOverlay(taskId) {
   let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
-  let column = document.querySelectorAll(".taskContainer")
-  column.forEach(container => {
+  let column = document.querySelectorAll(".taskContainer");
+  column.forEach((container) => {
     container.addEventListener("click", () => {
       let column = container.dataset.name;
       changeColumn(column, taskId);
-    })
-  })
+    });
+  });
 }
