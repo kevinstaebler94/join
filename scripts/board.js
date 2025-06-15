@@ -1,5 +1,6 @@
 let taskContainer = [];
 let resizeTimeout;
+let selectedTask = null;
 /**
  * Initializes the board by loading HTML, fetching the logged-in user,
  * and rendering tasks.
@@ -486,10 +487,10 @@ function returnToBoard() {
 }
 
 async function openMobileTaskOverlay(taskId) {
-  let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
-  let column = document.querySelectorAll(".taskContainer");
-  column.forEach((container) => {
-    container.addEventListener("click", () => {
+  let columns = document.querySelectorAll(".taskContainer");
+
+  columns.forEach((container) => {
+    container.addEventListener("click", function () {
       let column = container.dataset.name;
       changeColumn(column, taskId);
     });
