@@ -486,8 +486,6 @@ function returnToBoard() {
 }
 
 async function openMobileTaskOverlay(taskId) {
-  console.log("TaskId", taskId);
-
   let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
   let column = document.querySelectorAll(".taskContainer");
   column.forEach((container) => {
