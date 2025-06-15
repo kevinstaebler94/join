@@ -5,6 +5,10 @@
 }
 
 @media (max-width: 850px) {
+    .leftAddTaskForm {
+        gap: 0;
+    }
+
     .rightAddTaskForm {
         padding-bottom: 48px;
     }
@@ -62,7 +66,7 @@
     }
 
     .subtaskListPosition {
-        top: 1088px;
+        top: 976px;
         width: 345px;
     }
 
@@ -85,6 +89,10 @@
 
     .inputFields {
         width: 300px;
+    }
+
+    .textArea {
+        max-width: 300px;
     }
 
     .dropdownHeader {
@@ -113,7 +121,7 @@
     }
 
     .subtaskListPosition {
-        top: 1088px;
+        top: 976px;
         width: 300px;
     }
 
@@ -145,6 +153,10 @@
 
     .inputFields {
         width: 260px;
+    }
+
+    .textArea {
+        max-width: 260px;
     }
 
     .dropdownHeader {
@@ -193,6 +205,7 @@
     }
 
     .subtaskListPosition {
+        top: 1006px;
         width: 260px;
     }
 }
