@@ -55,7 +55,7 @@ function getSubtask() {
         subtaskList.innerHTML += `<li id="subtaskElement${subtaskIndex}">
     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
         <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
-            <p class="liMarker">•</p>
+            <p>•</p>
             <p id="subtaskValue${subtaskIndex}" class="subtaskWidth">${subtaskInput.value}</p>
         </span>
         <span id="editIconContainer" class="iconContainer dNone">

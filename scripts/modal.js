@@ -313,3 +313,14 @@ function checkEnterToAdd(event) {
     addNewSubtaskModal();
   }
 }
+
+/**
+ * Global keyup listener for handling "Enter" key events in inputs.
+ * Adds or confirms subtasks depending on active input.
+ */
+function checkEnterToAddModal(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    getSubtask();
+  }
+}

@@ -123,7 +123,7 @@ function getAddTaskStructure() {
                                         </div>
                                     </label>
                                     <label class="directionColumn">Subtasks
-                                        <input id="subtaskInput" class="inputFields" type="text" placeholder="Add new subtask">
+                                        <input onkeydown="checkEnterToAddModal(event)" id="subtaskInput" class="inputFields" type="text" placeholder="Add new subtask">
                                         <img onclick="getSubtask()" class="plusIcon" src="./assets/img/plusIcon.svg" alt="plus-icon">
                                         <ul id="subtaskList" class="subtaskList"></ul>
                                     </label>
@@ -341,7 +341,7 @@ function renderSubtasksEdit(subtasks, encodedSubtasks) {
         let subtaskList = document.getElementById('subtaskListEdit');
         subtaskList.innerHTML += `<li id="subtaskElement${currentSubtask.subtask}">
                                     <div id="subtaskContainer${currentSubtask.subtask}" class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
-                                        <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${currentSubtask.subtask}" class="subtaskWidth">${currentSubtask.subtask}</p></span>
+                                        <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="liText"><p>•</p><p id="subtaskValue${currentSubtask.subtask}" class="subtaskWidth">${currentSubtask.subtask}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
                                             <span onclick="getEditSubtaskModal('${currentSubtask.subtask}', '${subtaskIndex}', '${encodedSubtasks}')" class="editIcons"><img class="iconSize" src="./assets/img/edit.svg" alt=""></span>
                                             <span class="iconDivider">|</span>
@@ -378,7 +378,7 @@ function addNewSubtaskModal() {
     subtaskIndex = subtasksArr[0].push(subtaskObj) - 1;
     subtaskListEdit.innerHTML += `<li id="subtaskElement${inputValue.value}">
                                     <div id="subtaskContainer${inputValue.value}" class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
-                                        <span onclick="getEditSubtaskModal('${inputValue.value}')" class="liText"><p class="liMarker"></p><p id="subtaskValue${inputValue.value}">${inputValue.value}</p></span>
+                                        <span onclick="getEditSubtaskModal('${inputValue.value}')" class="liText"><p>•</p><p id="subtaskValue${inputValue.value}">${inputValue.value}</p></span>
                                         <span  id="editIconContainer" class="iconContainer dNone">
                                             <span onclick="getEditSubtaskModal('${inputValue.value}')" class="editIcons"><img src="./assets/img/edit.svg" alt="" class="iconSize"></span>
                                             <span class="iconDivider">|</span>
