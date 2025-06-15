@@ -183,12 +183,13 @@ function checkOrientation() {
   const isLandscape = window.innerWidth > window.innerHeight;
   const overlay = document.getElementById("orientationOverlay");
 
-  if (isLandscape && window.innerWidth <= 900) {
+  if (isLandscape && window.innerWidth <= 932) {
     overlay.classList.remove("dNone"); // z. B. Anzeige einer Warnung
   } else {
     overlay.classList.add("dNone");
   }
 }
+
 
 /**
  * Shows or hides the privacy policy based on the selected language button.

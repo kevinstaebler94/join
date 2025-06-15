@@ -44,5 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dateFormat: "d/m/Y",
         allowInput: true,
         minDate: "today",
+        disableMobile: true,
     });
 });

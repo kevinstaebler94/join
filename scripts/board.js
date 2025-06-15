@@ -18,10 +18,10 @@ window.addEventListener("resize", () => {
     }, 10);
   }
   if (window.innerWidth <= 1023) {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      window.location.href = "./board.html";
-    }, 500);
+    // clearTimeout(resizeTimeout);
+    // resizeTimeout = setTimeout(() => {
+    //   // window.location.href = "./board.html";
+    // }, 500);
   }
 });
 

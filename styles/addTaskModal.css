@@ -309,7 +309,7 @@ h1 {
 .plusIconEdit {
     width: 16px;
     position: relative;
-    left: 368px;
+    left: 384px;
     bottom: 27px;
     cursor: pointer;
 }
@@ -396,7 +396,7 @@ h1 {
 
 .dropdownListEdit {
     position: absolute;
-    width: 366px;
+    width: 416px;
     background: white;
     border: 1px solid #ccc;
     list-style: none;
@@ -427,7 +427,7 @@ h1 {
     position: relative;
     z-index: 10;
     top: -14px;
-    width: 405px;
+    width: 370px;
 }
 
 .dropdownList li {
@@ -582,7 +582,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .dateIconEdit {
     width: 16px;
     position: relative;
-    left: 368px;
+    left: 384px;
     bottom: 23px;
     cursor: pointer;
 }
@@ -720,6 +720,7 @@ ul {
     align-items: center;
     gap: 4px;
 }
+
 .iconSize {
     width: 16px;
     height: 16px;
@@ -843,6 +844,14 @@ ul {
 
 @media (max-width: 460px) {
     .inputFieldsEdit {
+        width: 250px;
+    }
+
+    .dropdownListEdit {
+        width: 250px;
+    }
+
+    .editListContainer {
         width: 250px;
     }
 

@@ -88,7 +88,8 @@ function initFlatpickrInModal() {
             wrap: true,
             dateFormat: "d/m/Y",
             allowInput: true,
-            minDate: "today"
+            minDate: "today",
+            disableMobile: true 
         });
     }
 }
