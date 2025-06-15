@@ -53,7 +53,7 @@ async function deleteData(path = "") {
     body: JSON.stringify(),
   });
   let data = await response.json();
-  // window.location.reload();
+  renderTasks();
   return data;
 }
 
