@@ -1,6 +1,5 @@
 let taskContainer = [];
 let resizeTimeout;
-let selectedTask = null;
 /**
  * Initializes the board by loading HTML, fetching the logged-in user,
  * and rendering tasks.
@@ -11,18 +10,24 @@ async function initBoard() {
   await renderTasks();
 }
 
+function forceRedraw(el) {
+  el.style.display = "none";
+  el.offsetHeight; // Zwingt ein Reflow
+  el.style.display = "";
+}
+
 window.addEventListener("resize", () => {
   if (window.innerWidth <= 1170) {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       checkWindowSize();
-    }, 10);
+    }, 150);
   }
   if (window.innerWidth <= 1023) {
-    // clearTimeout(resizeTimeout);
-    // resizeTimeout = setTimeout(() => {
-    //   // window.location.href = "./board.html";
-    // }, 500);
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      window.location.href = "./board.html";
+    }, 500);
   }
 });
 
@@ -39,6 +44,8 @@ function getColumnId(column) {
     return column + "Mobile";
   }
   return column;
+
+
 }
 
 /**
@@ -51,35 +58,47 @@ async function renderTasks() {
   columns.forEach((id) => {
     document.getElementById(getColumnId(id)).innerHTML = "";
   });
+  getRenderedTasks(tasks, countArr);
+  fillBlankTask(columns);
+  initProgressBar(tasks);
+}
 
+function getRenderedTasks(tasks, countArr) {
   let taskArr = Object.values(tasks || {});
   taskArr.forEach((task) => {
     const targetId = getColumnId(task.column);
     const target = document.getElementById(targetId);
-    taskContainer.push(task.id);
     if (!target) return;
     let taskComponents = getTaskComponents(task);
     target.innerHTML += filledTaskTemplate(taskComponents, task);
-    if (!task.contact) return;
-    task.contact.forEach((contact) => {
-      let initial = getInitials(contact);
-      countArr.push(contact);
-      if (task.contact.length > 3) {
-        countInitials(countArr, task.id);
-        styleInitalNameBoard(contact, initial, task.id);
-      } else {
-        styleInitalNameBoard(contact, initial, task.id);
-      }
-    });
+    getRenderContacts(task, countArr);
     countArr = [];
   });
+}
+
+function getRenderContacts(task, countArr) {
+  let initialContainerId = document.getElementById('assignedUser' + task)
+  if (!task.contact) return;
+  task.contact.forEach((contact) => {
+    let initial = getInitials(contact);
+    let initialContainerId = document.getElementById('assignedUser' + initial + task.id);
+    countArr.push(contact);
+    if (task.contact.length > 3) {
+      countInitials(countArr, task.id);
+      styleInitalNameBoard(contact, initial, task.id);
+    } else {
+      styleInitalNameBoard(contact, initial, task.id);
+    }
+  });
+}
+
+function fillBlankTask(columns) {
   columns.forEach((id) => {
     const column = document.getElementById(getColumnId(id));
     if (!column.innerHTML.trim()) {
       column.innerHTML = blankTask(id);
     }
   });
-  initProgressBar(tasks);
 }
 
 /**
@@ -369,8 +388,7 @@ function getFilledTaskHTML(
   let compInitials = initials.slice(0, 3);
   let initial = compInitials.map(
     (init) =>
-      `<span id="assignedUser${
-        init + taskComponents.id
+      `<span id="assignedUser${init + taskComponents.id
       }" class="assignedUser">${init}</span>`
   );
   let shortenedTitle = shortenText(taskComponents.title, 40);
@@ -471,6 +489,7 @@ function checkWindowSize() {
   const modal = document.getElementById("addTaskModal");
   if (modal && modal.classList.contains("dNone")) {
     renderTasks();
+    // setInitialStyle();
     return;
   }
   handleAddTask();
@@ -493,6 +512,8 @@ async function openMobileTaskOverlay(taskId) {
     container.addEventListener("click", function () {
       let column = container.dataset.name;
       changeColumn(column, taskId);
+      
+      
     });
   });
 }
