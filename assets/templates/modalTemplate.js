@@ -335,6 +335,7 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
  * @param {string} encodedSubtasks - Encoded version of the subtask array.
  */
 function renderSubtasksEdit(subtasks, encodedSubtasks) {
+    subtasksArr[0] = subtasks.subtask;
     for (let subtaskIndex = 0; subtaskIndex < subtasksArr[0].length; subtaskIndex++) {
         let sub = subtasksArr[0];
         let currentSubtask = sub[subtaskIndex];
@@ -358,6 +359,7 @@ function renderSubtasksEdit(subtasks, encodedSubtasks) {
                                     </div>
                                 </li>`;
     }
+    // subtasksArr = [];
 }
 
 /**
