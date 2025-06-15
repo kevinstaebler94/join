@@ -63,8 +63,6 @@ function toggleDropdownName() {
     dropdownIcon.classList.toggle('rotate');
     listContainer.classList.toggle('dNone');
     checkIsOpen(assignedInput);
-
-
 }
 
 /**
@@ -125,31 +123,6 @@ function resetPriorityClassList(urgentBtn, mediumBtn, lowBtn, urgentIcon, medium
     lowBtn.classList.remove('activeLowBtn');
     lowIcon.classList.remove('dNone');
     lowIconWhite.classList.add('dNone');
-}
-
-/**
- * Applies specific styles for the selected priority.
- */
-function setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon, urgentIconWhite, mediumIconWhite) {
-    if (priority === 'urgent') {
-        urgentBtn.classList.remove('hoverBtn');
-        urgentBtn.classList.add('activeUrgentBtn');
-        urgentIcon.classList.add('dNone');
-        urgentIconWhite.classList.remove('dNone');
-        prioBtn = 'urgent';
-    } else if (priority === 'medium') {
-        mediumBtn.classList.remove('hoverBtn');
-        mediumBtn.classList.add('activeMediumBtn');
-        mediumIcon.classList.add('dNone');
-        mediumIconWhite.classList.remove('dNone');
-        prioBtn = 'medium';
-    } else if (priority === 'low') {
-        lowBtn.classList.remove('hoverBtn');
-        lowBtn.classList.add('activeLowBtn');
-        lowIcon.classList.add('dNone');
-        lowIconWhite.classList.remove('dNone');
-        prioBtn = 'low';
-    }
 }
 
 /**
@@ -219,69 +192,6 @@ function showEditIcons(element) {
 function hideEditIcons(element) {
     let iconContainer = element.querySelector('.iconContainer');
     iconContainer.classList.add('dNone');
-}
-
-/**
- * Validates task form inputs and either shows errors or pushes task.
- */
-function checkValidation() {
-    let titleInput = document.getElementById('titleInput');
-    let requiredTitle = document.getElementById('requiredTitle');
-    let dateInput = document.getElementById('dateInput');
-    let requiredDate = document.getElementById('requiredDate');
-    let selectedCategory = document.getElementById('selectedCategory');
-    let categoryInput = document.getElementById('customDropdownCategory');
-    let requiredCategory = document.getElementById('requiredCategory');
-    if (titleInput.value == '') {
-        titleInput.classList.add('required');
-        requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
-    } if (dateInput.value.length < 10) {
-        dateInput.classList.add('required');
-        requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
-    } if (selectedCategory.innerHTML == 'Select category') {
-        categoryInput.classList.add('required');
-        requiredCategory.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
-    } else {
-        pushTasks(loggedInUser, assignedArr);
-        showAddedBoardImg();
-    }
-}
-
-function checkDateValidation() {
-    setTimeout(() => {
-        let dateInput = document.getElementById('dateInput');
-        let requiredDate = document.getElementById('requiredDate');
-        if (dateInput.value.length < 10) {
-            dateInput.classList.add('required');
-            // requiredDate.classList.remove('requiredDate');
-            requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
-        }
-    }, 100);
-}
-
-function removeTitleRequired() {
-    let titleInput = document.getElementById('titleInput');
-    let requiredTitle = document.getElementById('requiredTitle');
-    if (titleInput.value.length > 0) {
-        titleInput.classList.remove('required');
-        requiredTitle.innerHTML = '';
-    }
-}
-
-function removeDateRequired() {
-    let dateInput = document.getElementById('dateInput');
-    let requiredDate = document.getElementById('requiredDate');
-    if (dateInput.value.length > 0) {
-        dateInput.classList.remove('required');
-        requiredDate.innerHTML = '';
-    }
-}
-
-function removeCategoryRequired() {
-    let categoryInput = document.getElementById('customDropdownCategory');
-    let requiredCategory = document.getElementById('requiredCategory');
-    categoryInput.classList.remove('required');
-    requiredCategory.innerHTML = '';
 }
 
 /**
@@ -451,123 +361,4 @@ function getInitials(name) {
         .map(word => word[0])
         .join("")
         .toUpperCase();
-}
-
-/**
- * Returns a consistent color based on the contact name.
- * @param {string} name - Name to derive color from.
- * @returns {string} - Hex color code.
- */
-function getColorFromName(name) {
-    let sum = 0;
-    if (!name) {
-        return;
-    }
-    for (let i = 0; i < name.length; i++) {
-        sum += name.charCodeAt(i) + (i + 1);
-    }
-    let index = sum % colors.length;
-    return colors[index];
-}
-
-/**
- * Sets background color of a contact's initial container.
- * @param {string} contact - Name of the contact.
- */
-function styleInitalName(contact) {
-    let initalContainer = document.getElementById('initalContainer' + contact);
-    let color = getColorFromName(contact);
-    initalContainer.style.backgroundColor = color;
-    initialColor[contact] = color;
-}
-
-/**
- * Applies background color to assigned contact initial element.
- * @param {string} contact - Name of the contact.
- */
-function getContactInitialColor(contact) {
-    let contactAssignedInitial = document.getElementById('contactAssignedInitial' + contact);
-    contactAssignedInitial.style.backgroundColor = initialColor[contact];
-}
-
-/**
- * Styles and resets dropdown elements when clicked outside.
- * @param {HTMLElement} contactListContainer - Container for contact list.
- * @param {HTMLInputElement} assignedInput - Assigned contact input.
- */
-function styleDropdown(contactListContainer, assignedInput) {
-    document.getElementById('dropdownListName')?.classList.add('dNone');
-    document.getElementById('dropdownIconName')?.classList.remove('rotate');
-    document.getElementById('customDropdownName')?.classList.remove('activeBorder');
-    document.getElementById('customDropdownCategory')?.classList.remove('activeBorder');
-    document.getElementById('dropdownListCategory')?.classList.add('dNone');
-    document.getElementById('dropdownIconCategory')?.classList.remove('rotate');
-    contactListContainer?.classList.add('dNone');
-    if (typeof isOpen !== 'undefined') {
-        isOpen = false;
-    }
-    if (assignedInput && assignedInput.value === '') {
-        assignedInput.value = 'Assigned to';
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    initSubtaskInputListener();
-});
-
-window.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-        document.getElementById('dropdownListName').classList.add('dNone');
-        document.getElementById('dropdownIconName').classList.remove('rotate');
-        document.getElementById('customDropdownName').classList.remove('activeBorder');
-        document.getElementById('contactListContainer').classList.add('dNone');
-        document.getElementById('customDropdownCategory').classList.remove('activeBorder');
-        document.getElementById('dropdownListCategory').classList.add('dNone');
-        document.getElementById('dropdownIconCategory').classList.remove('rotate');
-    }
-});
-
-window.addEventListener('mousedown', function (event) {
-    const modal = document.getElementById('addTaskModal');
-    if (modal && modal.classList.contains('dNone')) return;
-    setTimeout(() => {
-        const wrappers = document.querySelectorAll('.customSelectWrapper');
-        const contactListContainer = document.getElementById('contactListContainer');
-        const assignedInput = document.getElementById('assignedInput');
-        const clickInsideContactList = contactListContainer?.contains(event.target) ?? false;
-        const clickInsideAssignedInput = assignedInput?.contains(event.target) ?? false;
-        if (!wrappers.length && !contactListContainer && !assignedInput) return;
-        let clickInsideAnyWrapper = false;
-        wrappers.forEach(wrapper => {
-            if (wrapper.contains(event.target)) {
-                clickInsideAnyWrapper = true;
-            }
-        });
-        if (!clickInsideAnyWrapper && !clickInsideContactList && !clickInsideAssignedInput) {
-            styleDropdown(contactListContainer, assignedInput);
-        }
-    }, 30);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('addTaskModal');
-    if (modal && modal.classList.contains('dNone')) return;
-    flatpickr("#calendarWrap", {
-        wrap: true,
-        dateFormat: "d/m/Y",
-        allowInput: true,
-        minDate: "today",
-    });
-});
-
-function initFlatpickrInModal() {
-    const calendarWrapper = document.querySelector("#calendarWrap");
-    if (calendarWrapper && !calendarWrapper._flatpickr) {
-        flatpickr(calendarWrapper, {
-            wrap: true,
-            dateFormat: "d/m/Y",
-            allowInput: true,
-            minDate: "today"
-        });
-    }
 }
