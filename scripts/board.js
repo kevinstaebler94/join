@@ -10,26 +10,72 @@ async function initBoard() {
   await renderTasks();
 }
 
-function forceRedraw(el) {
-  el.style.display = "none";
-  el.offsetHeight; // Zwingt ein Reflow
-  el.style.display = "";
-}
+// window.addEventListener("resize", () => {
+//   if (window.innerWidth <= 1170) {
+//     clearTimeout(resizeTimeout);
+//     resizeTimeout = setTimeout(() => {
+//       checkWindowSize();
+//     }, 150);
+//   }
+//   if (window.innerWidth <= 1023) {
+//     // clearTimeout(resizeTimeout);
+//     // resizeTimeout = setTimeout(() => {
+//     //   window.location.href = "./board.html";
+//     // }, 500);
+//   }
+// });
 
-window.addEventListener("resize", () => {
-  if (window.innerWidth <= 1170) {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      checkWindowSize();
-    }, 150);
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 1023) {
+    document
+      .querySelectorAll('[draggable="true"]')
+      .forEach((el) => (el.draggable = false));
+  } else {
+    document
+      .querySelectorAll('[draggable="false"]')
+      .forEach((el) => (el.draggable = true));
   }
+})
+
+document.addEventListener('dragstart', (e) => {
   if (window.innerWidth <= 1023) {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      window.location.href = "./board.html";
-    }, 500);
+    e.preventDefault();
   }
 });
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 1023) {
+    disableDragging();
+  } else {
+    enableDragging();
+  }
+});
+
+
+function disableDragging() {
+  document.querySelectorAll('[draggable]').forEach((el) => {
+    el.setAttribute('draggable', false);
+    el.removeEventListener('dragstart', dragstartHandler);
+  });
+
+  document.querySelectorAll('.dropZone').forEach((zone) => {
+    zone.removeEventListener('dragover', dragoverHandler);
+    zone.removeEventListener('drop', dropHandler);
+  });
+}
+
+function enableDragging() {
+  document.querySelectorAll('.taskCard').forEach((el) => {
+    el.setAttribute('draggable', true);
+    el.addEventListener('dragstart', dragstartHandler);
+  });
+
+  document.querySelectorAll('.dropZone').forEach((zone) => {
+    zone.addEventListener('dragover', dragoverHandler);
+    zone.addEventListener('drop', dropHandler);
+  });
+}
+
 
 /**
  * Returns the appropriate column ID depending on screen size.
@@ -41,11 +87,13 @@ function getColumnId(column) {
     document
       .querySelectorAll('[draggable="true"]')
       .forEach((el) => (el.draggable = false));
-    return column + "Mobile";
+    return column;
+  } else {
+    document
+      .querySelectorAll('[draggable="false"]')
+      .forEach((el) => (el.draggable = true));
+      return column;
   }
-  return column;
-
-
 }
 
 /**
@@ -77,11 +125,9 @@ function getRenderedTasks(tasks, countArr) {
 }
 
 function getRenderContacts(task, countArr) {
-  let initialContainerId = document.getElementById('assignedUser' + task)
   if (!task.contact) return;
   task.contact.forEach((contact) => {
     let initial = getInitials(contact);
-    let initialContainerId = document.getElementById('assignedUser' + initial + task.id);
     countArr.push(contact);
     if (task.contact.length > 3) {
       countInitials(countArr, task.id);
@@ -507,13 +553,12 @@ function returnToBoard() {
 
 async function openMobileTaskOverlay(taskId) {
   let columns = document.querySelectorAll(".taskContainer");
-
+  let boardContentWrapperMobile = document.getElementById('boardContentWrapperMobile');
+  boardContentWrapperMobile.classList.remove('dNone');
   columns.forEach((container) => {
     container.addEventListener("click", function () {
       let column = container.dataset.name;
       changeColumn(column, taskId);
-      
-      
     });
   });
 }
