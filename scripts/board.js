@@ -44,8 +44,6 @@ function getColumnId(column) {
     return column + "Mobile";
   }
   return column;
-
-
 }
 
 /**
@@ -77,11 +75,13 @@ function getRenderedTasks(tasks, countArr) {
 }
 
 function getRenderContacts(task, countArr) {
-  let initialContainerId = document.getElementById('assignedUser' + task)
+  let initialContainerId = document.getElementById("assignedUser" + task);
   if (!task.contact) return;
   task.contact.forEach((contact) => {
     let initial = getInitials(contact);
-    let initialContainerId = document.getElementById('assignedUser' + initial + task.id);
+    let initialContainerId = document.getElementById(
+      "assignedUser" + initial + task.id
+    );
     countArr.push(contact);
     if (task.contact.length > 3) {
       countInitials(countArr, task.id);
@@ -388,7 +388,8 @@ function getFilledTaskHTML(
   let compInitials = initials.slice(0, 3);
   let initial = compInitials.map(
     (init) =>
-      `<span id="assignedUser${init + taskComponents.id
+      `<span id="assignedUser${
+        init + taskComponents.id
       }" class="assignedUser">${init}</span>`
   );
   let shortenedTitle = shortenText(taskComponents.title, 40);
@@ -512,8 +513,6 @@ async function openMobileTaskOverlay(taskId) {
     container.addEventListener("click", function () {
       let column = container.dataset.name;
       changeColumn(column, taskId);
-      
-      
     });
   });
 }
