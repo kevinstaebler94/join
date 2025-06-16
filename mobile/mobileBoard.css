@@ -24,21 +24,15 @@
 }
 
 .addTaskButtonMobile {
-  border: none;
-  background: transparent;
-  text-align: center;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  background-color: #2a3647;
-  color: white;
-  padding: 0.25em 0.25em;
-  font-size: 1.5rem;
-  font-weight: 500;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: background-color 125ms ease-in-out;
 }
+
+.addTaskColumnBtn {
+  width: 32px;
+  cursor: pointer;
+}
+
+
 
 .taskSearchMobile {
   display: flex;
@@ -62,6 +56,10 @@
   width: 100%;
 }
 
+.hoverImg {
+  width: 24px;
+}
+
 .taskButtonContainerMobile span {
   font-size: 2.25rem;
   font-weight: 700;
@@ -74,12 +72,12 @@
   height: 2.125em;
 }
 
-.taskButtonContainerMobile img:hover {
-  filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg)
-    brightness(95%) contrast(86%);
+.addTaskColumnBtn:hover {
+  filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg) brightness(95%) contrast(86%);
 }
 
 @media (max-width: 1023px) {
+
   html,
   body {
     font-size: 16px;
@@ -169,14 +167,14 @@
     border: 1px solid rgba(61, 61, 61, 0.23);
   }
 
-  .boardDesktop {
+  /* .boardDesktop {
     display: none;
   }
 
   .boardMobile {
     display: block;
     overflow: auto;
-  }
+  } */
 
   .filledTask {
     max-width: 250px;
@@ -202,9 +200,55 @@
     overflow-x: auto;
     padding: 1.5em 0 3.5em 0;
   }
+
+  .boardHeaderWrapper {
+    margin: 3em 1.5em 0 1.5em;
+  }
+
+  .boardContentWrapper {
+    flex-direction: column;
+    margin-bottom: 64px;
+    margin-left: 1.5em;
+  }
+}
+
+@media (max-width: 850px) {
+  .boardHeaderContent {
+    flex-direction: column;
+  }
+
+  .addTaskButton {
+    display: none;
+  }
+
+  .addTaskButtonMobile {
+    display: block;
+  }
+
+  .headlineContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 48px;
+    flex: 1;
+  }
+
+  .taskActionWrapper {
+    width: 100%;
+  }
+
+  .taskSearch {
+    width: 100%;
+  }
+
+  .taskInputfield {
+    width: 100%;
+  }
 }
 
 @media (max-width: 500px) {
+
   html,
   body {
     font-size: 12px;

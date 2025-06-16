@@ -8,10 +8,6 @@ body {
   background-color: #f6f7f8;
 }
 
-.boardMobile {
-  display: none;
-}
-
 .contentWrapper {
   display: flex;
   height: 100vh;
@@ -56,6 +52,8 @@ main {
 .taskActionWrapper {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex: 2;
 }
 
 .taskSearch {
@@ -87,7 +85,7 @@ main {
   width: 2.5rem;
   cursor: pointer;
   transition: border-radius 125ms ease-in-out,
-  background-color 125ms ease-in-out;
+    background-color 125ms ease-in-out;
 }
 
 .searchIcon:hover {
@@ -132,7 +130,7 @@ main {
   align-items: center;
   flex: 1;
   width: 100%;
-  
+
 }
 
 .taskButtonContainer:nth-child(1),
@@ -158,21 +156,42 @@ main {
 }
 
 .taskButtonContainer img:hover {
-  filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg)
-    brightness(95%) contrast(86%);
+  filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg) brightness(95%) contrast(86%);
 }
 
 .boardContentWrapper {
   overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-top: 64px;
+  padding-top: 0.25em;
+  font-size: 1rem !important;
 }
 
 .boardContentWrapper::-webkit-scrollbar {
   display: none;
 }
 
+.columnHeadline {
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.columnContainer {
+  flex: 1;
+}
+
+.columnTaskWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+  padding: 1.125em;
+}
+
 .columnWrapper {
   display: flex;
-  margin: 0 2.5em;
   overflow: hidden;
 }
 
@@ -191,11 +210,11 @@ main {
   display: none;
 }
 
-.column:nth-child(1),
+/* .column:nth-child(1),
 .column:nth-child(2),
 .column:nth-child(3) {
   margin-right: 1.5em;
-}
+} */
 
 .blankTask {
   border: 2px dotted #acacac;
@@ -244,7 +263,7 @@ main {
 }
 
 .taskTitle {
-  font-size: 1.3rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: #2a3647;
   margin-bottom: 0.75em;
@@ -253,7 +272,7 @@ main {
 
 .taskDescription {
   color: #a8a8a8;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 300;
   margin-bottom: 1.5em;
   overflow-wrap: break-word;
@@ -349,7 +368,7 @@ main {
 }
 
 .dropZone {
-  min-height: 150px; 
+  min-height: 150px;
   position: relative;
   z-index: 0;
 }
@@ -366,6 +385,7 @@ main {
 }
 
 @media (min-width: 1921px) {
+
   html,
   body {
     font-size: 16px;
@@ -373,13 +393,16 @@ main {
 }
 
 @media (max-width: 1545px) {
+
   html,
   body {
     font-size: 12px;
   }
+
   .subtaskInfo {
     font-size: 1.1rem;
   }
+
   .progressBarContainer {
     width: 50%;
   }
@@ -390,18 +413,23 @@ main {
   .filledTask {
     max-height: 350px;
   }
+
   .blankTask {
     margin-bottom: 0;
   }
+
   .subtasksContainer {
     margin-bottom: 1em;
   }
+
   .taskCategory {
     margin-bottom: 0.75em;
   }
+
   .taskDescription {
     margin-bottom: 1em;
   }
+
   .subtaskInfo {
     font-size: 0.8rem;
   }
@@ -422,5 +450,3 @@ main {
     margin-bottom: 1em;
   }
 }
-
-

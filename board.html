@@ -1,224 +1,154 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./styles/sidebar.css" />
-    <link rel="stylesheet" href="./styles/header.css" />
-    <link rel="stylesheet" href="./styles/board.css" />
-    <link rel="stylesheet" href="./styles/modal.css" />
-    <link rel="stylesheet" href="./styles/addTaskModal.css" />
-    <link rel="stylesheet" href="./styles/boardModal.css" />
-    <link rel="stylesheet" href="./mobile/mobileHeader.css" />
-    <link rel="stylesheet" href="./mobile/mobileSidebar.css" />
-    <link rel="stylesheet" href="./mobile/mobileBoard.css" />
-    <link rel="stylesheet" href="./styles/checkbox.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="./script.js"></script>
-    <script src="./scripts/includeHTML.js"></script>
-    <script src="./scripts/db.js"></script>
-    <script src="./scripts/modal.js"></script>
-    <script src="./scripts/add_task.js"></script>
-    <script src="./scripts/taskValidation.js"></script>
-    <script src="./scripts/event.js"></script>
-    <script src="./scripts/addTaskStyle.js"></script>
-    <script src="./scripts/board.js"></script>
-    <script src="./scripts/header.js"></script>
-    <script src="./scripts/sidebar.js"></script>
-    <script src="./assets/templates/addTaskTemplate.js"></script>
-    <script src="./assets/templates/modalTemplate.js"></script>
-    <title>Board</title>
-  </head>
 
-  <body onload="init()">
-    <div id="overlayBoardImg" class="imgOverlay dNone">
-      <img
-        id="addedBoardImg"
-        class="dNone"
-        src="./assets/img/addedBoardImg.svg"
-        alt=""
-      />
-    </div>
-    <div id="orientationOverlay" class="orientationOverlay dNone">
-      <p>Please rotate your device to portrait mode to continue browsing.</p>
-    </div>
-    <div class="contentWrapper">
-      <aside>
-        <div w3-include-html="./assets/templates/sidebar.html"></div>
-      </aside>
-      <div class="mainContainer">
-        <header
-          class="includeContainerHeader"
-          w3-include-html="./assets/templates/header.html"
-        ></header>
-        <main id="boardMainContainer">
-          <div
-            onclick="closeModal()"
-            id="boardOverlay"
-            class="overlay dNone"
-          ></div>
-          <div
-            id="filledTaskModal"
-            class="filledTaskModal modalHeight dNone"
-          ></div>
-          <section
-            id="boardHeaderWrapper"
-            class="boardHeaderWrapper boardDesktop"
-          >
-            <div class="boardHeaderContent">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./styles/sidebar.css" />
+  <link rel="stylesheet" href="./styles/header.css" />
+  <link rel="stylesheet" href="./styles/board.css" />
+  <link rel="stylesheet" href="./styles/modal.css" />
+  <link rel="stylesheet" href="./styles/addTaskModal.css" />
+  <link rel="stylesheet" href="./styles/boardModal.css" />
+  <link rel="stylesheet" href="./mobile/mobileHeader.css" />
+  <link rel="stylesheet" href="./mobile/mobileSidebar.css" />
+  <link rel="stylesheet" href="./mobile/mobileBoard.css" />
+  <link rel="stylesheet" href="./styles/checkbox.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="./script.js"></script>
+  <script src="./scripts/includeHTML.js"></script>
+  <script src="./scripts/db.js"></script>
+  <script src="./scripts/modal.js"></script>
+  <script src="./scripts/add_task.js"></script>
+  <script src="./scripts/taskValidation.js"></script>
+  <script src="./scripts/event.js"></script>
+  <script src="./scripts/addTaskStyle.js"></script>
+  <script src="./scripts/board.js"></script>
+  <script src="./scripts/header.js"></script>
+  <script src="./scripts/sidebar.js"></script>
+  <script src="./assets/templates/addTaskTemplate.js"></script>
+  <script src="./assets/templates/modalTemplate.js"></script>
+  <title>Board</title>
+</head>
+
+<body onload="init()">
+  <div id="overlayBoardImg" class="imgOverlay dNone">
+    <img id="addedBoardImg" class="dNone" src="./assets/img/addedBoardImg.svg" alt="" />
+  </div>
+  <div id="orientationOverlay" class="orientationOverlay dNone">
+    <p>Please rotate your device to portrait mode to continue browsing.</p>
+  </div>
+  <div class="contentWrapper">
+    <aside>
+      <div w3-include-html="./assets/templates/sidebar.html"></div>
+    </aside>
+    <div class="mainContainer">
+      <header class="includeContainerHeader" w3-include-html="./assets/templates/header.html"></header>
+      <main id="boardMainContainer">
+        <div onclick="closeModal()" id="boardOverlay" class="overlay dNone"></div>
+        <div id="filledTaskModal" class="filledTaskModal modalHeight dNone"></div>
+        <section id="boardHeaderWrapper" class="boardHeaderWrapper boardDesktop">
+          <div class="boardHeaderContent">
+            <div class="headlineContainer">
               <h2 class="h2Desktop">Board</h2>
-              <div class="taskActionWrapper">
-                <div class="taskSearch">
-                  <input
-                    id="taskInputfield"
-                    class="taskInputfield"
-                    type="text"
-                    placeholder="Find task"
-                    oninput="handleTaskInput('taskInputfield')"
-                  />
-                  <img
-                    class="verticalLine"
-                    src="./assets/img/verticalLine.svg"
-                    alt=""
-                  />
-                  <img
-                    onclick="filterTasks('taskInputfield')"
-                    class="searchIcon"
-                    src="./assets/img/search.svg"
-                    alt=""
-                  />
+              <span onclick="handleAddTask()" class="addTaskButtonMobile displayNone">
+                <img src="./assets/img/addTaskBtn.svg" alt="" />
+              </span>
+            </div>
+
+            <div class="taskActionWrapper">
+              <div class="taskSearch">
+                <input id="taskInputfield" class="taskInputfield" type="text" placeholder="Find task"
+                  oninput="handleTaskInput('taskInputfield')" />
+                <img class="verticalLine" src="./assets/img/verticalLine.svg" alt="" />
+                <img onclick="filterTasks('taskInputfield')" class="searchIcon" src="./assets/img/search.svg" alt="" />
+              </div>
+              <div class="addTaskContainer">
+                <button onclick="handleAddTask()" class="addTaskButton">
+                  Add task<img src="./assets/img/plusIconWhite.svg" alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <section class="boardContentWrapper boardDesktop">
+          <div class="columnContainer">
+            <div class="columnTaskWrapper">
+              <span class="columnHeadline">To do</span>
+              <img class="addTaskColumnBtn" onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+            </div>
+            <div class="columnWrapper">
+              <div id="toDo" class="column dropZone" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+              </div>
+            </div>
+          </div>
+
+          <div class="columnContainer">
+            <div class="columnTaskWrapper">
+              <span class="columnHeadline">In progress</span>
+              <img class="addTaskColumnBtn" onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+            </div>
+            <div id="inProgress" class="column dropZone" ondrop="dropHandler(event)"
+              ondragover="dragoverHandler(event)"></div>
+          </div>
+          <div class="columnContainer">
+            <div class="columnTaskWrapper">
+              <span class="columnHeadline">Await feedback</span>
+              <img class="addTaskColumnBtn" onclick="handleAddTask()" src="./assets/img/plusIconDarkBlue.svg" alt="" />
+            </div>
+            <div id="awaitFeedback" class="column dropZone" ondrop="dropHandler(event)"
+              ondragover="dragoverHandler(event)"></div>
+          </div>
+          <div class="columnContainer">
+            <div class="columnTaskWrapper">
+              <span class="columnHeadline">Done</span>
+            </div>
+            <div id="done" class="column dropZone" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+            </div>
+          </div>
+        </section>
+        <section id="boardContentWrapperMobile" class="boardContentWrapperMobile boardMobile dNone">
+          <section class="moveToOverlayWrapper displayNone" id="moveToOverlayWrapper">
+            <div class="moveToOverlay">
+              <h3 class="moveTo">Move to...</h3>
+              <div class="containerWrapper">
+                <div class="subContainer">
+                  <div id="toDoOverlay" data-name="toDo" class="taskContainer">
+                    To do
+                  </div>
+                  <div id="inProgressOverlay" data-name="inProgress" class="taskContainer">
+                    In progress
+                  </div>
                 </div>
-                <div class="addTaskContainer">
-                  <button onclick="handleAddTask()" class="addTaskButton">
-                    Add task<img src="./assets/img/plusIconWhite.svg" alt="" />
+                <div class="subContainer">
+                  <div id="awaitFeedbackOverlay" data-name="awaitFeedback" class="taskContainer">
+                    Awaitfeedback
+                  </div>
+                  <div id="doneOverlay" data-name="done" class="taskContainer">
+                    Done
+                  </div>
+                </div>
+              </div>
+              <hr class="divider" />
+              <div class="containerWrapper">
+                <div class="subContainer">
+                  <button onclick="closeTaskOverlay()" class="openTask">
+                    Open task
+                  </button>
+                </div>
+                <div class="subContainer">
+                  <button onclick="returnToBoard()" class="returnToBoard">
+                    Return to board
                   </button>
                 </div>
               </div>
             </div>
-            <div class="taskButtonsWrapper">
-              <div class="taskButtonContainer">
-                <span>To do</span>
-                <img
-                  onclick="handleAddTask()"
-                  src="./assets/img/plusIconDarkBlue.svg"
-                  alt=""
-                />
-              </div>
-              <div class="taskButtonContainer">
-                <span>In progress</span>
-                <img
-                  onclick="handleAddTask()"
-                  src="./assets/img/plusIconDarkBlue.svg"
-                  alt=""
-                />
-              </div>
-              <div class="taskButtonContainer">
-                <span>Await feedback</span>
-                <img
-                  onclick="handleAddTask()"
-                  src="./assets/img/plusIconDarkBlue.svg"
-                  alt=""
-                />
-              </div>
-              <div class="taskButtonContainer">
-                <span>Done</span>
-              </div>
-            </div>
           </section>
-          <section class="boardContentWrapper boardDesktop">
-            <div class="columnWrapper">
-              <div
-                id="toDo"
-                class="column dropZone"
-                ondrop="dropHandler(event)"
-                ondragover="dragoverHandler(event)"
-              ></div>
-
-              <div
-                id="inProgress"
-                class="column dropZone"
-                ondrop="dropHandler(event)"
-                ondragover="dragoverHandler(event)"
-              ></div>
-
-              <div
-                id="awaitFeedback"
-                class="column dropZone"
-                ondrop="dropHandler(event)"
-                ondragover="dragoverHandler(event)"
-              ></div>
-
-              <div
-                id="done"
-                class="column dropZone"
-                ondrop="dropHandler(event)"
-                ondragover="dragoverHandler(event)"
-              ></div>
-            </div>
-          </section>
-          <section class="boardContentWrapperMobile boardMobile">
-            <section
-              class="moveToOverlayWrapper displayNone"
-              id="moveToOverlayWrapper"
-            >
-              <div class="moveToOverlay">
-                <h3 class="moveTo">Move to...</h3>
-                <div class="containerWrapper">
-                  <div class="subContainer">
-                    <div
-                      id="toDoOverlay"
-                      data-name="toDo"
-                      class="taskContainer"
-                    >
-                      To do
-                    </div>
-                    <div
-                      id="inProgressOverlay"
-                      data-name="inProgress"
-                      class="taskContainer"
-                    >
-                      In progress
-                    </div>
-                  </div>
-                  <div class="subContainer">
-                    <div
-                      id="awaitFeedbackOverlay"
-                      data-name="awaitFeedback"
-                      class="taskContainer"
-                    >
-                      Awaitfeedback
-                    </div>
-                    <div
-                      id="doneOverlay"
-                      data-name="done"
-                      class="taskContainer"
-                    >
-                      Done
-                    </div>
-                  </div>
-                </div>
-                <hr class="divider" />
-                <div class="containerWrapper">
-                  <div class="subContainer">
-                    <button onclick="closeTaskOverlay()" class="openTask">
-                      Open task
-                    </button>
-                  </div>
-                  <div class="subContainer">
-                    <button onclick="returnToBoard()" class="returnToBoard">
-                      Return to board
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <div class="boardHeaderContentMobile">
+          <!-- <div class="boardHeaderContentMobile">
               <h2 class="h2Mobile">Board</h2>
               <button onclick="handleAddTask()" class="addTaskButtonMobile">
                 <img src="./assets/img/plusIconWhite.svg" alt="" />
@@ -278,11 +208,12 @@
                 </div>
                 <div id="doneMobile" class="column dropZone"></div>
               </div>
-            </div>
-          </section>
-          <div id="addTaskModal" class="addTaskModal dNone"></div>
-        </main>
-      </div>
+            </div> -->
+        </section>
+        <div id="addTaskModal" class="addTaskModal dNone"></div>
+      </main>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
