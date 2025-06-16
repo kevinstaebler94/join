@@ -39,7 +39,7 @@
     }
 
     .modalIconContainer {
-        width: 150px;
+        width: 230px;
     }
 }
 
@@ -117,7 +117,7 @@
     .modalMobileCloseButtonWrapper {
         display: flex;
         position: relative;
-        top: -25px;
+        top: -140px;
         left: 88%;
     }
 
@@ -142,6 +142,8 @@
 
     .modalIconContainer {
         width: 145px;
+        position: absolute;
+        padding-bottom: 520px;
     }
 
     .mobileHeadlineWrapper {
@@ -177,11 +179,6 @@
         height: 145px;
         width: 145px;
         border-radius: 73px;
-    }
-
-    .modalIconContainer {
-        position: absolute;
-        padding-bottom: 500px;
     }
 
     .contentSection {
@@ -221,6 +218,7 @@
 }
 
 @media(max-width: 950px) {
+
     .mobileHeadlineWrapper {
         gap: 24px;
     }
@@ -239,6 +237,10 @@
 }
 
 @media(max-width: 890px) {
+    .modalMobileCloseButtonWrapper {
+        top: -90px;
+    }
+
     .mobileHeadlineWrapper {
         gap: 20px;
     }
@@ -277,6 +279,10 @@
 @media(max-width: 800px) {
     .mainContent {
         justify-content: center;
+    }
+
+    .modalMobileCloseButtonWrapper {
+        top: -30px;
     }
 
     .contactsOverview {
@@ -521,7 +527,7 @@
 /* responsivness height */
 
 
-@media(max-height: 940px) {
+@media(max-height: 932px) and (max-width: 430px) {
     .headlineContainer {
         height: 105px;
     }
@@ -534,12 +540,17 @@
         padding-bottom: 480px;
     }
 
+    .contactsModalIcon img {
+        width: 30px;
+        height: 30px;
+    }
+
     .buttonsContainer {
         padding-bottom: 70px;
     }
 }
 
-@media(max-height: 850px) {
+@media(max-height: 850px) and (max-width: 430px) {
     .modalMobileCloseButtonWrapper {
         top: -20px;
     }
@@ -561,13 +572,23 @@
     }
 }
 
-@media(max-height: 750px) {
+@media(max-height: 750px) and (max-width: 430px) {
     .inputFieldContainer {
         gap: 3px;
     }
 
+    .headlineContainer {
+        gap: 0;
+    }
+
+    .contactsModalIcon {
+        height: 124px;
+        width: 124px;
+    }
+
+
     .modalIconContainer {
-        padding-bottom: 370px;
+        padding-bottom: 350px;
     }
 
     .modalContentContainer {
@@ -576,11 +597,11 @@
 
     .buttonsContainer {
         padding-top: 14px;
-        padding-bottom: 40px;
+        padding-bottom: 24px;
     }
 }
 
-@media(max-height: 670px) {
+@media(max-height: 670px) and (max-width: 430px) {
     .modalMainContent {
         top: 40%
     }
