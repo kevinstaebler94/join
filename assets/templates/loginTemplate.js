@@ -1,6 +1,5 @@
 function loginTemplate() {
   let savedEmail = localStorage.getItem("registeredEmail") || "";
-  let savedPassword = localStorage.getItem("registeredPassword") || "";
   setTimeout(() => toggleLoginButton(), 0);
 
   return `
@@ -20,7 +19,7 @@ function loginTemplate() {
             <span class="hide">Placeholder</span>
           </div>
           <div class="inputWrapper">
-            <input id="passwordLogin" class="inputfieldLogin" type="password" value="${savedPassword}" placeholder="Password" oninput="toggleLoginButton()">
+            <input id="passwordLogin" class="inputfieldLogin" type="password" placeholder="Password" oninput="toggleLoginButton()">
             <img onclick="togglePasswordVisibility('passwordLogin')" id="passwordIcon" class="inputIconLogin passwordIcon" src="./assets/img/lock.svg" alt="">
             <span id="errorMsgLogin" class="errorMsgPassword hide">Check your email and password. Please try again.</span>
           </div>
@@ -38,5 +37,5 @@ function loginTemplate() {
       <span onclick="window.location.href='./privacyNotLogin.html'" class="privacyPolicy">Privacy Policy</span>
       <span onclick="window.location.href='./legalNoticeNotLogin.html'" class="legalNotice">Legal notice</span>
     </footer>
-  `
+  `;
 }

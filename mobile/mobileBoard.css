@@ -32,8 +32,6 @@
   cursor: pointer;
 }
 
-
-
 .taskSearchMobile {
   display: flex;
   align-items: center;
@@ -73,11 +71,11 @@
 }
 
 .addTaskColumnBtn:hover {
-  filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg) brightness(95%) contrast(86%);
+  filter: invert(65%) sepia(31%) saturate(4449%) hue-rotate(165deg)
+    brightness(95%) contrast(86%);
 }
 
 @media (max-width: 1023px) {
-
   html,
   body {
     font-size: 16px;
@@ -167,15 +165,6 @@
     border: 1px solid rgba(61, 61, 61, 0.23);
   }
 
-  /* .boardDesktop {
-    display: none;
-  }
-
-  .boardMobile {
-    display: block;
-    overflow: auto;
-  } */
-
   .filledTask {
     max-width: 250px;
     width: 100%;
@@ -253,7 +242,6 @@
 }
 
 @media (max-width: 500px) {
-
   html,
   body {
     font-size: 12px;

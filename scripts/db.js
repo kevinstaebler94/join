@@ -1,6 +1,7 @@
-const BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
+//cconst BASE_URL = 'https://join-439-default-rtdb.europe-west1.firebasedatabase.app/'; // main URL
 // const BASE_URL = 'https://join-contacts-fcc04-default-rtdb.europe-west1.firebasedatabase.app' // URL Oli
-// const BASE_URL = "https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/"; // URL Kevin
+const BASE_URL =
+  "https://test-project-9b5dc-default-rtdb.europe-west1.firebasedatabase.app/"; // URL Kevin
 
 /**
  * Fetches data from Firebase Realtime Database at a given path.

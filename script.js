@@ -190,7 +190,6 @@ function checkOrientation() {
   }
 }
 
-
 /**
  * Shows or hides the privacy policy based on the selected language button.
  * @param {string} clickedLanguage - The ID of the clicked language button.

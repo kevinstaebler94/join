@@ -11,29 +11,28 @@ async function initBoard() {
 }
 
 function disableDragging() {
-  document.querySelectorAll('[draggable]').forEach((el) => {
-    el.setAttribute('draggable', false);
-    el.removeEventListener('dragstart', dragstartHandler);
+  document.querySelectorAll("[draggable]").forEach((el) => {
+    el.setAttribute("draggable", false);
+    el.removeEventListener("dragstart", dragstartHandler);
   });
 
-  document.querySelectorAll('.dropZone').forEach((zone) => {
-    zone.removeEventListener('dragover', dragoverHandler);
-    zone.removeEventListener('drop', dropHandler);
+  document.querySelectorAll(".dropZone").forEach((zone) => {
+    zone.removeEventListener("dragover", dragoverHandler);
+    zone.removeEventListener("drop", dropHandler);
   });
 }
 
 function enableDragging() {
-  document.querySelectorAll('.taskCard').forEach((el) => {
-    el.setAttribute('draggable', true);
-    el.addEventListener('dragstart', dragstartHandler);
+  document.querySelectorAll(".taskCard").forEach((el) => {
+    el.setAttribute("draggable", true);
+    el.addEventListener("dragstart", dragstartHandler);
   });
 
-  document.querySelectorAll('.dropZone').forEach((zone) => {
-    zone.addEventListener('dragover', dragoverHandler);
-    zone.addEventListener('drop', dropHandler);
+  document.querySelectorAll(".dropZone").forEach((zone) => {
+    zone.addEventListener("dragover", dragoverHandler);
+    zone.addEventListener("drop", dropHandler);
   });
 }
-
 
 /**
  * Returns the appropriate column ID depending on screen size.
@@ -50,6 +49,7 @@ function getColumnId(column) {
     document
       .querySelectorAll('[draggable="false"]')
       .forEach((el) => (el.draggable = true));
+    return column;
     return column;
   }
 }
@@ -245,6 +245,15 @@ async function renderFilteredTasks(filtered, filteredTask) {
 }
 
 function getFilteredTaskTemplate(filtered, columnIds, isMobile) {
+  getFilteredTaskTemplate(filtered, columnIds, isMobile);
+  columnIds.forEach((id) => {
+    const col = document.getElementById(id);
+    if (col && !col.innerHTML.trim()) col.innerHTML = blankTask(id);
+  });
+  initProgressBar(filteredTask);
+}
+
+function getFilteredTaskTemplate(filtered, columnIds, isMobile) {
   if (!filtered.length)
     return columnIds.forEach(
       (id) => (document.getElementById(id).innerHTML = blankTask(id))
@@ -325,6 +334,7 @@ function countInitials(contacts, taskId) {
  * @param {Object} tasksData - Object containing all tasks keyed by their ID
  */
 function initProgressBar(tasksData) {
+  if (!tasksData) return;
   Object.entries(tasksData).forEach(([taskId, tasksData]) => {
     let subtask = tasksData.subtask || [];
     let isChecked = subtask.filter((st) => st.done === true).length;
@@ -377,4 +387,18 @@ function closeTaskOverlay() {
 function returnToBoard() {
   closeTaskOverlay();
   closeModal();
+}
+
+async function openMobileTaskOverlay(taskId) {
+  let columns = document.querySelectorAll(".taskContainer");
+  let boardContentWrapperMobile = document.getElementById(
+    "boardContentWrapperMobile"
+  );
+  boardContentWrapperMobile.classList.remove("dNone");
+  columns.forEach((container) => {
+    container.addEventListener("click", function () {
+      let column = container.dataset.name;
+      changeColumn(column, taskId);
+    });
+  });
 }
