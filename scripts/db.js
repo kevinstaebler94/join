@@ -52,7 +52,9 @@ async function deleteData(path = "") {
     body: JSON.stringify(),
   });
   let data = await response.json();
-  renderTasks();
+  if (window.location.href.includes("board.html")) {
+    renderTasks();
+  }
   return data;
 }
 
@@ -355,7 +357,6 @@ async function deleteContact(contactId, contactName) {
 
 function checkTaskContact(contactId) {
   let taskContact = contactId;
-  console.log(taskContact);
 }
 
 async function deleteUser() {

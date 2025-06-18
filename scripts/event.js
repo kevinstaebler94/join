@@ -47,3 +47,35 @@ document.addEventListener('DOMContentLoaded', () => {
         disableMobile: true,
     });
 });
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 1023) {
+    document
+      .querySelectorAll('[draggable="true"]')
+      .forEach((el) => (el.draggable = false));
+  } else {
+    document
+      .querySelectorAll('[draggable="false"]')
+      .forEach((el) => (el.draggable = true));
+  }
+})
+
+document.addEventListener('dragstart', (e) => {
+  if (window.innerWidth <= 1023) {
+    e.preventDefault();
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 1023) {
+    disableDragging();
+  } else {
+    enableDragging();
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 1023) {
+    returnToBoard();
+  }
+});

@@ -10,48 +10,6 @@ async function initBoard() {
   await renderTasks();
 }
 
-// window.addEventListener("resize", () => {
-//   if (window.innerWidth <= 1170) {
-//     clearTimeout(resizeTimeout);
-//     resizeTimeout = setTimeout(() => {
-//       checkWindowSize();
-//     }, 150);
-//   }
-//   if (window.innerWidth <= 1023) {
-//     // clearTimeout(resizeTimeout);
-//     // resizeTimeout = setTimeout(() => {
-//     //   window.location.href = "./board.html";
-//     // }, 500);
-//   }
-// });
-
-window.addEventListener('resize', () => {
-    if (window.innerWidth <= 1023) {
-    document
-      .querySelectorAll('[draggable="true"]')
-      .forEach((el) => (el.draggable = false));
-  } else {
-    document
-      .querySelectorAll('[draggable="false"]')
-      .forEach((el) => (el.draggable = true));
-  }
-})
-
-document.addEventListener('dragstart', (e) => {
-  if (window.innerWidth <= 1023) {
-    e.preventDefault();
-  }
-});
-
-window.addEventListener('resize', () => {
-  if (window.innerWidth <= 1023) {
-    disableDragging();
-  } else {
-    enableDragging();
-  }
-});
-
-
 function disableDragging() {
   document.querySelectorAll('[draggable]').forEach((el) => {
     el.setAttribute('draggable', false);
@@ -92,7 +50,7 @@ function getColumnId(column) {
     document
       .querySelectorAll('[draggable="false"]')
       .forEach((el) => (el.draggable = true));
-      return column;
+    return column;
   }
 }
 
@@ -156,7 +114,6 @@ function getTaskComponents(task) {
   const prio = task?.prio || "";
   const capitalizedPrio =
     prio.charAt(0).toUpperCase() + prio.slice(1).toLowerCase();
-
   return (taskComponents = {
     category: task.category,
     title: task.title,
@@ -200,19 +157,6 @@ function filledTaskTemplate(taskComponents) {
 }
 
 /**
- * Generates placeholder HTML when no tasks are available.
- * @param {string} columnName - The name of the column
- * @returns {string} - HTML string for blank task
- */
-function blankTask(columnName) {
-  return `
-    <div class="blankTask marginBottom">
-      <span>No tasks ${columnName.replace(/([a-z])([A-Z])/g, "$1 $2")}</span>
-    </div>
-  `;
-}
-
-/**
  * Handles the dragstart event by storing task ID and source column.
  * @param {DragEvent} ev
  */
@@ -249,11 +193,9 @@ async function dropHandler(ev) {
   const taskId = ev.dataTransfer.getData("text");
   const taskElement = document.getElementById(taskId);
   const dropZone = ev.target.closest(".dropZone");
-
   if (dropZone && taskElement) {
     const newColumn = dropZone.id;
     let task = await getData(`/users/${loggedInUser}/tasks/${taskId}`);
-
     if (task) {
       task.column = newColumn;
       await putData(`/users/${loggedInUser}/tasks/`, task, task.id);
@@ -273,7 +215,6 @@ async function filterTasks(id) {
   let tasks = await getData(`/users/${loggedInUser}/tasks`);
   let input = document.getElementById(id).value.toLowerCase();
   let tasksArr = Object.values(tasks || {});
-
   if (!input.trim()) {
     renderTasks();
     return;
@@ -295,12 +236,19 @@ async function renderFilteredTasks(filtered, filteredTask) {
   const columns = ["toDo", "inProgress", "awaitFeedback", "done"];
   const columnIds = columns.map((col) => (isMobile ? col + "Mobile" : col));
   columnIds.forEach((id) => (document.getElementById(id).innerHTML = ""));
+  getFilteredTaskTemplate(filtered, columnIds, isMobile);
+  columnIds.forEach((id) => {
+    const col = document.getElementById(id);
+    if (col && !col.innerHTML.trim()) col.innerHTML = blankTask(id);
+  });
+  initProgressBar(filteredTask);
+}
 
+function getFilteredTaskTemplate(filtered, columnIds, isMobile) {
   if (!filtered.length)
     return columnIds.forEach(
       (id) => (document.getElementById(id).innerHTML = blankTask(id))
     );
-
   for (const task of filtered) {
     const prio = task?.prio || "";
     task.capitalizedPrio = prio.charAt(0).toUpperCase() + prio.slice(1);
@@ -308,26 +256,6 @@ async function renderFilteredTasks(filtered, filteredTask) {
     const target = document.getElementById(targetId);
     if (target) target.innerHTML += filledTaskTemplate(task);
     getInitialStyle(task, task.contact);
-  }
-
-  columnIds.forEach((id) => {
-    const col = document.getElementById(id);
-    if (col && !col.innerHTML.trim()) col.innerHTML = blankTask(id);
-  });
-
-  initProgressBar(filteredTask);
-}
-
-function getInitialStyle(task, contacts) {
-  let contact;
-  let initial;
-  let taskId = task.id;
-  if (contacts) {
-    contacts.forEach((element) => {
-      contact = element;
-      initial = getInitials(contact);
-      styleInitalNameBoard(contact, initial, taskId);
-    });
   }
 }
 
@@ -343,20 +271,6 @@ async function handleTaskInput(id) {
     return;
   }
   await filterTasks(id);
-}
-
-/**
- * Converts contact names to initials.
- * @param {Array} contactData - List of contact names
- * @returns {Array} - Initials of contacts
- */
-function convertNameToInitial(contactData) {
-  return contactData.map((name) =>
-    name
-      .split(" ")
-      .map((n) => n.charAt(0).toUpperCase())
-      .join("")
-  );
 }
 
 /**
@@ -397,64 +311,6 @@ async function showProgressBar(isChecked, checkboxTotal, taskId) {
       progressBar.style.width = `${progress}%`;
     }, 10);
   }
-}
-
-/**
- * Generates HTML for the progress bar container.
- */
-function getProgressBarHTML(taskComponents, subtaskData, isChecked) {
-  return subtaskData.length > 0
-    ? `
-    <div id="subtasksContainer${taskComponents.id}" class="subtasksContainer">
-      <div class="progressBarContainer">
-        <div id="progressBar${taskComponents.id}" class="progressBar progressBarCurrentWith"></div>  
-      </div>
-      <span id="subtaskInfo${taskComponents.id}" class="subtaskInfo">${isChecked}/${subtaskData.length} Subtasks</span>
-    </div>
-  `
-    : "";
-}
-
-/**
- * Generates the HTML markup for a single task on the board.
- * @param {Object} taskComponents - The core task data including title, description, etc.
- * @param {string} serializedSubtasks - JSON stringified subtasks
- * @param {string} serializedContacts - JSON stringified contacts
- * @param {Array<string>} initials - Array of contact initials
- * @param {string} progressBarHTML - HTML for the subtask progress bar
- * @returns {string} - HTML string representing the task
- */
-function getFilledTaskHTML(
-  taskComponents,
-  serializedSubtasks,
-  serializedContacts,
-  initials,
-  progressBarHTML
-) {
-  let compInitials = initials.slice(0, 3);
-  let initial = compInitials.map(
-    (init) =>
-      `<span id="assignedUser${init + taskComponents.id
-      }" class="assignedUser">${init}</span>`
-  );
-  let shortenedTitle = shortenText(taskComponents.title, 40);
-  let shortenedDescription = shortenText(taskComponents.description, 25);
-  return `
-    <div data-id="${taskComponents.id}" id="${taskComponents.id}"
-     onclick="openFilledTaskModal('${taskComponents.id}', '${taskComponents.category}', '${taskComponents.title}', '${taskComponents.description}', '${taskComponents.date}', '${taskComponents.prio}', '${taskComponents.column}', '${serializedSubtasks}', '${serializedContacts}'), openMobileTaskOverlay('${taskComponents.id}')" class="filledTask marginBottom" draggable="true" ondragstart="dragstartHandler(event)" ondragend="dragendHandler(event)">
-      <h3 class="taskCategory userStory">${taskComponents.category}</h3>
-      <h4 class="taskTitle">${shortenedTitle}</h4>
-      <p class="taskDescription">${shortenedDescription}</p>
-      ${progressBarHTML}
-      <div id="assignedToContainer${taskComponents.id}" class="assignedToContainer assignedGap">
-        <div class="assignedUserContainer">
-          ${initial}
-          <span id="assignedCounter${taskComponents.id}" class="assignedCounter dNone"></span>
-        </div>
-        <img src="./assets/img/prio${taskComponents.capitalizedPrio}.svg" alt="" class="taskPrio">
-      </div>
-    </div>
-  `;
 }
 
 function countInitials(contacts, taskId) {
@@ -500,34 +356,6 @@ function handleAddTask() {
 }
 
 /**
- * Styles the background color of user initials on the board.
- * @param {string} contact - Full name of the contact
- * @param {string} initial - Initials of the contact
- */
-function styleInitalNameBoard(contact, initial, taskId) {
-  let initalContainer = document.getElementById(
-    "assignedUser" + initial + taskId
-  );
-  let color = getColorFromName(contact);
-  if (!initalContainer) return;
-  initalContainer.style.backgroundColor = color;
-  initialColor[contact] = color;
-}
-
-function styleInitalHigherThree(contact, initial, taskId) {
-  let initalContainer = document.getElementById(
-    "assignedUser" + initial + taskId
-  );
-  let color = getColorFromName(contact);
-  if (!initalContainer) {
-    return;
-  } else {
-    initalContainer.style.backgroundColor = color;
-    initialColor[contact] = color;
-  }
-}
-
-/**
  * Checks the current visibility state of the add task modal.
  * If the modal is visible (not hidden), it triggers the add task handler.
  */
@@ -549,16 +377,4 @@ function closeTaskOverlay() {
 function returnToBoard() {
   closeTaskOverlay();
   closeModal();
-}
-
-async function openMobileTaskOverlay(taskId) {
-  let columns = document.querySelectorAll(".taskContainer");
-  let boardContentWrapperMobile = document.getElementById('boardContentWrapperMobile');
-  boardContentWrapperMobile.classList.remove('dNone');
-  columns.forEach((container) => {
-    container.addEventListener("click", function () {
-      let column = container.dataset.name;
-      changeColumn(column, taskId);
-    });
-  });
 }

@@ -27,6 +27,8 @@
   <script src="./scripts/event.js"></script>
   <script src="./scripts/addTaskStyle.js"></script>
   <script src="./scripts/board.js"></script>
+  <script src="./scripts/boardStyle.js"></script>
+  <script src="./assets/templates/boardTemplate.js"></script>
   <script src="./scripts/header.js"></script>
   <script src="./scripts/sidebar.js"></script>
   <script src="./assets/templates/addTaskTemplate.js"></script>
@@ -115,23 +117,8 @@
           <section class="moveToOverlayWrapper displayNone" id="moveToOverlayWrapper">
             <div class="moveToOverlay">
               <h3 class="moveTo">Move to...</h3>
-              <div class="containerWrapper">
-                <div class="subContainer">
-                  <div id="toDoOverlay" data-name="toDo" class="taskContainer">
-                    To do
-                  </div>
-                  <div id="inProgressOverlay" data-name="inProgress" class="taskContainer">
-                    In progress
-                  </div>
-                </div>
-                <div class="subContainer">
-                  <div id="awaitFeedbackOverlay" data-name="awaitFeedback" class="taskContainer">
-                    Awaitfeedback
-                  </div>
-                  <div id="doneOverlay" data-name="done" class="taskContainer">
-                    Done
-                  </div>
-                </div>
+              <div id="containerWrapper" class="containerWrapper">
+                
               </div>
               <hr class="divider" />
               <div class="containerWrapper">

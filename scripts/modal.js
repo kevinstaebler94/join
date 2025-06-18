@@ -233,7 +233,6 @@ function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
 function deleteNewAddedSubtask(subtaskIndex, subtaskId) {
     let subtaskElement = document.getElementById('subtaskElement' + subtaskId);
     subtaskElement.innerHTML = '';
-    console.log(subtaskElement);
     subtasksArr[0].splice(subtaskIndex, 1);
 }
 

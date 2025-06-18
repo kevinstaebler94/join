@@ -6,8 +6,6 @@ async function greetingByName() {
     let nameData = await getData('/users/' + loggedInUser + '/name');
     if (!nameData) return;
     document.getElementById("userName").textContent = nameData;
-    console.log(loggedInUser);
-    
 }
 
 /**
