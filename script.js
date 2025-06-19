@@ -144,6 +144,7 @@ async function logoutUser() {
   await changeUsers(userId, greeting, email, password, name, login, tasks, contacts);
   await changeElement(greetingTrue);
   await checkLogoutUser();
+  loggedInUser = '';
   window.location.href = "index.html";
 }
 
