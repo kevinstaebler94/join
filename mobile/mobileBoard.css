@@ -198,6 +198,7 @@
     flex-direction: column;
     margin-bottom: 64px;
     margin-left: 1.5em;
+    gap: 0;
   }
 
   .blankTask {

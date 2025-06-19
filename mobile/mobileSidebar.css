@@ -1,7 +1,7 @@
 @media(max-width:1023px) {
-    main {
+    /* main {
         height: 100vh;
-    }
+    } */
 
     nav {
         position: fixed;

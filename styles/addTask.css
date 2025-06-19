@@ -608,3 +608,251 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transform: translate(-50%);
     z-index: 6;
 }
+
+@media (max-width: 1200px) {
+    .mainContent {
+        margin: 0 48px;
+    }
+}
+
+@media (max-width: 1023px) {
+    main {
+        height: unset;
+    }
+
+    html {
+        background-color: #F6F7F8;
+    }
+
+    .directionColumn {
+        padding-bottom: 20px;
+    }
+
+        .contactListContainer {
+        top: 350px;
+        width: 345px;
+    }
+
+    .categoryListContainer {
+        top: 458px;
+        width: 345px;
+    }
+
+    .subtaskListPosition {
+        top: 604px;
+        width: 345px;
+    }
+
+    .submitSection {
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 850px) {
+    .leftAddTaskForm {
+        gap: 0;
+    }
+
+    .rightAddTaskForm {
+        padding-bottom: 60px;
+        gap: 0;
+    }
+
+    .dividingLine {
+        display: none;
+    }
+
+    .addTaskContent {
+        flex-direction: column;
+        height: auto;
+        align-items: flex-start;
+        margin: 48px 0;
+    }
+
+    .mainContent {
+        width: auto;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 120px;
+    }
+
+    .submitSection {
+        position: fixed;
+        width: 100%;
+        padding: 24px;
+        bottom: 80px;
+        z-index: 50;
+        background-color: #F6F7F8;
+        justify-content: flex-end;
+    }
+
+    main {
+        height: unset;
+        overflow: unset;
+    }
+
+    #mobileInfo {
+        width: 100%;
+    }
+
+    .infoText {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    h1 {
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .subtaskListPosition {
+        top: 924px;
+        width: 345px;
+    }
+
+    .contactListContainer {
+        top: 686px;
+        width: 345px;
+    }
+
+    .categoryListContainer {
+        top: 802px;
+        width: 345px;
+    }
+
+    .mb20 {
+        margin-bottom: 20px !important;
+    }
+}
+
+@media (max-width: 440px) {
+
+    .rightAddTaskForm {
+        padding-bottom: 60px;
+    }
+
+    .inputFields {
+        width: 300px;
+    }
+
+    .textArea {
+        max-width: 300px;
+    }
+
+    .dropdownHeader {
+        width: 300px;
+    }
+
+    .customDropdownName {
+        width: 300px;
+    }
+
+    .customDropdownCategory {
+        width: 300px;
+    }
+
+    .priorityBtn {
+        width: 90px;
+        font-size: 12px;
+    }
+
+    .dateIcon {
+        left: -40px;
+    }
+
+    .plusIcon {
+        left: 272px;
+    }
+
+    .subtaskListPosition {
+        top: 924px;
+        width: 300px;
+    }
+
+    .contactListContainer {
+        width: 300px;
+    }
+
+    .categoryListContainer {
+        width: 300px;
+    }
+}
+
+@media (max-width: 380px) {
+    .leftAddTaskForm {
+        align-items: center;
+    }
+
+    .rightAddTaskForm {
+        padding-bottom: 60px;
+    }
+
+    .calendarWrap {
+        width: 260px;
+    }
+
+    .addTaskContent {
+        align-items: center;
+    }
+
+    .inputFields {
+        width: 260px;
+    }
+
+    .textArea {
+        max-width: 260px;
+    }
+
+    .dropdownHeader {
+        width: 260px;
+    }
+
+    .customDropdownName {
+        width: 260px;
+    }
+
+    .customDropdownCategory {
+        width: 260px;
+    }
+
+    .priorityBtn {
+        width: 80px;
+        font-size: 12px;
+    }
+
+    .dateIcon {
+        left: 228px;
+        bottom: 29px;
+    }
+
+    .flatpickr-calendar {
+        left: 22px;
+        width: 260px;
+    }
+
+    .plusIcon {
+        left: 228px;
+    }
+
+    .assignedInput {
+        width: 214px;
+    }
+
+    .contactListContainer {
+        top: 714px;
+        width: 260px;
+    }
+
+    .categoryListContainer {
+        top: 828px;
+        width: 260px;
+    }
+
+    .subtaskListPosition {
+        top: 954px;
+        width: 260px;
+    }
+}

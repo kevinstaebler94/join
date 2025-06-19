@@ -6,10 +6,23 @@ let loggedInUser;
  */
 async function init() {
   await getLoggedInUser();
+  checkIndex();
+  checkSummary();
+  checkBoard();
+  checkContacts();
+}
+
+async function checkIndex() {
   if (window.location.href.includes("index.html")) {
     getLogin();
     return;
+  } else {
+    await includeHTML();
+    highlightActiveSidebarLink();
   }
+}
+
+async function checkSummary() {
   if (window.location.href.includes("summary.html")) {
     if (window.innerWidth <= 800) {
       await includeHTML();
@@ -21,13 +34,25 @@ async function init() {
       highlightActiveSidebarLink();
       return;
     }
+  } else {
+    await includeHTML();
+    highlightActiveSidebarLink();
   }
+}
+
+async function checkBoard() {
   if (window.location.href.includes("board.html")) {
     await includeHTML();
     getBoard();
     highlightActiveSidebarLink();
     return;
+  } else {
+    await includeHTML();
+    highlightActiveSidebarLink();
   }
+}
+
+async function checkContacts() {
   if (window.location.href.includes("contacts.html")) {
     await includeHTML();
     getContacts();
@@ -119,20 +144,9 @@ async function logoutUser() {
   let greetingTrue = userData.greeting.greeting;
   greetingTrue = true;
   login = false;
-  await changeUsers(
-    userId,
-    greeting,
-    email,
-    password,
-    name,
-    login,
-    tasks,
-    contacts
-  );
+  await changeUsers(userId, greeting, email, password, name, login, tasks, contacts);
   await changeElement(greetingTrue);
   await checkLogoutUser();
-  console.log(loggedInUser);
-
   window.location.href = "index.html";
 }
 
@@ -153,14 +167,15 @@ async function checkLogoutUser() {
  */
 async function showUserInitials() {
   let userName = await getData("/users/" + loggedInUser + "/name");
-  if (!userName) return;
-
   let initials = getInitials(userName);
   let initialsContainer = document.getElementById("userIconInitials");
+  if (!userName) return;
+  setTimeout(() => {
+    if (initialsContainer) {
+      initialsContainer.textContent = initials;
+    }
+  }, 10);
 
-  if (initialsContainer) {
-    initialsContainer.textContent = initials;
-  }
 }
 
 /**
@@ -182,7 +197,6 @@ function getInitials(name) {
 function checkOrientation() {
   const isLandscape = window.innerWidth > window.innerHeight;
   const overlay = document.getElementById("orientationOverlay");
-
   if (isLandscape && window.innerWidth <= 932) {
     overlay.classList.remove("dNone"); // z. B. Anzeige einer Warnung
   } else {

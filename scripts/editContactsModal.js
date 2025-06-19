@@ -252,23 +252,35 @@ async function validateEditEmailFormat(originalEmail) {
         return;
     }
     if (!pattern.test(email)) {
-        emailInput.classList.add("error");
-        errorMsgEmail.innerText = "Please enter a valid email address.";
-        errorMsgEmail.classList.remove("dNone");
-        setTimeout(() => {
-            errorMsgEmail.classList.add("dNone");
-            errorMsgEmail.innerText = "";
-            emailInput.classList.remove("error");
-        }, 3000);
+        emailPatternTest(emailInput, errorMsgEmail);
         return false;
     }
+    errorMsgEmail.classList.add("dNone");
+    return true;
+}
+
+function emailPatternTest(emailInput, errorMsgEmail) {
+    emailInput.classList.add("error");
+    errorMsgEmail.innerText = "Please enter a valid email address.";
+    errorMsgEmail.classList.remove("dNone");
+    setTimeout(() => {
+        errorMsgEmail.classList.add("dNone");
+        errorMsgEmail.innerText = "";
+        emailInput.classList.remove("error");
+    }, 3000);
+}
+
+async function checkExistingContacts(originalEmail, email, emailInput, errorMsgEmail) {
     if (!originalEmail || email !== originalEmail.toLowerCase()) {
         let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
         if (emailInput.value == email) {
             return true;
         }
-        
-        for (let key in existingContacts) {
+    }
+}
+
+function loopExistingContacts(existingContacts, emailInput, errorMsgEmail, email) {
+for (let key in existingContacts) {
             if (existingContacts[key].email.trim().toLowerCase() === email) {
                 emailInput.classList.add("error");
                 errorMsgEmail.innerText = "Email is already used.";
@@ -281,9 +293,6 @@ async function validateEditEmailFormat(originalEmail) {
                 return false;
             }
         }
-    }
-    errorMsgEmail.classList.add("dNone");
-    return true;
 }
 
 function resetEditInputErrors(inputs) {
@@ -322,48 +331,59 @@ async function validateEditPhoneNumberFormat() {
     if (phone.value == '') {
         return;
     }
-   
-        if (!pattern.test(value)) {
-            errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
-            errorMsgPhone.classList.remove("dNone");
-            phone.classList.add("error");
-            setTimeout(() => {
-            errorMsgPhone.classList.add("dNone");
-            errorMsgPhone.innerText = "";
-            phone.classList.remove("error");
-        }, 3000);
-            return false;
-        }
-    
+    if (!pattern.test(value)) {
+        phonePatternTest(errorMsgPhone, phone);
+        return false;
+    }
     errorMsgPhone.classList.add("dNone");
     return true;
 }
 
+function phonePatternTest(errorMsgPhone, phone) {
+    errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
+    errorMsgPhone.classList.remove("dNone");
+    phone.classList.add("error");
+    setTimeout(() => {
+        errorMsgPhone.classList.add("dNone");
+        errorMsgPhone.innerText = "";
+        phone.classList.remove("error");
+    }, 3000);
+}
+
 function checkEmptyEditFields(inputs, values) {
     let hasError = false;
-
     if (!values.name) {
-        inputs.nameInput.classList.add('error');
-        document.getElementById('editNamePlaceholderError').innerHTML = "Please enter a name.";
-        document.getElementById('editNamePlaceholderError').classList.add('visible');
-        hideEditErrorMessages('editNamePlaceholderError', 'contactNameEdit');
-        hasError = true;
+        checkNameValue(inputs, values);
     }
-
     if (!values.email) {
-        inputs.emailInput.classList.add('error');
-        document.getElementById('editEmailPlaceholderError').innerHTML = "Please enter an e-mail adress.";
-        document.getElementById('editEmailPlaceholderError').classList.add('visible');
-        hideEditErrorMessages('editEmailPlaceholderError', 'contactEmailEdit');
-        hasError = true;
+        checkEmailValue(inputs, values);
     }
-
     if (!values.phone) {
-        inputs.phoneInput.classList.add('error');
-        document.getElementById('editPhonePlaceholderError').innerHTML = "Please enter a phone number.";
-        document.getElementById('editPhonePlaceholderError').classList.add('visible');
-        hideEditErrorMessages('editPhonePlaceholderError', 'contactPhoneEdit');
-        hasError = true;
+        checkPhoneValue(inputs, values);
     }
     return hasError;
+}
+
+function checkNameValue(inputs, values) {
+    inputs.nameInput.classList.add('error');
+    document.getElementById('editNamePlaceholderError').innerHTML = "Please enter a name.";
+    document.getElementById('editNamePlaceholderError').classList.add('visible');
+    hideEditErrorMessages('editNamePlaceholderError', 'contactNameEdit');
+    hasError = true;
+}
+
+function checkEmailValue(inputs, values) {
+    inputs.emailInput.classList.add('error');
+    document.getElementById('editEmailPlaceholderError').innerHTML = "Please enter an e-mail adress.";
+    document.getElementById('editEmailPlaceholderError').classList.add('visible');
+    hideEditErrorMessages('editEmailPlaceholderError', 'contactEmailEdit');
+    hasError = true;
+}
+
+function checkPhoneValue(inputs, values) {
+    inputs.phoneInput.classList.add('error');
+    document.getElementById('editPhonePlaceholderError').innerHTML = "Please enter a phone number.";
+    document.getElementById('editPhonePlaceholderError').classList.add('visible');
+    hideEditErrorMessages('editPhonePlaceholderError', 'contactPhoneEdit');
+    hasError = true;
 }

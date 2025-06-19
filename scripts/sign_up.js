@@ -6,19 +6,13 @@
  */
 async function signUp(event) {
   event.preventDefault();
-
   if (await checkInput()) {
     let overlay = document.getElementById("signUpOverlay");
     overlay.classList.remove("dNone");
     overlay.classList.add("dFlex");
-
     let email = document.getElementById("email").value.trim();
-    // let password = document.getElementById("password").value.trim();
-
     localStorage.setItem("registeredEmail", email);
-    // localStorage.setItem("registeredPassword", password);
     pushUsers();
-
     setTimeout(() => {
       updateContent("login");
       setTimeout(initLogin(), 100);
@@ -82,19 +76,16 @@ async function validateEmailFormat() {
   let email = document.getElementById("email").value.trim();
   let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let errorMsgEmail = document.getElementById("errorMsgEmail");
-
   if (!pattern.test(email)) {
     showEmailErrorMessage(errorMsgEmail, "Please enter a valid email address.");
     removeErrorMessageEmail(errorMsgEmail);
     return false;
   }
-
   if (await emailExists()) {
     showEmailErrorMessage(errorMsgEmail, "Email is already registered.");
     removeErrorMessageEmail(errorMsgEmail);
     return false;
   }
-
   hideEmailErrorMessage(errorMsgEmail);
   return true;
 }
@@ -148,7 +139,6 @@ function hideEmailErrorMessage(errorMsgEmail) {
 function removeErrorMessageEmail(errorMsgEmail) {
   document.getElementById("checkbox").checked = false;
   document.getElementById("signUpButton").disabled = true;
-
   setTimeout(function () {
     document.getElementById("email").classList.remove("redBorder");
     errorMsgEmail.classList.remove("show");
@@ -166,7 +156,6 @@ function validatePasswords() {
   let password = document.getElementById("password");
   let confirmedPassword = document.getElementById("confirmedPassword");
   let errorMsgPassword = document.getElementById("errorMsgPassword");
-
   if (!password || !confirmedPassword || !errorMsgPassword) return false;
 
   if (password.value.trim() === confirmedPassword.value.trim()) {
@@ -223,10 +212,8 @@ function showPasswordErrorMessage(
 function clearPasswordInput(password, confirmedPassword, errorMsgPassword) {
   document.getElementById("checkbox").checked = false;
   document.getElementById("signUpButton").disabled = true;
-
   password.value = "";
   confirmedPassword.value = "";
-
   setTimeout(() => {
     password.classList.remove("redBorder");
     confirmedPassword.classList.remove("redBorder");

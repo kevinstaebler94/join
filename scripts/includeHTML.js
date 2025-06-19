@@ -11,7 +11,6 @@ function includeHTML() {
     let elements = document.querySelectorAll('[w3-include-html]');
     let total = elements.length;
     let loaded = 0;
-
     elements.forEach(elmnt => {
       let file = elmnt.getAttribute('w3-include-html');
       fetch(file)

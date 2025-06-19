@@ -225,12 +225,17 @@ function changeTasks(taskId, column, category) {
   let title = document.getElementById("titleInputEdit");
   let description = document.getElementById("taskDescriptionEdit");
   let date = document.getElementById("dateInputEdit");
-  // let contacts = assignedArr;
-  let contacts = assignedArr.length > 0 ? assignedArr : [null]; // oder null, oder ein Platzhalter
+  let contacts = assignedArr.length > 0 ? assignedArr : [null];
   let subTask = subtasksArr[0];
   let time = getTimeStamp();
   let newTaskId = title.value + time;
-  let userData = {
+  let userData = getnewTaskObj(newTaskId, title, description, date, prioBtn, contacts, subTask, column, category);
+  putData(path, userData, newTaskId);
+  deleteTask(loggedInUser, taskId);
+}
+
+function getnewTaskObj(newTaskId, title, description, date, prioBtn, contacts, subTask, column, category) {
+  return {
     id: newTaskId,
     title: title.value,
     description: description.value,
@@ -241,9 +246,6 @@ function changeTasks(taskId, column, category) {
     column: column,
     category: category,
   };
-
-  putData(path, userData, newTaskId);
-  deleteTask(loggedInUser, taskId);
 }
 
 /**
@@ -254,13 +256,10 @@ function changeTasks(taskId, column, category) {
 async function pushContacts(loggedInUser) {
   let isValid = await validateContactInput();
   if (!isValid) return;
-
   let emailValid = await validateAddEmailFormat();
   if (!emailValid) return false;
-
   let phoneValid = await validatePhoneNumberFormat();
   if (!phoneValid) return false;
-
   let path = "/users/" + loggedInUser + "/contacts";
   let contactName = document.getElementById("contactName");
   let contactEmail = document.getElementById("contactEmail");
@@ -290,17 +289,6 @@ async function pushContacts(loggedInUser) {
  * @param {string} guestUser - Guest user ID.
  */
 async function pushGuestContacts(contactObj, guestUser) {
-  // Code didnt run for login
-
-  // let isValid = await validateContactInput();
-  // if (!isValid) return;
-
-  // let emailValid = await validateAddEmailFormat();
-  // if (!emailValid) return false;
-
-  // let phoneValid = await validatePhoneNumberFormat();
-  // if (!phoneValid) return false;
-
   let path = "/users/" + guestUser + "/contacts";
   let contactId = adjustEmail(contactObj.email);
   let userData = {
@@ -309,20 +297,6 @@ async function pushGuestContacts(contactObj, guestUser) {
     phone: contactObj.phone,
   };
   await putData(path, userData, contactId);
-
-  // Code didnt run for login
-
-  // try {
-
-  //     clearInputFields();
-  //     closeContactsModal();
-  //     await renderContacts();
-  //     currentContactId = contactId;
-  //     await openContactById(currentContactId);
-  //     showSuccessOverlayImg();
-  // } catch (error) {
-  //     console.error("error while saving:", error);
-  // }
 }
 
 /**
