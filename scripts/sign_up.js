@@ -42,9 +42,7 @@ function toggleSignUpButton() {
  */
 function checkPasswordInput() {
   let password = document.getElementById("password").value.trim();
-  let confirmedPassword = document
-    .getElementById("confirmedPassword")
-    .value.trim();
+  let confirmedPassword = document.getElementById("confirmedPassword").value.trim();
 
   return password.length >= 3 && confirmedPassword.length >= 3;
 }
@@ -101,9 +99,7 @@ async function emailExists() {
   let userData = await getData("/users");
   if (!userData) return false;
 
-  return Object.entries(userData).some(
-    ([key, value]) => key === formattedEmail && value.email === email
-  );
+  return Object.entries(userData).some(([key, value]) => key === formattedEmail && value.email === email);
 }
 
 /**
@@ -175,11 +171,7 @@ function validatePasswords() {
  * @param {HTMLElement} confirmedPassword - The confirmation input field.
  * @param {HTMLElement} errorMsgPassword - The error message element.
  */
-function hidePasswordErrorMessage(
-  password,
-  confirmedPassword,
-  errorMsgPassword
-) {
+function hidePasswordErrorMessage(password, confirmedPassword, errorMsgPassword) {
   errorMsgPassword.classList.remove("show");
   password.classList.remove("redBorder");
   confirmedPassword.classList.remove("redBorder");
@@ -192,11 +184,7 @@ function hidePasswordErrorMessage(
  * @param {HTMLElement} confirmedPassword - The confirmation input field.
  * @param {HTMLElement} errorMsgPassword - The error message element.
  */
-function showPasswordErrorMessage(
-  password,
-  confirmedPassword,
-  errorMsgPassword
-) {
+function showPasswordErrorMessage(password, confirmedPassword, errorMsgPassword) {
   errorMsgPassword.classList.add("show");
   password.classList.add("redBorder");
   confirmedPassword.classList.add("redBorder");

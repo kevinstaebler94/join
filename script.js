@@ -209,12 +209,8 @@ function checkOrientation() {
  * @param {string} clickedLanguage - The ID of the clicked language button.
  */
 function showLanguage(clickedLanguage) {
-  let privacyContainerEnglish = document.getElementById(
-    "privacyContainerEnglish"
-  );
-  let privacyContainerGerman = document.getElementById(
-    "privacyContainerGerman"
-  );
+  let privacyContainerEnglish = document.getElementById("privacyContainerEnglish");
+  let privacyContainerGerman = document.getElementById("privacyContainerGerman");
   if (clickedLanguage == "englishBtn") {
     privacyContainerEnglish.classList.remove("dNone");
     privacyContainerGerman.classList.add("dNone");
