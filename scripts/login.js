@@ -54,6 +54,11 @@ async function verifyLogin() {
   let login;
 
   loggedInUser = formattedEmail;
+  handleMissingUserData(userData);
+  processSuccessfulLogin(userData, formattedEmail, email, password, error, login);
+}
+
+function handleMissingUserData(userData) {
   if (!userData) {
     document.getElementById("passwordLogin").value = "";
     showLoginErrorMessage(error);
@@ -62,6 +67,9 @@ async function verifyLogin() {
     }, 3500);
     return false;
   }
+}
+
+async function processSuccessfulLogin(userData, formattedEmail, email, password, error, login) {
   if (
     userData &&
     userData[formattedEmail] &&
