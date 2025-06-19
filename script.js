@@ -6,15 +6,20 @@ let loggedInUser;
  */
 async function init() {
   await getLoggedInUser();
-  checkIndex();
-  checkSummary();
-  checkBoard();
-  checkContacts();
-}
-
-async function checkIndex() {
   if (window.location.href.includes("index.html")) {
-    getLogin();
+    await checkIndex();
+    return;
+  }
+  if (window.location.href.includes("summary.html")) {
+    await checkSummary();
+    return;
+   }
+  if (window.location.href.includes("board.html")) {
+    await checkBoard();
+    return;
+  }
+  if (window.location.href.includes("contacts.html")) {
+    await checkContacts();
     return;
   } else {
     await includeHTML();
@@ -22,8 +27,11 @@ async function checkIndex() {
   }
 }
 
+async function checkIndex() {
+    getLogin();
+}
+
 async function checkSummary() {
-  if (window.location.href.includes("summary.html")) {
     if (window.innerWidth <= 800) {
       await includeHTML();
       await loadGreeting();
@@ -34,34 +42,20 @@ async function checkSummary() {
       highlightActiveSidebarLink();
       return;
     }
-  } else {
-    await includeHTML();
-    highlightActiveSidebarLink();
-  }
 }
 
 async function checkBoard() {
-  if (window.location.href.includes("board.html")) {
     await includeHTML();
     getBoard();
     highlightActiveSidebarLink();
     return;
-  } else {
-    await includeHTML();
-    highlightActiveSidebarLink();
-  }
 }
 
 async function checkContacts() {
-  if (window.location.href.includes("contacts.html")) {
     await includeHTML();
     getContacts();
     highlightActiveSidebarLink();
     return;
-  } else {
-    await includeHTML();
-    highlightActiveSidebarLink();
-  }
 }
 
 /**
@@ -123,6 +117,9 @@ async function getLoggedInUser() {
         loggedInUser = formattedEmail;
       }
     }
+  }
+  if (window.location.href.includes("index.html")) {
+    return;
   }
   showUserInitials();
 }

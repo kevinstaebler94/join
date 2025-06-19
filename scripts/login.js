@@ -5,7 +5,6 @@
 function initLogin() {
   updateContent("login");
   localStorage.removeItem("registeredEmail");
-  localStorage.removeItem("registeredPassword");
 }
 
 /**
