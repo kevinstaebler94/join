@@ -1,13 +1,13 @@
 /**
  * Generates the HTML structure for the sign-up page.
- * 
+ *
  * This template includes:
  * - A confirmation overlay for successful sign-up
  * - A form with inputs for name, email, password, and confirmed password
  * - Validation placeholders and icons for user interaction
  * - A checkbox to accept the privacy policy
  * - A submit button that is enabled only when all validations pass
- * 
+ *
  * @returns {string} - The HTML string for the sign-up template
  */
 function signUpTemplate() {
@@ -44,7 +44,7 @@ function signUpTemplate() {
           </div>
           <div class="checkPrivacyPolicy">
             <input id="checkbox" class="checkbox" type="checkbox" onchange="toggleSignUpButton()">
-            <span>I accept the <span class="hightlight">Privacy Policy</span> </span>
+            <span onclick="window.location.href='./privacyNotLogin.html'">I accept the <span class="hightlight">Privacy Policy</span> </span>
           </div>
           <div class="buttonWrapperSignUp">
             <button disabled id="signUpButton" class="button signUpButton">Sign up</button>
@@ -53,8 +53,8 @@ function signUpTemplate() {
       </div>
     </main>
     <footer class="legalLinks">
-      <span class="privacyPolicy">Privacy Policy</span>
-      <span class="legalNotice">Legal notice</span>
+      <span onclick="window.location.href='./privacyNotLogin.html'" class="privacyPolicy">Privacy Policy</span>
+      <span onclick="window.location.href='./legalNoticeNotLogin.html'" class="legalNotice">Legal notice</span>
     </footer>
-  `
+  `;
 }
