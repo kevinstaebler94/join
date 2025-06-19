@@ -70,23 +70,9 @@ function handleMissingUserData(userData) {
 }
 
 async function processSuccessfulLogin(userData, formattedEmail, email, password, error, login) {
-  if (
-    userData &&
-    userData[formattedEmail] &&
-    userData[formattedEmail].email.toLowerCase() === email.toLowerCase() &&
-    userData[formattedEmail].password === password
-  ) {
+  if (userData && userData[formattedEmail] && userData[formattedEmail].email.toLowerCase() === email.toLowerCase() && userData[formattedEmail].password === password) {
     login = true;
-    await changeUsers(
-      formattedEmail,
-      userData[formattedEmail].greeting,
-      userData[formattedEmail].email,
-      userData[formattedEmail].password,
-      userData[formattedEmail].name,
-      login,
-      userData[formattedEmail].tasks,
-      userData[formattedEmail].contacts
-    );
+    await changeUsers(formattedEmail, userData[formattedEmail].greeting, userData[formattedEmail].email, userData[formattedEmail].password, userData[formattedEmail].name, login, userData[formattedEmail].tasks, userData[formattedEmail].contacts);
     window.location.href = "summary.html";
     return true;
   } else {

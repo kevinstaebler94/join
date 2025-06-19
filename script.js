@@ -119,20 +119,9 @@ async function logoutUser() {
   let greetingTrue = userData.greeting.greeting;
   greetingTrue = true;
   login = false;
-  await changeUsers(
-    userId,
-    greeting,
-    email,
-    password,
-    name,
-    login,
-    tasks,
-    contacts
-  );
+  await changeUsers(userId, greeting, email, password, name, login, tasks, contacts);
   await changeElement(greetingTrue);
   await checkLogoutUser();
-  console.log(loggedInUser);
-
   window.location.href = "index.html";
 }
 
@@ -195,12 +184,8 @@ function checkOrientation() {
  * @param {string} clickedLanguage - The ID of the clicked language button.
  */
 function showLanguage(clickedLanguage) {
-  let privacyContainerEnglish = document.getElementById(
-    "privacyContainerEnglish"
-  );
-  let privacyContainerGerman = document.getElementById(
-    "privacyContainerGerman"
-  );
+  let privacyContainerEnglish = document.getElementById("privacyContainerEnglish");
+  let privacyContainerGerman = document.getElementById("privacyContainerGerman");
   if (clickedLanguage == "englishBtn") {
     privacyContainerEnglish.classList.remove("dNone");
     privacyContainerGerman.classList.add("dNone");
