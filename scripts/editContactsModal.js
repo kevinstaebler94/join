@@ -255,6 +255,7 @@ async function validateEditEmailFormat(originalEmail) {
         emailPatternTest(emailInput, errorMsgEmail);
         return false;
     }
+    checkExistingContacts(originalEmail, email, emailInput, errorMsgEmail);
     errorMsgEmail.classList.add("dNone");
     return true;
 }

@@ -42,8 +42,6 @@ function getSubtask() {
     let subtaskList = document.getElementById('subtaskList');
     let subtaskObj = { subtask: subtaskInput.value, done: false };
     let subtaskIndex = subtasksArr.length;
-
-
   if (subtaskInput.value.startsWith(' ')) {
     subtaskInput.value = subtaskInput.value.trimStart();
   }

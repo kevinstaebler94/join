@@ -1,7 +1,6 @@
 function loginTemplate() {
   let savedEmail = localStorage.getItem("registeredEmail") || "";
   setTimeout(() => toggleLoginButton(), 0);
-
   return `
     <img class="heroLogo" src="./assets/img/joinLogoSmall.svg" alt="">
     <header class="signUpHeroContainer">

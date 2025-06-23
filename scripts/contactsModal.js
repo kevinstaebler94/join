@@ -6,7 +6,6 @@
 function openContactsModal() {
     let overlay = document.getElementById('modalOverlay');
     let container = document.getElementById('contactsAddModal');
-
     overlay.classList.remove('dNone');
     container.classList.remove('dNone');
     getContactsModalStructure();
@@ -105,11 +104,9 @@ function clearInputFields() {
     document.getElementById('contactName').value = "";
     document.getElementById('contactEmail').value = "";
     document.getElementById('contactPhone').value = "";
-
     ['contactName', 'contactEmail', 'contactPhone'].forEach(id => {
         document.getElementById(id).classList.remove('error');
     });
-
     ['nameError', 'emailError', 'phoneError'].forEach(id => {
         let el = document.getElementById(id);
         el.classList.add('dNone');
@@ -130,7 +127,6 @@ async function validateContactInput() {
         email: inputs.emailInput.value.trim().toLowerCase(),
         phone: inputs.phoneInput.value.trim()
     };
-
     resetContactInputErrors(inputs);
     if (checkEmptyFields(inputs, values)) return false;
     let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
@@ -165,7 +161,6 @@ function resetContactInputErrors(inputs) {
         el.classList.add('dNone');
         el.innerText = "";
     });
-
     ['namePlaceholderError', 'emailPlaceholderError', 'phonePlaceholderError'].forEach(id => {
         let el = document.getElementById(id);
         el.classList.remove('visible');
@@ -181,31 +176,40 @@ function resetContactInputErrors(inputs) {
  */
 function checkEmptyFields(inputs, values) {
     let hasError = false;
-
     if (!values.name) {
-        inputs.nameInput.classList.add('error');
-        document.getElementById('namePlaceholderError').innerHTML = "Please enter a name.";
-        document.getElementById('namePlaceholderError').classList.add('visible');
-        hideErrorMessages('namePlaceholderError', 'contactName');
-        hasError = true;
+        styleNameValues(inputs);
     }
-
     if (!values.email) {
-        inputs.emailInput.classList.add('error');
-        document.getElementById('emailPlaceholderError').innerHTML = "Please enter an e-mail adress.";
-        document.getElementById('emailPlaceholderError').classList.add('visible');
-        hideErrorMessages('emailPlaceholderError', 'contactEmail');
-        hasError = true;
+        styleEmailValues(inputs);
     }
-
     if (!values.phone) {
-        inputs.phoneInput.classList.add('error');
-        document.getElementById('phonePlaceholderError').innerHTML = "Please enter a phone number.";
-        document.getElementById('phonePlaceholderError').classList.add('visible');
-        hideErrorMessages('phonePlaceholderError', 'contactPhone');
-        hasError = true;
+        stylePhoneValues(inputs);
     }
     return hasError;
+}
+
+function styleNameValues(inputs) {
+    inputs.nameInput.classList.add('error');
+    document.getElementById('namePlaceholderError').innerHTML = "Please enter a name.";
+    document.getElementById('namePlaceholderError').classList.add('visible');
+    hideErrorMessages('namePlaceholderError', 'contactName');
+    hasError = true;
+}
+
+function styleEmailValues(inputs) {
+    inputs.emailInput.classList.add('error');
+    document.getElementById('emailPlaceholderError').innerHTML = "Please enter an e-mail adress.";
+    document.getElementById('emailPlaceholderError').classList.add('visible');
+    hideErrorMessages('emailPlaceholderError', 'contactEmail');
+    hasError = true;
+}
+
+function stylePhoneValues(inputs) {
+    inputs.phoneInput.classList.add('error');
+    document.getElementById('phonePlaceholderError').innerHTML = "Please enter a phone number.";
+    document.getElementById('phonePlaceholderError').classList.add('visible');
+    hideErrorMessages('phonePlaceholderError', 'contactPhone');
+    hasError = true;
 }
 
 /**
@@ -217,36 +221,40 @@ function checkEmptyFields(inputs, values) {
  */
 function checkDuplicateFields(inputs, values, existingContacts) {
     let hasError = false;
-
     for (let key in existingContacts) {
         let contact = existingContacts[key];
-
         if (contact.name?.trim().toLowerCase() === values.name) {
-            inputs.nameInput.classList.add('error');
-            document.getElementById('namePlaceholderError').innerHTML = "Name already used.";
-            document.getElementById('namePlaceholderError').classList.add('visible');
-            hideErrorMessages('namePlaceholderError', inputs.nameInput.id);
-            hasError = true;
+            styleDuplicateName(inputs);
         }
-
-        if (contact.email?.trim().toLowerCase() === values.email) {
-            inputs.emailInput.classList.add('error');
-            document.getElementById('emailPlaceholderError').innerHTML = "E-Mail already used.";
-            document.getElementById('emailPlaceholderError').classList.add('visible');
-            hideErrorMessages('emailPlaceholderError', inputs.emailInput.id);
-            hasError = true;
-        }
-
         if (contact.phone?.trim() === values.phone) {
-            inputs.phoneInput.classList.add('error');
-            document.getElementById('phonePlaceholderError').innerHTML = "Phone number already used.";
-            document.getElementById('phonePlaceholderError').classList.add('visible');
-            hideErrorMessages('phonePlaceholderError', inputs.phoneInput.id);
-            hasError = true;
+            styleDuplicatePhone(inputs);
         }
     }
-
     return hasError;
+}
+
+function styleDuplicateName(inputs) {
+    inputs.nameInput.classList.add('error');
+    document.getElementById('namePlaceholderError').innerHTML = "Name already used.";
+    document.getElementById('namePlaceholderError').classList.add('visible');
+    hideErrorMessages('namePlaceholderError', inputs.nameInput.id);
+    hasError = true;
+}
+
+function styleDuplicateEmail(inputs) {
+    inputs.emailInput.classList.add('error');
+    document.getElementById('emailPlaceholderError').innerHTML = "E-Mail already used.";
+    document.getElementById('emailPlaceholderError').classList.add('visible');
+    hideErrorMessages('emailPlaceholderError', inputs.emailInput.id);
+    hasError = true;
+}
+
+function styleDuplicatePhone(inputs) {
+    inputs.phoneInput.classList.add('error');
+    document.getElementById('phonePlaceholderError').innerHTML = "Phone number already used.";
+    document.getElementById('phonePlaceholderError').classList.add('visible');
+    hideErrorMessages('phonePlaceholderError', inputs.phoneInput.id);
+    hasError = true;
 }
 
 /**
@@ -277,20 +285,32 @@ async function validateAddEmailFormat() {
     let email = emailInput.value.trim().toLowerCase();
     let pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let errorMsgEmail = document.getElementById("emailError");
-
+    if (emailInput.value == '') {
+        return;
+    }
     if (!pattern.test(email)) {
-        emailInput.classList.add("error");
-        errorMsgEmail.innerText = "Please enter a valid email address.";
-        errorMsgEmail.classList.remove("dNone");
-        setTimeout(() => {
-            errorMsgEmail.classList.add("dNone");
-            errorMsgEmail.innerText = "";
-            emailInput.classList.remove("error");
-        }, 3000);
+        patternTestEmail(emailInput, errorMsgEmail);
         return false;
     }
+    let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
+    let exists = loopExistingContactsAdd(existingContacts, emailInput, errorMsgEmail, email);
+    if (exists === false) return false;
+    errorMsgEmail.classList.add("dNone");
+    return true;
+}
 
-    let existingContacts = await getData("/contacts") || {};
+function patternTestEmail(emailInput, errorMsgEmail) {
+    emailInput.classList.add("error");
+    errorMsgEmail.innerText = "Please enter a valid email address.";
+    errorMsgEmail.classList.remove("dNone");
+    setTimeout(() => {
+        errorMsgEmail.classList.add("dNone");
+        errorMsgEmail.innerText = "";
+        emailInput.classList.remove("error");
+    }, 3000);
+}
+
+function loopExistingContactsAdd(existingContacts, emailInput, errorMsgEmail, email) {
     for (let key in existingContacts) {
         if (existingContacts[key].email.trim().toLowerCase() === email) {
             emailInput.classList.add("error");
@@ -304,9 +324,6 @@ async function validateAddEmailFormat() {
             return false;
         }
     }
-
-    errorMsgEmail.classList.add("dNone");
-    return true;
 }
 
 async function validatePhoneNumberFormat() {
@@ -314,19 +331,22 @@ async function validatePhoneNumberFormat() {
     let pattern = /^(\+49\s?|0)[1-9][0-9\s\-]{3,}$/;
     let errorMsgPhone = document.getElementById("phoneError");
     let value = phone.value.trim();
-
     if (!pattern.test(value)) {
-        phone.classList.add("error");
-        errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
-        errorMsgPhone.classList.remove("dNone");
-        setTimeout(() => {
-            errorMsgPhone.classList.add("dNone");
-            errorMsgPhone.innerText = "";
-            phone.classList.remove("error");
-        }, 3000);
+        patternTestPhone(phone, errorMsgPhone);
         return false;
     }
-
     errorMsgPhone.classList.add("dNone");
     return true;
+}
+
+function patternTestPhone(phone, errorMsgPhone) {
+    if (phone.value == '') return;
+    phone.classList.add("error");
+    errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
+    errorMsgPhone.classList.remove("dNone");
+    setTimeout(() => {
+        errorMsgPhone.classList.add("dNone");
+        errorMsgPhone.innerText = "";
+        phone.classList.remove("error");
+    }, 3000);
 }

@@ -50,7 +50,6 @@ function getColumnId(column) {
       .querySelectorAll('[draggable="false"]')
       .forEach((el) => (el.draggable = true));
     return column;
-    return column;
   }
 }
 
@@ -140,19 +139,8 @@ function filledTaskTemplate(taskComponents) {
   let serializedSubtasks = encodeURIComponent(JSON.stringify(taskComponents));
   let serializedContacts = encodeURIComponent(JSON.stringify(contactData));
   let initials = convertNameToInitial(contactData);
-  let progressBarHTML = getProgressBarHTML(
-    taskComponents,
-    subtaskData,
-    isChecked
-  );
-  let filledTaskHTML = getFilledTaskHTML(
-    taskComponents,
-    serializedSubtasks,
-    serializedContacts,
-    initials,
-    progressBarHTML
-  );
-
+  let progressBarHTML = getProgressBarHTML(taskComponents, subtaskData, isChecked);
+  let filledTaskHTML = getFilledTaskHTML(taskComponents, serializedSubtasks, serializedContacts, initials, progressBarHTML);
   return filledTaskHTML;
 }
 
@@ -287,12 +275,8 @@ async function handleTaskInput(id) {
  * @param {HTMLInputElement} checkbox
  */
 async function handleCheckbox(checkbox) {
-  let subtaskInfo = document.getElementById(
-    "subtaskInfo" + checkbox.dataset.taskId
-  );
-  let list = document.querySelectorAll(
-    '.assignedToModal input[type="checkbox"]'
-  );
+  let subtaskInfo = document.getElementById("subtaskInfo" + checkbox.dataset.taskId);
+  let list = document.querySelectorAll('.assignedToModal input[type="checkbox"]');
   let label = checkbox.closest("label");
   let currentSubtask = label?.querySelector("p")?.textContent.trim();
   let taskId = checkbox.dataset.taskId;
@@ -373,7 +357,6 @@ function checkWindowSize() {
   const modal = document.getElementById("addTaskModal");
   if (modal && modal.classList.contains("dNone")) {
     renderTasks();
-    // setInitialStyle();
     return;
   }
   handleAddTask();

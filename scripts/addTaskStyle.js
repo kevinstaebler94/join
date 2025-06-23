@@ -3,24 +3,36 @@
  */
 function setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon, urgentIconWhite, mediumIconWhite) {
     if (priority === 'urgent') {
-        urgentBtn.classList.remove('hoverBtn');
-        urgentBtn.classList.add('activeUrgentBtn');
-        urgentIcon.classList.add('dNone');
-        urgentIconWhite.classList.remove('dNone');
-        prioBtn = 'urgent';
+        setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite, prioBtn);
     } else if (priority === 'medium') {
-        mediumBtn.classList.remove('hoverBtn');
-        mediumBtn.classList.add('activeMediumBtn');
-        mediumIcon.classList.add('dNone');
-        mediumIconWhite.classList.remove('dNone');
-        prioBtn = 'medium';
+        setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite, prioBtn);
     } else if (priority === 'low') {
-        lowBtn.classList.remove('hoverBtn');
-        lowBtn.classList.add('activeLowBtn');
-        lowIcon.classList.add('dNone');
-        lowIconWhite.classList.remove('dNone');
-        prioBtn = 'low';
+        setPrioLow(lowBtn, lowIcon, lowIconWhite, prioBtn);
     }
+}
+
+function setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite, prioBtn) {
+    urgentBtn.classList.remove('hoverBtn');
+    urgentBtn.classList.add('activeUrgentBtn');
+    urgentIcon.classList.add('dNone');
+    urgentIconWhite.classList.remove('dNone');
+    prioBtn = 'urgent';
+}
+
+function setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite, prioBtn) {
+    mediumBtn.classList.remove('hoverBtn');
+    mediumBtn.classList.add('activeMediumBtn');
+    mediumIcon.classList.add('dNone');
+    mediumIconWhite.classList.remove('dNone');
+    prioBtn = 'medium';
+}
+
+function setPrioLow(lowBtn, lowIcon, lowIconWhite, prioBtn) {
+    lowBtn.classList.remove('hoverBtn');
+    lowBtn.classList.add('activeLowBtn');
+    lowIcon.classList.add('dNone');
+    lowIconWhite.classList.remove('dNone');
+    prioBtn = 'low';
 }
 
 /**
@@ -89,7 +101,7 @@ function initFlatpickrInModal() {
             dateFormat: "d/m/Y",
             allowInput: true,
             minDate: "today",
-            disableMobile: true 
+            disableMobile: true
         });
     }
 }

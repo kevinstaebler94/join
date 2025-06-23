@@ -19,13 +19,10 @@ let isBurgerMenuOpen = false;
 async function renderContacts() {
     let container = document.getElementById("contactList");
     container.innerHTML = "";
-
     let data = await getData('/users/' + loggedInUser + '/contacts');
     if (!data) return;
-
     let entries = Object.entries(data).sort((a, b) => a[1].name.localeCompare(b[1].name));
     let currentLetter = "";
-
     for (let [id, contact] of entries) {
         currentLetter = appendLetterDividerIfNeeded(container, contact.name, currentLetter);
         container.appendChild(createContactCard(contact, id));
@@ -84,7 +81,6 @@ function createContactCard(contact, contactId) {
     card.dataset.contactId = contactId;
     let initials = getInitials(contact.name);
     let bgColor = getColorFromName(contact.name);
-
     card.innerHTML = `
         <div class="contactIcon" style="background-color: ${bgColor}">${initials}</div>
         <div class="contactDetails" onclick="openContactById()">
@@ -131,14 +127,12 @@ function updateContactDetails(contact) {
     document.getElementById("userName").innerHTML = contact.name;
     document.getElementById("userEmail").innerHTML = contact.email;
     document.getElementById("userPhoneNumber").innerHTML = contact.phone;
-
     let initials = getInitials(contact.name);
     let color = getColorFromName(contact.name);
     let initialsContainer = document.getElementById("contactInitials");
     initialsContainer.innerHTML = initials;
     initialsContainer.style.backgroundColor = color;
     initialsContainer.style.color = "white";
-
     getDeleteButtonStructure(contact.email, contact.name);
     getMobileDeleteButtonStructure(contact.email, contact.name);
 }
@@ -216,7 +210,6 @@ function addContactCardBgToggle(cardElement) {
  */
 function showContactDetailsToggle(cardElement) {
     let overview = document.getElementById('showContactDetails');
-
     if (cardElement.classList.contains('active', 'show')) {
         overview.classList.add('active', 'show');
     } else {
@@ -224,12 +217,16 @@ function showContactDetailsToggle(cardElement) {
     }
 }
 
+function closeContactDetailsToggle() {
+    let overview = document.getElementById('showContactDetails');
+    overview.classList.remove('active', 'show');
+}
+
 /**
  * Displays a success overlay image with fade-out effect.
  */
 function showSuccessOverlayImg() {
     let successOverlayImg = document.getElementById('succesfullyCreatedOverlayImg');
-
     successOverlayImg.classList.remove('displayNone');
     successOverlayImg.classList.add('show');
     setTimeout(() => {
@@ -295,7 +292,6 @@ window.addEventListener('resize', () => {
 document.addEventListener("click", (event) => {
     const menu = document.getElementById("mobileBurgerMenu");
     const button = document.getElementById("burgerMenuButton");
-
     if (
         isBurgerMenuOpen &&
         !menu.contains(event.target) &&

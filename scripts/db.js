@@ -328,6 +328,8 @@ async function deleteContact(contactId, contactName) {
     }
   }
   await deleteData(path);
+  renderContacts();
+  closeContactDetailsToggle();
 }
 
 function checkTaskContact(contactId) {

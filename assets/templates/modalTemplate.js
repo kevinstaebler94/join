@@ -20,9 +20,7 @@ function getAddTaskStructure() {
                             <img onclick="closeModal()" class="closeIcon" src="./assets/img/closeIcon.svg" alt="">
                             </div>
                         </div>
-                        
                         <div class="addTaskContent">
-                        
                             <div class="leftContainer">
                                 <form name="leftTaskForm" class="leftAddTaskForm">
                                     <label class="directionColumn">
@@ -52,7 +50,6 @@ function getAddTaskStructure() {
                                             <img class="dateIcon" src="./assets/img/dateIcon.svg" alt="Open calendar"
                                                 data-toggle>
                                         </div>
-
                                         <span id="requiredDate"></span>
                                     </label>
                                 </form>
@@ -136,7 +133,6 @@ function getAddTaskStructure() {
                                 <p>
                                 <p class="fontRed">*</p>This field is required</p>
                             </div>
-
                             <div class="submitBtnContainer">
                                 <span class="submitBtn clearBtn hoverBtn" onclick="clearAddTask()">Clear
                                     <img class="submitIcons" src="./assets/img/cancelIcon.svg" alt="">
@@ -234,7 +230,6 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                             <img onclick="closeModal()" class="closeIcon" src="./assets/img/closeIcon.svg" alt="">
                             </div>
                         </div>
-                        
                         <div class="addTaskContentEdit editTaskContent modalScrollbar">
                             <div class="leftContainerEdit">
                                 <form name="leftTaskForm" class="leftAddTaskFormEdit">
@@ -320,7 +315,6 @@ function openTaskEdit(taskId, category, title, description, date, priority, colu
                         <span class="submitBtn checkBtn hoverBtn changeBtn" onclick="changeTasks('${taskId}', '${column}', '${category}')">Ok
                                     <img class="submitIcons" src="./assets/img/createIcon.svg" alt="">
                         </span>
-                        
                     </div>`;
     selectPriority(priority);
     getContactsEdit(contacts);
