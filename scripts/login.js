@@ -53,11 +53,11 @@ async function verifyLogin() {
   let login;
 
   loggedInUser = formattedEmail;
-  handleMissingUserData(userData);
+  handleMissingUserData(userData, error);
   processSuccessfulLogin(userData, formattedEmail, email, password, error, login);
 }
 
-function handleMissingUserData(userData) {
+function handleMissingUserData(userData, error) {
   if (!userData) {
     document.getElementById("passwordLogin").value = "";
     showLoginErrorMessage(error);

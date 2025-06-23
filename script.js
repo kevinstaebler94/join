@@ -55,6 +55,7 @@ async function checkContacts() {
     await includeHTML();
     getContacts();
     highlightActiveSidebarLink();
+    showUserInitials();
     return;
 }
 
@@ -74,6 +75,7 @@ async function getSummary() {
   greetingByName();
   showUrgentDate();
   getAllCounter();
+  showUserInitials();
 }
 
 /**
@@ -172,7 +174,7 @@ async function showUserInitials() {
     if (initialsContainer) {
       initialsContainer.textContent = initials;
     }
-  }, 10);
+  }, 100);
 
 }
 

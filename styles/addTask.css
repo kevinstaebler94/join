@@ -615,6 +615,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
+@media (max-width: 1023px) and (min-width: 850px) {
+    .minusPadding {
+        padding-bottom: 6px !important;
+    }
+}
+
 @media (max-width: 1023px) {
     main {
         height: unset;
@@ -628,7 +634,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         padding-bottom: 20px;
     }
 
-        .contactListContainer {
+    .contactListContainer {
         top: 350px;
         width: 345px;
     }
@@ -725,6 +731,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .mb20 {
         margin-bottom: 20px !important;
+    }
+
+    .assignedContentContainer {
+        padding-bottom: 20px;
     }
 }
 
