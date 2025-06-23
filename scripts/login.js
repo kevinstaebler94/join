@@ -15,7 +15,6 @@ function initLogin() {
 function updateContent(section) {
   let contentWrapper = document.getElementById("contentWrapper");
   contentWrapper.innerHTML = "";
-
   switch (section) {
     case "login":
       contentWrapper.innerHTML = loginTemplate();
@@ -51,7 +50,6 @@ async function verifyLogin() {
   let userData = await getData("/users/");
   let error = document.getElementById("errorMsgLogin");
   let login;
-
   loggedInUser = formattedEmail;
   handleMissingUserData(userData, error);
   processSuccessfulLogin(userData, formattedEmail, email, password, error, login);
@@ -137,7 +135,6 @@ function hideLoginErrorMessage(error) {
 function togglePasswordVisibility(id) {
   let input = document.getElementById(id);
   let icon = input.nextElementSibling;
-
   if (input.type === "password") {
     input.type = "text";
     icon.src = "./assets/img/visibility.svg";

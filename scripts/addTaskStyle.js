@@ -3,15 +3,15 @@
  */
 function setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon, mediumIcon, lowIcon, urgentIconWhite, mediumIconWhite) {
     if (priority === 'urgent') {
-        setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite, prioBtn);
+        setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite);
     } else if (priority === 'medium') {
-        setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite, prioBtn);
+        setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite);
     } else if (priority === 'low') {
-        setPrioLow(lowBtn, lowIcon, lowIconWhite, prioBtn);
+        setPrioLow(lowBtn, lowIcon, lowIconWhite);
     }
 }
 
-function setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite, prioBtn) {
+function setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite) {
     urgentBtn.classList.remove('hoverBtn');
     urgentBtn.classList.add('activeUrgentBtn');
     urgentIcon.classList.add('dNone');
@@ -19,7 +19,7 @@ function setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite, prioBtn) {
     prioBtn = 'urgent';
 }
 
-function setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite, prioBtn) {
+function setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite) {
     mediumBtn.classList.remove('hoverBtn');
     mediumBtn.classList.add('activeMediumBtn');
     mediumIcon.classList.add('dNone');
@@ -27,7 +27,7 @@ function setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite, prioBtn) {
     prioBtn = 'medium';
 }
 
-function setPrioLow(lowBtn, lowIcon, lowIconWhite, prioBtn) {
+function setPrioLow(lowBtn, lowIcon, lowIconWhite) {
     lowBtn.classList.remove('hoverBtn');
     lowBtn.classList.add('activeLowBtn');
     lowIcon.classList.add('dNone');

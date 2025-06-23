@@ -27,7 +27,6 @@ function toggleSignUpButton() {
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
   let checkbox = document.getElementById("checkbox").checked;
-
   if (name && email && checkPasswordInput() && checkbox) {
     document.getElementById("signUpButton").disabled = false;
   } else {
@@ -43,7 +42,6 @@ function toggleSignUpButton() {
 function checkPasswordInput() {
   let password = document.getElementById("password").value.trim();
   let confirmedPassword = document.getElementById("confirmedPassword").value.trim();
-
   return password.length >= 3 && confirmedPassword.length >= 3;
 }
 
@@ -55,7 +53,6 @@ function checkPasswordInput() {
 function togglePasswordVisibility(id) {
   let input = document.getElementById(id);
   let icon = input.nextElementSibling;
-
   if (input.type === "password") {
     input.type = "text";
     icon.src = "./assets/img/visibility.svg";
@@ -153,7 +150,6 @@ function validatePasswords() {
   let confirmedPassword = document.getElementById("confirmedPassword");
   let errorMsgPassword = document.getElementById("errorMsgPassword");
   if (!password || !confirmedPassword || !errorMsgPassword) return false;
-
   if (password.value.trim() === confirmedPassword.value.trim()) {
     hidePasswordErrorMessage(password, confirmedPassword, errorMsgPassword);
     return true;

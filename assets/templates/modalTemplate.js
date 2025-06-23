@@ -387,8 +387,7 @@ function addNewSubtaskModal() {
                                         <span onclick="deleteNewAddedSubtask('${subtaskIndex}')" class="editIcons"><img src="./assets/img/delete.svg" alt="" class="iconSize"></span>
                                             
                                             <span class="iconDivider">|</span>
-                                            <span onclick="editSubtaskModal('${inputValue.value}', '${subtaskIndex}')" class="editIcons doneIcon"><img src="./assets/img/done.svg" alt="" class="iconSize"></span>
-                                            
+                                            <span onclick="editSubtaskModal('${inputValue.value}', '${subtaskIndex}')" class="editIcons doneIcon"><img src="./assets/img/done.svg" alt="" class="iconSize"></span>  
                                         </span>
                                     </div>
                                 </li>`;

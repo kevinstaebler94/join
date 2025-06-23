@@ -9,6 +9,10 @@ function checkValidation() {
     let selectedCategory = document.getElementById('selectedCategory');
     let categoryInput = document.getElementById('customDropdownCategory');
     let requiredCategory = document.getElementById('requiredCategory');
+    styleRequiredFields(titleInput, requiredTitle, dateInput, requiredDate, selectedCategory, categoryInput, requiredCategory);
+}
+
+function styleRequiredFields(titleInput, requiredTitle, dateInput, requiredDate, selectedCategory, categoryInput, requiredCategory) {
     if (titleInput.value == '') {
         titleInput.classList.add('required');
         requiredTitle.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
@@ -30,7 +34,6 @@ function checkDateValidation() {
         let requiredDate = document.getElementById('requiredDate');
         if (dateInput.value.length < 10) {
             dateInput.classList.add('required');
-            // requiredDate.classList.remove('requiredDate');
             requiredDate.innerHTML = `<p class="fontRed requiredFont">This field is required</p>`;
         }
     }, 100);

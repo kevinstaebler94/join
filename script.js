@@ -9,16 +9,13 @@ async function init() {
   if (window.location.href.includes("index.html")) {
     await checkIndex();
     return;
-  }
-  if (window.location.href.includes("summary.html")) {
+  } if (window.location.href.includes("summary.html")) {
     await checkSummary();
     return;
-   }
-  if (window.location.href.includes("board.html")) {
+  } if (window.location.href.includes("board.html")) {
     await checkBoard();
     return;
-  }
-  if (window.location.href.includes("contacts.html")) {
+  } if (window.location.href.includes("contacts.html")) {
     await checkContacts();
     return;
   } else {
@@ -28,35 +25,36 @@ async function init() {
 }
 
 async function checkIndex() {
-    getLogin();
+  getLogin();
 }
 
 async function checkSummary() {
-    if (window.innerWidth <= 800) {
-      await includeHTML();
-      await loadGreeting();
-      getSummary();
-    } else {
-      await includeHTML();
-      getSummary();
-      highlightActiveSidebarLink();
-      return;
-    }
+  if (window.innerWidth <= 800) {
+    await includeHTML();
+    await loadGreeting();
+    getSummary();
+    highlightActiveSidebarLink();
+  } else {
+    await includeHTML();
+    getSummary();
+    highlightActiveSidebarLink();
+    return;
+  }
 }
 
 async function checkBoard() {
-    await includeHTML();
-    getBoard();
-    highlightActiveSidebarLink();
-    return;
+  await includeHTML();
+  getBoard();
+  highlightActiveSidebarLink();
+  return;
 }
 
 async function checkContacts() {
-    await includeHTML();
-    getContacts();
-    highlightActiveSidebarLink();
-    showUserInitials();
-    return;
+  await includeHTML();
+  getContacts();
+  highlightActiveSidebarLink();
+  showUserInitials();
+  return;
 }
 
 /**
@@ -141,6 +139,10 @@ async function logoutUser() {
   let contacts = userData.contacts;
   let greeting = userData.greeting;
   let greetingTrue = userData.greeting.greeting;
+  setLogoutData(userId, greeting, email, password, name, login, tasks, contacts, greeting, greetingTrue);
+}
+
+async function setLogoutData(userId, greeting, email, password, name, login, tasks, contacts, greeting, greetingTrue) {
   greetingTrue = true;
   login = false;
   await changeUsers(userId, greeting, email, password, name, login, tasks, contacts);
@@ -159,7 +161,7 @@ async function checkLogoutUser() {
     } else {
       return;
     }
-  }, 10);
+  }, 100);
 }
 
 /**

@@ -119,16 +119,7 @@ async function changeContact(taskId, contactName) {
  * @param {Object} tasks - User tasks object.
  * @param {Object} contacts - User contacts object.
  */
-async function changeUsers(
-  userId,
-  greeting,
-  email,
-  password,
-  name,
-  login,
-  tasks,
-  contacts
-) {
+async function changeUsers(userId, greeting, email, password, name, login, tasks, contacts) {
   let path = "/users";
   let userData = {
     name: name,
@@ -156,6 +147,11 @@ function pushTasks(loggedInUser, contacts) {
   let time = getTimeStamp();
   let taskId = title.value + time;
   let subtasks = subtasksArr;
+  let userData = getUserDataTasks(taskId, title, description, date, prioBtn, contacts, category, subtasks);
+    putData(path, userData, taskId);
+}
+
+function getUserDataTasks(taskId, title, description, date, prioBtn, contacts, category, subtasks) {
   let userData = {
     id: taskId,
     title: title.value,
@@ -167,7 +163,7 @@ function pushTasks(loggedInUser, contacts) {
     column: "toDo",
     subtask: subtasks,
   };
-  putData(path, userData, taskId);
+  return userData;
 }
 
 /**
@@ -270,6 +266,10 @@ async function pushContacts(loggedInUser) {
     email: contactEmail.value,
     phone: contactPhone.value,
   };
+  putContactData(path, userData, contactId);
+}
+
+async function putContactData(path, userData, contactId) {
   try {
     await putData(path, userData, contactId);
     clearInputFields();

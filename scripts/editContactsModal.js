@@ -7,16 +7,13 @@ let originalContactId = null;
 function openEditContactsModal() {
     let overlay = document.getElementById('editContactsModal');
     let container = document.getElementById('contactsEditModal');
-
     overlay.classList.remove('dNone');
     container.classList.remove('dNone');
     getEditContactsModalStructure();
-
     setTimeout(() => {
         let modal = document.getElementById('modalEditContent');
         modal.classList.add('show');
     }, 10);
-
     fillEditContactsForm();
 }
 
@@ -51,7 +48,6 @@ function getEditContactsModalStructure() {
                 <h1>Edit contact</h1>
                 <p class="blueUnderline"></p>
             </div>
-
         </div>
         <div class="contentSection">
             <div class="modalIconContainer">
@@ -105,7 +101,6 @@ async function fillEditContactsForm() {
     document.getElementById("contactNameEdit").value = contact.name;
     document.getElementById("contactEmailEdit").value = contact.email;
     document.getElementById("contactPhoneEdit").value = contact.phone;
-
     originalContactId = currentContactId;
     originalContactEmail = contact.email;
 }
@@ -127,27 +122,25 @@ async function updateContacts() {
         email: email,
         phone: phone
     };
-    try {
-        await putData('/users/' + loggedInUser + '/contacts', updatedContact, newContactId);
-        if (newContactId !== originalContactId) {
-            await deleteContact(originalContactId);
-        }
-        currentContactId = newContactId;
-        await renderContacts();
-        await openContactById(currentContactId);
-        let allCards = document.querySelectorAll('.contactCard');
-        allCards.forEach(card => card.classList.remove('active'));
-        let updatedCard = Array.from(allCards).find(
-            c => c.dataset.contactId === currentContactId
-        );
-        if (updatedCard) {
-            addContactCardBgToggle(updatedCard);
-            showContactDetailsToggle(updatedCard);
-        }
-        closeEditContactsModal();
-    } catch (error) {
-        console.error('Error while updating contact:', error);
+    changeContactInfo(updatedContact, newContactId, originalContactId);
+}
+
+async function changeContactInfo(updatedContact, newContactId, originalContactId) {
+    await putData('/users/' + loggedInUser + '/contacts', updatedContact, newContactId);
+    if (newContactId !== originalContactId) {
+        await deleteContact(originalContactId);
     }
+    currentContactId = newContactId;
+    await renderContacts();
+    await openContactById(currentContactId);
+    let allCards = document.querySelectorAll('.contactCard');
+    allCards.forEach(card => card.classList.remove('active'));
+    let updatedCard = Array.from(allCards).find(c => c.dataset.contactId === currentContactId);
+    if (updatedCard) {
+        addContactCardBgToggle(updatedCard);
+        showContactDetailsToggle(updatedCard);
+    }
+    closeEditContactsModal();
 }
 
 /**
@@ -158,12 +151,8 @@ async function validateEditContactInput() {
     let inputs = getEditContactInputs();
     let values = getEditContactValues(inputs);
     resetEditInputErrors(inputs);
-
     let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
-
     let editEmailValid = await validateEditEmailFormat();
-
-
     let editPhoneValid = await validateEditPhoneNumberFormat();
     if (checkEmptyEditFields(inputs, values)) return false;
     if (checkEditDuplicateFields(inputs, values, existingContacts, originalContactId)) return false;
@@ -209,33 +198,44 @@ function getEditContactInputs() {
 function checkEditDuplicateFields(inputs, values, existingContacts, originalContactId) {
     let hasError = false;
     let original = existingContacts[originalContactId];
-
     for (let key in existingContacts) {
         if (key === originalContactId) continue;
         let contact = existingContacts[key];
         if (contact.name?.trim().toLowerCase() === values.name && values.name !== original.name?.trim().toLowerCase()) {
-            inputs.nameInput.classList.add('error');
-            document.getElementById('editNamePlaceholderError').innerHTML = "Name already used.";
-            document.getElementById('editNamePlaceholderError').classList.add('visible');
-            hideEditErrorMessages('editNamePlaceholderError', inputs.nameInput.id);
-            hasError = true;
+            styleDuplicateEditName(inputs)
         }
         if (contact.email?.trim().toLowerCase() === values.email && values.email !== original.email?.trim().toLowerCase()) {
-            inputs.emailInput.classList.add('error');
-            document.getElementById('editEmailPlaceholderError').innerHTML = "E-Mail already used.";
-            document.getElementById('editEmailPlaceholderError').classList.add('visible');
-            hideEditErrorMessages('editEmailPlaceholderError', inputs.emailInput.id);
-            hasError = true;
+            styleDuplicateEditEmail(inputs)
         }
         if (contact.phone?.trim() === values.phone && values.phone !== original.phone?.trim()) {
-            inputs.phoneInput.classList.add('error');
-            document.getElementById('editPhonePlaceholderError').innerHTML = "Phone number already used.";
-            document.getElementById('editPhonePlaceholderError').classList.add('visible');
-            hideEditErrorMessages('editPhonePlaceholderError', inputs.phoneInput.id);
-            hasError = true;
+            styleDuplicateEditPhone(inputs)
         }
     }
     return hasError;
+}
+
+function styleDuplicateEditName(inputs) {
+    inputs.nameInput.classList.add('error');
+    document.getElementById('editNamePlaceholderError').innerHTML = "Name already used.";
+    document.getElementById('editNamePlaceholderError').classList.add('visible');
+    hideEditErrorMessages('editNamePlaceholderError', inputs.nameInput.id);
+    hasError = true;
+}
+
+function styleDuplicateEditEmail(inputs) {
+    inputs.emailInput.classList.add('error');
+    document.getElementById('editEmailPlaceholderError').innerHTML = "E-Mail already used.";
+    document.getElementById('editEmailPlaceholderError').classList.add('visible');
+    hideEditErrorMessages('editEmailPlaceholderError', inputs.emailInput.id);
+    hasError = true;
+}
+
+function styleDuplicateEditPhone(inputs) {
+    inputs.phoneInput.classList.add('error');
+    document.getElementById('editPhonePlaceholderError').innerHTML = "Phone number already used.";
+    document.getElementById('editPhonePlaceholderError').classList.add('visible');
+    hideEditErrorMessages('editPhonePlaceholderError', inputs.phoneInput.id);
+    hasError = true;
 }
 
 /**
@@ -281,19 +281,19 @@ async function checkExistingContacts(originalEmail, email, emailInput, errorMsgE
 }
 
 function loopExistingContacts(existingContacts, emailInput, errorMsgEmail, email) {
-for (let key in existingContacts) {
-            if (existingContacts[key].email.trim().toLowerCase() === email) {
-                emailInput.classList.add("error");
-                errorMsgEmail.innerText = "Email is already used.";
-                errorMsgEmail.classList.remove("dNone");
-                setTimeout(() => {
-                    errorMsgEmail.classList.add("dNone");
-                    errorMsgEmail.innerText = "";
-                    emailInput.classList.remove("error");
-                }, 3000);
-                return false;
-            }
+    for (let key in existingContacts) {
+        if (existingContacts[key].email.trim().toLowerCase() === email) {
+            emailInput.classList.add("error");
+            errorMsgEmail.innerText = "Email is already used.";
+            errorMsgEmail.classList.remove("dNone");
+            setTimeout(() => {
+                errorMsgEmail.classList.add("dNone");
+                errorMsgEmail.innerText = "";
+                emailInput.classList.remove("error");
+            }, 3000);
+            return false;
         }
+    }
 }
 
 function resetEditInputErrors(inputs) {
