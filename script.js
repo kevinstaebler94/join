@@ -19,8 +19,7 @@ async function init() {
     await checkContacts();
     return;
   } else {
-    await includeHTML();
-    highlightActiveSidebarLink();
+    initAddTask();
   }
 }
 
@@ -40,6 +39,12 @@ async function checkSummary() {
     highlightActiveSidebarLink();
     return;
   }
+}
+
+async function initAddTask() {
+  await includeHTML();
+  highlightActiveSidebarLink();
+  showUserInitials();
 }
 
 async function checkBoard() {
