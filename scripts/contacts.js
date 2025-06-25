@@ -137,6 +137,12 @@ function updateContactDetails(contact) {
     getMobileDeleteButtonStructure(contact.email, contact.name);
 }
 
+/**
+ * Renders the HTML structure for the desktop delete button of a contact.
+ *
+ * @param {string} email - Email of the contact to delete.
+ * @param {string} name - Name of the contact to delete.
+ */
 function getDeleteButtonStructure(email, name) {
     document.getElementById('userNameDeleteContainer').innerHTML = `
     <div class="userNameDeleteIconContainer">
@@ -146,6 +152,12 @@ function getDeleteButtonStructure(email, name) {
     <span onclick="deleteContact('${adjustEmail(email)}',  '${name}')">Delete</span>`;
 }
 
+/**
+ * Renders the HTML structure for the mobile delete button of a contact.
+ *
+ * @param {string} email - Email of the contact to delete.
+ * @param {string} name - Name of the contact to delete.
+ */
 function getMobileDeleteButtonStructure(email, name) {
     document.getElementById('userNameMobileDeleteContainer').innerHTML = `
     <div class="userNameDeleteIconContainer">
@@ -217,6 +229,9 @@ function showContactDetailsToggle(cardElement) {
     }
 }
 
+/**
+ * Closes the contact details section by removing display-related classes.
+ */
 function closeContactDetailsToggle() {
     let overview = document.getElementById('showContactDetails');
     overview.classList.remove('active', 'show');

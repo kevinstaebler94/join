@@ -230,6 +230,11 @@ function deleteSubtaskModal(subtaskId, subtaskIndex, encodedSubtasks) {
     getSubtaskEdit(subtasks, serializeObj(subtasks));
 }
 
+/**
+ * Deletes a newly added subtask from the UI and the internal array.
+ * @param {number} subtaskIndex - The index of the subtask in the array.
+ * @param {string} subtaskId - The DOM ID suffix for the subtask element.
+ */
 function deleteNewAddedSubtask(subtaskIndex, subtaskId) {
     let subtaskElement = document.getElementById('subtaskElement' + subtaskId);
     subtaskElement.innerHTML = '';

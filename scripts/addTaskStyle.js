@@ -11,6 +11,13 @@ function setPriorityClassList(priority, urgentBtn, mediumBtn, lowBtn, urgentIcon
     }
 }
 
+/**
+ * Sets the task priority to "urgent" and updates UI to reflect this state.
+ *
+ * @param {HTMLElement} urgentBtn - The urgent priority button element.
+ * @param {HTMLElement} urgentIcon - The default icon for urgent.
+ * @param {HTMLElement} urgentIconWhite - The white icon for active urgent state.
+ */
 function setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite) {
     urgentBtn.classList.remove('hoverBtn');
     urgentBtn.classList.add('activeUrgentBtn');
@@ -19,6 +26,13 @@ function setPrioUrgent(urgentBtn, urgentIcon, urgentIconWhite) {
     prioBtn = 'urgent';
 }
 
+/**
+ * Sets the task priority to "medium" and updates UI to reflect this state.
+ *
+ * @param {HTMLElement} mediumBtn - The medium priority button element.
+ * @param {HTMLElement} mediumIcon - The default icon for medium.
+ * @param {HTMLElement} mediumIconWhite - The white icon for active medium state.
+ */
 function setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite) {
     mediumBtn.classList.remove('hoverBtn');
     mediumBtn.classList.add('activeMediumBtn');
@@ -27,6 +41,13 @@ function setPrioMedium(mediumBtn, mediumIcon, mediumIconWhite) {
     prioBtn = 'medium';
 }
 
+/**
+ * Sets the task priority to "low" and updates UI to reflect this state.
+ *
+ * @param {HTMLElement} lowBtn - The low priority button element.
+ * @param {HTMLElement} lowIcon - The default icon for low.
+ * @param {HTMLElement} lowIconWhite - The white icon for active low state.
+ */
 function setPrioLow(lowBtn, lowIcon, lowIconWhite) {
     lowBtn.classList.remove('hoverBtn');
     lowBtn.classList.add('activeLowBtn');
@@ -93,6 +114,10 @@ function styleDropdown(contactListContainer, assignedInput) {
     }
 }
 
+/**
+ * Initializes the Flatpickr calendar on the modal's calendar wrapper element.
+ * Ensures it is not re-initialized if already present.
+ */
 function initFlatpickrInModal() {
     const calendarWrapper = document.querySelector("#calendarWrap");
     if (calendarWrapper && !calendarWrapper._flatpickr) {

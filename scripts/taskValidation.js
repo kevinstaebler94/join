@@ -12,6 +12,17 @@ function checkValidation() {
     styleRequiredFields(titleInput, requiredTitle, dateInput, requiredDate, selectedCategory, categoryInput, requiredCategory);
 }
 
+/**
+ * Styles and marks required fields if they are empty or invalid.
+ * Also triggers task submission and visual feedback if all fields are valid.
+ * @param {HTMLInputElement} titleInput - Input element for task title.
+ * @param {HTMLElement} requiredTitle - Element for showing title validation message.
+ * @param {HTMLInputElement} dateInput - Input element for due date.
+ * @param {HTMLElement} requiredDate - Element for showing date validation message.
+ * @param {HTMLElement} selectedCategory - Dropdown element showing selected category.
+ * @param {HTMLElement} categoryInput - Element representing the category input UI.
+ * @param {HTMLElement} requiredCategory - Element for showing category validation message.
+ */
 function styleRequiredFields(titleInput, requiredTitle, dateInput, requiredDate, selectedCategory, categoryInput, requiredCategory) {
     if (titleInput.value == '') {
         titleInput.classList.add('required');
@@ -28,6 +39,10 @@ function styleRequiredFields(titleInput, requiredTitle, dateInput, requiredDate,
     }
 }
 
+/**
+ * Delays and then checks if the date input is valid.
+ * If not, shows a required field message.
+ */
 function checkDateValidation() {
     setTimeout(() => {
         let dateInput = document.getElementById('dateInput');
@@ -39,6 +54,9 @@ function checkDateValidation() {
     }, 100);
 }
 
+/**
+ * Removes the error styling and message for the task title input if it has content.
+ */
 function removeTitleRequired() {
     let titleInput = document.getElementById('titleInput');
     let requiredTitle = document.getElementById('requiredTitle');
@@ -48,6 +66,9 @@ function removeTitleRequired() {
     }
 }
 
+/**
+ * Removes the error styling and message for the date input if it has content.
+ */
 function removeDateRequired() {
     let dateInput = document.getElementById('dateInput');
     let requiredDate = document.getElementById('requiredDate');
@@ -57,6 +78,9 @@ function removeDateRequired() {
     }
 }
 
+/**
+ * Removes the error styling and message for the category input.
+ */
 function removeCategoryRequired() {
     let categoryInput = document.getElementById('customDropdownCategory');
     let requiredCategory = document.getElementById('requiredCategory');

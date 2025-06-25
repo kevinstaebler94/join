@@ -222,6 +222,10 @@ function clearAddTask() {
     clearRequired();
 }
 
+/**
+ * Clears required field indicators and error messages for the task creation form.
+ * Removes visual cues like red borders and error messages for title, date, and category inputs.
+ */
 function clearRequired() {
     let titleInput = document.getElementById('titleInput');
     let requiredTitle = document.getElementById('requiredTitle');

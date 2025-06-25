@@ -91,6 +91,12 @@ async function changeElement(greeting) {
   await putData(path, userData, userId);
 }
 
+/**
+ * Updates the column of a task and re-renders the board.
+ * @async
+ * @param {string} column - The new column name (e.g. "toDo", "done").
+ * @param {string} taskId - The ID of the task to update.
+ */
 async function changeColumn(column, taskId) {
   let path = "/users/" + loggedInUser;
   let userId = "tasks/" + taskId + "/column";
@@ -101,6 +107,12 @@ async function changeColumn(column, taskId) {
   returnToBoard();
 }
 
+/**
+ * Updates the assigned contact of a task.
+ * @async
+ * @param {string} taskId - The ID of the task to update.
+ * @param {string} contactName - The name of the new contact.
+ */
 async function changeContact(taskId, contactName) {
   let path = "/users/" + loggedInUser;
   let userId = "/tasks/" + taskId + "/contact/";
@@ -151,6 +163,18 @@ function pushTasks(loggedInUser, contacts) {
     putData(path, userData, taskId);
 }
 
+/**
+ * Creates a task object to be stored in the database.
+ * @param {string} taskId - The unique ID for the task.
+ * @param {HTMLInputElement} title - The title input element.
+ * @param {HTMLInputElement} description - The description input element.
+ * @param {HTMLInputElement} date - The due date input element.
+ * @param {string} prioBtn - The priority (e.g. "urgent").
+ * @param {Array} contacts - The list of assigned contacts.
+ * @param {HTMLElement} category - The category element.
+ * @param {Array} subtasks - The list of subtasks.
+ * @returns {Object} The user data task object.
+ */
 function getUserDataTasks(taskId, title, description, date, prioBtn, contacts, category, subtasks) {
   let userData = {
     id: taskId,
@@ -230,6 +254,19 @@ function changeTasks(taskId, column, category) {
   deleteTask(loggedInUser, taskId);
 }
 
+/**
+ * Creates a new task object.
+ * @param {string} newTaskId - The new unique ID.
+ * @param {HTMLInputElement} title - The title input element.
+ * @param {HTMLInputElement} description - The description input element.
+ * @param {HTMLInputElement} date - The due date input element.
+ * @param {string} prioBtn - The priority level.
+ * @param {Array} contacts - The assigned contacts.
+ * @param {Array} subTask - The subtasks array.
+ * @param {string} column - The column of the task board.
+ * @param {string} category - The task category.
+ * @returns {Object} The new task object.
+ */
 function getnewTaskObj(newTaskId, title, description, date, prioBtn, contacts, subTask, column, category) {
   return {
     id: newTaskId,
@@ -269,6 +306,13 @@ async function pushContacts(loggedInUser) {
   putContactData(path, userData, contactId);
 }
 
+/**
+ * Saves a new or updated contact to the database.
+ * @async
+ * @param {string} path - The path to the user data in the database.
+ * @param {Object} userData - The contact data to save.
+ * @param {string} contactId - The unique contact ID.
+ */
 async function putContactData(path, userData, contactId) {
   try {
     await putData(path, userData, contactId);
@@ -332,10 +376,18 @@ async function deleteContact(contactId, contactName) {
   closeContactDetailsToggle();
 }
 
+/**
+ * Placeholder function for checking assigned contact.
+ * @param {string} contactId - The ID of the contact to check.
+ */
 function checkTaskContact(contactId) {
   let taskContact = contactId;
 }
 
+/**
+ * Deletes the current user's data from the database.
+ * @async
+ */
 async function deleteUser() {
   let path = "/users/" + loggedInUser;
   await deleteData(path);

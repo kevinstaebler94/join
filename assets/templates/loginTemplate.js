@@ -1,3 +1,9 @@
+/**
+ * Returns the HTML markup string for the login page, including email/password input,
+ * login button, and guest login option.
+ *
+ * @returns {string} - HTML string for the login template.
+ */
 function loginTemplate() {
   let savedEmail = localStorage.getItem("registeredEmail") || "";
   setTimeout(() => toggleLoginButton(), 0);

@@ -23,10 +23,20 @@ async function init() {
   }
 }
 
+/**
+ * Calls the function to handle login logic on the index page.
+ * This function is used as an entry point.
+ * @async
+ */
 async function checkIndex() {
   getLogin();
 }
 
+/**
+ * Initializes the summary view, adjusts layout for mobile and desktop,
+ * and loads greeting and sidebar highlight.
+ * @async
+ */
 async function checkSummary() {
   if (window.innerWidth <= 800) {
     await includeHTML();
@@ -41,12 +51,21 @@ async function checkSummary() {
   }
 }
 
+/**
+ * Initializes the add task view.
+ * Includes HTML structure, highlights sidebar, and shows user initials.
+ * @async
+ */
 async function initAddTask() {
   await includeHTML();
   highlightActiveSidebarLink();
   showUserInitials();
 }
 
+/**
+ * Initializes the board view by loading HTML, board data and sidebar highlight.
+ * @async
+ */
 async function checkBoard() {
   await includeHTML();
   getBoard();
@@ -54,6 +73,10 @@ async function checkBoard() {
   return;
 }
 
+/**
+ * Initializes the contacts view by loading HTML, contacts, user initials, and sidebar highlight.
+ * @async
+ */
 async function checkContacts() {
   await includeHTML();
   getContacts();
@@ -147,6 +170,21 @@ async function logoutUser() {
   setLogoutData(userId, greeting, email, password, name, login, tasks, contacts, greeting, greetingTrue);
 }
 
+/**
+ * Sets the logout state and redirects to the login screen.
+ * Updates the user data with logout values and resets `loggedInUser`.
+ * @async
+ * @param {string} userId - ID of the user to update.
+ * @param {string} greeting - Greeting text.
+ * @param {string} email - User's email.
+ * @param {string} password - User's password.
+ * @param {string} name - User's name.
+ * @param {boolean} login - Login status (will be set to false).
+ * @param {Object} tasks - User's task data.
+ * @param {Object} contacts - User's contact data.
+ * @param {string} greeting - Greeting text (duplicated param, can be removed).
+ * @param {boolean} greetingTrue - Whether the greeting should be shown.
+ */
 async function setLogoutData(userId, greeting, email, password, name, login, tasks, contacts, greeting, greetingTrue) {
   greetingTrue = true;
   login = false;
@@ -157,6 +195,11 @@ async function setLogoutData(userId, greeting, email, password, name, login, tas
   window.location.href = "index.html";
 }
 
+/**
+ * Checks whether the currently logged-in user is the guest user.
+ * If so, deletes the user data after a short delay.
+ * @async
+ */
 async function checkLogoutUser() {
   let userData = await getData("/users/" + loggedInUser);
   setTimeout(() => {

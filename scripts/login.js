@@ -55,6 +55,13 @@ async function verifyLogin() {
   processSuccessfulLogin(userData, formattedEmail, email, password, error, login);
 }
 
+/**
+ * Handles the case when user data is missing during login.
+ * Clears the password field and shows an error message temporarily.
+ * @param {Object|null} userData - The user data returned from the database.
+ * @param {HTMLElement} error - The DOM element where the error message is shown.
+ * @returns {boolean|undefined} Returns false if userData is missing.
+ */
 function handleMissingUserData(userData, error) {
   if (!userData) {
     document.getElementById("passwordLogin").value = "";
@@ -66,6 +73,18 @@ function handleMissingUserData(userData, error) {
   }
 }
 
+/**
+ * Processes a successful or failed login attempt.
+ * Validates the credentials and redirects to the summary page if valid.
+ * @async
+ * @param {Object} userData - All users' data fetched from the database.
+ * @param {string} formattedEmail - The formatted version of the entered email (used as key).
+ * @param {string} email - The entered email address.
+ * @param {string} password - The entered password.
+ * @param {HTMLElement} error - The DOM element where the error message is shown.
+ * @param {boolean} login - The current login status (will be updated).
+ * @returns {Promise<boolean>} Whether the login was successful.
+ */
 async function processSuccessfulLogin(userData, formattedEmail, email, password, error, login) {
   if (userData && userData[formattedEmail] && userData[formattedEmail].email.toLowerCase() === email.toLowerCase() && userData[formattedEmail].password === password) {
     login = true;

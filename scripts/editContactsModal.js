@@ -32,62 +32,6 @@ function closeEditContactsModal() {
         }, 300);
     }
 }
-/**
- * Renders the HTML structure for the edit contact modal.
- */
-function getEditContactsModalStructure() {
-    let container = document.getElementById('contactsEditModal');
-    container.innerHTML = `
-    <div class="modalMainContent" id="modalEditContent">
-        <div class="headlineSection">
-        <div class="modalMobileCloseButtonWrapper">
-        <button class="modalMobileCloseButton" onclick="closeEditContactsModal()"><img src="./assets/img/plusIconWhite.svg"></button>
-        </div>
-            <img class="contactsModalImage" src="./assets/img/joinLogoSidebar.svg" alt="">
-            <div class="headlineContainer">
-                <h1>Edit contact</h1>
-                <p class="blueUnderline"></p>
-            </div>
-        </div>
-        <div class="contentSection">
-            <div class="modalIconContainer">
-                <div class="contactsModalIcon">
-                <img src="./assets/img/whitePerson.svg" alt="">
-                </div>
-            </div>
-            <div class="modalContentContainer">
-                <div class="modalCloseButtonWrapper">
-                    <button class="modalCloseButton" onclick="closeEditContactsModal()"><img src="./assets/img/closeIcon.svg"></button>
-                </div>
-                <div class="inputFieldContainer">
-                    <div class="inputFieldWrapper">
-                        <input class="inputFields" type="text" placeholder="Name" id="contactNameEdit" required>
-                        <img class="inputIcon" src="./assets/img/person.svg">
-                        <span id="editNamePlaceholderError" class="errorMsg">Placeholder</span>
-                        <div id="nameErrorEdit" class="inputError dNone">Fehlertext</div>
-                    </div>
-                    <div class="inputFieldWrapper">
-                        <input class="inputFields" type="email" placeholder="Email" id="contactEmailEdit" required>
-                        <img class="inputIcon" src="./assets/img/mail.svg">
-                        <span id="editEmailPlaceholderError" class="errorMsg">Placeholder</span>
-                        <div id="emailErrorEdit" class="inputError dNone">Fehlertext</div>
-                    </div>
-                    <div class="inputFieldWrapper">
-                        <input class="inputFields" type="tel" placeholder="+49..." id="contactPhoneEdit" required>
-                        <img class="inputIcon" src="./assets/img/phone.svg">
-                        <span id="editPhonePlaceholderError" class="errorMsg">Placeholder</span>
-                        <div id="phoneErrorEdit" class="inputError dNone">Fehlertext</div>
-                    </div>
-                </div>
-                <div class="buttonsContainer">
-                <button onclick="deleteContact('${currentContactId}')" class="modalCancelButton">Delete</button>
-                <button onclick="updateContacts()" class="modalSafeButton" type="button">Save <img src="./assets/img/createIcon.svg"></button>
-                </div>
-            </div>
-        </div>
-    </div>`
-}
-
 
 /// Editation ///
 
@@ -125,6 +69,13 @@ async function updateContacts() {
     changeContactInfo(updatedContact, newContactId, originalContactId);
 }
 
+/**
+ * Updates a contact and deletes the old one if necessary.
+ * @async
+ * @param {Object} updatedContact - The updated contact object.
+ * @param {string} newContactId - The new contact ID.
+ * @param {string} originalContactId - The original contact ID.
+ */
 async function changeContactInfo(updatedContact, newContactId, originalContactId) {
     await putData('/users/' + loggedInUser + '/contacts', updatedContact, newContactId);
     if (newContactId !== originalContactId) {
@@ -214,6 +165,10 @@ function checkEditDuplicateFields(inputs, values, existingContacts, originalCont
     return hasError;
 }
 
+/**
+ * Styles the name input in the edit form for duplicate error.
+ * @param {Object} inputs - The input elements object.
+ */
 function styleDuplicateEditName(inputs) {
     inputs.nameInput.classList.add('error');
     document.getElementById('editNamePlaceholderError').innerHTML = "Name already used.";
@@ -222,6 +177,10 @@ function styleDuplicateEditName(inputs) {
     hasError = true;
 }
 
+/**
+ * Styles the email input in the edit form for duplicate error.
+ * @param {Object} inputs - The input elements object.
+ */
 function styleDuplicateEditEmail(inputs) {
     inputs.emailInput.classList.add('error');
     document.getElementById('editEmailPlaceholderError').innerHTML = "E-Mail already used.";
@@ -230,6 +189,10 @@ function styleDuplicateEditEmail(inputs) {
     hasError = true;
 }
 
+/**
+ * Styles the phone input in the edit form for duplicate error.
+ * @param {Object} inputs - The input elements object.
+ */
 function styleDuplicateEditPhone(inputs) {
     inputs.phoneInput.classList.add('error');
     document.getElementById('editPhonePlaceholderError').innerHTML = "Phone number already used.";
@@ -260,6 +223,11 @@ async function validateEditEmailFormat(originalEmail) {
     return true;
 }
 
+/**
+ * Displays a validation error for an invalid email format.
+ * @param {HTMLElement} emailInput - The email input element.
+ * @param {HTMLElement} errorMsgEmail - The element to display the error message.
+ */
 function emailPatternTest(emailInput, errorMsgEmail) {
     emailInput.classList.add("error");
     errorMsgEmail.innerText = "Please enter a valid email address.";
@@ -271,6 +239,15 @@ function emailPatternTest(emailInput, errorMsgEmail) {
     }, 3000);
 }
 
+/**
+ * Checks if the new email already exists (excluding original).
+ * @async
+ * @param {string} originalEmail - The original email before edit.
+ * @param {string} email - The new email.
+ * @param {HTMLElement} emailInput - The email input element.
+ * @param {HTMLElement} errorMsgEmail - The error message element.
+ * @returns {boolean|undefined}
+ */
 async function checkExistingContacts(originalEmail, email, emailInput, errorMsgEmail) {
     if (!originalEmail || email !== originalEmail.toLowerCase()) {
         let existingContacts = await getData('/users/' + loggedInUser + '/contacts') || {};
@@ -280,6 +257,14 @@ async function checkExistingContacts(originalEmail, email, emailInput, errorMsgE
     }
 }
 
+/**
+ * Checks for duplicate email addresses in the contact list.
+ * @param {Object} existingContacts - The object of all contacts.
+ * @param {HTMLElement} emailInput - The email input element.
+ * @param {HTMLElement} errorMsgEmail - The element to display error message.
+ * @param {string} email - The email to check.
+ * @returns {boolean|undefined}
+ */
 function loopExistingContacts(existingContacts, emailInput, errorMsgEmail, email) {
     for (let key in existingContacts) {
         if (existingContacts[key].email.trim().toLowerCase() === email) {
@@ -296,6 +281,10 @@ function loopExistingContacts(existingContacts, emailInput, errorMsgEmail, email
     }
 }
 
+/**
+ * Resets all input error styles and messages in the edit contact form.
+ * @param {Object} inputs - The input elements and error message elements.
+ */
 function resetEditInputErrors(inputs) {
     [inputs.nameInput, inputs.emailInput, inputs.phoneInput].forEach(input => input.classList.remove('error'));
     [inputs.nameError, inputs.emailError, inputs.phoneError].forEach(el => {
@@ -310,6 +299,11 @@ function resetEditInputErrors(inputs) {
     });
 }
 
+/**
+ * Hides error message after a timeout for edit fields.
+ * @param {string} id - The ID of the error element.
+ * @param {string} inputId - The ID of the input element.
+ */
 function hideEditErrorMessages(id, inputId) {
     setTimeout(() => {
         let el = document.getElementById(id);
@@ -324,6 +318,11 @@ function hideEditErrorMessages(id, inputId) {
     }, 3000);
 }
 
+/**
+ * Validates the phone number format in the edit contact form.
+ * @async
+ * @returns {boolean|undefined} Whether the phone number is valid.
+ */
 async function validateEditPhoneNumberFormat() {
     let phone = document.getElementById("contactPhoneEdit");
     let pattern = /^(\+49\s?|0)[1-9][0-9\s\-]{3,}$/;
@@ -340,6 +339,11 @@ async function validateEditPhoneNumberFormat() {
     return true;
 }
 
+/**
+ * Shows validation error for an invalid phone number format.
+ * @param {HTMLElement} errorMsgPhone - The element for the error message.
+ * @param {HTMLElement} phone - The phone input element.
+ */
 function phonePatternTest(errorMsgPhone, phone) {
     errorMsgPhone.innerText = "Please enter a valid German phone number (e.g. +49 123 456789).";
     errorMsgPhone.classList.remove("dNone");
@@ -351,6 +355,12 @@ function phonePatternTest(errorMsgPhone, phone) {
     }, 3000);
 }
 
+/**
+ * Checks for empty fields in the edit contact form.
+ * @param {Object} inputs - The input elements.
+ * @param {Object} values - The current values of the inputs.
+ * @returns {boolean} Whether any errors occurred.
+ */
 function checkEmptyEditFields(inputs, values) {
     let hasError = false;
     if (!values.name) {
@@ -365,6 +375,11 @@ function checkEmptyEditFields(inputs, values) {
     return hasError;
 }
 
+/**
+ * Validates empty name input and displays an error.
+ * @param {Object} inputs - The input elements.
+ * @param {Object} values - The current input values.
+ */
 function checkNameValue(inputs, values) {
     inputs.nameInput.classList.add('error');
     document.getElementById('editNamePlaceholderError').innerHTML = "Please enter a name.";
@@ -373,6 +388,11 @@ function checkNameValue(inputs, values) {
     hasError = true;
 }
 
+/**
+ * Validates empty email input and displays an error.
+ * @param {Object} inputs - The input elements.
+ * @param {Object} values - The current input values.
+ */
 function checkEmailValue(inputs, values) {
     inputs.emailInput.classList.add('error');
     document.getElementById('editEmailPlaceholderError').innerHTML = "Please enter an e-mail adress.";
@@ -381,6 +401,11 @@ function checkEmailValue(inputs, values) {
     hasError = true;
 }
 
+/**
+ * Validates empty phone input and displays an error.
+ * @param {Object} inputs - The input elements.
+ * @param {Object} values - The current input values.
+ */
 function checkPhoneValue(inputs, values) {
     inputs.phoneInput.classList.add('error');
     document.getElementById('editPhonePlaceholderError').innerHTML = "Please enter a phone number.";

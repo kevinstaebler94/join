@@ -69,6 +69,12 @@ function getFilledTaskHTML(
   `;
 }
 
+/**
+ * Displays a mobile overlay for task status change options.
+ * Dynamically injects task category buttons (To do, In progress, etc.) into the overlay container.
+ *
+ * @param {string} taskId - The ID of the task to be modified.
+ */
 async function openMobileTaskOverlay(taskId) {
   let boardContentWrapperMobile = document.getElementById('boardContentWrapperMobile');
   let containerWrapper = document.getElementById('containerWrapper');

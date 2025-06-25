@@ -1,3 +1,10 @@
+/**
+ * Applies visual styling for each contact assigned to a task,
+ * typically by rendering their initials on the board.
+ *
+ * @param {Object} task - The task object.
+ * @param {Array<Object>} contacts - List of assigned contacts.
+ */
 function getInitialStyle(task, contacts) {
   let contact;
   let initial;
@@ -40,6 +47,13 @@ function styleInitalNameBoard(contact, initial, taskId) {
   initialColor[contact] = color;
 }
 
+/**
+ * Applies background color styling to a contact's initial when more than three contacts are assigned to a task.
+ *
+ * @param {string} contact - The contact's name.
+ * @param {string} initial - The contact's initials.
+ * @param {string} taskId - The ID of the associated task.
+ */
 function styleInitalHigherThree(contact, initial, taskId) {
   let initalContainer = document.getElementById(
     "assignedUser" + initial + taskId

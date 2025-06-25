@@ -51,6 +51,10 @@ async function showUrgentDate() {
     checkEarliestDate(earliestDate);
 }
 
+/**
+ * Displays the earliest due date in the DOM or a fallback message.
+ * @param {Date|null} earliestDate - The earliest due date from urgent tasks.
+ */
 function checkEarliestDate(earliestDate) {
     if (earliestDate) {
         let options = { year: 'numeric', month: 'long', day: 'numeric' };

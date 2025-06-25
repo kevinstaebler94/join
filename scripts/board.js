@@ -10,6 +10,10 @@ async function initBoard() {
   await renderTasks();
 }
 
+/**
+ * Disables drag-and-drop functionality for all draggable elements and drop zones.
+ * Removes event listeners and sets `draggable` attributes to false.
+ */
 function disableDragging() {
   document.querySelectorAll("[draggable]").forEach((el) => {
     el.setAttribute("draggable", false);
@@ -22,6 +26,10 @@ function disableDragging() {
   });
 }
 
+/**
+ * Enables drag-and-drop functionality for all task cards and drop zones.
+ * Adds appropriate event listeners and sets `draggable` attributes to true.
+ */
 function enableDragging() {
   document.querySelectorAll(".taskCard").forEach((el) => {
     el.setAttribute("draggable", true);
@@ -68,6 +76,13 @@ async function renderTasks() {
   initProgressBar(tasks);
 }
 
+/**
+ * Renders all tasks by inserting them into their respective columns.
+ * Calls functions to generate task templates and associated contact visuals.
+ *
+ * @param {Object} tasks - Object containing task data.
+ * @param {Array} countArr - Array used to track displayed contacts per task.
+ */
 function getRenderedTasks(tasks, countArr) {
   let taskArr = Object.values(tasks || {});
   taskArr.forEach((task) => {
@@ -81,6 +96,13 @@ function getRenderedTasks(tasks, countArr) {
   });
 }
 
+/**
+ * Renders contact initials for each task.
+ * Handles logic for styling contacts and showing a counter if there are more than 3.
+ *
+ * @param {Object} task - The task object containing assigned contacts.
+ * @param {Array} countArr - Array to track which contacts are displayed.
+ */
 function getRenderContacts(task, countArr) {
   if (!task.contact) return;
   task.contact.forEach((contact) => {
@@ -95,6 +117,11 @@ function getRenderContacts(task, countArr) {
   });
 }
 
+/**
+ * Inserts a placeholder into empty task columns to indicate no tasks are present.
+ *
+ * @param {Array<string>} columns - List of column identifiers.
+ */
 function fillBlankTask(columns) {
   columns.forEach((id) => {
     const column = document.getElementById(getColumnId(id));
@@ -153,6 +180,9 @@ function dragstartHandler(ev) {
   ev.dataTransfer.setData("column", ev.target.closest(".dropZone").id);
 }
 
+/**
+ * Removes the visual highlight from all drop zones after a drag operation ends.
+ */
 function dragendHandler() {
   document
     .querySelectorAll(".dropZone")
@@ -232,6 +262,14 @@ async function renderFilteredTasks(filtered, filteredTask) {
   initProgressBar(filteredTask);
 }
 
+/**
+ * Renders filtered tasks into their columns and fills empty columns with placeholders.
+ * Also initializes the progress bar based on the filtered tasks.
+ *
+ * @param {Array<Object>} filtered - Array of filtered task objects.
+ * @param {Array<string>} columnIds - IDs of the columns to be updated.
+ * @param {boolean} isMobile - Whether to render in mobile view or not.
+ */
 function getFilteredTaskTemplate(filtered, columnIds, isMobile) {
   getFilteredTaskTemplate(filtered, columnIds, isMobile);
   columnIds.forEach((id) => {
@@ -241,6 +279,14 @@ function getFilteredTaskTemplate(filtered, columnIds, isMobile) {
   initProgressBar(filteredTask);
 }
 
+/**
+ * Internal logic to render each filtered task into the appropriate column.
+ * Adds contact styling and handles mobile/desktop rendering.
+ *
+ * @param {Array<Object>} filtered - Filtered task list.
+ * @param {Array<string>} columnIds - List of column IDs.
+ * @param {boolean} isMobile - Determines if the layout is mobile-specific.
+ */
 function getFilteredTaskTemplate(filtered, columnIds, isMobile) {
   if (!filtered.length)
     return columnIds.forEach(
@@ -306,6 +352,13 @@ async function showProgressBar(isChecked, checkboxTotal, taskId) {
   }
 }
 
+/**
+ * Displays a counter when more than three contacts are assigned to a task.
+ * Shows "+X" where X is the number of hidden contacts.
+ *
+ * @param {Array<string>} contacts - List of contact names assigned to a task.
+ * @param {string} taskId - ID of the task to which the contacts belong.
+ */
 function countInitials(contacts, taskId) {
   let assignedCounter = document.getElementById("assignedCounter" + taskId);
   let countHigherThree = contacts.length - 3;
@@ -362,16 +415,28 @@ function checkWindowSize() {
   handleAddTask();
 }
 
+/**
+ * Closes the mobile task overlay by hiding the move-to wrapper.
+ */
 function closeTaskOverlay() {
   let mobileTaskOverlay = document.getElementById("moveToOverlayWrapper");
   mobileTaskOverlay.classList.add("displayNone");
 }
 
+/**
+ * Closes both the mobile task overlay and any open modal.
+ */
 function returnToBoard() {
   closeTaskOverlay();
   closeModal();
 }
 
+/**
+ * Opens the mobile task overlay and adds event listeners to columns
+ * to handle task status changes when clicked.
+ *
+ * @param {string} taskId - The ID of the task being moved.
+ */
 async function openMobileTaskOverlay(taskId) {
   let columns = document.querySelectorAll(".taskContainer");
   let boardContentWrapperMobile = document.getElementById(

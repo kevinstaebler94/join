@@ -12,7 +12,22 @@ function renderFilteredContacts(filter = '') {
     dropdownListName.innerHTML = '';
     filteredContacts.forEach(contact => {
         let isChecked = assignedArr.includes(contact.name) ? 'checked' : '';
-        dropdownListName.innerHTML += `<label class="customCheckbox">
+        dropdownListName.innerHTML += getFilteredContactsStructure(contact);
+        styleInitalName(contact.name);
+    });
+    updateCheckedListElements();
+}
+
+/**
+ * Returns an HTML string representing a contact list item with a checkbox and name.
+ * Used for rendering the assigned contact selection UI.
+ *
+ * @param {Object} contact - The contact object.
+ * @param {string} contact.name - The full name of the contact.
+ * @returns {string} - HTML string for the contact element including checkbox and name.
+ */
+function getFilteredContactsStructure(contact) {
+    let filteredStructure = `<label class="customCheckbox">
                                             <li id="listName${contact.name}" class="listElement">
                                                 <div class="nameContainer">
                                                     <span id="initalContainer${contact.name}" class="initalIcon">${getInitials(contact.name)}</span>
@@ -28,9 +43,7 @@ function renderFilteredContacts(filter = '') {
                                                     <span class="icon"></span>
                                             </li>
                                         </label>`;
-        styleInitalName(contact.name);
-    });
-    updateCheckedListElements();
+    return filteredStructure;
 }
 
 /**
@@ -42,15 +55,30 @@ function getSubtask() {
     let subtaskList = document.getElementById('subtaskList');
     let subtaskObj = { subtask: subtaskInput.value, done: false };
     let subtaskIndex = subtasksArr.length;
-  if (subtaskInput.value.startsWith(' ')) {
-    subtaskInput.value = subtaskInput.value.trimStart();
-  }
+    if (subtaskInput.value.startsWith(' ')) {
+        subtaskInput.value = subtaskInput.value.trimStart();
+    }
     if (!subtaskInput.value) {
         subtaskInput.classList.add('required');
         return;
     } if (subtaskInput.value.length > 0) {
         subtaskInput.classList.remove('required');
-        subtaskList.innerHTML += `<li id="subtaskElement${subtaskIndex}">
+        subtaskList.innerHTML += getSubtaskStructure(subtaskIndex, subtaskInput);
+        subtasksArr.push(subtaskObj);
+        subtaskInput.value = '';
+    }
+}
+
+/**
+ * Returns an HTML string representing a subtask list item with edit and delete icons.
+ * Used to dynamically render subtasks in a task creation form or editor.
+ *
+ * @param {number} subtaskIndex - The index of the subtask.
+ * @param {HTMLInputElement} subtaskInput - The input element containing the subtask text.
+ * @returns {string} - HTML string for the subtask list item.
+ */
+function getSubtaskStructure(subtaskIndex, subtaskInput) {
+    let subtaskStructure = `<li id="subtaskElement${subtaskIndex}">
     <div class="subtaskListElement" onmouseover="showEditIcons(this)" onmouseout="hideEditIcons(this)">
         <span onclick="getEditSubtask(${subtaskIndex})" class="liText">
             <p>•</p>
@@ -63,10 +91,7 @@ function getSubtask() {
         </span>
     </div>
 </li>`;
-        subtasksArr.push(subtaskObj);
-        subtaskInput.value = '';
-    }
-
+    return subtaskStructure;
 }
 
 /**
